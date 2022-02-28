@@ -1,2 +1,8 @@
 @import './Styles/vendors/bootstrap';
 @import './Styles/vendors/normalize';
+
+//layout
+@import './Styles/layout/header';
+
+//pages
+@import './Styles/pages/home';

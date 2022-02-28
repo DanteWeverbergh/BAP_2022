@@ -1,9 +1,9 @@
+import Routing from '../Routes/Routing';
+
 function App() {
   return (
     <>
-      <div className="App">
-        <h1 className="text-primary">Gains</h1>
-      </div>
+      <Routing />
     </>
   );
 }
