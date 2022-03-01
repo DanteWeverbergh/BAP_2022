@@ -1,69 +1,68 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 
-class Calculator extends Component {
-  state = {
+function Calculator() {
+  const [data, setData] = useState({
     weight: '',
     reps: '',
-    result: '',
-  };
+  });
 
-  handleSumbit() {
-    const weight = this.state.weight;
-    const reps = this.state.reps;
+  const [result, setResult] = useState({
+    result: '',
+  });
+
+  const handleSumbit = () => {
+    const weight = data.weight;
+    const reps = data.reps;
 
     const result = weight / (1.0278 - 0.0278 * reps);
 
-    this.setState({
+    setResult({
       result: result,
     });
-  }
+  };
 
-  handleOnChange = (e) => {
-    this.setState({
+  const handleOnChange = (e) => {
+    setData({
       [e.target.name]:
         e.target.type === 'number' ? parseInt(e.target.value) : e.target.value,
     });
   };
 
-  render() {
-    const { weight, reps, result } = this.state;
-
-    return (
-      <>
+  return (
+    <>
+      <div>
+        <h1>Calculator</h1>
         <div>
-          <h1>Calculator</h1>
-          <div>
-            <input
-              type="number"
-              name="weight"
-              value={weight}
-              className="form-control"
-              placeholder="weight"
-              onChange={this.handleOnChange}
-            ></input>
-            <input
-              type="number"
-              name="reps"
-              value={reps}
-              className="form-control"
-              placeholder="reps"
-              onChange={this.handleOnChange}
-            ></input>
-            <button
-              className="btn-primary form-control"
-              onClick={() => this.handleSumbit()}
-            >
-              Calculate
-            </button>
+          <input
+            type="number"
+            name="weight"
+            value={data.weight}
+            className="form-control"
+            placeholder="weight"
+            onChange={handleOnChange}
+          ></input>
+          <input
+            type="number"
+            name="reps"
+            value={data.reps}
+            className="form-control"
+            placeholder="reps"
+            onChange={handleOnChange}
+          ></input>
+          <button
+            className="btn-primary form-control"
+            onClick={() => handleSumbit()}
+          >
+            Calculate
+          </button>
 
-            <div className="result">
-              <p>{`Your 1RM is approximately ${result}kg`}</p>
-            </div>
+          <div className="result">
+            <p>{`Your 1RM is approximately ${result}kg`}</p>
           </div>
         </div>
-      </>
-    );
-  }
+      </div>
+    </>
+  );
 }
 
 export default Calculator;
