@@ -1,14 +1,16 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 
-class Log extends Component {
-  render() {
-    return (
-      <>
-        <h1>Log your workout</h1>
+function Log() {
+  useEffect(() => {
+    document.title = 'Log - Gains';
+  }, []);
 
-        <button className="btn-primary">Add exercise</button>
-      </>
-    );
-  }
+  return (
+    <>
+      <h1>Log your workout</h1>
+
+      <button className="btn-primary">Add exercise</button>
+    </>
+  );
 }
 export default Log;
