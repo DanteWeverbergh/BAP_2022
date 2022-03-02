@@ -5,15 +5,16 @@ import FirebaseContext from '../../Context/Firebase';
 function Login() {
   const { firebase } = useContext(FirebaseContext);
 
+  const [error, setError] = useState('');
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const [error, setError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log('Login');
+    console.log(email);
+    console.log(password);
   };
 
   useEffect(() => {
@@ -22,28 +23,49 @@ function Login() {
 
   return (
     <>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label>Email</label>
+      <div className="w-full max-w-xs ">
+        <form
+          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+          onSubmit={handleSubmit}
+        >
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="email"
+            >
+              Email
+            </label>
             <input
               type={'email'}
               name={'email'}
-              value={data.email}
+              value={email}
               placeholder="email"
+              id="email"
+              onChange={({ target }) => setEmail(target.value)}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
-          <div>
-            <label>Password</label>
+          <div className="mb-6">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="password"
+            >
+              Password
+            </label>
             <input
               type={'password'}
               name={'password'}
-              value={data.email}
+              value={password}
+              onChange={({ target }) => setPassword(target.value)}
               placeholder="password"
+              id="password"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
-          <div>
-            <button>Login</button>
+          <div className="flex items-center justify-between">
+            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+              Sign in
+            </button>
           </div>
         </form>
       </div>

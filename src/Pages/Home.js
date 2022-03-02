@@ -11,7 +11,7 @@ function Home() {
         <div className="card">
           <div className="card-body">
             <h5 className="card-title">New 1RM</h5>
-            <p className="card-text ">
+            <p className="card-text">
               kjmdjkjqksmjdkjqsdkjqksjdqdsmlkjkqjsdkjmk
             </p>
             <div className="icons">
