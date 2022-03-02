@@ -9,13 +9,12 @@ class Header extends Component {
   render() {
     return (
       <>
-        <header>
-          <div>Header</div>
-          <nav>
-            <Link to={'/'}>Home</Link>
-            <Link to={'/calculator'}>Calculator</Link>
-            <Link to={'/log'}>Log</Link>
-          </nav>
+        <header className="mb-16">
+          <h1 className="text-3xl text-red-500 absolute top-0 left-0 ml-5 mt-5">
+            Gains
+          </h1>
+
+          <div className="w-10 h-10 bg-red-500 rounded-full absolute top-0 right-0 mr-5 mt-5"></div>
         </header>
       </>
     );

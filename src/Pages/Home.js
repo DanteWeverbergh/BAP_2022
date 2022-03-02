@@ -8,16 +8,18 @@ function Home() {
   return (
     <>
       <div>
-        <div className="card">
-          <div className="card-body">
-            <h5 className="card-title">New 1RM</h5>
-            <p className="card-text">
-              kjmdjkjqksmjdkjqsdkjqksjdqdsmlkjkqjsdkjmk
-            </p>
-            <div className="icons">
-              <div className="icon">💪</div>
-              <div className="icon">share</div>
-              <div className="icon">Comment</div>
+        <div className="max-w-sm rounded overflow-hidden shadow-lg">
+          <div className="px-6 py-4">
+            <div class="font-bold text-xl mb-2">New 1RM</div>
+            <div>
+              <p className="text-gray-700 text-base">
+                kjmdjkjqksmjdkjqsdkjqksjdqdsmlkjkqjsdkjmk
+              </p>
+            </div>
+            <div className="px-6 pt-4 pb-2 flex">
+              <div className="">💪</div>
+              <div className="ml-6">share</div>
+              <div className="ml-6">Comment</div>
             </div>
           </div>
         </div>
