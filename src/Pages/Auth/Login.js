@@ -1,6 +1,6 @@
-import { data } from 'autoprefixer';
 import React, { useEffect, useState, useContext } from 'react';
 import FirebaseContext from '../../Context/Firebase';
+import 'firebase/auth';
 
 function Login() {
   const { firebase } = useContext(FirebaseContext);
@@ -13,8 +13,16 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log(email);
-    console.log(password);
+    const auth = firebase.auth();
+
+    auth
+      .signInWithEmailAndPassword(email, password)
+      .then((cred) => {
+        console.log(cred.user);
+      })
+      .catch((error) => {
+        alert(`${error.message}`);
+      });
   };
 
   useEffect(() => {
