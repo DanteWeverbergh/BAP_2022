@@ -36,21 +36,12 @@ function Login() {
 
   return (
     <>
-      <div className="w-full max-w-xs">
+      <div className="w-full ">
+        <h1 className="text-4xl text-center">Gains</h1>
         {error && <p className="mb-4 text-xs text-red-primary">{error}</p>}
 
-        <form
-          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-          onSubmit={handleSubmit}
-          method="POST"
-        >
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="email"
-            >
-              Email
-            </label>
+        <form className="ml-12 mr-12" onSubmit={handleSubmit} method="POST">
+          <div className="mb-4 mt-12">
             <input
               type={'email'}
               name={'email'}
@@ -62,12 +53,6 @@ function Login() {
             />
           </div>
           <div className="mb-6">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="password"
-            >
-              Password
-            </label>
             <input
               type={'password'}
               name={'password'}
@@ -79,10 +64,9 @@ function Login() {
             />
           </div>
 
-          <button
-            type="submit"
-            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
-          >
+          <p className="mb-6">Forgot password</p>
+
+          <button type="submit" className="bg-blue-400 px-10 py-2 w-full">
             Login
           </button>
         </form>

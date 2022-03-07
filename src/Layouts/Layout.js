@@ -5,8 +5,10 @@ import Header from './Header/Header';
 function Layout() {
   return (
     <>
-      <Header />
-      <Footer />
+      <div>
+        <Header />
+        <Footer />
+      </div>
     </>
   );
 }
