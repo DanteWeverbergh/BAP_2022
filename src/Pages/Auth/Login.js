@@ -2,27 +2,32 @@ import React, { useEffect, useState, useContext } from 'react';
 import FirebaseContext from '../../Context/Firebase';
 import 'firebase/auth';
 
+import { useNavigate } from 'react-router-dom';
+
 function Login() {
   const { firebase } = useContext(FirebaseContext);
+  let navigate = useNavigate();
 
   const [error, setError] = useState('');
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const auth = firebase.auth();
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+      alert('logged in');
+      localStorage.setItem('loggedIn', true);
+      navigate('/home');
+    } catch (error) {
+      setEmail('');
+      setPassword('');
 
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then((cred) => {
-        console.log(cred.user);
-      })
-      .catch((error) => {
-        alert(`${error.message}`);
-      });
+      //setError(error.message);
+      setError('Email and/or password is wrong');
+    }
   };
 
   useEffect(() => {
@@ -32,6 +37,8 @@ function Login() {
   return (
     <>
       <div className="w-full max-w-xs">
+        {error && <p className="mb-4 text-xs text-red-primary">{error}</p>}
+
         <form
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
           onSubmit={handleSubmit}

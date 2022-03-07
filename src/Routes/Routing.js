@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import Auth from '../Helpers/Auth';
 import Footer from '../Layouts/Footer/Footer';
 import Header from '../Layouts/Header/Header';
 import Layout from '../Layouts/Layout';
@@ -19,13 +20,12 @@ function Routing() {
           <Route path={'/'} element={<Home />} />
           <Route path={'/calculator'} element={<Calculator />} />
           <Route path={'/log'} element={<Log />} />
+          <Route path={'/profile'} element={<Profile />} />
+          <Route path={'*'} element={<Home />} />
 
           {/* Auth routes */}
           <Route path={'/login'} element={<Login />} />
           <Route path={'/register'} element={<Register />} />
-          <Route path={'/profile'} element={<Profile />} />
-
-          <Route path={'*'} element={<Home />} />
         </Routes>
 
         <Footer />
