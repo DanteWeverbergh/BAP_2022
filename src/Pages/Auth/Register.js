@@ -1,16 +1,22 @@
 import React, { useEffect, useState, useContext } from 'react';
 import FirebaseContext from '../../Context/Firebase';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Register() {
   const { firebase } = useContext(FirebaseContext);
 
+  //react States
+  const [userName, setUserName] = useState('');
+  const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log('register');
+    try {
+    } catch (error) {}
   };
 
   useEffect(() => {
@@ -64,7 +70,7 @@ function Register() {
             type="submit"
             className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
           >
-            Register
+            Sign up
           </button>
         </form>
       </div>

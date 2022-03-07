@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import FirebaseContext from '../../Context/Firebase';
 import 'firebase/auth';
 
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Login() {
   const { firebase } = useContext(FirebaseContext);
@@ -86,6 +86,9 @@ function Login() {
             Login
           </button>
         </form>
+        <div>
+          <Link to={'/register'}>No account yet? Click here!</Link>
+        </div>
       </div>
     </>
   );
