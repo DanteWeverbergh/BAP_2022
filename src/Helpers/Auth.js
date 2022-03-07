@@ -1,20 +1,31 @@
 import { Navigate, Outlet } from 'react-router-dom';
+import FirebaseContext from '../Context/Firebase';
+import React, { useContext } from 'react';
+import 'firebase/auth';
+import Login from '../Pages/Auth/Login';
 
 const useAuth = () => {
-  const loggedIn = localStorage.getItem('loggedIn');
+  /*
+  const { firebase } = useContext(FirebaseContext);
+ 
 
-  if (loggedIn) {
-    const user = { loggedIn: true };
-    return user && user.logedIn;
-  } else {
-    const user = { loggedIn: false };
-    return user && user.logedIn;
-  }
+  firebase.auht().onAuthStateChanged(function (user) {
+    if (user) {
+      console.log('logged in');
+    } else {
+      const user = { loggedIn: false };
+  return user && user.loggedIn;
+    }
+  });
+  */
+
+  const user = { loggedIn: true };
+  return user && user.loggedIn;
 };
 
 const Auth = () => {
   const isAuth = useAuth();
-  return isAuth ? <Outlet /> : <Navigate to="/login" />;
+  return isAuth ? <Outlet /> : <Login />;
 };
 
 export default Auth;

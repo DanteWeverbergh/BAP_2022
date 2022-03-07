@@ -17,15 +17,17 @@ function Routing() {
       <div>
         <Header />
         <Routes>
-          <Route path={'/'} element={<Home />} />
-          <Route path={'/calculator'} element={<Calculator />} />
-          <Route path={'/log'} element={<Log />} />
-          <Route path={'/profile'} element={<Profile />} />
-          <Route path={'*'} element={<Home />} />
-
           {/* Auth routes */}
           <Route path={'/login'} element={<Login />} />
           <Route path={'/register'} element={<Register />} />
+
+          <Route element={<Auth />}>
+            <Route path={'/'} element={<Home />} />
+            <Route path={'/calculator'} element={<Calculator />} />
+            <Route path={'/log'} element={<Log />} />
+            <Route path={'/profile'} element={<Profile />} />
+            <Route path={'*'} element={<Home />} />
+          </Route>
         </Routes>
 
         <Footer />
