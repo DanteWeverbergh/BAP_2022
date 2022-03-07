@@ -5,22 +5,17 @@ import 'firebase/auth';
 import Login from '../Pages/Auth/Login';
 
 const useAuth = () => {
-  /*
   const { firebase } = useContext(FirebaseContext);
- 
 
-  firebase.auht().onAuthStateChanged(function (user) {
-    if (user) {
-      console.log('logged in');
+  firebase.auth().onAuthStateChanged(function (firebaseUser) {
+    if (firebaseUser) {
+      const user = { loggedIn: false };
+      return user && user.loggedIn;
     } else {
       const user = { loggedIn: false };
-  return user && user.loggedIn;
+      return user && user.loggedIn;
     }
   });
-  */
-
-  const user = { loggedIn: true };
-  return user && user.loggedIn;
 };
 
 const Auth = () => {
