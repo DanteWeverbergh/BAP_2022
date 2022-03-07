@@ -2,9 +2,11 @@ import React, { useEffect, useState, useContext } from 'react';
 import FirebaseContext from '../../Context/Firebase';
 import { Link, useNavigate } from 'react-router-dom';
 import { doesUsernameExist } from '../../Services/firebase';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 
 function Register() {
   const { firebase } = useContext(FirebaseContext);
+  let navigate = useNavigate();
 
   //react States
   const [username, setUsername] = useState('');
@@ -17,12 +19,56 @@ function Register() {
     e.preventDefault();
 
     const usernameExist = await doesUsernameExist(username);
-    if (usernameExist) {
+    if (!usernameExist.length) {
       try {
+        /*
         const createdUserResult = await firebase
           .auth()
           .createUserWithEmailAndPassword(email, password);
-      } catch (error) {}
+
+        //username = displayName
+        await createdUserResult.user.updatePofile({
+          displayName: username,
+        });
+
+        //firestore user collection
+        await firebase.firestore().collection('users').add({
+          userId: createdUserResult.user.uid,
+          displayName: username,
+          username: username.toLowerCase(),
+          fullName,
+          following: [],
+          personalTrainers: [],
+          dateCreated: Date.now(),
+        });
+
+        */
+        const auth = firebase.auth();
+
+        const res = await createUserWithEmailAndPassword(auth, email, password);
+        const user = res.user;
+        await firebase.firestore().collection('users').add({
+          uid: user.uid,
+          displayName: username,
+          username: username.toLocaleLowerCase(),
+          fullName,
+          email,
+          authProvider: 'email',
+          following: [],
+          personalTrainers: [],
+          dateCreated: Date.now(),
+        });
+
+        navigate('/home');
+      } catch (error) {
+        setFullName('');
+        setEmail('');
+        setPassword('');
+        setUsername('');
+        setError(error.message);
+      }
+    } else {
+      setError('Username already exists.');
     }
   };
 
@@ -33,6 +79,8 @@ function Register() {
   return (
     <>
       <div className="w-full">
+        {error && <p className="mb-4 text-xs text-red-primary">{error}</p>}
+
         <form className="ml-12 mr-12" onSubmit={handleSubmit} method="POST">
           <div className="mb-4">
             <label
