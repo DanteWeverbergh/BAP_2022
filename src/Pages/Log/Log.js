@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Timer from '../../Components/Timer';
 
 function Log() {
   useEffect(() => {
@@ -9,7 +10,7 @@ function Log() {
     <>
       <h1>Log your workout</h1>
 
-      <button className="btn-primary">Add exercise</button>
+      <Timer />
     </>
   );
 }
