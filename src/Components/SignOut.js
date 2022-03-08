@@ -6,6 +6,8 @@ function SignOut() {
   const { firebase } = useContext(FirebaseContext);
   const signOut = () => {
     firebase.auth().signOut();
+
+    localStorage.removeItem('loggedIn');
   };
 
   return (

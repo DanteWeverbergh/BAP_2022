@@ -10,24 +10,26 @@ import Register from '../Pages/Auth/Register';
 import Calculator from '../Pages/Calculator';
 import Home from '../Pages/Home';
 import Log from '../Pages/Log/Log';
+import Createposts from '../Pages/Posts/Createposts';
 
 function Routing() {
   return (
     <>
       <div>
         <Header />
-        <Routes>
+        <Routes element={<Auth />}>
           {/* Auth routes */}
           <Route path={'/login'} element={<Login />} />
           <Route path={'/register'} element={<Register />} />
 
-          <Route element={<Auth />}>
-            <Route path={'/'} element={<Home />} />
-            <Route path={'/calculator'} element={<Calculator />} />
-            <Route path={'/log'} element={<Log />} />
-            <Route path={'/profile'} element={<Profile />} />
-            <Route path={'*'} element={<Home />} />
-          </Route>
+          {/*<Route element={<Auth />*/}
+          <Route path={'/'} element={<Home />} />
+          <Route path={'/calculator'} element={<Calculator />} />
+          <Route path={'/log'} element={<Log />} />
+          <Route path={'/profile'} element={<Profile />} />
+          <Route path={'*'} element={<Home />} />
+          <Route path="/create" element={<Createposts />} />
+          {/*</Route>*/}
         </Routes>
 
         <Footer />

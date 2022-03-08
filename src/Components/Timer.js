@@ -13,6 +13,7 @@ function Timer() {
   const reset = () => {
     setSeconds(0);
     setMinutes(0);
+    setHours(0);
     setIsActive(false);
   };
 
@@ -40,9 +41,8 @@ function Timer() {
 
   return (
     <>
-      <div>
-        <h1 className="">Timer</h1>
-        <p>
+      <div className="text-center">
+        <p className="text-6xl">
           {hours}:{minutes}:{seconds}
         </p>
 
