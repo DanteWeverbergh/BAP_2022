@@ -3,6 +3,7 @@ import FirebaseContext from '../../Context/Firebase';
 import { Link, useNavigate } from 'react-router-dom';
 import { doesUsernameExist } from '../../Services/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { useAuthContext } from '../../Context/AuthContext';
 
 function Register() {
   const { firebase } = useContext(FirebaseContext);
@@ -15,8 +16,14 @@ function Register() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+  const { register } = useAuthContext();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    //eerste register poging
+
+    /*
 
     const usernameExist = await doesUsernameExist(username);
     if (!usernameExist.length) {
@@ -43,6 +50,8 @@ function Register() {
         });
 
         */
+
+    /*
         const auth = firebase.auth();
 
         const res = await createUserWithEmailAndPassword(auth, email, password);
@@ -69,6 +78,12 @@ function Register() {
       }
     } else {
       setError('Username already exists.');
+    }
+
+    */
+
+    if (email && username && password) {
+      register(email, username, password);
     }
   };
 

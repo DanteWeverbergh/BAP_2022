@@ -3,6 +3,7 @@ import FirebaseContext from '../../Context/Firebase';
 import 'firebase/auth';
 
 import { Link, useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../../Context/AuthContext';
 
 function Login() {
   const { firebase } = useContext(FirebaseContext);
@@ -13,20 +14,13 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const { signin } = useAuthContext();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      await firebase.auth().signInWithEmailAndPassword(email, password);
-      alert('logged in');
-      localStorage.setItem('loggedIn', true);
-      navigate('/home');
-    } catch (error) {
-      setEmail('');
-      setPassword('');
-
-      //setError(error.message);
-      setError('Email and/or password is wrong');
+    if (email && password) {
+      signin(email, password);
     }
   };
 
