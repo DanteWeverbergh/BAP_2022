@@ -33,11 +33,11 @@ export const AuthContextProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
-  const register = (email, username, password) => {
+  const register = (email, username, password, fullName) => {
     ///
     setLoading(true);
 
-    createUserWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, email, password, fullName)
       .then((res) => {
         console.log(res.user.uid);
 
@@ -46,6 +46,7 @@ export const AuthContextProvider = ({ children }) => {
           displayName: username,
           username: username.toLocaleLowerCase(),
           email,
+          fullName,
           authProvider: 'email',
           following: [],
           personalTrainers: [],

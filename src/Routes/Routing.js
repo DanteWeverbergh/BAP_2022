@@ -4,6 +4,7 @@ import Auth from '../Helpers/Auth';
 import Footer from '../Layouts/Footer/Footer';
 import Header from '../Layouts/Header/Header';
 import Layout from '../Layouts/Layout';
+import ForgotPassword from '../Pages/Auth/ForgotPassword';
 import Login from '../Pages/Auth/Login';
 import Profile from '../Pages/Auth/Profile';
 import Register from '../Pages/Auth/Register';
@@ -17,10 +18,11 @@ function Routing() {
     <>
       <div>
         <Header />
-        <Routes element={<Auth />}>
+        <Routes>
           {/* Auth routes */}
           <Route path={'/login'} element={<Login />} />
           <Route path={'/register'} element={<Register />} />
+          <Route path={'/forgot'} element={<ForgotPassword />} />
 
           {/*<Route element={<Auth />*/}
           <Route path={'/'} element={<Home />} />

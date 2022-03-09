@@ -21,69 +21,8 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    //eerste register poging
-
-    /*
-
-    const usernameExist = await doesUsernameExist(username);
-    if (!usernameExist.length) {
-      try {
-        /*
-        const createdUserResult = await firebase
-          .auth()
-          .createUserWithEmailAndPassword(email, password);
-
-        //username = displayName
-        await createdUserResult.user.updatePofile({
-          displayName: username,
-        });
-
-        //firestore user collection
-        await firebase.firestore().collection('users').add({
-          userId: createdUserResult.user.uid,
-          displayName: username,
-          username: username.toLowerCase(),
-          fullName,
-          following: [],
-          personalTrainers: [],
-          dateCreated: Date.now(),
-        });
-
-        */
-
-    /*
-        const auth = firebase.auth();
-
-        const res = await createUserWithEmailAndPassword(auth, email, password);
-        const user = res.user;
-        await firebase.firestore().collection('users').add({
-          uid: user.uid,
-          displayName: username,
-          username: username.toLocaleLowerCase(),
-          fullName,
-          email,
-          authProvider: 'email',
-          following: [],
-          personalTrainers: [],
-          dateCreated: Date.now(),
-        });
-
-        navigate('/home');
-      } catch (error) {
-        setFullName('');
-        setEmail('');
-        setPassword('');
-        setUsername('');
-        setError(error.message);
-      }
-    } else {
-      setError('Username already exists.');
-    }
-
-    */
-
-    if (email && username && password) {
-      register(email, username, password);
+    if (email && username && password && fullName) {
+      register(email, username, password, fullName);
     }
   };
 

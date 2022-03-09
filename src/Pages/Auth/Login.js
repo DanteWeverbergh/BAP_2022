@@ -58,7 +58,9 @@ function Login() {
             />
           </div>
 
-          <p className="mb-6">Forgot password</p>
+          <Link className="" to={'/forgot'}>
+            Forgot password
+          </Link>
 
           <button type="submit" className="bg-blue-400 px-10 py-2 w-full">
             Login
