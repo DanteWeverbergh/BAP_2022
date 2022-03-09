@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import SocialCard from '../Components/SocialCard';
 import FirebaseContext from '../Context/Firebase';
 import 'firebase/auth';
@@ -7,26 +7,29 @@ import { Link } from 'react-router-dom';
 
 function Home() {
   const { firebase } = useContext(FirebaseContext);
+
+  const [test, setTest] = useState([]);
+
   useEffect(() => {
     document.title = 'Home - Gains';
 
-    const u = firebase.auth().currentUser;
+    const db = firebase.firestore();
 
-    if (u) {
-      console.log('log');
-    } else {
-      console.log('not log');
-    }
+    db.collection('posts')
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((element) => {
+          const t = element.data().test;
+
+          const state = test;
+
+          state.push(t);
+        });
+      });
   }, []);
 
   const loggedIn = () => {
-    firebase.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        console.log('logged in');
-      } else {
-        console.log('not logged in');
-      }
-    });
+    console.log(test);
   };
 
   return (
@@ -40,6 +43,7 @@ function Home() {
       </Link>
 
       <SignOut />
+
       <SocialCard />
     </>
   );
