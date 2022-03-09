@@ -5,21 +5,17 @@ import 'firebase/auth';
 import Login from '../Pages/Auth/Login';
 
 const useAuth = () => {
-  const [isLoggedin, setIsLoggedin] = useState(false);
+  const { firebase } = useContext(FirebaseContext);
 
-  useEffect(() => {
-    setIsLoggedin(localStorage.getItem('loggedIn'));
-  });
+  const u = firebase.auth().currentUser;
 
-  if (isLoggedin) {
+  if (u) {
     const user = { loggedIn: true };
     return user && user.loggedIn;
+  } else {
+    const user = { loggedIn: false };
+    return user && user.loggedIn;
   }
-
-  /*
-  const user = { loggedIn: true };
-  return user && user.loggedIn;
-  */
 };
 
 const Auth = () => {

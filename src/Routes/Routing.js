@@ -24,14 +24,14 @@ function Routing() {
           <Route path={'/register'} element={<Register />} />
           <Route path={'/forgot'} element={<ForgotPassword />} />
 
-          {/*<Route element={<Auth />*/}
-          <Route path={'/'} element={<Home />} />
-          <Route path={'/calculator'} element={<Calculator />} />
-          <Route path={'/log'} element={<Log />} />
-          <Route path={'/profile'} element={<Profile />} />
-          <Route path={'*'} element={<Home />} />
-          <Route path="/create" element={<Createposts />} />
-          {/*</Route>*/}
+          <Route element={<Auth />}>
+            <Route path={'/'} element={<Home />} />
+            <Route path={'/calculator'} element={<Calculator />} />
+            <Route path={'/log'} element={<Log />} />
+            <Route path={'/profile'} element={<Profile />} />
+            <Route path={'*'} element={<Home />} />
+            <Route path="/create" element={<Createposts />} />
+          </Route>
         </Routes>
 
         <Footer />

@@ -9,6 +9,14 @@ function Home() {
   const { firebase } = useContext(FirebaseContext);
   useEffect(() => {
     document.title = 'Home - Gains';
+
+    const u = firebase.auth().currentUser;
+
+    if (u) {
+      console.log('log');
+    } else {
+      console.log('not log');
+    }
   }, []);
 
   const loggedIn = () => {
