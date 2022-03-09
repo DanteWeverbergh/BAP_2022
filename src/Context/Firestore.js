@@ -16,9 +16,8 @@ export const FireStoreContextProvider = ({ children }) => {
   const [error, setError] = useState('');
   const [data, setData] = useState([]);
 
-  const getCollection = async (col) => {
-    await db
-      .collection(col)
+  const getCollection = (col) => {
+    db.collection(col)
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((element) => {
@@ -33,6 +32,7 @@ export const FireStoreContextProvider = ({ children }) => {
 
   const contextValue = {
     data,
+    getCollection,
   };
 
   return (

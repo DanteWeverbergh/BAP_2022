@@ -4,9 +4,11 @@ import FirebaseContext from '../Context/Firebase';
 import 'firebase/auth';
 import SignOut from '../Components/SignOut';
 import { Link } from 'react-router-dom';
+import { useFirestoreContext } from '../Context/Firestore';
 
 function Home() {
   const { firebase } = useContext(FirebaseContext);
+  //const { getCollection } = useFirestoreContext();
 
   const [test, setTest] = useState([]);
 
