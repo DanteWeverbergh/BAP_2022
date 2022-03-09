@@ -41,7 +41,7 @@ export const AuthContextProvider = ({ children }) => {
       .then((res) => {
         console.log(res.user.uid);
 
-        firebase.firestore().collection('users').add({
+        firebase.firestore().collection('users').doc(res.user.uid).set({
           uid: res.user.uid,
           displayName: username,
           username: username.toLocaleLowerCase(),
