@@ -60,7 +60,9 @@ function Profile() {
   };
 
   const picture = () => {
-    upload(photo, user.uid, setLoading);
+    const uid = user.uid;
+
+    upload(photo, user, setLoading);
   };
 
   const updateProfile = () => {
@@ -68,7 +70,7 @@ function Profile() {
   };
 
   const test = () => {
-    const user = firebase.auth().currentUser;
+    console.log(user.photoUrl);
   };
 
   return (

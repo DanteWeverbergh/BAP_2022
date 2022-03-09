@@ -1,7 +1,8 @@
 import Firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
-import { getStorage, ref, uploadBytes } from 'firebase/storage';
+import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
+import { updateProfile } from 'firebase/auth';
 
 const config = {
   apiKey: 'AIzaSyBpbQWDbR-GdEeVOGcW8Ux6mnS6xfe-rAI',
@@ -23,9 +24,16 @@ export { firebase, FieldValue };
 export async function upload(file, currentUser, setLoading) {
   //
   const fileRef = ref(storage, currentUser.uid + '.png');
+  const url = getDownloadURL(fileRef);
 
   //upload file
   await uploadBytes(fileRef, file);
+
+  updateProfile(currentUser, {
+    photoUrl: url,
+  });
+
   setLoading(false);
+
   alert('file uploaded!');
 }
