@@ -15,6 +15,7 @@ function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [role, setRole] = useState('regular');
 
   const { register } = useAuthContext();
 
@@ -22,8 +23,12 @@ function Register() {
     e.preventDefault();
 
     if (email && username && password && fullName) {
-      register(email, username, password, fullName);
+      register(email, username, password, fullName, role);
     }
+  };
+
+  const test = () => {
+    console.log(role);
   };
 
   useEffect(() => {
@@ -106,6 +111,16 @@ function Register() {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
+          <div>
+            <label>Account type</label>
+            <select
+              value={role}
+              onChange={({ target }) => setRole(target.value)}
+            >
+              <option>regular</option>
+              <option>Personal trainer</option>
+            </select>
+          </div>
 
           <button
             type="submit"
@@ -114,6 +129,10 @@ function Register() {
             Sign up
           </button>
         </form>
+
+        <button className="bg-red-400" onClick={() => test()}>
+          Test
+        </button>
         <div>
           <Link to={'/login'}>Already have an account? Login</Link>
         </div>

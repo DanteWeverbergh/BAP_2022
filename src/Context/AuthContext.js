@@ -33,7 +33,7 @@ export const AuthContextProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
-  const register = (email, username, password, fullName) => {
+  const register = (email, username, password, fullName, role) => {
     ///
     setLoading(true);
 
@@ -51,19 +51,17 @@ export const AuthContextProvider = ({ children }) => {
           following: [],
           personalTrainers: [],
           dateCreated: Date.now(),
+          userType: role,
         });
       })
       .then(() => {
-        return (
-          updateProfile(auth.currentUser),
-          {
-            displayName: username,
-          }
-        );
+        const u = firebase.auth().currentUser;
+
+        u.updateProfile({
+          displayName: username,
+        });
       })
-      .then((res) => {
-        alert('login succes');
-      })
+      .then((res) => {})
       .catch((err) => {
         setError(err.message);
       })
@@ -76,9 +74,7 @@ export const AuthContextProvider = ({ children }) => {
     setLoading(true);
 
     signInWithEmailAndPassword(auth, email, password)
-      .then((res) => {
-        console.log(res);
-      })
+      .then((res) => {})
       .catch((err) => {
         setError(err.message);
       })

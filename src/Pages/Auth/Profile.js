@@ -11,17 +11,12 @@ function Profile() {
 
   useEffect(() => {
     document.title = 'Profile - Gains';
-
-    const user = async () => {
-      await firebase.auth().currentUser;
-    };
-    console.log(user);
-
-    setEmail(user.email);
   }, []);
 
   const test = () => {
-    console.log('klik');
+    const user = firebase.auth().currentUser;
+
+    console.log(user);
   };
 
   return (
