@@ -1,6 +1,7 @@
 import Firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
+import { getStorage, ref, uploadBytes } from 'firebase/storage';
 
 const config = {
   apiKey: 'AIzaSyBpbQWDbR-GdEeVOGcW8Ux6mnS6xfe-rAI',
@@ -12,6 +13,19 @@ const config = {
 };
 
 const firebase = Firebase.initializeApp(config);
+const storage = getStorage();
 const { FieldValue } = Firebase.firestore;
 
 export { firebase, FieldValue };
+
+//storage tijdelijk
+
+export async function upload(file, currentUser, setLoading) {
+  //
+  const fileRef = ref(storage, currentUser.uid + '.png');
+
+  //upload file
+  await uploadBytes(fileRef, file);
+  setLoading(false);
+  alert('file uploaded!');
+}

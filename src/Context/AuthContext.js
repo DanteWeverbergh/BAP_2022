@@ -91,6 +91,10 @@ export const AuthContextProvider = ({ children }) => {
     return sendPasswordResetEmail(auth, email);
   };
 
+  const updateProfile = (email, displayName) => {
+    // update profile
+  };
+
   const contextValue = {
     user,
     loading,
@@ -99,6 +103,7 @@ export const AuthContextProvider = ({ children }) => {
     signin,
     logout,
     forgotPassword,
+    updateProfile,
   };
   return (
     <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
