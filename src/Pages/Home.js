@@ -36,11 +36,11 @@ function Home() {
       .get()
       .then((querySnapshot) => {
         querySnapshot.forEach((element) => {
-          const t = element.data().test;
+          const data = element.data();
 
           const state = test;
 
-          state.push(t);
+          state.push(data);
         });
       })
       .then(() => {
