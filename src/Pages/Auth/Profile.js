@@ -82,7 +82,7 @@ function Profile() {
         <div className="flex-col text-center grid place-items-center">
           <div className=" relative w-36 h-36 grid place-items-center  bg-red-500 rounded-full  mr-5 mt-5  ">
             <img
-              className="h-32 w-32 rounded-full object-fit"
+              className="h-32 w-32 rounded-full object-cover"
               alt="profilePic"
               src={photoUrl}
             />
@@ -139,8 +139,18 @@ function Profile() {
         </form>
 
         <div className="mt-24">
-          <label>Update profile picture</label>
-          <input onChange={photoChange} type={'file'}></input>
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="pic"
+          >
+            Update profile picture
+          </label>
+          <input
+            id="pic"
+            onChange={photoChange}
+            type={'file'}
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          ></input>
           <button
             disabled={loading || !photo}
             type="submit"
@@ -149,10 +159,6 @@ function Profile() {
             Foto
           </button>
         </div>
-
-        <button className="text-4xl" onClick={() => test()}>
-          Test
-        </button>
       </div>
     </>
   );

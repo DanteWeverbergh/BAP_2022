@@ -6,6 +6,7 @@ import SignOut from '../Components/SignOut';
 import { Link } from 'react-router-dom';
 import { useFirestoreContext } from '../Context/Firestore';
 import Header from '../Layouts/Header/Header';
+import Footer from '../Layouts/Footer/Footer';
 
 function Home() {
   const { firebase } = useContext(FirebaseContext);
@@ -49,6 +50,7 @@ function Home() {
       <SignOut />
 
       <SocialCard />
+      <Footer />
     </>
   );
 }

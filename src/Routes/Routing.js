@@ -32,8 +32,6 @@ function Routing() {
             <Route path="/create" element={<Createposts />} />
           </Route>
         </Routes>
-
-        <Footer />
       </div>
     </>
   );

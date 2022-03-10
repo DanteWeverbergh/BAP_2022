@@ -14,13 +14,23 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { signin } = useAuthContext();
+  const { signin, forgotPassword } = useAuthContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (email && password) {
       signin(email, password);
+    }
+  };
+
+  const forgot = () => {
+    //
+    if (email) {
+      forgotPassword(email);
+      alert('recovery email sended');
+    } else {
+      alert('please fill in email to recover password');
     }
   };
 
@@ -58,9 +68,7 @@ function Login() {
             />
           </div>
 
-          <Link className="" to={'/forgot'}>
-            Forgot password
-          </Link>
+          <button onClick={() => forgot()}>Forgot password</button>
 
           <button type="submit" className="bg-blue-400 px-10 py-2 w-full">
             Login
