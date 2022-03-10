@@ -1,3 +1,4 @@
+import { getDownloadURL } from 'firebase/storage';
 import React, { useEffect, useState, useContext } from 'react';
 import { useAuthContext } from '../../Context/AuthContext';
 import FirebaseContext from '../../Context/Firebase';
@@ -47,8 +48,8 @@ function Profile() {
       setUsername(user.displayName);
       //
 
-      if (user?.photoUrl) {
-        setPhotoUrl(user.photoUrl);
+      if (user?.photoURL) {
+        setPhotoUrl(user.photoURL);
       }
     }
   }, [user]);
@@ -70,7 +71,7 @@ function Profile() {
   };
 
   const test = () => {
-    console.log(user.photoUrl);
+    console.log(user.photoURL);
   };
 
   return (
@@ -130,8 +131,6 @@ function Profile() {
         >
           Foto
         </button>
-
-        <img className="rounded-full h-12 w-12" alt="avatar" src={photoUrl} />
       </div>
 
       <button className="text-4xl" onClick={() => test()}>

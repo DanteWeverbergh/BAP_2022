@@ -24,13 +24,14 @@ export { firebase, FieldValue };
 export async function upload(file, currentUser, setLoading) {
   //
   const fileRef = ref(storage, currentUser.uid + '.png');
-  const url = getDownloadURL(fileRef);
 
   //upload file
   await uploadBytes(fileRef, file);
 
+  const photoURL = await getDownloadURL(fileRef);
+
   updateProfile(currentUser, {
-    photoUrl: url,
+    photoURL,
   });
 
   setLoading(false);
