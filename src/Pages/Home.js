@@ -16,6 +16,7 @@ function Home() {
 
   const [test, setTest] = useState([]);
   const [userType, setUserType] = useState('');
+  const [isLoaded, setIsloaded] = useState(false);
 
   useEffect(() => {
     document.title = 'Home - Gains';
@@ -41,6 +42,9 @@ function Home() {
 
           state.push(t);
         });
+      })
+      .then(() => {
+        setIsloaded(true);
       });
   }, []);
 
@@ -64,9 +68,7 @@ function Home() {
 
       <SignOut />
 
-      {test.map(() => (
-        <SocialCard />
-      ))}
+      {isLoaded ? test.map(() => <SocialCard />) : <div></div>}
 
       <Footer />
     </>
