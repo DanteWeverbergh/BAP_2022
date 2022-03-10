@@ -138,7 +138,7 @@ function Profile() {
           </button>
         </form>
 
-        <div className="mt-24">
+        <div className="mt-24 mx-12">
           <label
             className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="pic"
@@ -155,8 +155,9 @@ function Profile() {
             disabled={loading || !photo}
             type="submit"
             onClick={() => picture()}
+            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-6`}
           >
-            Foto
+            Upload photo
           </button>
         </div>
       </div>

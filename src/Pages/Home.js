@@ -7,17 +7,29 @@ import { Link } from 'react-router-dom';
 import { useFirestoreContext } from '../Context/Firestore';
 import Header from '../Layouts/Header/Header';
 import Footer from '../Layouts/Footer/Footer';
+import { useAuthContext } from '../Context/AuthContext';
 
 function Home() {
   const { firebase } = useContext(FirebaseContext);
+  const { user } = useAuthContext();
   //const { getCollection } = useFirestoreContext();
 
   const [test, setTest] = useState([]);
+  const [userType, setUserType] = useState('');
 
   useEffect(() => {
     document.title = 'Home - Gains';
 
     const db = firebase.firestore();
+
+    db.collection('users')
+      .doc(user.uid)
+      .get()
+      .then((res) => {
+        const data = res.data();
+
+        setUserType(data.userType);
+      });
 
     db.collection('posts')
       .get()
@@ -32,14 +44,17 @@ function Home() {
       });
   }, []);
 
-  const loggedIn = () => {
+  const t = () => {
     console.log(test);
   };
 
   return (
     <>
       <Header />
-      <button className="bg-blue-500 px-6 py-3" onClick={() => loggedIn()}>
+
+      <p>{userType}</p>
+
+      <button className="bg-blue-500 px-6 py-3" onClick={() => t()}>
         Test
       </button>
 
@@ -49,7 +64,10 @@ function Home() {
 
       <SignOut />
 
-      <SocialCard />
+      {test.map(() => (
+        <SocialCard />
+      ))}
+
       <Footer />
     </>
   );
