@@ -17,7 +17,6 @@ function Routing() {
   return (
     <>
       <div>
-        <Header />
         <Routes>
           {/* Auth routes */}
           <Route path={'/login'} element={<Login />} />

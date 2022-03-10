@@ -5,6 +5,7 @@ import 'firebase/auth';
 import SignOut from '../Components/SignOut';
 import { Link } from 'react-router-dom';
 import { useFirestoreContext } from '../Context/Firestore';
+import Header from '../Layouts/Header/Header';
 
 function Home() {
   const { firebase } = useContext(FirebaseContext);
@@ -36,6 +37,7 @@ function Home() {
 
   return (
     <>
+      <Header />
       <button className="bg-blue-500 px-6 py-3" onClick={() => loggedIn()}>
         Test
       </button>
