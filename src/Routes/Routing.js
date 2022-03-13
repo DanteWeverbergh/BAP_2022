@@ -29,7 +29,7 @@ function Routing() {
             <Route path={'/log'} element={<Log />} />
             <Route path={'/profile'} element={<Profile />} />
             <Route path={'*'} element={<Home />} />
-            <Route path="/create" element={<Createposts />} />
+            <Route path="/createpost" element={<Createposts />} />
           </Route>
         </Routes>
       </div>

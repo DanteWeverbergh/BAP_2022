@@ -56,18 +56,6 @@ function Home() {
     <>
       <Header />
 
-      <p>{userType}</p>
-
-      <button className="bg-blue-500 px-6 py-3" onClick={() => t()}>
-        Test
-      </button>
-
-      <Link to={'/create'} className="bg-red-400 rounded-full  px-6 py-6">
-        +
-      </Link>
-
-      <SignOut />
-
       {isLoaded ? (
         test.map((post) => <SocialCard key={post.docId} post={post} />)
       ) : (
