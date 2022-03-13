@@ -49,7 +49,7 @@ function Home() {
   }, []);
 
   const t = () => {
-    console.log(test);
+    console.log(test[0].docId);
   };
 
   return (
@@ -68,7 +68,11 @@ function Home() {
 
       <SignOut />
 
-      {isLoaded ? test.map(() => <SocialCard />) : <div></div>}
+      {isLoaded ? (
+        test.map((post) => <SocialCard key={post.docId} post={post} />)
+      ) : (
+        <div></div>
+      )}
 
       <Footer />
     </>

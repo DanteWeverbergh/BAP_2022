@@ -34,7 +34,6 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
   const register = (email, username, password, fullName, role) => {
-    ///
     setLoading(true);
 
     createUserWithEmailAndPassword(auth, email, password, fullName)
@@ -93,6 +92,17 @@ export const AuthContextProvider = ({ children }) => {
 
   const updateProfile = (email, displayName) => {
     // update profile
+  };
+
+  const getUserById = (uid) => {
+    //get the user by uid
+    const db = firebase.firestore();
+
+    db.collection('users')
+      .doc(uid)
+      .get((res) => {
+        console.log('woepwoep');
+      });
   };
 
   const contextValue = {

@@ -8,7 +8,7 @@ import { upload } from '../../Libs/Firebase';
 function Profile() {
   const { firebase } = useContext(FirebaseContext);
 
-  const { user } = useAuthContext();
+  const { user, logout } = useAuthContext();
   let navigate = useNavigate();
 
   //states
@@ -72,12 +72,18 @@ function Profile() {
   return (
     <>
       <div>
-        <Link
-          className="rounded-full bg-red-400 h-8 w-8 text-center "
-          to={'/home'}
-        >
-          B
-        </Link>
+        <div className="flex justify-between mx-6 mt-6">
+          <Link
+            className="rounded-full bg-red-400 h-8 w-8 text-center "
+            to={'/home'}
+          >
+            B
+          </Link>
+
+          <button className="bg-red-400 rounded-md" onClick={logout}>
+            Logout
+          </button>
+        </div>
 
         <div className="flex-col text-center grid place-items-center">
           <div className=" relative w-36 h-36 grid place-items-center  bg-red-500 rounded-full  mr-5 mt-5  ">

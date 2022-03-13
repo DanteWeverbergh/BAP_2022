@@ -5,7 +5,7 @@ class Footer extends Component {
   render() {
     return (
       <>
-        <div className="fixed inset-x-0 bottom-0 h-16 bg-red-500">
+        <div className="fixed inset-x-0 bottom-0 h-16 bg-slate-800 drop-shadow-lg">
           <nav className="flex justify-between">
             <Link to={'/home'}>Home</Link>
             <Link to={'/log'}>Log</Link>
