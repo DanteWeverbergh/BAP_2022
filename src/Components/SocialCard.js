@@ -20,7 +20,6 @@ function SocialCard({ post }) {
       .get()
       .then((res) => {
         const data = res.data();
-        console.log(data);
 
         const state = postUser;
 
@@ -58,7 +57,9 @@ function SocialCard({ post }) {
               <div className="mr-4">
                 <button onClick={() => console.log('like')}>Like</button>
               </div>
-              <div>Comment</div>
+              <div>
+                <button onClick={() => console.log('comment')}>Comments</button>
+              </div>
             </div>
             <div className="flex">
               <div className="mr-4">{likes} Likes</div>

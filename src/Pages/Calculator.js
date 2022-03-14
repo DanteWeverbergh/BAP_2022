@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Footer from '../Layouts/Footer/Footer';
+import Header from '../Layouts/Header/Header';
 
 function Calculator() {
   const [data, setData] = useState({
@@ -30,6 +32,7 @@ function Calculator() {
 
   return (
     <>
+      <Header />
       <div>
         <h1>Calculator</h1>
         <div>
@@ -61,6 +64,7 @@ function Calculator() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

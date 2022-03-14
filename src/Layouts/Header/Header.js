@@ -19,7 +19,11 @@ function Header() {
 
     const currentPath = location.pathname;
 
-    if (currentPath === '/home' || currentPath === 'Home') {
+    if (
+      currentPath === '/home' ||
+      currentPath === 'Home' ||
+      currentPath === '/'
+    ) {
       setIsHome(true);
     }
   }, [user]);

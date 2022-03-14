@@ -42,7 +42,7 @@ function Timer() {
   return (
     <>
       <div className="text-center">
-        <p className="text-6xl">
+        <p className="text-6xl text-white">
           {hours}:{minutes}:{seconds}
         </p>
 
