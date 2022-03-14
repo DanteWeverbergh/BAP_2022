@@ -46,6 +46,26 @@ function SocialCard({ post }) {
     const db = firebase.firestore();
     const postsRef = db.collection('posts').doc(post.docId);
 
+    if (isLiked) {
+      postsRef
+        .update('likes', FieldValue.arrayRemove(user.uid))
+        .then(() => {
+          setisLoading(false);
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    } else {
+      postsRef
+        .update('likes', FieldValue.arrayUnion(user.uid))
+        .then(() => {
+          setisLoading(false);
+        })
+        .catch((err) => {
+          alert(err.message);
+        });
+    }
+
     postsRef
       .update('likes', FieldValue.arrayUnion('fghjkljglj'))
       .then(() => {
