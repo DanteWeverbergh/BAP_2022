@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../Context/AuthContext';
 import FirebaseContext from '../../Context/Firebase';
 import { upload } from '../../Libs/Firebase';
+import { IoIosArrowBack } from 'react-icons/io';
 
 function Profile() {
   const { firebase } = useContext(FirebaseContext);
@@ -77,7 +78,7 @@ function Profile() {
             className="rounded-full bg-red-400 h-8 w-8 text-center "
             to={'/home'}
           >
-            B
+            <IoIosArrowBack className="text-3xl text-center text-white" />
           </Link>
 
           <button className="bg-red-400 rounded-md" onClick={logout}>

@@ -3,6 +3,8 @@ import { useAuthContext } from '../Context/AuthContext';
 import FirebaseContext from '../Context/Firebase';
 import { FieldValue } from '../Libs/Firebase';
 import Comments from './Comments';
+import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io';
+import { FaComments, FaRegComments } from 'react-icons/fa';
 
 function SocialCard({ post }) {
   const { firebase } = useContext(FirebaseContext);
@@ -47,19 +49,23 @@ function SocialCard({ post }) {
     const postsRef = db.collection('posts').doc(post.docId);
 
     if (isLiked) {
+      // remove the like
       postsRef
         .update('likes', FieldValue.arrayRemove(user.uid))
         .then(() => {
           setisLoading(false);
+          setIsLiked(false);
         })
         .catch((err) => {
           alert(err.message);
         });
     } else {
+      //like the post
       postsRef
         .update('likes', FieldValue.arrayUnion(user.uid))
         .then(() => {
           setisLoading(false);
+          setIsLiked(true);
         })
         .catch((err) => {
           alert(err.message);
@@ -108,15 +114,14 @@ function SocialCard({ post }) {
           <div className="flex justify-between mt-5">
             <div className="flex">
               <div className="mr-4">
-                <button
-                  className={isLiked ? 'bg-red-400' : ''}
-                  onClick={() => like()}
-                >
-                  Like
+                <button onClick={() => like()}>
+                  {isLiked ? <IoIosHeart /> : <IoIosHeartEmpty />}
                 </button>
               </div>
               <div>
-                <button onClick={() => openComments()}>Comments</button>
+                <button onClick={() => openComments()}>
+                  {comments ? <FaComments /> : <FaRegComments />}
+                </button>
               </div>
             </div>
             <div className="flex">
