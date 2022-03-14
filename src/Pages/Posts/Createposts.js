@@ -34,7 +34,7 @@ function Createposts() {
 
     try {
       await db.collection('posts').add({
-        // add
+        text: 'hkhkkhkmhkm',
       });
 
       alert('uploaded');

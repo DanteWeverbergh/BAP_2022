@@ -17,7 +17,6 @@ function SocialCard({ post }) {
 
   useEffect(() => {
     //setlikes probleempje
-    setLikes(post.likes.length);
 
     const db = firebase.firestore();
 
@@ -30,15 +29,16 @@ function SocialCard({ post }) {
         const state = postUser;
 
         state.push(data);
+      })
+      .then(() => {
+        post.likes.map((e) => {
+          if (e === user.uid) {
+            setIsLiked(true);
+          }
+        });
+
+        setLikes(post.likes.length);
       });
-
-    post.likes.map((e) => {
-      if (e === user.uid) {
-        setIsLiked(true);
-      }
-    });
-
-    console.log(post.likes);
   });
 
   const like = () => {
