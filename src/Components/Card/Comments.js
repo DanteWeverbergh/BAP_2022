@@ -12,7 +12,6 @@ function Comments({ comments }) {
 
   useEffect(() => {
     //
-    console.log(comments);
   });
 
   return (
