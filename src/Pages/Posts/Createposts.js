@@ -3,9 +3,12 @@ import FirebaseContext from '../../Context/Firebase';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../../Layouts/Header/Header';
 import Footer from '../../Layouts/Footer/Footer';
+import userEvent from '@testing-library/user-event';
+import { useAuthContext } from '../../Context/AuthContext';
 
 function Createposts() {
   const { firebase } = useContext(FirebaseContext);
+  const { user } = useAuthContext();
   let navigate = useNavigate();
 
   //states
@@ -35,6 +38,8 @@ function Createposts() {
     try {
       await db.collection('posts').add({
         text: 'hkhkkhkmhkm',
+        likes: [],
+        uid: user.uid,
       });
 
       alert('uploaded');

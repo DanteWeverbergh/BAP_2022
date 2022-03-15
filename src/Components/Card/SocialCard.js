@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useAuthContext } from '../Context/AuthContext';
-import FirebaseContext from '../Context/Firebase';
-import { FieldValue } from '../Libs/Firebase';
+import { useAuthContext } from '../../Context/AuthContext';
+import FirebaseContext from '../../Context/Firebase';
+import { FieldValue } from '../../Libs/Firebase';
 import Comments from './Comments';
 import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io';
 import { FaComments, FaRegComments } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 function SocialCard({ post }) {
   const { firebase } = useContext(FirebaseContext);
@@ -12,8 +13,8 @@ function SocialCard({ post }) {
   const { user } = useAuthContext();
 
   //states
-  const [postUser, setPostUser] = useState([]);
-  const [comments, setComments] = useState(false);
+  const [postUser, setPostUser] = useState({});
+  const [areComments, setAreComments] = useState(false);
   const [isLoading, setisLoading] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
 
@@ -28,9 +29,7 @@ function SocialCard({ post }) {
       .then((res) => {
         const data = res.data();
 
-        const state = postUser;
-
-        state.push(data);
+        setPostUser(data);
       })
       .then(() => {
         post.likes.map((e) => {
@@ -83,26 +82,31 @@ function SocialCard({ post }) {
   };
 
   const openComments = () => {
-    setComments(!comments);
+    setAreComments(!areComments);
   };
 
   return (
     <>
       {/*Card */}
+
       <div className="px-4 mx-4 py-4 mt-5 rounded-md bg-slate-600">
         {/* topbar */}
+
         <div className="flex justify-between">
           <div className="flex">
-            <img
-              alt="profilePic"
-              className="h-12 w-12 rounded-full image-cover mr-4"
-              src="https://picsum.photos/200"
-            />
+            <Link to={`/profile/${postUser.uid}`}>
+              <img
+                alt="profilePic"
+                className="h-12 w-12 rounded-full image-cover mr-4"
+                src="https://picsum.photos/200"
+              />
+            </Link>
             <div>
               <h1>{postUser.fullName}</h1>
               <p>{post.timeStamp}</p>
             </div>
           </div>
+
           <div>...</div>
         </div>
         {/* content card */}
@@ -120,7 +124,7 @@ function SocialCard({ post }) {
               </div>
               <div>
                 <button onClick={() => openComments()}>
-                  {comments ? <FaComments /> : <FaRegComments />}
+                  {areComments ? <FaComments /> : <FaRegComments />}
                 </button>
               </div>
             </div>
@@ -130,7 +134,7 @@ function SocialCard({ post }) {
             </div>
           </div>
         </div>
-        {comments ? <Comments /> : <div></div>}
+        {areComments ? <Comments /> : <div></div>}
       </div>
     </>
   );

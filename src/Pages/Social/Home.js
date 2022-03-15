@@ -1,13 +1,14 @@
 import React, { useEffect, useContext, useState } from 'react';
-import SocialCard from '../Components/SocialCard';
-import FirebaseContext from '../Context/Firebase';
+import SocialCard from '../../Components/Card/SocialCard';
+import FirebaseContext from '../../Context/Firebase';
 import 'firebase/auth';
-import SignOut from '../Components/SignOut';
+import SignOut from '../../Components/SignOut';
 import { Link } from 'react-router-dom';
-import { useFirestoreContext } from '../Context/Firestore';
-import Header from '../Layouts/Header/Header';
-import Footer from '../Layouts/Footer/Footer';
-import { useAuthContext } from '../Context/AuthContext';
+import { useFirestoreContext } from '../../Context/Firestore';
+import Header from '../../Layouts/Header/Header';
+import Footer from '../../Layouts/Footer/Footer';
+import { useAuthContext } from '../../Context/AuthContext';
+import { db } from '../../Libs/Firebase';
 
 function Home() {
   const { firebase } = useContext(FirebaseContext);
@@ -18,10 +19,23 @@ function Home() {
   const [userType, setUserType] = useState('');
   const [isLoaded, setIsloaded] = useState(false);
 
+  const [posts, setPosts] = useState([]);
+
   useEffect(() => {
     document.title = 'Home - Gains';
 
-    const db = firebase.firestore();
+    //const db = firebase.firestore();
+
+    db.collection('posts').onSnapshot((snapshot) => {
+      setPosts(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          post: doc.data(),
+        }))
+      );
+
+      setIsloaded(true);
+    });
 
     db.collection('users')
       .doc(user.uid)
@@ -31,33 +45,14 @@ function Home() {
 
         setUserType(data.userType);
       });
-
-    db.collection('posts')
-      .get()
-      .then((querySnapshot) => {
-        querySnapshot.forEach((element) => {
-          const data = element.data();
-
-          const state = test;
-
-          state.push(data);
-        });
-      })
-      .then(() => {
-        setIsloaded(true);
-      });
   }, []);
-
-  const t = () => {
-    console.log(test[0].docId);
-  };
 
   return (
     <>
       <Header />
 
       {isLoaded ? (
-        test.map((post) => <SocialCard key={post.docId} post={post} />)
+        posts.map(({ id, post }) => <SocialCard key={id} post={post} />)
       ) : (
         <div></div>
       )}
