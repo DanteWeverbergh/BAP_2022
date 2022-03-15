@@ -7,6 +7,7 @@ import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io';
 import { FaComments, FaRegComments } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { db } from '../../Libs/Firebase';
+import SocialProfile from './SocialProfile';
 
 function SocialCard({ post, postId }) {
   const { firebase } = useContext(FirebaseContext);
@@ -19,12 +20,10 @@ function SocialCard({ post, postId }) {
   const [isLoading, setisLoading] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [comments, setComments] = useState([]);
+  const [commentsAmount, setCommentsAmount] = useState(0);
 
   useEffect(() => {
     let unsubscribe;
-    //setlikes probleempje
-
-    //const db = firebase.firestore();
 
     db.collection('users')
       .doc(post.uid)
@@ -55,6 +54,8 @@ function SocialCard({ post, postId }) {
         //
         setComments(snapshot.docs.map((doc) => doc.data()));
       });
+
+    setCommentsAmount(comments.length);
 
     return () => unsubscribe();
   }, [postId]);
@@ -98,26 +99,8 @@ function SocialCard({ post, postId }) {
       {/*Card */}
 
       <div className="px-4 mx-4 py-4 mt-5 rounded-md bg-slate-600">
-        {/* topbar */}
+        <SocialProfile post={post} postUser={postUser} />
 
-        <div className="flex justify-between">
-          <div className="flex">
-            <Link to={`/profile/${postUser.uid}`}>
-              <img
-                alt="profilePic"
-                className="h-12 w-12 rounded-full object-cover mr-4"
-                //src="https://picsum.photos/200"
-                src={user.photoURL}
-              />
-            </Link>
-            <div>
-              <h1>{postUser.fullName}</h1>
-              <p>{post.timeStamp}</p>
-            </div>
-          </div>
-
-          <div>...</div>
-        </div>
         {/* content card */}
         <div className="mt-4">
           <img
@@ -151,7 +134,7 @@ function SocialCard({ post, postId }) {
             </div>
             <div className="flex">
               <div className="mr-4">{likes} Likes</div>
-              <div>4 comments</div>
+              <div>{commentsAmount} comments</div>
             </div>
           </div>
         </div>
