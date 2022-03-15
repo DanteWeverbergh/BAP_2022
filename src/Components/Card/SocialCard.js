@@ -6,6 +6,7 @@ import Comments from './Comments';
 import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io';
 import { FaComments, FaRegComments } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { db } from '../../Libs/Firebase';
 
 function SocialCard({ post }) {
   const { firebase } = useContext(FirebaseContext);
@@ -21,7 +22,7 @@ function SocialCard({ post }) {
   useEffect(() => {
     //setlikes probleempje
 
-    const db = firebase.firestore();
+    //const db = firebase.firestore();
 
     db.collection('users')
       .doc(post.uid)
@@ -37,6 +38,10 @@ function SocialCard({ post }) {
             setIsLiked(true);
           }
         });
+
+        const postUid = postUser.uid;
+
+        // console.log(user.postUid);
 
         setLikes(post.likes.length);
       });
@@ -70,15 +75,6 @@ function SocialCard({ post }) {
           alert(err.message);
         });
     }
-
-    postsRef
-      .update('likes', FieldValue.arrayUnion('fghjkljglj'))
-      .then(() => {
-        setisLoading(false);
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
   };
 
   const openComments = () => {
@@ -97,8 +93,9 @@ function SocialCard({ post }) {
             <Link to={`/profile/${postUser.uid}`}>
               <img
                 alt="profilePic"
-                className="h-12 w-12 rounded-full image-cover mr-4"
-                src="https://picsum.photos/200"
+                className="h-12 w-12 rounded-full object-cover mr-4"
+                //src="https://picsum.photos/200"
+                src={user.photoURL}
               />
             </Link>
             <div>
@@ -111,7 +108,11 @@ function SocialCard({ post }) {
         </div>
         {/* content card */}
         <div className="mt-4">
-          <img alt="pic" src="https://picsum.photos/400" />
+          <img
+            className="rounded-md"
+            alt="pic"
+            src="https://picsum.photos/400"
+          />
           <div>
             <p className="mt-4">{post.text}</p>
           </div>
@@ -119,12 +120,20 @@ function SocialCard({ post }) {
             <div className="flex">
               <div className="mr-4">
                 <button onClick={() => like()}>
-                  {isLiked ? <IoIosHeart /> : <IoIosHeartEmpty />}
+                  {isLiked ? (
+                    <IoIosHeart className="text-2xl text-red-400" />
+                  ) : (
+                    <IoIosHeartEmpty className="text-2xl text-white" />
+                  )}
                 </button>
               </div>
               <div>
                 <button onClick={() => openComments()}>
-                  {areComments ? <FaComments /> : <FaRegComments />}
+                  {areComments ? (
+                    <FaComments className="text-white text-2xl" />
+                  ) : (
+                    <FaRegComments className="text-white text-2xl" />
+                  )}
                 </button>
               </div>
             </div>

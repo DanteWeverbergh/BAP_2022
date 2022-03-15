@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Auth from '../Helpers/Auth';
-import ForgotPassword from '../Pages/Auth/ForgotPassword';
 import Login from '../Pages/Auth/Login';
 import Profile from '../Pages/Auth/Profile';
 import Register from '../Pages/Auth/Register';
@@ -19,7 +18,6 @@ function Routing() {
           {/* Auth routes */}
           <Route path={'/login'} element={<Login />} />
           <Route path={'/register'} element={<Register />} />
-          <Route path={'/forgot'} element={<ForgotPassword />} />
 
           <Route element={<Auth />}>
             <Route path={'/'} element={<Home />} />
