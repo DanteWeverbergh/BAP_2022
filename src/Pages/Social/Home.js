@@ -52,7 +52,9 @@ function Home() {
       <Header />
 
       {isLoaded ? (
-        posts.map(({ id, post }) => <SocialCard key={id} post={post} />)
+        posts.map(({ id, post }) => (
+          <SocialCard key={id} post={post} postId={id} />
+        ))
       ) : (
         <div></div>
       )}

@@ -1,8 +1,9 @@
 import React, { useContext, useEffect } from 'react';
 import { MdSend } from 'react-icons/md';
 import FirebaseContext from '../../Context/Firebase';
+import CommentsDetail from './CommentsDetail';
 
-function Comments() {
+function Comments({ comments }) {
   const { firebase } = useContext(FirebaseContext);
   const sendComment = (e) => {
     e.preventDefault();
@@ -11,19 +12,17 @@ function Comments() {
 
   useEffect(() => {
     //
+    console.log(comments);
   });
 
   return (
     <>
       <div>
-        <div className="mt-6 flex items-center">
-          <img
-            alt="profPic"
-            src="https://picsum.photos/200"
-            className="h-10 w-10 rounded-full"
-          />
-          <p className="ml-4 ">Waaw, Goed bezig!</p>
-        </div>
+        {comments ? (
+          comments.map((comments) => <CommentsDetail comments={comments} />)
+        ) : (
+          <div>No comments yet.</div>
+        )}
         {/*form/*/}
         <div>
           <form className="w-full" onSubmit={sendComment} method="POST">

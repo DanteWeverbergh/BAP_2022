@@ -8,7 +8,7 @@ import { FaComments, FaRegComments } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { db } from '../../Libs/Firebase';
 
-function SocialCard({ post }) {
+function SocialCard({ post, postId }) {
   const { firebase } = useContext(FirebaseContext);
   const [likes, setLikes] = useState(0);
   const { user } = useAuthContext();
@@ -18,8 +18,10 @@ function SocialCard({ post }) {
   const [areComments, setAreComments] = useState(false);
   const [isLoading, setisLoading] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
+  const [comments, setComments] = useState([]);
 
   useEffect(() => {
+    let unsubscribe;
     //setlikes probleempje
 
     //const db = firebase.firestore();
@@ -41,15 +43,25 @@ function SocialCard({ post }) {
 
         const postUid = postUser.uid;
 
-        // console.log(user.postUid);
-
         setLikes(post.likes.length);
       });
-  });
+
+    //comments
+    unsubscribe = db
+      .collection('posts')
+      .doc(postId)
+      .collection('comments')
+      .onSnapshot((snapshot) => {
+        //
+        setComments(snapshot.docs.map((doc) => doc.data()));
+      });
+
+    return () => unsubscribe();
+  }, [postId]);
 
   const like = () => {
     setisLoading(true);
-    const db = firebase.firestore();
+    //const db = firebase.firestore();
     const postsRef = db.collection('posts').doc(post.docId);
 
     if (isLiked) {
@@ -143,7 +155,7 @@ function SocialCard({ post }) {
             </div>
           </div>
         </div>
-        {areComments ? <Comments /> : <div></div>}
+        {areComments ? <Comments comments={comments} /> : <div></div>}
       </div>
     </>
   );
