@@ -41,3 +41,16 @@ export async function upload(file, currentUser, setLoading) {
 
   alert('file uploaded!');
 }
+
+export async function postPhoto(file, fileName, setLoading) {
+  const fileRef = ref(storage, fileName);
+
+  //upload file
+  await uploadBytes(fileRef, file);
+
+  const photoUrl = await getDownloadURL(fileRef);
+
+  setLoading(false);
+
+  alert('file uploaded');
+}

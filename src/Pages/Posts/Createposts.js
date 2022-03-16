@@ -6,6 +6,7 @@ import Footer from '../../Layouts/Footer/Footer';
 import userEvent from '@testing-library/user-event';
 import { useAuthContext } from '../../Context/AuthContext';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
+import { postPhoto } from '../../Libs/Firebase';
 
 function Createposts() {
   const { firebase, storage } = useContext(FirebaseContext);
@@ -20,6 +21,7 @@ function Createposts() {
   const [message, setMessage] = useState('');
   const [photo, setPhoto] = useState('');
   const [photoUrl, setPhotoUrl] = useState('');
+  const [loading, setLoading] = useState('false');
 
   useEffect(() => {
     document.title = 'Create - Gains';
@@ -34,11 +36,6 @@ function Createposts() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const fileRef = ref(storage, photo.name);
-
-    await uploadBytes(fileRef, photo);
-
-    /*
     const db = firebase.firestore();
 
     const data = {
@@ -51,6 +48,8 @@ function Createposts() {
     try {
       await db.collection('posts').add(data);
 
+      postPhoto(photo, photo.name, setLoading);
+
       alert('uploaded');
 
       navigate('/home');
@@ -58,7 +57,6 @@ function Createposts() {
       setError(error.message);
       alert(error.message);
     }
-    */
   };
 
   return (
