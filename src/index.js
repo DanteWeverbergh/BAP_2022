@@ -13,9 +13,7 @@ ReactDOM.render(
     <Router>
       <FirebaseContext.Provider value={{ firebase, FieldValue }}>
         <AuthContextProvider>
-          <FireStoreContextProvider>
-            <App />
-          </FireStoreContextProvider>
+          <App />
         </AuthContextProvider>
       </FirebaseContext.Provider>
     </Router>

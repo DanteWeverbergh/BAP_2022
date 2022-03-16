@@ -9,6 +9,7 @@ import Home from '../Pages/Social/Home';
 import Log from '../Pages/Log/Log';
 import Createposts from '../Pages/Posts/Createposts';
 import SocialProfile from '../Components/Card/SocialProfile';
+import FindTrainer from '../Pages/RegularUser/FindTrainer';
 
 function Routing() {
   return (
@@ -27,6 +28,9 @@ function Routing() {
             <Route path="/profile/:id" element={<SocialProfile />} />
             <Route path={'*'} element={<Home />} />
             <Route path="/createpost" element={<Createposts />} />
+
+            {/** */}
+            <Route path="/findtrainer" element={<FindTrainer />} />
           </Route>
         </Routes>
       </div>

@@ -64,3 +64,15 @@ export async function createPost(file, setLoading, text, uid, uPhoto) {
 
   alert('post uploaded');
 }
+
+//add data to a collection
+export async function addToCollection(col, data) {
+  await db.collection(col).add(data);
+
+  alert('Uploaded');
+}
+
+//add data to certain doc within collection
+export async function addToDoc(col, doc, data) {
+  await db.collection(col).doc(doc).update(data);
+}
