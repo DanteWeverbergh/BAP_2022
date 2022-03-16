@@ -5,9 +5,10 @@ import Header from '../../Layouts/Header/Header';
 import Footer from '../../Layouts/Footer/Footer';
 import userEvent from '@testing-library/user-event';
 import { useAuthContext } from '../../Context/AuthContext';
+import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 
 function Createposts() {
-  const { firebase } = useContext(FirebaseContext);
+  const { firebase, storage } = useContext(FirebaseContext);
   const { user } = useAuthContext();
   let navigate = useNavigate();
 
@@ -33,6 +34,11 @@ function Createposts() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const fileRef = ref(storage, photo.name);
+
+    await uploadBytes(fileRef, photo);
+
+    /*
     const db = firebase.firestore();
 
     const data = {
@@ -52,6 +58,7 @@ function Createposts() {
       setError(error.message);
       alert(error.message);
     }
+    */
   };
 
   return (

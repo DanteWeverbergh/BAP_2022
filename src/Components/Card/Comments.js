@@ -2,9 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import { MdSend } from 'react-icons/md';
 import { useAuthContext } from '../../Context/AuthContext';
 import FirebaseContext from '../../Context/Firebase';
+import { db } from '../../Libs/Firebase';
 import CommentsDetail from './CommentsDetail';
 
-function Comments({ comments }) {
+function Comments({ comments, postId }) {
   const { firebase } = useContext(FirebaseContext);
   const { user } = useAuthContext();
 
@@ -12,11 +13,20 @@ function Comments({ comments }) {
 
   useEffect(() => {
     //
+    console.log(postId);
   });
 
   const sendComment = (e) => {
     e.preventDefault();
-    console.log('send comment');
+
+    const data = {
+      comment: comment,
+      userName: user.displayName,
+    };
+
+    db.collection('posts').doc(postId).collection('comments').add(data);
+
+    setComment('');
   };
 
   return (

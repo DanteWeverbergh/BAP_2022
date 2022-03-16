@@ -24,6 +24,7 @@ function SocialCard({ post, postId }) {
 
   useEffect(() => {
     let unsubscribe;
+    setisLoading(true);
 
     db.collection('users')
       .doc(post.uid)
@@ -55,7 +56,7 @@ function SocialCard({ post, postId }) {
         setComments(snapshot.docs.map((doc) => doc.data()));
       });
 
-    setCommentsAmount(comments.length);
+    setisLoading(false);
 
     return () => unsubscribe();
   }, [postId]);
@@ -63,15 +64,15 @@ function SocialCard({ post, postId }) {
   const like = () => {
     setisLoading(true);
     //const db = firebase.firestore();
-    const postsRef = db.collection('posts').doc(post.docId);
+    const postsRef = db.collection('posts').doc(postId);
 
     if (isLiked) {
       // remove the like
       postsRef
         .update('likes', FieldValue.arrayRemove(user.uid))
         .then(() => {
-          setisLoading(false);
           setIsLiked(false);
+          setisLoading(false);
         })
         .catch((err) => {
           alert(err.message);
@@ -81,8 +82,8 @@ function SocialCard({ post, postId }) {
       postsRef
         .update('likes', FieldValue.arrayUnion(user.uid))
         .then(() => {
-          setisLoading(false);
           setIsLiked(true);
+          setisLoading(false);
         })
         .catch((err) => {
           alert(err.message);
@@ -133,12 +134,16 @@ function SocialCard({ post, postId }) {
               </div>
             </div>
             <div className="flex">
-              <div className="mr-4">{likes} Likes</div>
-              <div>{commentsAmount} comments</div>
+              <div className="mr-4">{!isLoading ? likes : ''} Likes</div>
+              <div>{!isLoading ? commentsAmount : ''}comments</div>
             </div>
           </div>
         </div>
-        {areComments ? <Comments comments={comments} /> : <div></div>}
+        {areComments ? (
+          <Comments comments={comments} postId={postId} key={postId} />
+        ) : (
+          <div></div>
+        )}
       </div>
     </>
   );
