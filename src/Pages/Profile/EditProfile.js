@@ -6,7 +6,7 @@ import FirebaseContext from '../../Context/Firebase';
 import { upload } from '../../Libs/Firebase';
 import { IoIosArrowBack } from 'react-icons/io';
 
-function Profile() {
+function EditProfile() {
   const { firebase } = useContext(FirebaseContext);
 
   const { user, logout } = useAuthContext();
@@ -76,7 +76,7 @@ function Profile() {
         <div className="flex justify-between mx-6 mt-6">
           <Link
             className="rounded-full bg-slate-700 h-8 w-8 text-center "
-            to={'/home'}
+            to={'/profile'}
           >
             <IoIosArrowBack className="text-3xl text-center text-white" />
           </Link>
@@ -174,4 +174,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default EditProfile;
