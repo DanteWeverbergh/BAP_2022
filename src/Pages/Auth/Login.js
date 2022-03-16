@@ -41,10 +41,10 @@ function Login() {
   return (
     <>
       <div className="w-full ">
-        <h1 className="text-4xl text-center">Gains</h1>
+        <h1 className="text-4xl text-center text-white">Gains</h1>
         {error && <p className="mb-4 text-xs text-red-primary">{error}</p>}
 
-        <form className="ml-12 mr-12" onSubmit={handleSubmit} method="POST">
+        <form className="mx-12" onSubmit={handleSubmit} method="POST">
           <div className="mb-4 mt-12">
             <input
               type={'email'}
@@ -68,14 +68,18 @@ function Login() {
             />
           </div>
 
-          <button onClick={() => forgot()}>Forgot password</button>
+          <button className="text-white mb-4" onClick={() => forgot()}>
+            Forgot password
+          </button>
 
           <button type="submit" className="bg-blue-400 px-10 py-2 w-full">
             Login
           </button>
         </form>
-        <div>
-          <Link to={'/register'}>No account yet? Click here!</Link>
+        <div className="mx-12">
+          <Link className="text-white" to={'/register'}>
+            No account yet? Click here!
+          </Link>
         </div>
       </div>
     </>

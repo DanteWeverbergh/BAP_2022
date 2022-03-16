@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { doesUsernameExist } from '../../Services/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useAuthContext } from '../../Context/AuthContext';
+import Label from '../../Components/Label';
 
 function Register() {
   const { firebase } = useContext(FirebaseContext);
@@ -42,12 +43,7 @@ function Register() {
 
         <form className="ml-12 mr-12" onSubmit={handleSubmit} method="POST">
           <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="email"
-            >
-              Email
-            </label>
+            <Label label={'Email'} htmlFor={'email'} />
             <input
               type={'email'}
               name={'email'}
@@ -59,12 +55,7 @@ function Register() {
             />
           </div>
           <div className="mb-6">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="password"
-            >
-              Password
-            </label>
+            <Label label={'Password'} htmlFor={'password'} />
             <input
               type={'password'}
               name={'password'}
@@ -77,12 +68,7 @@ function Register() {
           </div>
 
           <div className="mb-6">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="username"
-            >
-              UserName
-            </label>
+            <Label label={'Username'} htmlFor={'username'} />
             <input
               type={'text'}
               name={'userName'}
@@ -95,12 +81,8 @@ function Register() {
           </div>
 
           <div className="mb-6">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="fullName"
-            >
-              Fullname
-            </label>
+            <Label label={'fullname'} htmlFor={'fullName'} />
+
             <input
               type={'text'}
               name={'fullName'}
@@ -112,8 +94,9 @@ function Register() {
             />
           </div>
           <div>
-            <label>Account type</label>
+            <label className="text-white">Account type</label>
             <select
+              className="rounded-md"
               value={role}
               onChange={({ target }) => setRole(target.value)}
             >
@@ -130,10 +113,7 @@ function Register() {
           </button>
         </form>
 
-        <button className="bg-red-400" onClick={() => test()}>
-          Test
-        </button>
-        <div>
+        <div className="mx-12 text-white">
           <Link to={'/login'}>Already have an account? Login</Link>
         </div>
       </div>
