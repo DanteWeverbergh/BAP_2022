@@ -35,12 +35,15 @@ function Createposts() {
 
     const db = firebase.firestore();
 
+    const data = {
+      text: message,
+      likes: [],
+      uid: user.uid,
+      uPhoto: user.photoURL ? user.photoURL : '',
+    };
+
     try {
-      await db.collection('posts').add({
-        text: 'hkhkkhkmhkm',
-        likes: [],
-        uid: user.uid,
-      });
+      await db.collection('posts').add(data);
 
       alert('uploaded');
 
@@ -63,9 +66,9 @@ function Createposts() {
             name="message"
             id="message"
             type={'text'}
-            placeholder="Message"
+            placeholder="message"
             value={message}
-            onChange={(target) => setMessage(target.value)}
+            onChange={({ target }) => setMessage(target.value)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
