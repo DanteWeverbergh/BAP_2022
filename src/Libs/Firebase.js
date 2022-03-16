@@ -42,7 +42,8 @@ export async function upload(file, currentUser, setLoading) {
   alert('file uploaded!');
 }
 
-export async function postPhoto(file, fileName, setLoading) {
+export async function createPost(file, setLoading, text, uid, uPhoto) {
+  const fileName = Date.now() + 'jpg';
   const fileRef = ref(storage, fileName);
 
   //upload file
@@ -50,7 +51,16 @@ export async function postPhoto(file, fileName, setLoading) {
 
   const photoUrl = await getDownloadURL(fileRef);
 
+  await db.collection('posts').add({
+    photoUrl,
+    uid,
+    text,
+    uPhoto,
+    likes: [],
+    created: FieldValue.serverTimestamp(),
+  });
+
   setLoading(false);
 
-  alert('file uploaded');
+  alert('post uploaded');
 }

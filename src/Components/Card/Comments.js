@@ -22,6 +22,7 @@ function Comments({ comments, postId }) {
     const data = {
       comment: comment,
       userName: user.displayName,
+      uPhoto: user.photoURL,
     };
 
     db.collection('posts').doc(postId).collection('comments').add(data);

@@ -104,11 +104,17 @@ function SocialCard({ post, postId }) {
 
         {/* content card */}
         <div className="mt-4">
-          <img
-            className="rounded-md"
-            alt="pic"
-            src="https://picsum.photos/400"
-          />
+          {post.photoUrl ? (
+            <img
+              className="rounded-md"
+              alt="pic"
+              //src="https://picsum.photos/400"
+              src={post.photoUrl}
+            />
+          ) : (
+            <div></div>
+          )}
+
           <div>
             <p className="mt-4">{post.text}</p>
           </div>

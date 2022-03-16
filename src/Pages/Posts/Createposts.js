@@ -6,7 +6,7 @@ import Footer from '../../Layouts/Footer/Footer';
 import userEvent from '@testing-library/user-event';
 import { useAuthContext } from '../../Context/AuthContext';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
-import { postPhoto } from '../../Libs/Firebase';
+import { createPost } from '../../Libs/Firebase';
 
 function Createposts() {
   const { firebase, storage } = useContext(FirebaseContext);
@@ -46,11 +46,15 @@ function Createposts() {
     };
 
     try {
-      await db.collection('posts').add(data);
+      //await db.collection('posts').add(data);
 
-      postPhoto(photo, photo.name, setLoading);
-
-      alert('uploaded');
+      createPost(
+        photo,
+        setLoading,
+        message,
+        user.uid,
+        user.photoURL ? user.photoURL : null
+      );
 
       navigate('/home');
     } catch (error) {
