@@ -11,6 +11,7 @@ import Createposts from '../Pages/Posts/Createposts';
 import SocialProfile from '../Components/Card/SocialProfile';
 import FindTrainer from '../Pages/RegularUser/FindTrainer';
 import Profile from '../Pages/Profile/Profile';
+import UserProfile from '../Pages/Profile/UserProfile';
 
 function Routing() {
   return (
@@ -30,7 +31,11 @@ function Routing() {
             <Route path="/profile" element={<Profile />} />
             <Route path={'/profile/edit'} element={<EditProfile />} />
             <Route path="/profile/:id" element={<SocialProfile />} />
+            <Route path="/profile/:displayName" element={<UserProfile />} />
+
             <Route path={'*'} element={<Home />} />
+
+            {/*Social */}
             <Route path="/createpost" element={<Createposts />} />
 
             {/** */}

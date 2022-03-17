@@ -5,7 +5,7 @@ import { FieldValue } from '../../Libs/Firebase';
 import Comments from './Comments';
 import { IoIosHeartEmpty, IoIosHeart } from 'react-icons/io';
 import { FaComments, FaRegComments } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+
 import { db } from '../../Libs/Firebase';
 import SocialProfile from './SocialProfile';
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Input from '../../Components/Input';
 import Timer from '../../Components/Timer';
 import { useAuthContext } from '../../Context/AuthContext';
 import Footer from '../../Layouts/Footer/Footer';
@@ -10,7 +11,7 @@ import { getDocById } from '../../Libs/Firestore';
 function Log() {
   const { user } = useAuthContext();
 
-  const [userType, setUserType] = useState('');
+  const [userType, setUserType] = useState('regular');
   const [u, setU] = useState({});
 
   useEffect(() => {
@@ -22,7 +23,9 @@ function Log() {
     db.collection('users')
       .doc(user.uid)
       .get()
-      .then((doc) => setU(doc.data()));
+      .then((doc) => {
+        setU(doc.data());
+      });
   }, []);
 
   return (
@@ -34,13 +37,28 @@ function Log() {
       <Timer />
        */}
 
-      {u.userType === 'regular' ? (
+      {/** TIJDELIJK
+       * Geen internet connectie
+       */}
+
+      {/*
+      u.userType === 'regular' ? (
         <Link className="mx-12 text-white" to={'/findtrainer'}>
           Find a personal trainer
         </Link>
       ) : (
         <div>personal trainer</div>
-      )}
+      )
+    
+      */}
+
+      <Link to={'/findtrainer'} className="mx-12 text-white">
+        Find a personal trainer
+      </Link>
+
+      <Link to={'/logworkout'}>Log a workout</Link>
+
+      <Input placeholder={'test'} />
 
       <Footer />
     </>

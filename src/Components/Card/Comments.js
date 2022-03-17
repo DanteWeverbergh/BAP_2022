@@ -1,12 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdSend } from 'react-icons/md';
 import { useAuthContext } from '../../Context/AuthContext';
-import FirebaseContext from '../../Context/Firebase';
+
 import { db } from '../../Libs/Firebase';
 import CommentsDetail from './CommentsDetail';
 
 function Comments({ comments, postId }) {
-  const { firebase } = useContext(FirebaseContext);
   const { user } = useAuthContext();
 
   const [comment, setComment] = useState('');
