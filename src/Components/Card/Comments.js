@@ -12,7 +12,6 @@ function Comments({ comments, postId }) {
 
   useEffect(() => {
     //
-    console.log(postId);
   });
 
   const sendComment = (e) => {

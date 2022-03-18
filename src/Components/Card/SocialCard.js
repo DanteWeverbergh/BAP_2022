@@ -58,6 +58,8 @@ function SocialCard({ post, postId }) {
 
     setisLoading(false);
 
+    console.log(comments);
+
     return () => unsubscribe();
   }, [postId]);
 
@@ -141,7 +143,7 @@ function SocialCard({ post, postId }) {
             </div>
             <div className="flex">
               <div className="mr-4">{!isLoading ? likes : ''} Likes</div>
-              <div>{!isLoading ? commentsAmount : ''}comments</div>
+              <div>{!isLoading ? comments.length : '0'} comments</div>
             </div>
           </div>
         </div>

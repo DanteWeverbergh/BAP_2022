@@ -58,8 +58,6 @@ function Log() {
 
       <Link to={'/logworkout'}>Log a workout</Link>
 
-      <Input placeholder={'test'} />
-
       <Footer />
     </>
   );
