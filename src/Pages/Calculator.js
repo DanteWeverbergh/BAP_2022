@@ -1,67 +1,65 @@
 import React, { useState } from 'react';
+import Button from '../Components/Button';
+import Input from '../Components/Input';
+import Label from '../Components/Label';
 import Footer from '../Layouts/Footer/Footer';
 import Header from '../Layouts/Header/Header';
 
 function Calculator() {
-  const [data, setData] = useState({
-    weight: '',
-    reps: '',
-  });
+  const [weight, setWeight] = useState('');
+  const [reps, setReps] = useState('');
 
-  const [result, setResult] = useState({
-    result: '',
-  });
+  const [result, setResult] = useState();
 
-  const handleSumbit = () => {
-    const weight = data.weight;
-    const reps = data.reps;
+  const handleSumbit = (e) => {
+    e.preventDefault();
 
-    const result = weight / (1.0278 - 0.0278 * reps);
-
-    setResult({
-      result: result,
-    });
-  };
-
-  const handleOnChange = (e) => {
-    setData({
-      [e.target.name]:
-        e.target.type === 'number' ? parseInt(e.target.value) : e.target.value,
-    });
+    setResult(Math.round(weight / (1.0278 - 0.0278 * reps)));
   };
 
   return (
     <>
       <Header />
       <div>
-        <h1>Calculator</h1>
+        <h1 className="mx-12 text-white text-3xl mb-12 text-center">
+          Calculator
+        </h1>
         <div>
-          <input
-            type="number"
-            name="weight"
-            value={data.weight}
-            className="form-control"
-            placeholder="weight"
-            onChange={handleOnChange}
-          ></input>
-          <input
-            type="number"
-            name="reps"
-            value={data.reps}
-            className="form-control"
-            placeholder="reps"
-            onChange={handleOnChange}
-          ></input>
-          <button
-            className="btn-primary form-control"
-            onClick={() => handleSumbit()}
-          >
-            Calculate
-          </button>
+          <form className="mx-12" onSubmit={handleSumbit}>
+            <div>
+              <Label htmlFor={'weight'} label="weight" />
+              <Input
+                type={'number'}
+                name="weight"
+                value={weight}
+                onChange={({ target }) => setWeight(target.value)}
+                placeholder={'weight'}
+                id={'weight'}
+              />
+            </div>
 
-          <div className="result">
-            <p>{`Your 1RM is approximately ${result}kg`}</p>
-          </div>
+            <div>
+              <Label htmlFor={'reps'} label="reps" />
+              <Input
+                type={'number'}
+                name="reps"
+                value={reps}
+                onChange={({ target }) => setReps(target.value)}
+                placeholder={'reps'}
+                id={'reps'}
+              />
+            </div>
+
+            <Button text={'calculate'} />
+          </form>
+
+          {result ? (
+            <div className="mx-12 text-white mt-6">
+              <p>{`Your estimated 1RM is approximately ${result}kg`}</p>
+            </div>
+          ) : (
+            <div></div>
+          )}
         </div>
       </div>
       <Footer />
