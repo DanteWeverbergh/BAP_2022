@@ -5,6 +5,9 @@ import { useAuthContext } from '../../Context/AuthContext';
 import FirebaseContext from '../../Context/Firebase';
 import { upload } from '../../Libs/Firebase';
 import { IoIosArrowBack } from 'react-icons/io';
+import Button from '../../Components/Button';
+import Label from '../../Components/Label';
+import Input from '../../Components/Input';
 
 function EditProfile() {
   const { firebase } = useContext(FirebaseContext);
@@ -66,10 +69,6 @@ function EditProfile() {
     console.log('update');
   };
 
-  const test = () => {
-    console.log(fullName);
-  };
-
   return (
     <>
       <div>
@@ -105,46 +104,29 @@ function EditProfile() {
         </div>
         <form className="ml-12 mr-12" onSubmit={updateProfile} method="POST">
           <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="email"
-            >
-              Email
-            </label>
-            <input
+            <Label htmlFor={'email'} label={'email'} />
+            <Input
               type={'email'}
               name={'email'}
               value={email}
               placeholder="johndoe@email.com"
               id="email"
               onChange={({ target }) => setEmail(target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
           <div className="mb-6">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="username"
-            >
-              UserName
-            </label>
-            <input
+            <Label htmlFor={'username'} label={'username'} />
+            <Input
               type={'text'}
               name={'userName'}
               value={username}
               onChange={({ target }) => setUsername(target.value)}
               placeholder="username"
               id="username"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
 
-          <button
-            type="submit"
-            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
-          >
-            Update
-          </button>
+          <Button text="Update" />
         </form>
 
         <div className="mt-24 mx-12">

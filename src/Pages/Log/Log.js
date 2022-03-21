@@ -14,6 +14,9 @@ function Log() {
   const [userType, setUserType] = useState('regular');
   const [u, setU] = useState({});
 
+  const [pt, setPt] = useState(false);
+  const [workout, setWorkout] = useState(false);
+
   useEffect(() => {
     document.title = 'Log - Gains';
 
@@ -27,6 +30,16 @@ function Log() {
         setU(doc.data());
       });
   }, []);
+
+  const clickPt = () => {
+    pt(true);
+    workout(false);
+  };
+
+  const clickWorkout = () => {
+    pt(false);
+    workout(true);
+  };
 
   return (
     <>
@@ -52,11 +65,20 @@ function Log() {
     
       */}
 
-      <Link to={'/findtrainer'} className="mx-12 text-white">
-        Find a personal trainer
-      </Link>
+      <div
+        className={'bg-slate-700 rounded-md mx-12 flex justify-between px-8'}
+      >
+        <div onClick={() => clickPt()} className={pt ? 'text-white' : ''}>
+          Personal trainer
+        </div>
 
-      <Link to={'/logworkout'}>Log a workout</Link>
+        <div
+          onClick={() => clickWorkout()}
+          className={workout ? 'text-white' : ''}
+        >
+          Workout
+        </div>
+      </div>
 
       <Footer />
     </>

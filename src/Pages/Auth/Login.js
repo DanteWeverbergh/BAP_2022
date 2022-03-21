@@ -4,6 +4,7 @@ import 'firebase/auth';
 
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../Context/AuthContext';
+import Button from '../../Components/Button';
 
 function Login() {
   const { firebase } = useContext(FirebaseContext);
@@ -72,9 +73,7 @@ function Login() {
             Forgot password
           </button>
 
-          <button type="submit" className="bg-blue-400 px-10 py-2 w-full">
-            Login
-          </button>
+          <Button text="Login" />
         </form>
         <div className="mx-12">
           <Link className="text-white" to={'/register'}>
