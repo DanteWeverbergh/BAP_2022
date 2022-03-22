@@ -18,6 +18,7 @@ function Profile() {
     'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'
   );
   const [u, setU] = useState({});
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     //
@@ -29,13 +30,16 @@ function Profile() {
       db.collection('users')
         .doc(user.uid)
         .get()
-        .then((doc) => setU(doc.data()));
+        .then((doc) => setU(doc.data()))
+        .then(() => {
+          setIsLoaded(true);
+        });
     }
   }, []);
 
   return (
     <>
-      <ProfileHeader photoUrl={photoUrl} fullName={fullName} />
+      {isLoaded ? <ProfileHeader photoUrl={photoUrl} u={u} /> : <div></div>}
 
       {/*1RM*/}
 

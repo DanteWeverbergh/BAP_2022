@@ -4,11 +4,11 @@ import { IoIosArrowBack } from 'react-icons/io';
 import { useAuthContext } from '../../Context/AuthContext';
 import { Link } from 'react-router-dom';
 
-function ProfileHeader({ photoUrl, fullName }) {
+function ProfileHeader({ photoUrl, u }) {
   const { user, logout } = useAuthContext();
 
   useEffect(() => {
-    console.log(fullName);
+    console.log(u);
   });
 
   return (
@@ -41,7 +41,9 @@ function ProfileHeader({ photoUrl, fullName }) {
             <MdOutlineEdit className="text-white text-center text-xl" />
           </Link>
         </div>
-        <div className="text-2xl mt-4 mb-8 text-white">Welcome {fullName}</div>
+        <div className="text-2xl mt-4 mb-8 text-white">
+          Welcome {u.fullName}
+        </div>
       </div>
     </>
   );
