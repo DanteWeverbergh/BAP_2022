@@ -7,6 +7,9 @@ import Footer from '../../Layouts/Footer/Footer';
 import Header from '../../Layouts/Header/Header';
 import { db } from '../../Libs/Firebase';
 import { getDocById } from '../../Libs/Firestore';
+import Dashboard from './Dashboard';
+import Routines from './Routines';
+import Workouts from './Workouts';
 
 function Log() {
   const { user } = useAuthContext();
@@ -14,15 +17,15 @@ function Log() {
   const [userType, setUserType] = useState('regular');
   const [u, setU] = useState({});
 
-  const [pt, setPt] = useState(false);
-  const [workout, setWorkout] = useState(false);
+  const [dashboard, setDashboard] = useState(true);
+  const [routine, setRoutine] = useState(false);
+  const [workouts, setWorkouts] = useState(false);
 
   useEffect(() => {
     document.title = 'Log - Gains';
 
     //const doc = getDocById('users', user.uid);
     //console.log(doc);
-
     db.collection('users')
       .doc(user.uid)
       .get()
@@ -31,54 +34,56 @@ function Log() {
       });
   }, []);
 
-  const clickPt = () => {
-    pt(true);
-    workout(false);
+  const clickDashboard = () => {
+    setDashboard(true);
+    setRoutine(false);
+    setWorkouts(false);
   };
 
-  const clickWorkout = () => {
-    pt(false);
-    workout(true);
+  const clickPlans = () => {
+    setDashboard(false);
+    setRoutine(true);
+    setWorkouts(false);
+  };
+
+  const clickWorkouts = () => {
+    setDashboard(false);
+    setRoutine(false);
+    setWorkouts(true);
   };
 
   return (
     <>
       <Header />
 
-      {/**<h1>Log your workout</h1>
-
-      <Timer />
-       */}
-
-      {/** TIJDELIJK
-       * Geen internet connectie
-       */}
-
-      {/*
-      u.userType === 'regular' ? (
-        <Link className="mx-12 text-white" to={'/findtrainer'}>
-          Find a personal trainer
-        </Link>
+      {u.userType === 'regular' ? (
+        <ul className="bg-slate-700 rounded-md mx-12 flex justify-between px-8">
+          <li
+            className={dashboard ? 'text-white' : ''}
+            onClick={() => clickDashboard()}
+          >
+            Dashboard
+          </li>
+          <li
+            className={routine ? 'text-white' : ''}
+            onClick={() => clickPlans()}
+          >
+            routines
+          </li>
+          <li
+            className={workouts ? 'text-white' : ''}
+            onClick={() => clickWorkouts()}
+          >
+            workouts
+          </li>
+        </ul>
       ) : (
-        <div>personal trainer</div>
-      )
-    
-      */}
+        <div>make workout programs</div>
+      )}
 
-      <div
-        className={'bg-slate-700 rounded-md mx-12 flex justify-between px-8'}
-      >
-        <div onClick={() => clickPt()} className={pt ? 'text-white' : ''}>
-          Personal trainer
-        </div>
-
-        <div
-          onClick={() => clickWorkout()}
-          className={workout ? 'text-white' : ''}
-        >
-          Workout
-        </div>
-      </div>
+      {dashboard ? <Dashboard /> : <div></div>}
+      {routine ? <Routines u={u} /> : <div></div>}
+      {workouts ? <Workouts /> : <div></div>}
 
       <Footer />
     </>
