@@ -11,6 +11,8 @@ import Createposts from '../Pages/Posts/Createposts';
 import SocialProfile from '../Components/Card/SocialProfile';
 import Profile from '../Pages/Profile/Profile';
 import UserProfile from '../Pages/Profile/UserProfile';
+import RoutineDetail from '../Pages/Log/RoutineDetail';
+import CreateRoutine from '../Pages/Log/Routines/CreateRoutine';
 
 function Routing() {
   return (
@@ -37,7 +39,9 @@ function Routing() {
             {/*Social */}
             <Route path="/createpost" element={<Createposts />} />
 
-            {/** */}
+            {/*Routines*/}
+            <Route path="/log/:id" element={<RoutineDetail />} />
+            <Route path="/create/routine" element={<CreateRoutine />} />
           </Route>
         </Routes>
       </div>

@@ -1,8 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import FirebaseContext from '../../Context/Firebase';
 import { db } from '../../Libs/Firebase';
 import RoutineCard from './RoutineCard';
 
 function Routines({ u }) {
+  const { firebase } = useContext(FirebaseContext);
+
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [routines, setRoutines] = useState([]);
+
+  useEffect(() => {
+    //
+
+    db.collection('Routines').onSnapshot((snapshot) => {
+      setRoutines(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          routine: doc.data(),
+        }))
+      );
+      setIsLoaded(true);
+    });
+  }, [isLoaded]);
+
   return (
     <>
       <div className="mx-12 mt-6">
@@ -21,7 +41,17 @@ function Routines({ u }) {
 
         <div>
           <h1 className="text-white text-2xl mt-6 mb-4">Other routines</h1>
-          <RoutineCard />
+          <ul className="flex overflow-x-auto gap-6 snap-x snap-mandatory">
+            {isLoaded ? (
+              routines.map(({ id, routine }) => (
+                <li className="shrink-0 w-3/4 snap-center">
+                  <RoutineCard key={id} routine={routine} id={id} />
+                </li>
+              ))
+            ) : (
+              <div></div>
+            )}
+          </ul>
         </div>
       </div>
 
