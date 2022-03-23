@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Button from '../../Components/Button';
 import Input from '../../Components/Input';
+import Modal from '../../Components/Modal';
 import { useAuthContext } from '../../Context/AuthContext';
 import { db } from '../../Libs/Firebase';
 
@@ -12,6 +13,9 @@ function Records({ u }) {
   const [deadlift, setDeadlift] = useState('');
   const [squad, setSquad] = useState('');
   const [bench, setBench] = useState('');
+
+  //modal
+  const [openModal, setOpenModal] = useState(false);
 
   const { user } = useAuthContext();
 
@@ -63,13 +67,12 @@ function Records({ u }) {
           <p className="m-auto">{u.squad1rm}</p>
         </div>
         <div
-          onClick={() => setOpenBench(!openBench)}
+          onClick={() => setOpenModal(true)}
           className="bg-blue-500 rounded-full h-24 w-24 flex"
         >
           <p className="m-auto">{u.bench1rm}</p>
         </div>
       </div>
-
       <div className="flex justify-between mx-12 ">
         <div className="bg-blue-500  h-12 w-24 flex ">
           <p className="m-auto">Deadlift</p>
@@ -81,7 +84,6 @@ function Records({ u }) {
           <p className="m-auto">Bench</p>
         </div>
       </div>
-
       {openDeadlift ? (
         <div>
           <form onSubmit={updateDeadlift} method="POST" className="mx-12">
@@ -101,6 +103,11 @@ function Records({ u }) {
       )}
       {openSquat ? <div>squat</div> : <div></div>}
       {openBench ? <div>bench</div> : <div></div>}
+
+      {/**
+
+      {openModal && <Modal openModal={openModal} setOpenModal={setOpenModal} />}
+       */}
     </>
   );
 }

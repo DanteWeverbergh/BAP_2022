@@ -1,16 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import FirebaseContext from '../../Context/Firebase';
 import { db } from '../../Libs/Firebase';
 import RoutineCard from './RoutineCard';
+import { BsFillPlusCircleFill } from 'react-icons/bs';
 
 function Routines({ u }) {
   const { firebase } = useContext(FirebaseContext);
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [routines, setRoutines] = useState([]);
+  const [currentRoutine, setCurrentRoutine] = useState({});
 
   useEffect(() => {
     //
+
+    //get all routines
 
     db.collection('Routines').onSnapshot((snapshot) => {
       setRoutines(
@@ -21,15 +26,25 @@ function Routines({ u }) {
       );
       setIsLoaded(true);
     });
+
+    //getCurrentRoutine
+    console.log(u.currentRoutineId);
+    db.collection('Routines')
+      .doc(u.currentRoutineId)
+      .get()
+      .then((doc) => {
+        setCurrentRoutine(doc.data());
+      });
   }, [isLoaded]);
 
   return (
     <>
       <div className="mx-12 mt-6">
-        {u.currentRoutine ? (
+        {u.currentRoutineId ? (
           <div>
             <h1 className="text-white text-2xl">Current routine</h1>
-            <RoutineCard />
+
+            <RoutineCard routine={currentRoutine} id={u.currentRoutineId} />
           </div>
         ) : (
           <div className="text-white">
@@ -55,8 +70,10 @@ function Routines({ u }) {
         </div>
       </div>
 
-      <div className="mx-12 mt-6">
-        <p>Add your own routine</p>
+      <div className="mx-12 mt-6 text-white">
+        <Link className="flex" to={'/create/routine'}>
+          Add your own routine. <BsFillPlusCircleFill />
+        </Link>
       </div>
     </>
   );
