@@ -13,6 +13,7 @@ import Profile from '../Pages/Profile/Profile';
 import UserProfile from '../Pages/Profile/UserProfile';
 import RoutineDetail from '../Pages/Log/RoutineDetail';
 import CreateRoutine from '../Pages/Log/Routines/CreateRoutine';
+import Workout from '../Pages/Log/Workout/Workout';
 
 function Routing() {
   return (
@@ -42,6 +43,8 @@ function Routing() {
             {/*Routines*/}
             <Route path="/log/:id" element={<RoutineDetail />} />
             <Route path="/create/routine" element={<CreateRoutine />} />
+
+            <Route path="/log/workout" element={<Workout />} />
           </Route>
         </Routes>
       </div>

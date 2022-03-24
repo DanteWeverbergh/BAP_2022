@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Button from '../../../Components/Button';
 import Input from '../../../Components/Input';
 import Label from '../../../Components/Label';
+import ProgressBar from '../../../Components/ProgressBar';
 import { useAuthContext } from '../../../Context/AuthContext';
 import Footer from '../../../Layouts/Footer/Footer';
 import Header from '../../../Layouts/Header/Header';
@@ -14,6 +15,8 @@ function CreateRoutine() {
   const [days, setDays] = useState('');
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+
+  const [width, setWidth] = useState('1/4');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,7 +42,15 @@ function CreateRoutine() {
   return (
     <>
       <Header />
-      <div className="text-white">Create a new routine</div>
+
+      <ProgressBar width={width} />
+
+      <button className="bg-red-400" onClick={() => setWidth('2/4')}>
+        {' '}
+        next
+      </button>
+
+      <div className="text-white mx-12 text-2xl">Create a new routine</div>
 
       <form className="mx-12" method="POST" onSubmit={handleSubmit}>
         <div className="mt-6">
