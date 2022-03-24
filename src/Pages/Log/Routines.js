@@ -39,9 +39,9 @@ function Routines({ u }) {
 
   return (
     <>
-      <div className="mx-12 mt-6">
+      <div className=" mt-6">
         {u.currentRoutineId ? (
-          <div>
+          <div className="mx-12">
             <h1 className="text-white text-2xl">Current routine</h1>
 
             <RoutineCard routine={currentRoutine} id={u.currentRoutineId} />
@@ -54,7 +54,7 @@ function Routines({ u }) {
           </div>
         )}
 
-        <div>
+        <div className="ml-12">
           <h1 className="text-white text-2xl mt-6 mb-4">Other routines</h1>
           <ul className="flex overflow-x-auto gap-6 snap-x snap-mandatory">
             {isLoaded ? (
