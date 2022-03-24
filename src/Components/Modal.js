@@ -1,6 +1,5 @@
 import React from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
-import './Modal.css';
 
 function Modal({ setOpenModal, routine, selectRoutine }) {
   return (

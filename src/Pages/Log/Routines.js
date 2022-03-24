@@ -28,7 +28,7 @@ function Routines({ u }) {
     });
 
     //getCurrentRoutine
-    console.log(u.currentRoutineId);
+
     db.collection('Routines')
       .doc(u.currentRoutineId)
       .get()

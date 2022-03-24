@@ -85,14 +85,6 @@ function Log() {
       {routine ? <Routines u={u} /> : <div></div>}
       {workouts ? <Workouts /> : <div></div>}
 
-      {!u.userType !== 'regular' ? (
-        <div>
-          <Link to="/create/routine">Create new routine</Link>
-        </div>
-      ) : (
-        <div></div>
-      )}
-
       <Footer />
     </>
   );
