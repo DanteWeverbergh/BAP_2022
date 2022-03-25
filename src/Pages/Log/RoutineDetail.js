@@ -73,7 +73,6 @@ function RoutineDetail() {
       <Back />
 
       <div className="mx-12">
-        <div>RoutineDetail</div>
         <h1 className="text-white">{routine.name}</h1>
 
         <div>{routine.days}</div>
