@@ -10,6 +10,8 @@ function Workout() {
   const [currentRoutineId, setCurrentRoutineId] = useState('');
   const [currentRoutine, setCurrentRoutine] = useState([]);
   const [day, setDay] = useState('');
+  const [days, setDays] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const [log, setLog] = useState(false);
 
@@ -21,16 +23,18 @@ function Workout() {
       db.collection('users')
         .doc(user.uid)
         .get()
-        .then((doc) => setCurrentRoutineId(doc.data().currentRoutineId))
-        .then(() =>
-          db
-            .collection('Routines')
-            .doc(currentRoutineId)
-            .get()
-            .then((doc) => {
-              setCurrentRoutine(doc.data());
-            })
-        );
+        .then((doc) => {
+          setCurrentRoutineId(doc.data().currentRoutineId);
+
+          db.collection('Routines')
+            .doc(doc.data().currentRoutineId)
+            .collection('Exercises')
+            .onSnapshot((snapshot) => {
+              setDays(snapshot.docs.map((ex) => ex.data()));
+            });
+        });
+
+      setIsLoaded(true);
     } catch (error) {
       alert(error.message);
     }
@@ -45,6 +49,8 @@ function Workout() {
       <div className="text-white">
         {currentRoutineId && currentRoutine.name}
       </div>
+
+      {/** 
 
       {!log && (
         <div>
@@ -67,6 +73,8 @@ function Workout() {
         </div>
       )}
 
+      */}
+
       <div className="text-white">{day}</div>
 
       <button
@@ -75,6 +83,23 @@ function Workout() {
       >
         Start
       </button>
+
+      <button onClick={() => console.log(days)}>Test</button>
+
+      <div>
+        <form>
+          <select
+            className="mx-auto w-3/4 rounded-md"
+            name="cars"
+            id="cars"
+            value={day}
+            onChange={({ target }) => setDay(target.value)}
+          >
+            {isLoaded &&
+              days.map((d) => <option value={d.name}>{d.name}</option>)}
+          </select>
+        </form>
+      </div>
 
       <Footer />
     </>
