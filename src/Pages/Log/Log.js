@@ -78,7 +78,10 @@ function Log() {
           </li>
         </ul>
       ) : (
-        <div>make workout programs</div>
+        <>
+          <div>make workout programs</div>
+          <Link to={'/exercise/create'}>Add Exercise</Link>
+        </>
       )}
 
       {dashboard ? <Dashboard /> : <div></div>}

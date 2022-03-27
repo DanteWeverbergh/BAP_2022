@@ -14,6 +14,7 @@ import UserProfile from '../Pages/Profile/UserProfile';
 import RoutineDetail from '../Pages/Log/RoutineDetail';
 import CreateRoutine from '../Pages/Log/Routines/CreateRoutine';
 import Workout from '../Pages/Log/Workout/Workout';
+import CreateExercise from '../Pages/PersonalTrainer/Exercises/CreateExercise';
 
 function Routing() {
   return (
@@ -45,6 +46,8 @@ function Routing() {
             <Route path="/create/routine" element={<CreateRoutine />} />
 
             <Route path="/log/workout" element={<Workout />} />
+
+            <Route path="/exercise/create" element={<CreateExercise />} />
           </Route>
         </Routes>
       </div>
