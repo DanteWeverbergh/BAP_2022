@@ -16,6 +16,8 @@ function Workout() {
 
   const [log, setLog] = useState(false);
 
+  const [time, setTime] = useState('');
+
   useEffect(() => {
     //
 
@@ -47,15 +49,13 @@ function Workout() {
     <>
       <div className="mx-12">
         <div className="mt-6">
-          <Timer />
+          <Timer time={time} setTime={setTime} />
         </div>
 
         <div className="text-white">
           {currentRoutineId && currentRoutine.name}
         </div>
-
         <div className="text-white">{day}</div>
-
         <div>
           <form>
             <select
@@ -70,7 +70,6 @@ function Workout() {
             </select>
           </form>
         </div>
-
         <button
           className="bg-blue-500 px-5 py-2 rounded-md"
           onClick={() => setLog(true)}
@@ -83,7 +82,6 @@ function Workout() {
         >
           Stop
         </button>
-
         {log ? (
           days.map((e) =>
             e.name === day ? <WorkoutDetail days={e} /> : <div></div>

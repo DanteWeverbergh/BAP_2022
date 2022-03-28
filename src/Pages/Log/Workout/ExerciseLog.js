@@ -28,22 +28,24 @@ function ExerciseLog({ exercise }) {
 
   return (
     <>
-      <div>
+      <div className="">
         {inputList.map((x, i) => {
           return (
             <div className="">
-              <Input
-                name="reps"
-                placeholder="Reps"
-                value={x.reps}
-                onChange={(e) => handleInputChange(e, i)}
-              />
-              <Input
-                name="weight"
-                placeholder="Weight"
-                value={x.wieght}
-                onChange={(e) => handleInputChange(e, i)}
-              />
+              <div className="flex">
+                <Input
+                  name="reps"
+                  placeholder="Reps"
+                  value={x.reps}
+                  onChange={(e) => handleInputChange(e, i)}
+                />
+                <Input
+                  name="weight"
+                  placeholder="Weight"
+                  value={x.wieght}
+                  onChange={(e) => handleInputChange(e, i)}
+                />
+              </div>
               <div className="btn-box">
                 {inputList.length !== 1 && (
                   <button className="mr10" onClick={() => handleRemoveClick(i)}>

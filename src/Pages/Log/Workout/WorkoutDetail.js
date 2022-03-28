@@ -14,10 +14,19 @@ function WorkoutDetail({ days }) {
         <div>
           {days.exercises &&
             days.exercises.map((ex) => (
-              <div className="mt-10">
+              <div className="mt-10 bg-slate-700 px-4 py-2 rounded-md">
+                <h1 className="text-white font-bold text-xl mb-2">{ex.name}</h1>
                 <ExerciseLog exercise={ex} />
               </div>
             ))}
+        </div>
+        <div>
+          <button
+            className="bg-blue-500 px-4 py-2 rounded-md"
+            onClick={() => console.log('klaar')}
+          >
+            Done
+          </button>
         </div>
       </div>
     </>
