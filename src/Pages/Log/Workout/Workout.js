@@ -3,6 +3,7 @@ import Timer from '../../../Components/Timer';
 import { useAuthContext } from '../../../Context/AuthContext';
 import Footer from '../../../Layouts/Footer/Footer';
 import { db } from '../../../Libs/Firebase';
+import WorkoutDetail from './WorkoutDetail';
 
 function Workout() {
   const { user } = useAuthContext();
@@ -38,6 +39,8 @@ function Workout() {
     } catch (error) {
       alert(error.message);
     }
+
+    console.log(days);
   }, []);
 
   return (
@@ -50,48 +53,14 @@ function Workout() {
         {currentRoutineId && currentRoutine.name}
       </div>
 
-      {/** 
-
-      {!log && (
-        <div>
-          <form>
-            <select
-              className="mx-auto w-3/4 rounded-md"
-              name="cars"
-              id="cars"
-              value={day}
-              onChange={({ target }) => setDay(target.value)}
-            >
-              <option value="Push A">Push A</option>
-              <option value="Pull A">Pull A</option>
-              <option value="Legs A">Legs A</option>
-              <option value="Push B">Push B</option>
-              <option value="Pull B">Pull B</option>
-              <option value="Legs B">Legs B</option>
-            </select>
-          </form>
-        </div>
-      )}
-
-      */}
-
       <div className="text-white">{day}</div>
-
-      <button
-        className="bg-blue-500 px-5 py-2 rounded-md"
-        onClick={() => setLog(true)}
-      >
-        Start
-      </button>
-
-      <button onClick={() => console.log(days)}>Test</button>
 
       <div>
         <form>
           <select
             className="mx-auto w-3/4 rounded-md"
-            name="cars"
-            id="cars"
+            name="days"
+            id="days"
             value={day}
             onChange={({ target }) => setDay(target.value)}
           >
@@ -100,6 +69,27 @@ function Workout() {
           </select>
         </form>
       </div>
+
+      <button
+        className="bg-blue-500 px-5 py-2 rounded-md"
+        onClick={() => setLog(true)}
+      >
+        Start
+      </button>
+      <button
+        className="bg-blue-500 px-5 py-2 rounded-md"
+        onClick={() => setLog(false)}
+      >
+        Stop
+      </button>
+
+      {log ? (
+        days.map((e) =>
+          e.name === day ? <WorkoutDetail days={e} /> : <div></div>
+        )
+      ) : (
+        <div></div>
+      )}
 
       <Footer />
     </>
