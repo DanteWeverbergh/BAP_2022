@@ -45,51 +45,53 @@ function Workout() {
 
   return (
     <>
-      <div className="mt-6">
-        <Timer />
+      <div className="mx-12">
+        <div className="mt-6">
+          <Timer />
+        </div>
+
+        <div className="text-white">
+          {currentRoutineId && currentRoutine.name}
+        </div>
+
+        <div className="text-white">{day}</div>
+
+        <div>
+          <form>
+            <select
+              className="mx-auto w-3/4 rounded-md"
+              name="days"
+              id="days"
+              value={day}
+              onChange={({ target }) => setDay(target.value)}
+            >
+              {isLoaded &&
+                days.map((d) => <option value={d.name}>{d.name}</option>)}
+            </select>
+          </form>
+        </div>
+
+        <button
+          className="bg-blue-500 px-5 py-2 rounded-md"
+          onClick={() => setLog(true)}
+        >
+          Start
+        </button>
+        <button
+          className="bg-blue-500 px-5 py-2 rounded-md"
+          onClick={() => setLog(false)}
+        >
+          Stop
+        </button>
+
+        {log ? (
+          days.map((e) =>
+            e.name === day ? <WorkoutDetail days={e} /> : <div></div>
+          )
+        ) : (
+          <div></div>
+        )}
       </div>
-
-      <div className="text-white">
-        {currentRoutineId && currentRoutine.name}
-      </div>
-
-      <div className="text-white">{day}</div>
-
-      <div>
-        <form>
-          <select
-            className="mx-auto w-3/4 rounded-md"
-            name="days"
-            id="days"
-            value={day}
-            onChange={({ target }) => setDay(target.value)}
-          >
-            {isLoaded &&
-              days.map((d) => <option value={d.name}>{d.name}</option>)}
-          </select>
-        </form>
-      </div>
-
-      <button
-        className="bg-blue-500 px-5 py-2 rounded-md"
-        onClick={() => setLog(true)}
-      >
-        Start
-      </button>
-      <button
-        className="bg-blue-500 px-5 py-2 rounded-md"
-        onClick={() => setLog(false)}
-      >
-        Stop
-      </button>
-
-      {log ? (
-        days.map((e) =>
-          e.name === day ? <WorkoutDetail days={e} /> : <div></div>
-        )
-      ) : (
-        <div></div>
-      )}
 
       <Footer />
     </>
