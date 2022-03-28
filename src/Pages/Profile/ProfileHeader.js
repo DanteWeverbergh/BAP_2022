@@ -3,6 +3,7 @@ import { MdOutlineEdit } from 'react-icons/md';
 import { IoIosArrowBack } from 'react-icons/io';
 import { useAuthContext } from '../../Context/AuthContext';
 import { Link } from 'react-router-dom';
+import { db } from '../../Libs/Firebase';
 
 function ProfileHeader({ photoUrl, u }) {
   const { user, logout } = useAuthContext();
@@ -11,12 +12,12 @@ function ProfileHeader({ photoUrl, u }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    console.log(u);
-
-    console.log(u.posts.length);
-
     setFollowing(u.following);
     setIsLoaded(true);
+
+    db.collection('users').doc(user.uid).update({
+      photoURL: photoUrl,
+    });
   });
 
   return (

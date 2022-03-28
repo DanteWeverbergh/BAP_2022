@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { MdOutlineEdit } from 'react-icons/md';
 import { IoIosArrowBack } from 'react-icons/io';
 
@@ -11,6 +11,9 @@ function UserHeader({ photoUrl, u, uid }) {
   const { user } = useAuthContext();
 
   const { firebase } = useContext(FirebaseContext);
+  const [following, setFollowing] = useState([]);
+  const [isFollowing, setIsFollowing] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     //
@@ -18,7 +21,16 @@ function UserHeader({ photoUrl, u, uid }) {
     db.collection('users')
       .doc(user.uid)
       .get()
-      .then((doc) => console.log(doc.data()));
+      .then((doc) => {
+        //
+        doc.data().following && setFollowing(doc.data().following);
+
+        following.map((f) => {
+          f === uid && setIsFollowing(true);
+        });
+      });
+
+    setIsLoaded(true);
   }, []);
 
   const follow = () => {
@@ -57,6 +69,8 @@ function UserHeader({ photoUrl, u, uid }) {
 
   return (
     <>
+      {isLoaded && isFollowing ? <p>Volgt al</p> : <p>Volgt niet</p>}
+
       <div className="flex justify-between mx-6 mt-6">
         <Link
           className="rounded-full bg-slate-700 h-8 w-8 text-center "
@@ -65,12 +79,21 @@ function UserHeader({ photoUrl, u, uid }) {
           <IoIosArrowBack className="text-3xl text-center text-white" />
         </Link>
 
-        <div
-          className="px-4 bg-blue-500 rounded-md text-white"
-          onClick={() => follow()}
-        >
-          Follow
-        </div>
+        {isFollowing ? (
+          <div
+            className="px-4 bg-blue-500 rounded-md text-white"
+            onClick={() => follow()}
+          >
+            Unfollow
+          </div>
+        ) : (
+          <div
+            className="px-4 bg-blue-500 rounded-md text-white"
+            onClick={() => follow()}
+          >
+            follow
+          </div>
+        )}
       </div>
 
       <div className="flex-col text-center grid place-items-center">
