@@ -64,3 +64,11 @@ export async function getDocInDoc(col, id, coll, docId) {
 
   return document;
 }
+
+//update doc
+
+export async function updateDoc(col, doc, data) {
+  await db.collection(col).doc(doc).update(data);
+
+  alert('updated');
+}

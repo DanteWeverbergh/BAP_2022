@@ -10,11 +10,11 @@ import Log from '../Pages/Log/Log';
 import Createposts from '../Pages/Posts/Createposts';
 import SocialProfile from '../Components/Card/SocialProfile';
 import Profile from '../Pages/Profile/Profile';
-import UserProfile from '../Pages/Profile/UserProfile';
 import RoutineDetail from '../Pages/Log/RoutineDetail';
 import CreateRoutine from '../Pages/Log/Routines/CreateRoutine';
 import Workout from '../Pages/Log/Workout/Workout';
 import CreateExercise from '../Pages/PersonalTrainer/Exercises/CreateExercise';
+import User from '../Pages/Profile/Social/User';
 
 function Routing() {
   return (
@@ -33,8 +33,7 @@ function Routing() {
             {/**Profile */}
             <Route path="/profile" element={<Profile />} />
             <Route path={'/profile/edit'} element={<EditProfile />} />
-            <Route path="/profile/:id" element={<SocialProfile />} />
-            <Route path="/profile/:displayName" element={<UserProfile />} />
+            <Route path="/profile/:uid" element={<User />} />
 
             <Route path={'*'} element={<Home />} />
 

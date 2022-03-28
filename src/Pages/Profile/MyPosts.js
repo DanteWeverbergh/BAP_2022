@@ -1,31 +1,49 @@
 import React, { useEffect, useState } from 'react';
+import SocialCard from '../../Components/Card/SocialCard';
 import { useAuthContext } from '../../Context/AuthContext';
 import { db } from '../../Libs/Firebase';
 
 function MyPosts() {
   const { user } = useAuthContext();
-  const [isLoading, setIsLoading] = useState(false);
-  const [post, setposts] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [posts, setposts] = useState([]);
 
   useEffect(() => {
     //
-    setIsLoading(true);
 
     let unsubscribe;
 
     unsubscribe = db.collection('posts').onSnapshot((snapshot) => {
       //
-      console.log();
 
       snapshot.docs.map((doc) => {
-        console.log(doc.data().uid);
+        if (doc.data().uid === user.uid) {
+          setposts({
+            id: doc.id,
+            post: doc.data(),
+          });
+        }
       });
     });
+
+    setIsLoaded(true);
+
+    return unsubscribe;
   }, []);
 
   return (
     <>
       <div className="mt-4 text-white">My posts</div>
+
+      <button onClick={() => console.log(posts)}>Test</button>
+
+      {/*
+      
+      isLoaded && (
+        <SocialCard key={posts.id} post={posts.post} postId={posts.id} />
+      )
+    
+      */}
     </>
   );
 }

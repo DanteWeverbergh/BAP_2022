@@ -2,9 +2,12 @@ import React, { useState } from 'react';
 import Input from '../../../Components/Input';
 import Label from '../../../Components/Label';
 import { BsPlusCircleFill } from 'react-icons/bs';
+import { IoMdRemoveCircle } from 'react-icons/io';
 
 function ExerciseLog({ exercise }) {
-  const [inputList, setInputList] = useState([{ reps: '', weight: '' }]);
+  const [inputList, setInputList] = useState([
+    { reps: '', weight: '', set: 1 },
+  ]);
 
   // handle input change
   const handleInputChange = (e, index) => {
@@ -33,6 +36,7 @@ function ExerciseLog({ exercise }) {
           return (
             <div className="">
               <div className="flex">
+                <h2>{}</h2>
                 <Input
                   name="reps"
                   placeholder="Reps"
@@ -49,11 +53,13 @@ function ExerciseLog({ exercise }) {
               <div className="btn-box">
                 {inputList.length !== 1 && (
                   <button className="mr10" onClick={() => handleRemoveClick(i)}>
-                    Remove
+                    <IoMdRemoveCircle className="text-xl absolute right-24" />
                   </button>
                 )}
                 {inputList.length - 1 === i && (
-                  <button onClick={handleAddClick}>Add</button>
+                  <button onClick={handleAddClick}>
+                    <BsPlusCircleFill className="text-xl absolute right-16" />
+                  </button>
                 )}
               </div>
             </div>

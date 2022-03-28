@@ -4,6 +4,8 @@ import Input from '../../Components/Input';
 import Modal from '../../Components/Modal';
 import { useAuthContext } from '../../Context/AuthContext';
 import { db } from '../../Libs/Firebase';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { updateDoc } from '../../Libs/Firestore';
 
 function Records({ u }) {
   const [openDeadlift, setOpenDeadlift] = useState(false);
@@ -23,32 +25,32 @@ function Records({ u }) {
     //
     //console.log(u.squad1rm);
     console.log(u.deadift1rm);
+
+    const unsub = onSnapshot(doc(db, 'users', user.uid), (doc) => {
+      doc.data().deadlift1rm && setDeadlift(doc.data().deadlift1rm);
+      doc.data().squad1rm && setSquad(doc.data().squad1rm);
+      doc.data().bench1rm && setBench(doc.data().bench1rm);
+    });
   }, []);
 
   const updateDeadlift = (e) => {
     //
     e.preventDefault();
 
-    db.collection('users').doc(user.uid).update({
-      deadlift1rm: deadlift,
-    });
+    updateDoc('users', user.uid, { deadlift1rm: deadlift });
   };
   const updateSquat = (e) => {
     e.preventDefault();
     //
 
-    db.collection('users').doc(user.uid).update({
-      squat1rm: squad,
-    });
+    updateDoc('users', user.uid, { squad1rm: squad });
   };
 
   const updateBench = (e) => {
     e.preventDefault();
     //
 
-    db.collection('users').doc(user.uid).update({
-      bench1rm: bench,
-    });
+    updateDoc('users', user.uid, { bench1rm: bench });
   };
 
   return (
@@ -58,19 +60,19 @@ function Records({ u }) {
           onClick={() => setOpenDeadlift(!openDeadlift)}
           className="bg-blue-500 rounded-full h-24 w-24 flex "
         >
-          <p className="m-auto">{u.deadlift1rm}</p>
+          <p className="m-auto">{deadlift}</p>
         </div>
         <div
           onClick={() => setOpenSquad(!openSquat)}
           className="bg-blue-500 rounded-full h-24 w-24 flex"
         >
-          <p className="m-auto">{u.squad1rm}</p>
+          <p className="m-auto">{squad}</p>
         </div>
         <div
-          onClick={() => setOpenModal(true)}
+          onClick={() => setOpenBench(!openBench)}
           className="bg-blue-500 rounded-full h-24 w-24 flex"
         >
-          <p className="m-auto">{u.bench1rm}</p>
+          <p className="m-auto">{bench}</p>
         </div>
       </div>
       <div className="flex justify-between mx-12 ">
@@ -86,7 +88,7 @@ function Records({ u }) {
       </div>
       {openDeadlift ? (
         <div>
-          <form onSubmit={updateDeadlift} method="POST" className="mx-12">
+          <form onSubmit={updateDeadlift} method="POST" className="mx-12 mb-4">
             <Input
               type={'number'}
               placeholder="deadlift 1rm"
@@ -101,8 +103,42 @@ function Records({ u }) {
       ) : (
         <div></div>
       )}
-      {openSquat ? <div>squat</div> : <div></div>}
-      {openBench ? <div>bench</div> : <div></div>}
+
+      {openSquat ? (
+        <div>
+          <form onSubmit={updateSquat} method="POST" className="mx-12 mb-4">
+            <Input
+              type={'number'}
+              placeholder="squad 1rm"
+              onChange={({ target }) => setSquad(target.value)}
+              id="squad"
+              value={squad}
+              name="squad"
+            />
+            <Button text={'Update'} />
+          </form>
+        </div>
+      ) : (
+        <div></div>
+      )}
+
+      {openBench ? (
+        <div>
+          <form onSubmit={updateBench} method="POST" className="mx-12 mb-4">
+            <Input
+              type={'number'}
+              placeholder="bench 1rm"
+              onChange={({ target }) => setBench(target.value)}
+              id="bench"
+              value={bench}
+              name="bench"
+            />
+            <Button text={'Update'} />
+          </form>
+        </div>
+      ) : (
+        <div></div>
+      )}
 
       {/**
 

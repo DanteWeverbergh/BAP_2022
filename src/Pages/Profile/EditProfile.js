@@ -65,8 +65,12 @@ function EditProfile() {
     upload(photo, user, setLoading);
   };
 
-  const updateProfile = () => {
-    console.log('update');
+  const updateProfile = (e) => {
+    e.preventDefault();
+
+    updateProfile(user, {
+      displayName: username,
+    });
   };
 
   return (

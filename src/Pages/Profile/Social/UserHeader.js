@@ -1,15 +1,18 @@
 import React, { useEffect } from 'react';
 import { MdOutlineEdit } from 'react-icons/md';
 import { IoIosArrowBack } from 'react-icons/io';
-import { useAuthContext } from '../../Context/AuthContext';
+
 import { Link } from 'react-router-dom';
+import { useAuthContext } from '../../../Context/AuthContext';
 
-function ProfileHeader({ photoUrl, u }) {
-  const { user, logout } = useAuthContext();
+function UserHeader({ photoUrl, u, uid }) {
+  const { user } = useAuthContext();
 
-  useEffect(() => {
-    console.log(u);
-  });
+  const follow = () => {
+    //
+    console.log('ikke: ', user.uid);
+    console.log('profiel: ', uid);
+  };
 
   return (
     <>
@@ -21,9 +24,12 @@ function ProfileHeader({ photoUrl, u }) {
           <IoIosArrowBack className="text-3xl text-center text-white" />
         </Link>
 
-        <button className="px-4 bg-blue-500 rounded-md" onClick={logout}>
-          Logout
-        </button>
+        <div
+          className="px-4 bg-blue-500 rounded-md text-white"
+          onClick={() => follow()}
+        >
+          Follow
+        </div>
       </div>
 
       <div className="flex-col text-center grid place-items-center">
@@ -35,20 +41,11 @@ function ProfileHeader({ photoUrl, u }) {
               src={photoUrl}
             />
           )}
-
-          <Link
-            className="h-6 w-6  rounded-full absolute bottom-3 right-3 bg-blue-500 text-center"
-            to={'/profile/edit'}
-          >
-            <MdOutlineEdit className="text-white text-center text-xl" />
-          </Link>
         </div>
-        <div className="text-2xl mt-4 mb-8 text-white">
-          Welcome {u.fullName}
-        </div>
+        <div className="text-2xl mt-4 mb-8 text-white">{u.fullName}</div>
       </div>
     </>
   );
 }
 
-export default ProfileHeader;
+export default UserHeader;
