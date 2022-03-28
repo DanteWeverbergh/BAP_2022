@@ -14,6 +14,11 @@ function UserHeader({ photoUrl, u, uid }) {
 
   useEffect(() => {
     //
+
+    db.collection('users')
+      .doc(user.uid)
+      .get()
+      .then((doc) => console.log(doc.data()));
   }, []);
 
   const follow = () => {
