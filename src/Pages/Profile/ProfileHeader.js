@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdOutlineEdit } from 'react-icons/md';
 import { IoIosArrowBack } from 'react-icons/io';
 import { useAuthContext } from '../../Context/AuthContext';
@@ -6,13 +6,27 @@ import { Link } from 'react-router-dom';
 
 function ProfileHeader({ photoUrl, u }) {
   const { user, logout } = useAuthContext();
+  const [following, setFollowing] = useState([]);
+  const [followers, setFollowers] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     console.log(u);
+
+    console.log(u.posts.length);
+
+    setFollowing(u.following);
+    setIsLoaded(true);
   });
 
   return (
     <>
+      <div className="text-white">
+        <div> following: {following.length}</div>
+        <div> followers: {followers.length}</div>
+        <div> posts: {u.posts.length}</div>
+      </div>
+
       <div className="flex justify-between mx-6 mt-6">
         <Link
           className="rounded-full bg-slate-700 h-8 w-8 text-center "

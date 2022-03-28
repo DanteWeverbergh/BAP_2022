@@ -1,17 +1,53 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { MdOutlineEdit } from 'react-icons/md';
 import { IoIosArrowBack } from 'react-icons/io';
 
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../../Context/AuthContext';
+import FirebaseContext from '../../../Context/Firebase';
+import { db, FieldValue } from '../../../Libs/Firebase';
 
 function UserHeader({ photoUrl, u, uid }) {
   const { user } = useAuthContext();
+
+  const { firebase } = useContext(FirebaseContext);
+
+  useEffect(() => {
+    //
+  }, []);
 
   const follow = () => {
     //
     console.log('ikke: ', user.uid);
     console.log('profiel: ', uid);
+
+    //update current user following
+
+    db.collection('users')
+      .doc(user.uid)
+      .update('following', FieldValue.arrayUnion(uid));
+
+    // update user followers
+    db.collection('users')
+      .doc(uid)
+      .update('followers', FieldValue.arrayUnion(user.uid));
+  };
+
+  const unFollow = () => {
+    //
+    console.log('ikke: ', user.uid);
+    console.log('profiel: ', uid);
+
+    //update current user following
+
+    db.collection('users')
+      .doc(user.uid)
+      .update('following', FieldValue.arrayRemove(uid));
+
+    // update user followers
+    db.collection('users')
+      .doc(uid)
+      .update('followers', FieldValue.arrayRemove(user.uid));
   };
 
   return (
