@@ -147,8 +147,11 @@ function SocialCard({ post, postId }) {
             </div>
           </div>
         </div>
+
         {areComments ? (
-          <Comments comments={comments} postId={postId} key={postId} />
+          <div className="h-56 overflow-auto">
+            <Comments comments={comments} postId={postId} key={postId} />
+          </div>
         ) : (
           <div></div>
         )}
