@@ -7,6 +7,7 @@ import { useAuthContext } from '../../../Context/AuthContext';
 import Footer from '../../../Layouts/Footer/Footer';
 import Header from '../../../Layouts/Header/Header';
 import { db } from '../../../Libs/Firebase';
+import ExerciseModal from './Forms/ExerciseModal';
 import Form1 from './Forms/Form1';
 import Form2 from './Forms/Form2';
 
@@ -21,6 +22,10 @@ function CreateRoutine() {
   //form 2
   const [day, setDay] = useState('');
   const [dayName, setDayName] = useState('');
+
+  //modal
+  const [exerciseModal, setExerciseModal] = useState(false);
+  const [exerciseName, setExerciseName] = useState('');
 
   const [page, setPage] = useState(1);
 
@@ -41,6 +46,20 @@ function CreateRoutine() {
       <ProgressBar page={page} />
 
       <div className="text-white mx-12 text-2xl">Create a new routine</div>
+
+      <div
+        className="text-white mx-12"
+        onClick={() => setExerciseModal(!exerciseModal)}
+      >
+        Exercise not in the list? Add the exercise!
+      </div>
+
+      {exerciseModal && (
+        <ExerciseModal
+          exerciseName={exerciseName}
+          setExerciseName={setExerciseName}
+        />
+      )}
 
       {page === 1 && (
         <Form1

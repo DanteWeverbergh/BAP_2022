@@ -2,11 +2,20 @@ import React, { useEffect, useState } from 'react';
 import Input from '../../../../Components/Input';
 import Label from '../../../../Components/Label';
 import { db } from '../../../../Libs/Firebase';
+import SelectForm from './SelectForm';
 
 function Form2({ setPage, day, setDay, dayName, setDayName }) {
   const [exercisesDB, setExercisesDB] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [numEx, setNumEx] = useState(1);
+
+  const [exerciseList, setExerciseList] = useState([
+    {
+      day: '',
+      name: '',
+      exercises: [],
+    },
+  ]);
 
   useEffect(() => {
     //
@@ -54,25 +63,9 @@ function Form2({ setPage, day, setDay, dayName, setDayName }) {
           />
         </div>
 
-        <div className="mt-6">
-          <select className="mx-auto w-full roounded-md">
-            {isLoaded &&
-              exercisesDB.map((e) => <option value={e.name}> {e.name}</option>)}
-          </select>
-        </div>
+        <SelectForm isLoaded={isLoaded} exercisesDB={exercisesDB} />
 
         <div onClick={() => setNumEx(2)}>plus</div>
-
-        {numEx === 2 && (
-          <div className="mt-6">
-            <select className="mx-auto w-full roounded-md">
-              {isLoaded &&
-                exercisesDB.map((e) => (
-                  <option value={e.name}> {e.name}</option>
-                ))}
-            </select>
-          </div>
-        )}
       </form>
 
       <div className="mx-12">
