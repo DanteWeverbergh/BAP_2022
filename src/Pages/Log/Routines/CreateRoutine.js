@@ -26,6 +26,7 @@ function CreateRoutine() {
   //modal
   const [exerciseModal, setExerciseModal] = useState(false);
   const [exerciseName, setExerciseName] = useState('');
+  const [videoUrl, setVideoUrl] = useState('');
 
   const [page, setPage] = useState(1);
 
@@ -54,12 +55,7 @@ function CreateRoutine() {
         Exercise not in the list? Add the exercise!
       </div>
 
-      {exerciseModal && (
-        <ExerciseModal
-          exerciseName={exerciseName}
-          setExerciseName={setExerciseName}
-        />
-      )}
+      {exerciseModal && <ExerciseModal />}
 
       {page === 1 && (
         <Form1

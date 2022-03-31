@@ -72,3 +72,14 @@ export async function updateDoc(col, doc, data) {
 
   alert('updated');
 }
+
+//add doc to collection
+export async function addDoc(col, data) {
+  try {
+    await db.collection(col).add(data);
+
+    alert('exercise updated');
+  } catch (error) {
+    console.log(error.message);
+  }
+}
