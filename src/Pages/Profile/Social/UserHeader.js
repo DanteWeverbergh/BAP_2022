@@ -16,6 +16,7 @@ function UserHeader({ photoUrl, u, uid }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
+    console.log(u);
     //
 
     db.collection('users')

@@ -58,8 +58,6 @@ function SocialCard({ post, postId }) {
 
     setisLoading(false);
 
-    console.log(comments);
-
     return () => unsubscribe();
   }, [postId]);
 

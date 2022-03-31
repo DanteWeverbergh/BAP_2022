@@ -13,6 +13,7 @@ function ProfileHeader({ photoUrl, u }) {
 
   useEffect(() => {
     setFollowing(u.following);
+    u.followers && setFollowers(u.followers);
     setIsLoaded(true);
 
     db.collection('users').doc(user.uid).update({
@@ -22,12 +23,6 @@ function ProfileHeader({ photoUrl, u }) {
 
   return (
     <>
-      <div className="text-white">
-        <div> following: {following.length}</div>
-        <div> followers: {followers.length}</div>
-        <div> posts: {u.posts.length}</div>
-      </div>
-
       <div className="flex justify-between mx-6 mt-6">
         <Link
           className="rounded-full bg-slate-700 h-8 w-8 text-center "
@@ -60,6 +55,12 @@ function ProfileHeader({ photoUrl, u }) {
         </div>
         <div className="text-2xl mt-4 mb-8 text-white">
           Welcome {u.fullName}
+        </div>
+
+        <div className="text-white  mb-4 bg-slate-700 px-4 py-2 flex jusify-between w-full">
+          <div>{following.length} following</div>
+          <div> {followers.length} followers</div>
+          <div> {u.posts.length} posts</div>
         </div>
       </div>
     </>
