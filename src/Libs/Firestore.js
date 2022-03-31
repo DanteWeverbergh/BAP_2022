@@ -59,7 +59,7 @@ export async function getDocInDoc(col, id, coll, docId) {
     .doc(docId)
     .get()
     .then((doc) => {
-      document.doc.data();
+      document = doc.data();
     });
 
   return document;
@@ -68,9 +68,13 @@ export async function getDocInDoc(col, id, coll, docId) {
 //update doc
 
 export async function updateDoc(col, doc, data) {
-  await db.collection(col).doc(doc).update(data);
+  try {
+    await db.collection(col).doc(doc).update(data);
 
-  alert('updated');
+    alert('updated');
+  } catch (error) {
+    console.log(error.message);
+  }
 }
 
 //add doc to collection
