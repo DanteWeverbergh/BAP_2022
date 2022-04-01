@@ -87,3 +87,24 @@ export async function addDoc(col, data) {
     console.log(error.message);
   }
 }
+
+//add routine
+export async function addRoutine(data, dataa) {
+  //
+
+  try {
+    await db
+      .collection('Routines')
+      .add(data)
+      .then((docRef) => {
+        db.collection('Routines')
+          .doc(docRef.id)
+          .collection('Exercises')
+          .add(dataa);
+      });
+
+    alert('routine created');
+  } catch (error) {
+    console.log(error.message);
+  }
+}

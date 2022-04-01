@@ -7,6 +7,7 @@ import { useAuthContext } from '../../../Context/AuthContext';
 import Footer from '../../../Layouts/Footer/Footer';
 import Header from '../../../Layouts/Header/Header';
 import { db } from '../../../Libs/Firebase';
+import { addRoutine } from '../../../Libs/Firestore';
 import ExerciseModal from './Forms/ExerciseModal';
 import Form1 from './Forms/Form1';
 import Form2 from './Forms/Form2';
@@ -23,6 +24,11 @@ function CreateRoutine() {
   const [day, setDay] = useState('');
   const [dayName, setDayName] = useState('');
 
+  // select
+  const [exName, setExName] = useState('');
+  const [sets, setSets] = useState('');
+  const [repRange, setRepRange] = useState('');
+
   //modal
   const [exerciseModal, setExerciseModal] = useState(false);
   const [exerciseName, setExerciseName] = useState('');
@@ -33,11 +39,35 @@ function CreateRoutine() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const data = {
+      name,
+      description,
+      days,
+      creator: user.uid,
+    };
+    const dataa = {
+      day,
+      name: dayName,
+      Exercises: [
+        {
+          sets,
+          name: exName,
+          repRange,
+        },
+      ],
+    };
+
+    console.log(dataa);
+
+    //addRoutine('Routines', data);
+
+    /*
     try {
       //
     } catch (error) {
       //
     }
+    */
   };
 
   return (
@@ -57,28 +87,36 @@ function CreateRoutine() {
 
       {exerciseModal && <ExerciseModal />}
 
-      {page === 1 && (
-        <Form1
-          days={days}
-          setDays={setDays}
-          name={name}
-          setName={setName}
-          description={description}
-          setDescription={setDescription}
-          setPage={setPage}
-        />
-      )}
+      <form className="mx-12" method="POST" onSubmit={handleSubmit}>
+        {page === 1 && (
+          <Form1
+            days={days}
+            setDays={setDays}
+            name={name}
+            setName={setName}
+            description={description}
+            setDescription={setDescription}
+            setPage={setPage}
+          />
+        )}
 
-      {page === 2 && (
-        <Form2
-          setPage={setPage}
-          days={days}
-          day={day}
-          setDay={setDay}
-          dayName={dayName}
-          setDayName={setDayName}
-        />
-      )}
+        {page === 2 && (
+          <Form2
+            setPage={setPage}
+            days={days}
+            day={day}
+            setDay={setDay}
+            dayName={dayName}
+            setDayName={setDayName}
+            sets={sets}
+            setSets={setSets}
+            repRange={repRange}
+            setRepRange={setRepRange}
+            exName={exName}
+            setExName={setExName}
+          />
+        )}
+      </form>
 
       <Footer />
     </>
