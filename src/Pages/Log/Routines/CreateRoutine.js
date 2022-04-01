@@ -24,10 +24,13 @@ function CreateRoutine() {
   const [day, setDay] = useState('');
   const [dayName, setDayName] = useState('');
 
-  // select
-  const [exName, setExName] = useState('');
-  const [sets, setSets] = useState('');
-  const [repRange, setRepRange] = useState('');
+  const [exerciseList, setExerciseList] = useState([
+    {
+      exName: '',
+      sets: '',
+      repRange: '',
+    },
+  ]);
 
   //modal
   const [exerciseModal, setExerciseModal] = useState(false);
@@ -48,31 +51,17 @@ function CreateRoutine() {
     const dataa = {
       day,
       name: dayName,
-      Exercises: [
-        {
-          sets,
-          name: exName,
-          repRange,
-        },
-      ],
+      Exercises: exerciseList,
     };
 
-    console.log(dataa);
-
-    //addRoutine('Routines', data);
-
-    /*
-    try {
-      //
-    } catch (error) {
-      //
-    }
-    */
+    addRoutine(data, dataa);
   };
 
   return (
     <>
       <Header />
+
+      <div style={{ marginTop: 20 }}>{JSON.stringify(exerciseList)}</div>
 
       <ProgressBar page={page} />
 
@@ -108,12 +97,8 @@ function CreateRoutine() {
             setDay={setDay}
             dayName={dayName}
             setDayName={setDayName}
-            sets={sets}
-            setSets={setSets}
-            repRange={repRange}
-            setRepRange={setRepRange}
-            exName={exName}
-            setExName={setExName}
+            exerciseList={exerciseList}
+            setExerciseList={setExerciseList}
           />
         )}
       </form>

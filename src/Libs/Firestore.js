@@ -104,6 +104,8 @@ export async function addRoutine(data, dataa) {
       });
 
     alert('routine created');
+
+    // go back to dashboard
   } catch (error) {
     console.log(error.message);
   }

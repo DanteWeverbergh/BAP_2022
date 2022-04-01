@@ -10,24 +10,12 @@ function Form2({
   setDay,
   dayName,
   setDayName,
-  sets,
-  setSets,
-  repRange,
-  setRepRange,
-  exName,
-  setExName,
+  exerciseList,
+  setExerciseList,
 }) {
   const [exercisesDB, setExercisesDB] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [numEx, setNumEx] = useState(1);
-
-  const [exerciseList, setExerciseList] = useState([
-    {
-      day: '',
-      name: '',
-      exercises: [],
-    },
-  ]);
 
   useEffect(() => {
     //
@@ -72,12 +60,8 @@ function Form2({
       <SelectForm
         isLoaded={isLoaded}
         exercisesDB={exercisesDB}
-        sets={sets}
-        setSets={setSets}
-        repRange={repRange}
-        setRepRange={setRepRange}
-        exName={exName}
-        setExName={setExName}
+        exerciseList={exerciseList}
+        setExerciseList={setExerciseList}
       />
 
       <div onClick={() => setNumEx(2)}>plus</div>
@@ -92,6 +76,8 @@ function Form2({
       <button className="bg-blue-400 py-2 px-4 rounded-md" type="submit">
         Next
       </button>
+
+      <div className="mt-24"></div>
     </>
   );
 }
