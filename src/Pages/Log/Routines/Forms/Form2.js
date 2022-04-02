@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Input from '../../../../Components/Input';
 import Label from '../../../../Components/Label';
 import { db } from '../../../../Libs/Firebase';
+import DaySelect from './DaySelect';
 import SelectForm from './SelectForm';
 
 function Form2({
@@ -37,13 +38,28 @@ function Form2({
     return unsubscribe;
   }, []);
 
+  const test = () => {
+    //
+    console.log(Number(day));
+  };
+
   return (
     <>
-      {[...Array(Number(days))].map((elem, index) => (
-        <span className="flex" key={index}>
-          dag
-        </span>
-      ))}
+      <div className="mt-8">
+        <Label label={'day'} htmlFor="day" />
+        <select
+          className="mx-auto w-full rounded-md"
+          name="day"
+          value={day}
+          onChange={({ target }) => setDay(target.value)}
+        >
+          {[...Array(Number(days))].map((elem, index) => (
+            <option value={(index += 1)}>{index}</option>
+          ))}
+        </select>
+      </div>
+
+      {/*
 
       <div className="mt-6">
         <Label htmlFor={'day'} label="day" />
@@ -56,6 +72,9 @@ function Form2({
           id={'day'}
         />
       </div>
+
+
+          */}
       <div className="mt-6">
         <Label htmlFor={'dayName'} label="day name" />
         <Input
@@ -83,6 +102,8 @@ function Form2({
       <button className="bg-blue-400 py-2 px-4 rounded-md" type="submit">
         Next
       </button>
+
+      <button onClick={() => test()}>volgende</button>
       <div className="mt-24"></div>
     </>
   );
