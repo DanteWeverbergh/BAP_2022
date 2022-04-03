@@ -5,7 +5,7 @@ import Modal from '../../Components/Modal';
 import { useAuthContext } from '../../Context/AuthContext';
 import { db } from '../../Libs/Firebase';
 import { doc, onSnapshot } from 'firebase/firestore';
-import { updateDoc } from '../../Libs/Firestore';
+import { recordsUpdate, updateDoc } from '../../Libs/Firestore';
 
 function Records({ u }) {
   const [openDeadlift, setOpenDeadlift] = useState(false);
@@ -38,12 +38,16 @@ function Records({ u }) {
     e.preventDefault();
 
     updateDoc('users', user.uid, { deadlift1rm: deadlift });
+
+    recordsUpdate(user, 'deadlift', deadlift);
   };
   const updateSquat = (e) => {
     e.preventDefault();
     //
 
     updateDoc('users', user.uid, { squad1rm: squad });
+
+    recordsUpdate(user, 'squad', squad);
   };
 
   const updateBench = (e) => {
@@ -51,6 +55,8 @@ function Records({ u }) {
     //
 
     updateDoc('users', user.uid, { bench1rm: bench });
+
+    recordsUpdate(user, 'benchpress', bench);
   };
 
   return (

@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { db } from './Firebase';
+import { useAuthContext } from '../Context/AuthContext';
+import { db, FieldValue } from './Firebase';
 
 //get collection from firestore
 
@@ -89,7 +90,7 @@ export async function addDoc(col, data) {
 }
 
 //add routine
-export async function addRoutine(data, dataa) {
+export async function addRoutine(data, dataa, setDocRef) {
   //
 
   try {
@@ -101,11 +102,44 @@ export async function addRoutine(data, dataa) {
           .doc(docRef.id)
           .collection('Exercises')
           .add(dataa);
+
+        setDocRef(docRef);
       });
 
     alert('routine created');
 
     // go back to dashboard
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+//add extra day to routine
+export async function addDayToRoutine(data, docRef) {
+  try {
+    await db
+      .collection('Routines')
+      .doc(docRef)
+      .add(data)
+      .then(() => console.log('succes'));
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+//records updat
+export async function recordsUpdate(user, lift, rm) {
+  //
+
+  try {
+    await db.collection('posts').add({
+      uid: user.uid,
+      created: FieldValue.serverTimestamp(),
+      uPhoto: user.photoURL,
+      likes: [],
+      text: `${user.displayName} updated his 1rm with ${rm} kg on the ${lift}`,
+      photoUrl: 'https://media.giphy.com/media/3oKIPjzfv0sI2p7fDW/giphy.gif',
+    });
   } catch (error) {
     console.log(error.message);
   }

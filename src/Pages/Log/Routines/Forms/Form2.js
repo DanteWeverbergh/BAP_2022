@@ -14,6 +14,8 @@ function Form2({
   exerciseList,
   setExerciseList,
   days,
+  docRef,
+  setDocRef,
 }) {
   const [exercisesDB, setExercisesDB] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -59,22 +61,6 @@ function Form2({
         </select>
       </div>
 
-      {/*
-
-      <div className="mt-6">
-        <Label htmlFor={'day'} label="day" />
-        <Input
-          type={'number'}
-          name="day"
-          value={day}
-          onChange={({ target }) => setDay(target.value)}
-          placeholder={'day'}
-          id={'day'}
-        />
-      </div>
-
-
-          */}
       <div className="mt-6">
         <Label htmlFor={'dayName'} label="day name" />
         <Input

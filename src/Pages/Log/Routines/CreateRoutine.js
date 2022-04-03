@@ -7,7 +7,7 @@ import { useAuthContext } from '../../../Context/AuthContext';
 import Footer from '../../../Layouts/Footer/Footer';
 import Header from '../../../Layouts/Header/Header';
 import { db } from '../../../Libs/Firebase';
-import { addRoutine } from '../../../Libs/Firestore';
+import { addDayToRoutine, addRoutine } from '../../../Libs/Firestore';
 import ExerciseModal from './Forms/ExerciseModal';
 import Form1 from './Forms/Form1';
 import Form2 from './Forms/Form2';
@@ -21,7 +21,7 @@ function CreateRoutine() {
   const [description, setDescription] = useState('');
 
   //form 2
-  const [day, setDay] = useState('');
+  const [day, setDay] = useState('1');
   const [dayName, setDayName] = useState('');
 
   const [exerciseList, setExerciseList] = useState([
@@ -31,6 +31,8 @@ function CreateRoutine() {
       repRange: '',
     },
   ]);
+
+  const [docRef, setDocRef] = useState('');
 
   //modal
   const [exerciseModal, setExerciseModal] = useState(false);
@@ -54,14 +56,16 @@ function CreateRoutine() {
       Exercises: exerciseList,
     };
 
-    addRoutine(data, dataa);
+    if (day === '1') {
+      addRoutine(data, dataa);
+    } else {
+      addDayToRoutine(dataa, docRef);
+    }
   };
 
   return (
     <>
       <Header />
-
-      <div style={{ marginTop: 20 }}>{JSON.stringify(exerciseList)}</div>
 
       <ProgressBar page={page} />
 
@@ -99,6 +103,8 @@ function CreateRoutine() {
             setDayName={setDayName}
             exerciseList={exerciseList}
             setExerciseList={setExerciseList}
+            docRef={docRef}
+            setDocRef={setDocRef}
           />
         )}
       </form>
