@@ -81,7 +81,8 @@ function CreateRoutine() {
         console.log(error.message);
       }
     } else {
-      addDayToRoutine(dataa, docRef);
+      console.log(dataa);
+      //addDayToRoutine(dataa, docRef);
     }
   };
 

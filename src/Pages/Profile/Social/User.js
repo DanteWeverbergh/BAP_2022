@@ -26,7 +26,7 @@ function User() {
 
   return (
     <>
-      <div>User</div>
+      <div>{uid}</div>
 
       {isLoaded && <UserHeader u={userProfile} uid={uid} />}
 

@@ -16,8 +16,20 @@ function UserHeader({ photoUrl, u, uid }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    console.log(u);
+    console.log('userHeader', u);
     //
+
+    console.log(uid);
+
+    /*
+    db.collection('users')
+      .where(user.uid, 'in_array', 'followers')
+      .then((doc) => {
+        console.log('data', doc.data());
+      });
+      */
+
+    /*
 
     db.collection('users')
       .doc(user.uid)
@@ -30,6 +42,8 @@ function UserHeader({ photoUrl, u, uid }) {
           f === uid && setIsFollowing(true);
         });
       });
+
+      */
 
     setIsLoaded(true);
   }, []);
@@ -99,11 +113,11 @@ function UserHeader({ photoUrl, u, uid }) {
 
       <div className="flex-col text-center grid place-items-center">
         <div className=" relative w-36 h-36 grid place-items-center  bg-blue-500 rounded-full  mr-5 mt-5  ">
-          {photoUrl && (
+          {u.photoURL && (
             <img
               className="h-32 w-32 rounded-full object-cover"
               alt="profilePic"
-              src={photoUrl}
+              src={u.photoURL}
             />
           )}
         </div>

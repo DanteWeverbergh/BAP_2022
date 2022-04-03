@@ -6,7 +6,7 @@ function Exercise({ id, exercise }) {
   const [openDetails, setOpenDetails] = useState(false);
 
   useEffect(() => {
-    console.log(exercise);
+    console.log('exer');
   }, []);
 
   return (

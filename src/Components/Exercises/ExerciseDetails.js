@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { MdOndemandVideo } from 'react-icons/md';
+import { db } from '../../Libs/Firebase';
 
 function ExerciseDetails({ exercise }) {
   useEffect(() => {
@@ -9,10 +10,10 @@ function ExerciseDetails({ exercise }) {
   return (
     <>
       <div className="text-white ">
-        {exercise.exercises &&
-          exercise.exercises.map((e) => (
+        {exercise.Exercises &&
+          exercise.Exercises.map((e) => (
             <div className="border-b-2 flex justify-between mt-2">
-              <p>{e.name}</p>
+              <p>{e.exName}</p>
               <div onClick={() => console.log('klik')}>
                 <MdOndemandVideo />
               </div>
