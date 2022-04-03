@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuthContext } from '../Context/AuthContext';
 import { db, FieldValue } from './Firebase';
+import { deadliftGifs } from './Gifs';
 
 //get collection from firestore
 
@@ -143,5 +144,45 @@ export async function recordsUpdate(user, lift, rm) {
     });
   } catch (error) {
     console.log(error.message);
+  }
+}
+
+export async function follow(followerUid, profileUid, follow, setIsFollowing) {
+  if (follow) {
+    //follow
+    try {
+      //
+      await db
+        .collection('users')
+        .doc(followerUid)
+        .update('following', FieldValue.arrayUnion(profileUid));
+
+      await db
+        .collection('users')
+        .doc(profileUid)
+        .update('followers', FieldValue.arrayUnion(followerUid));
+
+      setIsFollowing(true);
+    } catch (error) {
+      console.log(error.message);
+    }
+  } else {
+    //unfollow
+
+    await db
+      .collection('users')
+      .doc(followerUid)
+      .update('following', FieldValue.arrayRemove(profileUid));
+
+    await db
+      .collection('users')
+      .doc(profileUid)
+      .update('followers', FieldValue.arrayRemove(followerUid));
+
+    setIsFollowing(false);
+    try {
+    } catch (error) {
+      console.log(error.message);
+    }
   }
 }

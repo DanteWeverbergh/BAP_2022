@@ -60,7 +60,7 @@ function ProfileHeader({ photoUrl, u }) {
         <div className="text-white  mb-4 bg-slate-700 px-4 py-2 flex jusify-between w-full">
           <div>{following.length} following</div>
           <div> {followers.length} followers</div>
-          <div> {u.posts.length} posts</div>
+          <div> ... posts</div>
         </div>
       </div>
     </>

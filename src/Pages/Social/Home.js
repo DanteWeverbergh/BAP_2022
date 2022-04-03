@@ -9,6 +9,7 @@ import Header from '../../Layouts/Header/Header';
 import Footer from '../../Layouts/Footer/Footer';
 import { useAuthContext } from '../../Context/AuthContext';
 import { db } from '../../Libs/Firebase';
+import { benchGifs, deadliftGifs, squatGifs } from '../../Libs/Gifs';
 
 function Home() {
   const { firebase } = useContext(FirebaseContext);
