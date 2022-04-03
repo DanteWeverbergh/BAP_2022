@@ -13,18 +13,17 @@ function MyPosts() {
 
     let unsubscribe;
 
-    unsubscribe = db.collection('posts').onSnapshot((snapshot) => {
-      //
-
-      snapshot.docs.map((doc) => {
-        if (doc.data().uid === user.uid) {
-          setposts({
+    unsubscribe = db
+      .collection('posts')
+      .where('uid', '==', user.uid)
+      .onSnapshot((snapshot) => {
+        setposts(
+          snapshot.docs.map((doc) => ({
             id: doc.id,
             post: doc.data(),
-          });
-        }
+          }))
+        );
       });
-    });
 
     setIsLoaded(true);
 
@@ -33,17 +32,14 @@ function MyPosts() {
 
   return (
     <>
-      <div className="mt-4 text-white">My posts</div>
+      <div className=" text-center text-2xl mt-8 text-white">My posts</div>
 
-      <button onClick={() => console.log(posts)}>Test</button>
+      {isLoaded &&
+        posts.map(({ id, post }) => (
+          <SocialCard key={id} post={post} postid={post} />
+        ))}
 
-      {/*
-      
-      isLoaded && (
-        <SocialCard key={posts.id} post={posts.post} postId={posts.id} />
-      )
-    
-      */}
+      <div className="mt-32"></div>
     </>
   );
 }

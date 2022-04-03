@@ -41,7 +41,7 @@ function CreateRoutine() {
 
   const [page, setPage] = useState(1);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const data = {
@@ -57,7 +57,29 @@ function CreateRoutine() {
     };
 
     if (day === '1') {
-      addRoutine(data, dataa);
+      try {
+        await db
+          .collection('Routines')
+          .add(data)
+          .then((docRef) => {
+            db.collection('Routines')
+              .doc(docRef.id)
+              .collection('Exercises')
+              .add(dataa);
+            setDocRef(docRef.id);
+            //reset al fields
+            setDayName('');
+            setExerciseList([
+              {
+                exName: '',
+                sets: '',
+                repRange: '',
+              },
+            ]);
+          });
+      } catch (error) {
+        console.log(error.message);
+      }
     } else {
       addDayToRoutine(dataa, docRef);
     }
@@ -66,6 +88,7 @@ function CreateRoutine() {
   return (
     <>
       <Header />
+      {docRef}
 
       <ProgressBar page={page} />
 

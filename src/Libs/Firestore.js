@@ -103,7 +103,7 @@ export async function addRoutine(data, dataa, setDocRef) {
           .collection('Exercises')
           .add(dataa);
 
-        setDocRef(docRef);
+        setDocRef(docRef.id);
       });
 
     alert('routine created');
@@ -120,6 +120,7 @@ export async function addDayToRoutine(data, docRef) {
     await db
       .collection('Routines')
       .doc(docRef)
+      .collection('Exercises')
       .add(data)
       .then(() => console.log('succes'));
   } catch (error) {

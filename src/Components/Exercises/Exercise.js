@@ -5,6 +5,10 @@ import ExerciseDetails from './ExerciseDetails';
 function Exercise({ id, exercise }) {
   const [openDetails, setOpenDetails] = useState(false);
 
+  useEffect(() => {
+    console.log(exercise);
+  }, []);
+
   return (
     <>
       <div className="text-white mb-4 mt-4 flex justify-between text-xl">

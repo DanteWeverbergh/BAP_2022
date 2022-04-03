@@ -1,9 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../Context/AuthContext';
 
 function SocialProfile({ post, postUser }) {
   const { user } = useAuthContext();
+  const [date, setDate] = useState('');
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    const date = new Intl.DateTimeFormat('de-De', {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+    }).format(post.created.toDate());
+
+    // console.log(post.created.toDate());
+    setDate(date);
+
+    setIsLoaded(true);
+  }, []);
 
   return (
     <>
@@ -19,7 +34,7 @@ function SocialProfile({ post, postUser }) {
           </Link>
           <div>
             <h1>{postUser.fullName}</h1>
-            <p>datum</p>
+            <p>{isLoaded && date}</p>
           </div>
         </div>
 

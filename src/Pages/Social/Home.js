@@ -26,16 +26,18 @@ function Home() {
 
     //const db = firebase.firestore();
 
-    db.collection('posts').onSnapshot((snapshot) => {
-      setPosts(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          post: doc.data(),
-        }))
-      );
+    db.collection('posts')
+      .orderBy('created', 'desc')
+      .onSnapshot((snapshot) => {
+        setPosts(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            post: doc.data(),
+          }))
+        );
 
-      setIsloaded(true);
-    });
+        setIsloaded(true);
+      });
 
     db.collection('users')
       .doc(user.uid)

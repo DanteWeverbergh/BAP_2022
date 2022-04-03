@@ -140,7 +140,9 @@ function SocialCard({ post, postId }) {
               </div>
             </div>
             <div className="flex">
-              <div className="mr-4">{!isLoading ? likes : ''} Likes</div>
+              <div className="mr-4">
+                {!isLoading ? post.likes.length : ''} Likes
+              </div>
               <div>{!isLoading ? comments.length : '0'} comments</div>
             </div>
           </div>

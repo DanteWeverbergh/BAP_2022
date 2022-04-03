@@ -19,6 +19,8 @@ function User() {
         setUserProfile(doc.data());
       });
 
+    console.log(userProfile);
+
     setIsLoaded(true);
   }, []);
 
