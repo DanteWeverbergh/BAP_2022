@@ -16,19 +16,20 @@ function UserHeader({ photoUrl, u, uid }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    console.log('userHeader', u);
-    //
+    //ToDo verder uitwerken
 
-    console.log(uid);
-
-    /*
     db.collection('users')
-      .where(user.uid, 'in_array', 'followers')
+      .doc(uid)
+      .get()
       .then((doc) => {
-        console.log('data', doc.data());
-      });
-      */
+        const followers = doc.data().followers;
 
+        followers.map((f) => {
+          if (user.uid === f) {
+            setIsFollowing(true);
+          }
+        });
+      });
     /*
 
     db.collection('users')
