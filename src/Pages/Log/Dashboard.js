@@ -12,9 +12,12 @@ function Dashboard() {
   return (
     <>
       <div className="mx-12">
-        <div className="mt-6 text-white">Dashboard</div>
+        <div className="mt-6 text-white-950">Dashboard</div>
 
-        <Link to="/log/workout" className=" px-5 py-2 bg-blue-500 rounded-md">
+        <Link
+          to="/log/workout"
+          className=" px-5 py-2 bg-blue-950  text-white-950 rounded-md"
+        >
           Log your workout
         </Link>
       </div>

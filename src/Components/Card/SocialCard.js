@@ -99,7 +99,7 @@ function SocialCard({ post, postId }) {
     <>
       {/*Card */}
 
-      <div className="px-4 mx-4 py-4 mt-5 rounded-md bg-slate-600">
+      <div className="px-4 mx-4 py-4 mt-5 rounded-md bg-slate-960 text-white-950">
         <SocialProfile post={post} postUser={postUser} />
 
         {/* content card */}
@@ -116,7 +116,7 @@ function SocialCard({ post, postId }) {
           )}
 
           <div>
-            <p className="mt-4">{post.text}</p>
+            <p className="mt-4 text-white-950">{post.text}</p>
           </div>
           <div className="flex justify-between mt-5">
             <div className="flex">
@@ -132,9 +132,9 @@ function SocialCard({ post, postId }) {
               <div>
                 <button onClick={() => openComments()}>
                   {areComments ? (
-                    <FaComments className="text-white text-2xl" />
+                    <FaComments className="text-white-950 text-2xl" />
                   ) : (
-                    <FaRegComments className="text-white text-2xl" />
+                    <FaRegComments className="text-white-950 text-2xl" />
                   )}
                 </button>
               </div>

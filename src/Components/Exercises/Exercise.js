@@ -6,12 +6,12 @@ function Exercise({ id, exercise }) {
   const [openDetails, setOpenDetails] = useState(false);
 
   useEffect(() => {
-    console.log('exer');
+    //
   }, []);
 
   return (
     <>
-      <div className="text-white mb-4 mt-4 flex justify-between text-xl">
+      <div className="text-white-950 mb-4 mt-4 flex justify-between text-xl">
         <h1>{exercise.name}</h1>
 
         {!openDetails ? (

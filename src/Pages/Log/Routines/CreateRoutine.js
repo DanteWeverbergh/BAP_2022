@@ -93,7 +93,7 @@ function CreateRoutine() {
 
       <ProgressBar page={page} />
 
-      <div className="text-white mx-12 text-2xl">Create a new routine</div>
+      <div className="text-white-950 mx-12 text-2xl">Create a new routine</div>
 
       <div
         className="text-white mx-12"

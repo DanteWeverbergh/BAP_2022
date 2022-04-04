@@ -32,7 +32,7 @@ function ChatInput({ chatId }) {
           />
 
           <button className="mx-4" type="submit">
-            <IoSend className="text-white text-2xl" />
+            <IoSend className="text-blue-950 text-2xl" />
           </button>
         </form>
       </div>

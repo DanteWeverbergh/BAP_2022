@@ -22,7 +22,7 @@ function ChatHeader() {
 
   return (
     <>
-      <div className="flex h-16 bg-slate-700 items-center justify-between rounded-b-md">
+      <div className="flex h-16 bg-slate-960 items-center justify-between rounded-b-md text-white-950">
         <Back link={'/chat'} />
         <div className="mr-6 flex items-center">
           <div className="text-white text-2xl ml-4">

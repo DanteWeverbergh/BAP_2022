@@ -12,7 +12,7 @@ function SignOut() {
 
   return (
     <button
-      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full"
+      className="bg-blue-950 hover:bg-blue-960 text-white-950 font-bold py-2 px-4 rounded-full"
       onClick={() => signOut()}
     >
       Uitloggen

@@ -39,7 +39,7 @@ function Routines({ u }) {
 
   return (
     <>
-      <div className=" mt-6">
+      <div className=" mt-6 text-white-950">
         {u.currentRoutineId ? (
           <div className="mx-12">
             <h1 className="text-white text-2xl">Current routine</h1>
@@ -70,7 +70,7 @@ function Routines({ u }) {
         </div>
       </div>
 
-      <div className="mx-12 mt-6 text-white">
+      <div className="mx-12 mt-6 text-white-950">
         <Link className="flex" to={'/create/routine'}>
           Add your own routine. <BsFillPlusCircleFill />
         </Link>

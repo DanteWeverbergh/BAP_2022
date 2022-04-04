@@ -73,17 +73,17 @@ function RoutineDetail() {
       <Back link={'/log'} />
 
       <div className="mx-12">
-        <h1 className="text-white">{routine.name}</h1>
+        <h1 className="text-white-950">{routine.name}</h1>
 
-        <div>{routine.days}</div>
+        <div className="text-white-950">{routine.days}</div>
 
         {exercises &&
           exercises.map(({ id, exercise }) => (
             <Exercise key={id} id={id} exercise={exercise} />
           ))}
 
-        <div className="bg-blue-500 rounded-md px-2 mt-6">
-          <button className="text-white" onClick={() => modal()}>
+        <div className="bg-blue-950 rounded-md px-2 mt-6 ">
+          <button className="text-white-950" onClick={() => modal()}>
             Select this as current routine
           </button>
         </div>

@@ -29,24 +29,26 @@ function Footer() {
 
   return (
     <>
-      <div className="fixed inset-x-0 bottom-0 py-5 bg-slate-800 opacity-90 ">
+      <div className="fixed inset-x-0 bottom-0 py-5 bg-slate-950 opacity-90 ">
         <nav className="flex justify-around content-center  text-4xl text-white">
           <Link to={'/home'}>
-            <MdHome className={homeActive ? 'text-blue-500' : 'text-white'} />
+            <MdHome
+              className={homeActive ? 'text-blue-950' : 'text-white-950'}
+            />
           </Link>
           <Link to={'/log'}>
             <IoIosFitness
-              className={logActive ? 'text-blue-500' : 'text-white'}
+              className={logActive ? 'text-blue-950' : 'text-white-950'}
             />
           </Link>
           <Link to={'/calculator'}>
             <IoIosCalculator
-              className={calculatorActive ? 'text-blue-500' : 'text-white'}
+              className={calculatorActive ? 'text-blue-950' : 'text-white-950'}
             />
           </Link>
           <Link to={'/chat'}>
             <IoChatbubbles
-              className={chatActive ? 'text-blue-500' : 'text-white'}
+              className={chatActive ? 'text-blue-950' : 'text-white-950'}
             />
           </Link>
         </nav>
