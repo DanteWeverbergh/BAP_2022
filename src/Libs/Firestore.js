@@ -186,3 +186,19 @@ export async function follow(followerUid, profileUid, follow, setIsFollowing) {
     }
   }
 }
+
+// send message
+
+export async function sendMessage(message, uid) {
+  try {
+    await db.collection('chat').add({
+      created: FieldValue.serverTimestamp(),
+      message,
+      uid,
+    });
+
+    console.log('message send');
+  } catch (error) {
+    console.log(error.message);
+  }
+}

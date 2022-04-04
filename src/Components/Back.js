@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { IoArrowBack } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 
-function Back() {
+function Back({ link }) {
   return (
-    <Link to={'/log'}>
+    <Link to={link}>
       <div className="m-5 h-12 w-12 bg-slate-400 flex justify-center  items-center rounded-full">
         <IoArrowBack className="text-white text-2xl" />
       </div>

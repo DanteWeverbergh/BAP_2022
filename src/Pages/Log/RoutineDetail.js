@@ -70,7 +70,7 @@ function RoutineDetail() {
         />
       )}
 
-      <Back />
+      <Back link={'/log'} />
 
       <div className="mx-12">
         <h1 className="text-white">{routine.name}</h1>

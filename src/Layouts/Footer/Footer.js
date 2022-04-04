@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { MdHome } from 'react-icons/md';
-import { IoIosCalculator, IoIosFitness } from 'react-icons/io';
+import { IoIosCalculator, IoIosFitness, IoMdChatbubbles } from 'react-icons/io';
+import { IoChatbubble, IoChatbubbles } from 'react-icons/io5';
 
 function Footer() {
   const [logActive, setLogeActive] = useState(false);
   const [homeActive, setHomeActive] = useState(false);
   const [calculatorActive, setCalculatorActive] = useState(false);
+  const [chatActive, setChatActive] = useState(false);
 
   const location = useLocation();
 
@@ -20,6 +22,8 @@ function Footer() {
       setLogeActive(true);
     } else if (path === '/calculator') {
       setCalculatorActive(true);
+    } else if (path === '/chat') {
+      setChatActive(true);
     }
   }, []);
 
@@ -38,6 +42,11 @@ function Footer() {
           <Link to={'/calculator'}>
             <IoIosCalculator
               className={calculatorActive ? 'text-blue-500' : 'text-white'}
+            />
+          </Link>
+          <Link to={'/chat'}>
+            <IoChatbubbles
+              className={chatActive ? 'text-blue-500' : 'text-white'}
             />
           </Link>
         </nav>

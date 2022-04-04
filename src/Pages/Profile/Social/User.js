@@ -47,10 +47,6 @@ function User() {
 
       <UserPosts />
 
-      <button className="bg-green-400 p-5" onClick={() => test()}>
-        Test
-      </button>
-
       <Footer />
     </>
   );
