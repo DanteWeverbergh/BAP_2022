@@ -34,8 +34,6 @@ function ChatMessage() {
             <p>{message.message}</p>
           </div>
         ))}
-
-      <button onClick={() => console.log(messages)}>Test</button>
     </>
   );
 }

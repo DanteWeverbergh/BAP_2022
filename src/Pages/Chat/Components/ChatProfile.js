@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-function ChatProfile() {
+function ChatProfile({ type }) {
   const [isOnline, setIsOnline] = useState(true);
 
   return (

@@ -10,19 +10,21 @@ function ChatDashboard() {
 
   return (
     <>
-      <Header />
+      <div className="z-10">
+        <Header />
 
-      <ChatSearch />
+        <ChatSearch />
 
-      {/*       <OnlineUsers />
-       */}
+        {/*       <OnlineUsers />
+         */}
 
-      <div className="flex flex-col items-center mx-12">
-        <ChatProfile />
-        <ChatProfile />
+        <div className="flex flex-col items-center mx-12">
+          <ChatProfile type="chat" />
+          <ChatProfile />
+        </div>
+
+        <Footer />
       </div>
-
-      <Footer />
     </>
   );
 }
