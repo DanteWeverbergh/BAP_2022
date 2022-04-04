@@ -199,6 +199,10 @@ export async function sendMessage(message, uid, chatId) {
       uid,
     });
 
+    await db.collection('chat').doc(chatId).update({
+      lastUpdated: FieldValue.serverTimestamp(),
+    });
+
     console.log('message send');
   } catch (error) {
     console.log(error.message);
@@ -225,7 +229,7 @@ export async function addContact(user, uid, setIsLoaded) {
     //create chatroom for users
     await db.collection('chat').add({
       users: [user.uid, uid],
-      lastUpdated: FieldValue.serverTimestamp(),
+      created: FieldValue.serverTimestamp(),
     });
 
     setIsLoaded(true);

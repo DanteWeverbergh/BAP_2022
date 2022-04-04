@@ -46,8 +46,13 @@ function ChatDashboard() {
 
         <div className="flex flex-col items-center mx-12">
           {isLoaded &&
+            contacts &&
             contacts.map((uid) => <ChatProfile uid={uid} key={uid} />)}
         </div>
+
+        {isLoaded && !contacts && (
+          <p className="text-white text-center">No contacts yet!</p>
+        )}
 
         <Footer />
       </div>
