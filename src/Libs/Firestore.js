@@ -187,17 +187,68 @@ export async function follow(followerUid, profileUid, follow, setIsFollowing) {
   }
 }
 
+// CHAT
+
 // send message
 
-export async function sendMessage(message, uid) {
+export async function sendMessage(message, uid, chatId) {
   try {
-    await db.collection('chat').add({
+    await db.collection('chat').doc(chatId).collection('messages').add({
       created: FieldValue.serverTimestamp(),
       message,
       uid,
     });
 
     console.log('message send');
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+// add Contact
+export async function addContact(user, uid, setIsLoaded) {
+  //
+
+  try {
+    // add contact to your own connection
+    await db
+      .collection('users')
+      .doc(user.uid)
+      .update('chat', FieldValue.arrayUnion(uid));
+
+    //add contact to other connection
+    await db
+      .collection('users')
+      .doc(uid)
+      .update('chat', FieldValue.arrayUnion(user.uid));
+
+    //create chatroom for users
+    await db.collection('chat').add({
+      users: [user.uid, uid],
+      lastUpdated: FieldValue.serverTimestamp(),
+    });
+
+    setIsLoaded(true);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+// delete contact
+export async function deleteContact(user, uid, setIsLoaded) {
+  try {
+    await db
+      .collection('users')
+      .doc(user.uid)
+      .update('chat', FieldValue.arrayRemove(uid));
+
+    //add contact to other connection
+    await db
+      .collection('users')
+      .doc(uid)
+      .update('chat', FieldValue.arrayRemove(user.uid));
+
+    setIsLoaded(true);
   } catch (error) {
     console.log(error.message);
   }

@@ -44,7 +44,6 @@ function ChatSearch() {
           +
         </div>
       </div>
-      <button onClick={() => console.log(listOfUsers)}>test</button>
     </>
   );
 }

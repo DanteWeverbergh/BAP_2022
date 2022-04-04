@@ -1,18 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IoSend } from 'react-icons/io5';
 import Input from '../../../Components/Input';
 import { useAuthContext } from '../../../Context/AuthContext';
 import { sendMessage } from '../../../Libs/Firestore';
 
-function ChatInput() {
+function ChatInput({ chatId }) {
   const [message, setMessage] = useState('');
 
   const { user } = useAuthContext();
 
+  useEffect(() => {
+    console.log('input', chatId);
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    sendMessage(message, user.uid);
+    sendMessage(message, user.uid, chatId);
   };
   return (
     <>

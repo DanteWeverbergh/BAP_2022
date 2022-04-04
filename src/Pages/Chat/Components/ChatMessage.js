@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../../../Libs/Firebase';
+import ChatBubble from './ChatBubble';
 
-function ChatMessage() {
+function ChatMessage({ chatId }) {
   const [messages, setMessages] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     //
+
     let unsubcibe;
 
-    unsubcibe = db
-      .collection('chat')
-      .orderBy('created', 'desc')
+    db.collection('chat')
+      .doc(chatId)
+      .collection('messages')
+      .orderBy('created')
       .onSnapshot((snapshot) => {
-        setMessages(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            message: doc.data(),
-          }))
-        );
+        setMessages(snapshot.docs.map((doc) => doc.data()));
       });
 
     setIsLoaded(true);
@@ -28,12 +26,14 @@ function ChatMessage() {
 
   return (
     <>
-      {isLoaded &&
-        messages.map(({ id, message }) => (
-          <div className=" relative w-24 bg-blue-400 h-20 rounded-md items-center flex justify-center">
-            <p>{message.message}</p>
-          </div>
-        ))}
+      <ul class="space-y-2">
+        {isLoaded &&
+          messages.map((message) => <ChatBubble message={message} />)}
+      </ul>
+
+      {isLoaded && !messages && (
+        <p className="text-white text-center mt-4">No message yet!</p>
+      )}
     </>
   );
 }
