@@ -31,7 +31,10 @@ function ProfileHeader({ photoUrl, u }) {
           <IoIosArrowBack className="text-3xl text-center text-white" />
         </Link>
 
-        <button className="px-4 bg-blue-500 rounded-md" onClick={logout}>
+        <button
+          className="px-4 bg-blue-500 rounded-md"
+          onClick={() => logout(user.uid)}
+        >
           Logout
         </button>
       </div>

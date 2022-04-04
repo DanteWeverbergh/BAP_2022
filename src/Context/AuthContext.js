@@ -8,6 +8,7 @@ import {
   sendPasswordResetEmail,
 } from 'firebase/auth';
 import FirebaseContext from './Firebase';
+import { db } from '../Libs/Firebase';
 
 export const AuthContext = createContext({});
 
@@ -73,7 +74,11 @@ export const AuthContextProvider = ({ children }) => {
     setLoading(true);
 
     signInWithEmailAndPassword(auth, email, password)
-      .then((res) => {})
+      .then((res) => {
+        db.collection('users').doc(res.user.uid).update({
+          online: true,
+        });
+      })
       .catch((err) => {
         setError(err.message);
       })
@@ -82,7 +87,11 @@ export const AuthContextProvider = ({ children }) => {
       });
   };
 
-  const logout = () => {
+  const logout = async (uid) => {
+    await db.collection('users').doc(uid).update({
+      online: false,
+    });
+
     signOut(auth);
   };
 
