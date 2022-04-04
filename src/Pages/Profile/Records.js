@@ -22,10 +22,6 @@ function Records({ u }) {
   const { user } = useAuthContext();
 
   useEffect(() => {
-    //
-    //console.log(u.squad1rm);
-    console.log(u.deadift1rm);
-
     const unsub = onSnapshot(doc(db, 'users', user.uid), (doc) => {
       doc.data().deadlift1rm && setDeadlift(doc.data().deadlift1rm);
       doc.data().squad1rm && setSquad(doc.data().squad1rm);
@@ -64,31 +60,31 @@ function Records({ u }) {
       <div className="flex justify-between mx-12">
         <div
           onClick={() => setOpenDeadlift(!openDeadlift)}
-          className="bg-blue-500 rounded-full h-24 w-24 flex "
+          className="bg-blue-950 rounded-full h-24 w-24 flex "
         >
           <p className="m-auto">{deadlift}</p>
         </div>
         <div
           onClick={() => setOpenSquad(!openSquat)}
-          className="bg-blue-500 rounded-full h-24 w-24 flex"
+          className="bg-blue-950 rounded-full h-24 w-24 flex"
         >
           <p className="m-auto">{squad}</p>
         </div>
         <div
           onClick={() => setOpenBench(!openBench)}
-          className="bg-blue-500 rounded-full h-24 w-24 flex"
+          className="bg-blue-950 rounded-full h-24 w-24 flex"
         >
           <p className="m-auto">{bench}</p>
         </div>
       </div>
       <div className="flex justify-between mx-12 ">
-        <div className="bg-blue-500  h-12 w-24 flex ">
+        <div className="bg-blue-950  h-12 w-24 flex ">
           <p className="m-auto">Deadlift</p>
         </div>
-        <div className="bg-blue-500  h-12 w-24 flex">
+        <div className="bg-blue-950  h-12 w-24 flex">
           <p className="m-auto">Squad</p>
         </div>
-        <div className="bg-blue-500  h-12 w-24 flex">
+        <div className="bg-blue-950  h-12 w-24 flex">
           <p className="m-auto">Bench</p>
         </div>
       </div>

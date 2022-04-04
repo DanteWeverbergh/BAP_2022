@@ -39,15 +39,15 @@ function UserHeader({ photoUrl, u, uid }) {
     <>
       <div className="flex justify-between mx-6 mt-6">
         <Link
-          className="rounded-full bg-slate-700 h-8 w-8 text-center "
+          className="rounded-full bg-white-950  h-8 w-8 text-center "
           to={'/home'}
         >
-          <IoIosArrowBack className="text-3xl text-center text-white" />
+          <IoIosArrowBack className="text-3xl text-center text-slate-950" />
         </Link>
 
         {isFollowing ? (
           <div
-            className="px-4 bg-blue-500 rounded-md text-white"
+            className="px-4 bg-blue-950  rounded-md text-white"
             onClick={() => follow(user.uid, uid, false, setIsFollowing)}
           >
             Unfollow
@@ -63,7 +63,7 @@ function UserHeader({ photoUrl, u, uid }) {
       </div>
 
       <div className="flex-col text-center grid place-items-center">
-        <div className=" relative w-36 h-36 grid place-items-center  bg-blue-500 rounded-full  mr-5 mt-5  ">
+        <div className=" relative w-36 h-36 grid place-items-center  bg-blue-950 rounded-full  mr-5 mt-5  ">
           {u.photoURL && (
             <img
               className="h-32 w-32 rounded-full object-cover"
@@ -72,10 +72,10 @@ function UserHeader({ photoUrl, u, uid }) {
             />
           )}
         </div>
-        <div className="text-2xl mt-4 mb-8 text-white">{u.fullName}</div>
+        <div className="text-2xl mt-4 mb-8 text-white-950">{u.fullName}</div>
       </div>
 
-      <div className="text-white  mb-4 bg-slate-700 px-4 py-2 flex jusify-between w-full">
+      <div className="text-white-950  mb-4 bg-slate-960 px-4 py-2 flex jusify-between w-full">
         <div> following</div>
         <div> followers</div>
         <div> ... posts</div>

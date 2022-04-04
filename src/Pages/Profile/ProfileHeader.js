@@ -25,14 +25,14 @@ function ProfileHeader({ photoUrl, u }) {
     <>
       <div className="flex justify-between mx-6 mt-6">
         <Link
-          className="rounded-full bg-slate-700 h-8 w-8 text-center "
+          className="rounded-full text-slate-950 bg-white-950 h-8 w-8 text-center "
           to={'/home'}
         >
-          <IoIosArrowBack className="text-3xl text-center text-white" />
+          <IoIosArrowBack className="text-3xl text-center text-slate-950" />
         </Link>
 
         <button
-          className="px-4 bg-blue-500 rounded-md"
+          className="px-4 bg-blue-950 rounded-md"
           onClick={() => logout(user.uid)}
         >
           Logout
@@ -50,17 +50,17 @@ function ProfileHeader({ photoUrl, u }) {
           )}
 
           <Link
-            className="h-6 w-6  rounded-full absolute bottom-3 right-3 bg-blue-500 text-center"
+            className="h-6 w-6  rounded-full absolute bottom-3 right-3 bg-blue-950 text-center"
             to={'/profile/edit'}
           >
-            <MdOutlineEdit className="text-white text-center text-xl" />
+            <MdOutlineEdit className="text-white-950 text-center text-xl" />
           </Link>
         </div>
-        <div className="text-2xl mt-4 mb-8 text-white">
+        <div className="text-2xl mt-4 mb-8 text-white-950">
           Welcome {u.fullName}
         </div>
 
-        <div className="text-white  mb-4 bg-slate-700 px-4 py-2 flex jusify-between w-full">
+        <div className="text-white-950  mb-4 bg-slate-960 px-4 py-2 flex jusify-between w-full">
           <div>{following.length} following</div>
           <div> {followers.length} followers</div>
           <div> ... posts</div>

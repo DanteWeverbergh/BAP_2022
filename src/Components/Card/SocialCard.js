@@ -123,9 +123,9 @@ function SocialCard({ post, postId }) {
               <div className="mr-4">
                 <button onClick={() => like()}>
                   {isLiked && !isLoading ? (
-                    <IoIosHeart className="text-2xl text-red-400" />
+                    <IoIosHeart className="text-2xl text-red-950" />
                   ) : (
-                    <IoIosHeartEmpty className="text-2xl text-white" />
+                    <IoIosHeartEmpty className="text-2xl text-white-950" />
                   )}
                 </button>
               </div>

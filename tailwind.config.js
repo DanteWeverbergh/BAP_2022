@@ -14,6 +14,9 @@ module.exports = {
         white: {
           950: '#cfd9e4',
         },
+        red: {
+          950: '#d45d52',
+        },
       },
     },
   },

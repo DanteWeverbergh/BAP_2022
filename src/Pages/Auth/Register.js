@@ -5,6 +5,7 @@ import { doesUsernameExist } from '../../Services/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useAuthContext } from '../../Context/AuthContext';
 import Label from '../../Components/Label';
+import Input from '../../Components/Input';
 
 function Register() {
   const { firebase } = useContext(FirebaseContext);
@@ -25,6 +26,8 @@ function Register() {
 
     if (email && username && password && fullName) {
       register(email, username, password, fullName, role);
+
+      navigate('/home');
     }
   };
 
@@ -38,65 +41,64 @@ function Register() {
 
   return (
     <>
-      <div className="w-full">
+      <div className="w-full flex flex-col justify-center content-center h-screen">
         {error && <p className="mb-4 text-xs text-red-primary">{error}</p>}
 
         <form className="ml-12 mr-12" onSubmit={handleSubmit} method="POST">
           <div className="mb-4">
             <Label label={'Email'} htmlFor={'email'} />
-            <input
+
+            <Input
               type={'email'}
               name={'email'}
               value={email}
               placeholder="johndoe@email.com"
               id="email"
               onChange={({ target }) => setEmail(target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
           <div className="mb-6">
             <Label label={'Password'} htmlFor={'password'} />
-            <input
+
+            <Input
               type={'password'}
               name={'password'}
               value={password}
               onChange={({ target }) => setPassword(target.value)}
               placeholder="password"
               id="password"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
 
           <div className="mb-6">
             <Label label={'Username'} htmlFor={'username'} />
-            <input
+
+            <Input
               type={'text'}
               name={'userName'}
               value={username}
               onChange={({ target }) => setUsername(target.value)}
               placeholder="username"
               id="username"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
 
           <div className="mb-6">
             <Label label={'fullname'} htmlFor={'fullName'} />
 
-            <input
+            <Input
               type={'text'}
               name={'fullName'}
               value={fullName}
               onChange={({ target }) => setFullName(target.value)}
-              placeholder="password"
+              placeholder="John Doe"
               id="fullName"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
           <div>
-            <label className="text-white">Account type</label>
+            <label className="text-white-950">Account type</label>
             <select
-              className="rounded-md"
+              className="rounded-md bg-white-950 text-slate-950"
               value={role}
               onChange={({ target }) => setRole(target.value)}
             >
@@ -107,13 +109,13 @@ function Register() {
 
           <button
             type="submit"
-            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+            className={`bg-blue-950 hover:bg-blue-960 text-white-950 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
           >
             Sign up
           </button>
         </form>
 
-        <div className="mx-12 text-white">
+        <div className="mx-12 text-white-950">
           <Link to={'/login'}>Already have an account? Login</Link>
         </div>
       </div>

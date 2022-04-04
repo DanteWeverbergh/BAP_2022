@@ -5,6 +5,7 @@ import 'firebase/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../Context/AuthContext';
 import Button from '../../Components/Button';
+import Input from '../../Components/Input';
 
 function Login() {
   const { firebase } = useContext(FirebaseContext);
@@ -41,42 +42,40 @@ function Login() {
 
   return (
     <>
-      <div className="w-full ">
-        <h1 className="text-4xl text-center text-white">Gains</h1>
+      <div className="w-full flex flex-col justify-center content-center h-screen relative">
+        <h1 className="text-4xl text-center text-white-950  mx-auto">Gains</h1>
         {error && <p className="mb-4 text-xs text-red-primary">{error}</p>}
 
         <form className="mx-12" onSubmit={handleSubmit} method="POST">
           <div className="mb-4 mt-12">
-            <input
+            <Input
               type={'email'}
               name={'email'}
               value={email}
               placeholder="email"
               id="email"
               onChange={({ target }) => setEmail(target.value)}
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
           <div className="mb-6">
-            <input
+            <Input
               type={'password'}
               name={'password'}
               value={password}
               onChange={({ target }) => setPassword(target.value)}
               placeholder="password"
               id="password"
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />
           </div>
 
-          <button className="text-white mb-4" onClick={() => forgot()}>
+          <button className="text-white-950 mb-4" onClick={() => forgot()}>
             Forgot password
           </button>
 
           <Button text="Login" />
         </form>
         <div className="mx-12">
-          <Link className="text-white" to={'/register'}>
+          <Link className="text-white-950" to={'/register'}>
             No account yet? Click here!
           </Link>
         </div>

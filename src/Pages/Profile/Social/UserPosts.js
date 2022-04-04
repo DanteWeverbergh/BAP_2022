@@ -33,7 +33,7 @@ function UserPosts() {
 
   return (
     <>
-      <div className=" text-center text-2xl mt-8 text-white">
+      <div className=" text-center text-2xl mt-8 text-white-950">
         Post from user
       </div>
 

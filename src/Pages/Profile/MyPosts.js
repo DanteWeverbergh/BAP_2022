@@ -32,7 +32,7 @@ function MyPosts() {
 
   return (
     <>
-      <div className=" text-center text-2xl mt-8 text-white">My posts</div>
+      <div className=" text-center text-2xl mt-8 text-white-950">My posts</div>
 
       {isLoaded &&
         posts.map(({ id, post }) => (
