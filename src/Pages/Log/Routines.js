@@ -4,6 +4,8 @@ import FirebaseContext from '../../Context/Firebase';
 import { db } from '../../Libs/Firebase';
 import RoutineCard from './RoutineCard';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
+import { IoFilterOutline } from 'react-icons/io5';
+import Filter from './Filter';
 
 function Routines({ u }) {
   const { firebase } = useContext(FirebaseContext);
@@ -11,6 +13,7 @@ function Routines({ u }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [routines, setRoutines] = useState([]);
   const [currentRoutine, setCurrentRoutine] = useState({});
+  const [filterMenu, setFilterMenu] = useState(false);
 
   useEffect(() => {
     //
@@ -55,7 +58,15 @@ function Routines({ u }) {
         )}
 
         <div className="ml-12">
-          <h1 className="text-white text-2xl mt-6 mb-4">Other routines</h1>
+          <div className="flex items-center justify-between">
+            <h1 className="text-white-950 text-2xl mt-6 mb-4">
+              Other routines
+            </h1>
+            <IoFilterOutline
+              onClick={() => setFilterMenu(!filterMenu)}
+              className="text-white-950 text-2xl mr-12"
+            />
+          </div>
           <ul className="flex overflow-x-auto gap-6 snap-x snap-mandatory">
             {isLoaded ? (
               routines.map(({ id, routine }) => (
@@ -69,6 +80,8 @@ function Routines({ u }) {
           </ul>
         </div>
       </div>
+
+      {filterMenu && <Filter setFilterMenu={setFilterMenu} />}
 
       <div className="mx-12 mt-6 text-white-950">
         <Link className="flex" to={'/create/routine'}>

@@ -259,6 +259,16 @@ export async function deleteContact(user, uid, setIsLoaded) {
 }
 
 // CHECK duplicats
-export async function checkDuplicates(col, duplicate) {
+export async function checkDuplicates(col, check, setExists, setIsLoaded) {
   //check for duplicates in exercises
+  await db
+    .collection(col)
+    .where('name', '==', check)
+    .onSnapshot((snapshot) => {
+      snapshot.docs.map((doc) => {
+        setExists(true);
+      });
+    });
+
+  setIsLoaded(true);
 }

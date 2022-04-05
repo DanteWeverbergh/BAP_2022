@@ -10,6 +10,7 @@ import Footer from '../../Layouts/Footer/Footer';
 import { useAuthContext } from '../../Context/AuthContext';
 import { db } from '../../Libs/Firebase';
 import { benchGifs, deadliftGifs, squatGifs } from '../../Libs/Gifs';
+import { MdCollections } from 'react-icons/md';
 
 function Home() {
   const { firebase } = useContext(FirebaseContext);
@@ -20,16 +21,26 @@ function Home() {
   const [userType, setUserType] = useState('');
   const [isLoaded, setIsloaded] = useState(false);
 
+  //infinite scroll
+  const [limit, setLimit] = useState(2);
+
   const [posts, setPosts] = useState([]);
+  const [lastPost, setLastPost] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(false);
 
   useEffect(() => {
     document.title = 'Home - Gains';
 
     //const db = firebase.firestore();
+    setIsloaded(true);
 
     db.collection('posts')
       .orderBy('created', 'desc')
+      .limit(5)
       .onSnapshot((snapshot) => {
+        setLastPost(snapshot.docs[snapshot.docs.length - 1]);
         setPosts(
           snapshot.docs.map((doc) => ({
             id: doc.id,
@@ -38,6 +49,7 @@ function Home() {
         );
 
         setIsloaded(true);
+        setIsLoading(false);
       });
 
     db.collection('users')
@@ -50,6 +62,34 @@ function Home() {
       });
   }, []);
 
+  const fetchMore = () => {
+    //
+
+    setIsLoading(true);
+
+    db.collection('posts')
+      .orderBy('created', 'desc')
+      .startAfter(lastPost)
+      .limit(5)
+      .onSnapshot((snapshot) => {
+        // check if there are other posts
+        if (snapshot.size === 0) {
+          setIsEmpty(true);
+        } else {
+          setLastPost(snapshot.docs[snapshot.docs.length - 1]);
+          setPosts((posts) => [
+            ...posts,
+            ...snapshot.docs.map((doc) => ({
+              id: doc.id,
+              post: doc.data(),
+            })),
+          ]);
+        }
+      });
+
+    setIsLoading(false);
+  };
+
   return (
     <>
       <Header />
@@ -60,6 +100,23 @@ function Home() {
         ))
       ) : (
         <div></div>
+      )}
+
+      {isLoading && <p>Laden ...</p>}
+
+      <div className="w-full flex items-center justify-center">
+        <button
+          className="bg-slate-960 mx-12 py-2 mt-4 rounded-md px-2 text-white-950 "
+          onClick={() => fetchMore()}
+        >
+          Load moree
+        </button>
+      </div>
+
+      {isEmpty && (
+        <p className="text-xl text-center text-white-950">
+          You have reached the end
+        </p>
       )}
 
       <div className="mt-24"></div>

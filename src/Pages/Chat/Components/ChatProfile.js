@@ -18,16 +18,6 @@ function ChatProfile({ uid }) {
       .doc(uid)
       .onSnapshot((doc) => setCardUser(doc.data()));
 
-    /*
-    unsubscribe = db
-      .collection('users')
-      .doc(uid)
-      .get()
-      .then((doc) => {
-        setCardUser(doc.data());
-      });
-
-      */
     setIsLoaded(true);
 
     return unsubscribe;
