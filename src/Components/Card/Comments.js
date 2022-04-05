@@ -20,6 +20,7 @@ function Comments({ comments, postId }) {
     const data = {
       comment: comment,
       userName: user.displayName,
+      uid: user.uid,
       uPhoto: user.photoURL,
     };
 
@@ -48,7 +49,7 @@ function Comments({ comments, postId }) {
               onChange={({ target }) => setComment(target.value)}
             />
             <button>
-              <MdSend className="text-white ml-2" />
+              <MdSend className="text-blue-950 text-xl ml-2" />
             </button>
           </form>
         </div>

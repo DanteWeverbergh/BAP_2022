@@ -5,7 +5,7 @@ function CommentsDetail({ comments }) {
   return (
     <>
       <div className="mt-6 flex items-center">
-        <Link to={`/profile/${comments.userName}`}>
+        <Link to={`/profile/${comments.uid}`}>
           <img
             alt="profPic"
             //src="https://picsum.photos/200"
@@ -20,7 +20,7 @@ function CommentsDetail({ comments }) {
         <div className="ml-4">
           <p>{comments.userName}</p>
 
-          <p className="text-white">{comments.comment}</p>
+          <p className="text-white-950">{comments.comment}</p>
         </div>
       </div>
     </>
