@@ -12,9 +12,12 @@ function Users({ setShowList, listOfUsers }) {
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [search, setSearch] = useState('');
+  const [activeUser, setActiveUser] = useState({});
 
   useEffect(() => {
     console.log(listOfUsers);
+
+    setActiveUser(user);
   }, []);
 
   const add = (uid) => {
@@ -57,17 +60,21 @@ function Users({ setShowList, listOfUsers }) {
                 return user;
               }
             })
-            .map(({ id, user }) => (
-              <div className="bg-slate-700  w-full py-2 mt-4 rounded-md relative">
-                <p>{user.username}</p>
-                <button
-                  className="absolute right-4 bg-blue-500"
-                  onClick={() => add(id)}
-                >
-                  Add
-                </button>
-              </div>
-            ))}
+            .map(({ id, user }) =>
+              id !== activeUser.uid ? (
+                <div className="bg-slate-700  w-full py-2 mt-4 rounded-md relative">
+                  <p>{user.username}</p>
+                  <button
+                    className="absolute right-4 bg-blue-500"
+                    onClick={() => add(id)}
+                  >
+                    Add
+                  </button>
+                </div>
+              ) : (
+                <div></div>
+              )
+            )}
         </div>
       </div>
     </>
