@@ -257,3 +257,8 @@ export async function deleteContact(user, uid, setIsLoaded) {
     console.log(error.message);
   }
 }
+
+// CHECK duplicats
+export async function checkDuplicates(col, duplicate) {
+  //check for duplicates in exercises
+}

@@ -42,7 +42,7 @@ export async function upload(file, currentUser, setLoading) {
   alert('file uploaded!');
 }
 
-export async function createPost(file, setLoading, text, uid, uPhoto) {
+export async function createPost(file, setIsLoaded, text, uid, uPhoto) {
   const fileName = Date.now() + 'jpg';
   const fileRef = ref(storage, fileName);
 
@@ -60,9 +60,8 @@ export async function createPost(file, setLoading, text, uid, uPhoto) {
     created: FieldValue.serverTimestamp(),
   });
 
-  setLoading(false);
-
   alert('post uploaded');
+  setIsLoaded(true);
 }
 
 //add data to a collection

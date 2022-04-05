@@ -9,7 +9,7 @@ function ExerciseDetails({ exercise }) {
 
   return (
     <>
-      <div className="text-white ">
+      <div className="text-white-950 ">
         {exercise.Exercises &&
           exercise.Exercises.map((e) => (
             <div className="border-b-2 flex justify-between mt-2">

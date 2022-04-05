@@ -7,6 +7,7 @@ import userEvent from '@testing-library/user-event';
 import { useAuthContext } from '../../Context/AuthContext';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 import { createPost } from '../../Libs/Firebase';
+import Label from '../../Components/Label';
 
 function Createposts() {
   const { firebase, storage } = useContext(FirebaseContext);
@@ -22,6 +23,7 @@ function Createposts() {
   const [photo, setPhoto] = useState('');
   const [photoUrl, setPhotoUrl] = useState('');
   const [loading, setLoading] = useState('false');
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     document.title = 'Create - Gains';
@@ -50,13 +52,13 @@ function Createposts() {
 
       createPost(
         photo,
-        setLoading,
+        setIsLoaded,
         message,
         user.uid,
         user.photoURL ? user.photoURL : null
       );
 
-      navigate('/home');
+      isLoaded && navigate('/home');
     } catch (error) {
       setError(error.message);
       alert(error.message);
@@ -70,7 +72,7 @@ function Createposts() {
 
       <form onSubmit={handleSubmit} className="mx-12">
         <div className="mb-6">
-          <label htmlFor="message">Message</label>
+          <Label label="message" htmlFor="message" />
           <textarea
             name="message"
             id="message"
@@ -78,21 +80,17 @@ function Createposts() {
             placeholder="message"
             value={message}
             onChange={({ target }) => setMessage(target.value)}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-slate-950 bg-white-950 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
         <div className="mb-6">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="pic"
-          >
-            Update profile picture
-          </label>
+          <Label label={'Select a photo'} htmlFor="pic" />
           <input
             id="pic"
             onChange={photoChange}
             type={'file'}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="bg-white-950"
+            placeholder="hjlhhjlh"
           ></input>
         </div>
 
