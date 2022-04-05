@@ -1,0 +1,15 @@
+{
+  "short_name": "Gains",
+  "name": "Gains | The social media app for gym bro's.",
+  "icons": [
+    {
+      "src": "/images/logo.png",
+      "type": "image/png",
+      "sizes": "1024x1024"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#22262d",
+  "background_color": "#22262d"
+}
