@@ -1,6 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { db } from '../../../Libs/Firebase';
 
 function OnlineUsers() {
+  const [onlineUsers, setOnlineUsers] = useState([]);
+
+  useEffect(() => {
+    //
+
+    db.collection('users')
+      .where('online', '==', true)
+      .onSnapshot((snaphot) => {
+        setOnlineUsers(
+          snaphot.docs.map((doc) => ({
+            id: doc.id,
+            user: doc.data(),
+          }))
+        );
+      });
+  }, []);
+
   return (
     <>
       <div className="mx-12 flex w-full overflow-x-auto space-x-1 mt-4">
