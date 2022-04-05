@@ -2,7 +2,15 @@ import React from 'react';
 import Input from '../../Components/Input';
 import Label from '../../Components/Label';
 
-function Filter({ setFilterMenu }) {
+function Filter({
+  setFilterMenu,
+  days,
+  setDays,
+  trainer,
+  setTrainer,
+  routineName,
+  setRoutineName,
+}) {
   return (
     <>
       <div className="  h-screen w-screen text-white-950 absolute top-0 z-50 bg-slate-950">

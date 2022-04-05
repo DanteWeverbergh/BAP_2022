@@ -15,6 +15,11 @@ function Routines({ u }) {
   const [currentRoutine, setCurrentRoutine] = useState({});
   const [filterMenu, setFilterMenu] = useState(false);
 
+  //filter states
+  const [days, setDays] = useState('');
+  const [trainer, setTrainer] = useState('');
+  const [routineName, setRoutineName] = useState('');
+
   useEffect(() => {
     //
 
@@ -79,7 +84,17 @@ function Routines({ u }) {
         </div>
       </div>
 
-      {filterMenu && <Filter setFilterMenu={setFilterMenu} />}
+      {filterMenu && (
+        <Filter
+          setFilterMenu={setFilterMenu}
+          days={days}
+          setDays={setDays}
+          trainer={trainer}
+          setTrainer={setTrainer}
+          routineName={routineName}
+          setRoutineName={setRoutineName}
+        />
+      )}
 
       <div className="mx-12 mt-6 text-white-950">
         <Link className="flex" to={'/create/routine'}>
