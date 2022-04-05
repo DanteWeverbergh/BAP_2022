@@ -1,14 +1,17 @@
 import userEvent from '@testing-library/user-event';
 import React, { useEffect, useState } from 'react';
+import Input from '../../../Components/Input';
 import { useAuthContext } from '../../../Context/AuthContext';
 import { db, FieldValue } from '../../../Libs/Firebase';
 import { addContact } from '../../../Libs/Firestore';
 import ChatProfile from './ChatProfile';
+import ChatSearch from './ChatSearch';
 
 function Users({ setShowList, listOfUsers }) {
   const { user } = useAuthContext();
 
   const [isLoaded, setIsLoaded] = useState(false);
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     console.log(listOfUsers);
@@ -28,20 +31,43 @@ function Users({ setShowList, listOfUsers }) {
           X
         </div>
 
+        <div className="flex mx-12 justify-around">
+          <form className="">
+            <Input
+              type={'text'}
+              placeholder={'search'}
+              name="search"
+              value={search}
+              id="search"
+              onChange={({ target }) => setSearch(target.value)}
+            />
+          </form>
+        </div>
+
         <div>List of users</div>
 
         <div className="mx-12 mt-16">
-          {listOfUsers.map(({ id, user }) => (
-            <div className="bg-slate-700  w-full py-2 mt-4 rounded-md relative">
-              <p>{user.username}</p>
-              <button
-                className="absolute right-4 bg-blue-500"
-                onClick={() => add(id)}
-              >
-                Add
-              </button>
-            </div>
-          ))}
+          {listOfUsers
+            .filter(({ user }) => {
+              if (search === '') {
+                return user;
+              } else if (
+                user.username.toLowerCase().includes(search.toLocaleLowerCase())
+              ) {
+                return user;
+              }
+            })
+            .map(({ id, user }) => (
+              <div className="bg-slate-700  w-full py-2 mt-4 rounded-md relative">
+                <p>{user.username}</p>
+                <button
+                  className="absolute right-4 bg-blue-500"
+                  onClick={() => add(id)}
+                >
+                  Add
+                </button>
+              </div>
+            ))}
         </div>
       </div>
     </>

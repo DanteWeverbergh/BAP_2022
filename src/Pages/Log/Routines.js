@@ -18,8 +18,6 @@ function Routines({ u }) {
   useEffect(() => {
     //
 
-    //get all routines
-
     db.collection('Routines').onSnapshot((snapshot) => {
       setRoutines(
         snapshot.docs.map((doc) => ({

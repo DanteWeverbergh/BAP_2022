@@ -90,17 +90,25 @@ function Home() {
     setIsLoading(false);
   };
 
+  const handleScrol = () => {
+    const { scrollTop, clientHeight, scrollHeight } = window.currentTarget;
+
+    console.log('scrollllll');
+  };
+
   return (
     <>
       <Header />
 
-      {isLoaded ? (
-        posts.map(({ id, post }) => (
-          <SocialCard key={id} post={post} postId={id} />
-        ))
-      ) : (
-        <div></div>
-      )}
+      <div>
+        {isLoaded ? (
+          posts.map(({ id, post }) => (
+            <SocialCard key={id} post={post} postId={id} />
+          ))
+        ) : (
+          <div></div>
+        )}
+      </div>
 
       {isLoading && <p>Laden ...</p>}
 
@@ -109,7 +117,7 @@ function Home() {
           className="bg-slate-960 mx-12 py-2 mt-4 rounded-md px-2 text-white-950 "
           onClick={() => fetchMore()}
         >
-          Load moree
+          Load more
         </button>
       </div>
 

@@ -13,8 +13,11 @@ function ChatDashboard() {
   const [onlineUsers, setOnlineUsers] = useState([]);
 
   const [contacts, setContacts] = useState([]);
+  const [contactsFull, setContactsFull] = useState([]);
 
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     //
@@ -29,6 +32,18 @@ function ChatDashboard() {
         setContacts(doc.data().chat);
       });
 
+    if (contacts) {
+      contacts.map((uid) => {
+        setContactsFull(
+          db
+            .collection('users')
+            .doc(uid)
+            .get()
+            .then((doc) => doc.data())
+        );
+      });
+    }
+
     setIsLoaded(true);
 
     return unsubscribe;
@@ -39,15 +54,25 @@ function ChatDashboard() {
       <div className="z-10">
         <Header />
 
-        <ChatSearch />
+        <ChatSearch search={search} setSearch={setSearch} />
 
         {/*       <OnlineUsers />
          */}
 
+        <button onClick={() => console.log(contactsFull)}> test</button>
+
         <div className="flex flex-col items-center mx-12">
           {isLoaded &&
             contacts &&
-            contacts.map((uid) => <ChatProfile uid={uid} key={uid} />)}
+            contacts
+              .filter((uid) => {
+                if (search === '') {
+                  return uid;
+                } else if (uid.includes(search)) {
+                  return uid;
+                }
+              })
+              .map((uid) => <ChatProfile uid={uid} key={uid} />)}
         </div>
 
         {isLoaded && !contacts && (

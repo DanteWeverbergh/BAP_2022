@@ -3,7 +3,7 @@ import Input from '../../../Components/Input';
 import { db } from '../../../Libs/Firebase';
 import Users from './Users';
 
-function ChatSearch() {
+function ChatSearch({ search, setSearch }) {
   const [listOfUsers, setListOfUsers] = useState([]);
   const [showList, setShowList] = useState(false);
 
@@ -35,7 +35,14 @@ function ChatSearch() {
 
       <div className="flex mx-12 justify-around">
         <form className="">
-          <Input placeholder={'search'} />
+          <Input
+            type={'text'}
+            placeholder={'search'}
+            name="search"
+            value={search}
+            id="search"
+            onChange={({ target }) => setSearch(target.value)}
+          />
         </form>
         <div
           onClick={() => setShowList(true)}
