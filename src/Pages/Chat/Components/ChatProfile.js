@@ -27,7 +27,7 @@ function ChatProfile({ uid }) {
     <>
       <Link
         to={`/chat/${uid}`}
-        className="bg-slate-700 w-full py-2 rounded-md mt-4 flex relative"
+        className="bg-slate-960 w-full py-2 rounded-md mt-4 flex relative"
       >
         {cardUser.photoURL ? (
           <img
@@ -49,9 +49,9 @@ function ChatProfile({ uid }) {
         </div>
 
         {cardUser.online ? (
-          <div className="absolute right-4 top-0-4 bg-green-400 h-2 w-2 rounded-full"></div>
+          <div className="absolute right-4 top-0-4 bg-green-950 h-2 w-2 rounded-full"></div>
         ) : (
-          <div className="absolute right-4 top-0-4 bg-red-400 h-2 w-2 rounded-full"></div>
+          <div className="absolute right-4 top-0-4 bg-red-950 h-2 w-2 rounded-full"></div>
         )}
       </Link>
     </>

@@ -13,7 +13,7 @@ function ChatDashboard() {
   const [onlineUsers, setOnlineUsers] = useState([]);
 
   const [contacts, setContacts] = useState([]);
-  const [contactsFull, setContactsFull] = useState([]);
+  const [users, setUsers] = useState([]);
 
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -34,12 +34,12 @@ function ChatDashboard() {
 
     if (contacts) {
       contacts.map((uid) => {
-        setContactsFull(
+        setUsers(
           db
             .collection('users')
             .doc(uid)
             .get()
-            .then((doc) => doc.data())
+            .then((doc) => console.log(doc.data()))
         );
       });
     }
@@ -59,7 +59,7 @@ function ChatDashboard() {
         {/*       <OnlineUsers />
          */}
 
-        <button onClick={() => console.log(contactsFull)}> test</button>
+        <button onClick={() => console.log(users)}> test</button>
 
         <div className="flex flex-col items-center mx-12">
           {isLoaded &&
