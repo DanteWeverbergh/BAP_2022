@@ -1,27 +1,36 @@
 import React, { useEffect, useState } from 'react';
 import { MdOndemandVideo } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 import { db } from '../../Libs/Firebase';
+import ExerciseSingle from './ExerciseSingle';
 
 function ExerciseDetails({ exercise }) {
+  let navigate = useNavigate();
+
+  const [videoUrl, setVideoUrl] = useState('');
+
   useEffect(() => {
     //
   }, []);
+
+  const video = (e) => {
+    db.collection('exercises')
+      .where('name', '==', e.exName)
+      .onSnapshot((snapshot) => {
+        snapshot.docs.map((doc) => {
+          console.log(doc.data().videoUrl);
+          setVideoUrl(doc.data().videoUrl);
+          // navigate(doc.data().videoUrl);
+        });
+      });
+  };
 
   return (
     <>
       <div className="text-white-950 ">
         {exercise.Exercises &&
-          exercise.Exercises.map((e) => (
-            <div className="border-b-2 flex justify-between mt-2">
-              <p>{e.exName}</p>
-              <div onClick={() => console.log('klik')}>
-                <MdOndemandVideo />
-              </div>
-              <div className="flex">
-                <p>sets: {e.sets}</p>
-                <p className="ml-4">reps: {e.repRange}</p>
-              </div>
-            </div>
+          exercise.Exercises.map((exercise) => (
+            <ExerciseSingle exercise={exercise} />
           ))}
       </div>
     </>

@@ -20,6 +20,12 @@ function SocialProfile({ post, postUser }) {
     setIsLoaded(true);
   }, []);
 
+  const menu = () => {
+    if (user.uid === postUser.uid) {
+      console.log('mijn post');
+    }
+  };
+
   return (
     <>
       <div className="flex justify-between">
@@ -38,7 +44,7 @@ function SocialProfile({ post, postUser }) {
           </div>
         </div>
 
-        <div>...</div>
+        <div onClick={() => menu()}>...</div>
       </div>
     </>
   );
