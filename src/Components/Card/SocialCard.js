@@ -9,7 +9,7 @@ import { FaComments, FaRegComments } from 'react-icons/fa';
 import { db } from '../../Libs/Firebase';
 import SocialProfile from './SocialProfile';
 
-function SocialCard({ post, postId }) {
+function SocialCard({ post, postId, setModal, setPostId }) {
   const { firebase } = useContext(FirebaseContext);
   const [likes, setLikes] = useState(0);
   const { user } = useAuthContext();
@@ -100,7 +100,13 @@ function SocialCard({ post, postId }) {
       {/*Card */}
 
       <div className="px-4 mx-4 py-4 mt-5 rounded-md bg-slate-960 text-white-950">
-        <SocialProfile post={post} postUser={postUser} />
+        <SocialProfile
+          post={post}
+          postUser={postUser}
+          setModal={setModal}
+          setPostId={setPostId}
+          postId={postId}
+        />
 
         {/* content card */}
         <div className="mt-4">

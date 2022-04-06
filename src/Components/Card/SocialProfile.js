@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../Context/AuthContext';
+import Modal from './Modal';
 
-function SocialProfile({ post, postUser }) {
+function SocialProfile({ post, postUser, setModal, setPostId, postId }) {
   const { user } = useAuthContext();
   const [date, setDate] = useState('');
   const [isLoaded, setIsLoaded] = useState(false);
@@ -22,7 +23,8 @@ function SocialProfile({ post, postUser }) {
 
   const menu = () => {
     if (user.uid === postUser.uid) {
-      console.log('mijn post');
+      setPostId(postId);
+      setModal(true);
     }
   };
 

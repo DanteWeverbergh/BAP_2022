@@ -11,6 +11,7 @@ import { useAuthContext } from '../../Context/AuthContext';
 import { db } from '../../Libs/Firebase';
 import { benchGifs, deadliftGifs, squatGifs } from '../../Libs/Gifs';
 import { MdCollections } from 'react-icons/md';
+import Modal from '../../Components/Card/Modal';
 
 function Home() {
   const { firebase } = useContext(FirebaseContext);
@@ -30,8 +31,63 @@ function Home() {
   const [isLoading, setIsLoading] = useState(false);
   const [isEmpty, setIsEmpty] = useState(false);
 
+  const [modal, setModal] = useState(false);
+
+  const [postId, setPostId] = useState('');
+  const [isDeleted, setIsDeleted] = useState(false);
+
+  const fetchMore = () => {
+    //
+
+    setIsLoading(true);
+
+    db.collection('posts')
+      .orderBy('created', 'desc')
+      .startAfter(lastPost)
+      .limit(5)
+      .onSnapshot((snapshot) => {
+        // check if there are other posts
+        if (snapshot.size === 0) {
+          setIsEmpty(true);
+        } else {
+          setLastPost(snapshot.docs[snapshot.docs.length - 1]);
+          setPosts((posts) => [
+            ...posts,
+            ...snapshot.docs.map((doc) => ({
+              id: doc.id,
+              post: doc.data(),
+            })),
+          ]);
+        }
+      });
+
+    setIsLoading(false);
+  };
+
+  /*
+
+  const handleScrol = (e) => {
+    //
+
+    const scrollTop = e.target.documentElement.scrollTop;
+    const scrollHeight = e.target.documentElement.scrollHeight;
+    const innerHeight = window.innerHeight;
+
+    if (innerHeight + scrollTop + 1 >= scrollHeight) {
+      console.log('koek');
+      fetchMore();
+    }
+  };
+  */
+
   useEffect(() => {
     document.title = 'Home - Gains';
+
+    /*
+    window.addEventListener('scroll', handleScrol);
+    */
+
+    console.log('home');
 
     //const db = firebase.firestore();
     setIsloaded(true);
@@ -62,48 +118,29 @@ function Home() {
       });
   }, []);
 
-  const fetchMore = () => {
-    //
-
-    setIsLoading(true);
-
-    db.collection('posts')
-      .orderBy('created', 'desc')
-      .startAfter(lastPost)
-      .limit(5)
-      .onSnapshot((snapshot) => {
-        // check if there are other posts
-        if (snapshot.size === 0) {
-          setIsEmpty(true);
-        } else {
-          setLastPost(snapshot.docs[snapshot.docs.length - 1]);
-          setPosts((posts) => [
-            ...posts,
-            ...snapshot.docs.map((doc) => ({
-              id: doc.id,
-              post: doc.data(),
-            })),
-          ]);
-        }
-      });
-
-    setIsLoading(false);
-  };
-
-  const handleScrol = () => {
-    const { scrollTop, clientHeight, scrollHeight } = window.currentTarget;
-
-    console.log('scrollllll');
-  };
-
   return (
     <>
+      {modal && (
+        <Modal
+          setModal={setModal}
+          modal={modal}
+          postId={postId}
+          setIsDeleted={setIsDeleted}
+        />
+      )}
+
       <Header />
 
       <div>
         {isLoaded ? (
           posts.map(({ id, post }) => (
-            <SocialCard key={id} post={post} postId={id} />
+            <SocialCard
+              key={id}
+              post={post}
+              postId={id}
+              setModal={setModal}
+              setPostId={setPostId}
+            />
           ))
         ) : (
           <div></div>
@@ -112,17 +149,19 @@ function Home() {
 
       {isLoading && <p>Laden ...</p>}
 
-      <div className="w-full flex items-center justify-center">
-        <button
-          className="bg-slate-960 mx-12 py-2 mt-4 rounded-md px-2 text-white-950 "
-          onClick={() => fetchMore()}
-        >
-          Load more
-        </button>
-      </div>
+      {!isEmpty && (
+        <div className="w-full flex items-center justify-center">
+          <button
+            className="bg-slate-960 mx-12 py-2 mt-4 rounded-md px-2 text-white-950 "
+            onClick={() => fetchMore()}
+          >
+            Load more
+          </button>
+        </div>
+      )}
 
       {isEmpty && (
-        <p className="text-xl text-center text-white-950">
+        <p className="text-xl text-center text-white-950 mt-4">
           You have reached the end
         </p>
       )}

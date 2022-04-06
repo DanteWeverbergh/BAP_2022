@@ -79,6 +79,24 @@ export async function updateDoc(col, doc, data) {
   }
 }
 
+// delete doc
+export async function deleteDoc(col, doc, setIsDeleted, setModal) {
+  try {
+    await db
+      .collection(col)
+      .doc(doc)
+      .delete()
+      .then(() => {
+        console.log('post deleted succesfully!');
+      });
+
+    setIsDeleted(true);
+    setModal(false);
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
 //add doc to collection
 export async function addDoc(col, data) {
   try {
