@@ -27,6 +27,8 @@ function Records({ u }) {
       doc.data().squad1rm && setSquad(doc.data().squad1rm);
       doc.data().bench1rm && setBench(doc.data().bench1rm);
     });
+
+    return unsub;
   }, []);
 
   const updateDeadlift = (e) => {

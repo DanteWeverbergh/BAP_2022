@@ -4,7 +4,7 @@ import Label from '../../../Components/Label';
 import { BsPlusCircleFill } from 'react-icons/bs';
 import { IoMdRemoveCircle } from 'react-icons/io';
 
-function ExerciseLog({ exercisen, setLog }) {
+function ExerciseLog({ exercise, setLog }) {
   useEffect(() => {}, []);
 
   const [inputList, setInputList] = useState([
@@ -41,7 +41,7 @@ function ExerciseLog({ exercisen, setLog }) {
                 <h2>{}</h2>
                 <Input
                   name="reps"
-                  placeholder="Reps"
+                  placeholder={`reps: ${exercise.repRange}`}
                   value={x.reps}
                   onChange={(e) => handleInputChange(e, i)}
                 />

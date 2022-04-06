@@ -7,6 +7,7 @@ import { deadliftGifs, squatGifs } from '../../../Libs/Gifs';
 
 import UserHeader from './UserHeader';
 import UserPosts from './UserPosts';
+import UserRecords from './UserRecords';
 
 function User() {
   let { uid } = useParams();
@@ -45,6 +46,7 @@ function User() {
     <>
       {isLoaded && <UserHeader u={userProfile} uid={uid} />}
 
+      <UserRecords uid={uid} />
       <UserPosts />
 
       <Footer />

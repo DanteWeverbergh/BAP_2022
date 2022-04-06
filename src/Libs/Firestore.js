@@ -283,9 +283,7 @@ export async function checkDuplicates(col, check, setExists, setIsLoaded) {
     .collection(col)
     .where('name', '==', check)
     .onSnapshot((snapshot) => {
-      snapshot.docs.map((doc) => {
-        setExists(true);
-      });
+      console.log(snapshot.empty);
     });
 
   setIsLoaded(true);
