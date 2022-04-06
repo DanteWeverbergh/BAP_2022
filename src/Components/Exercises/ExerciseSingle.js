@@ -3,10 +3,10 @@ import { MdOndemandVideo } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { db } from '../../Libs/Firebase';
 import YouTube from 'react-youtube';
+import VideoModal from './VideoModal';
 
-function ExerciseSingle({ exercise }) {
+function ExerciseSingle({ exercise, setVideoModal, setYtId }) {
   const [videoUrl, setVideoUrl] = useState('');
-  const [ytId, setYtId] = useState('');
 
   useEffect(() => {
     //
@@ -25,7 +25,10 @@ function ExerciseSingle({ exercise }) {
       /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
     var match = videoUrl.match(regExp);
 
-    setYtId(match && match[7].length == 11 ? match[7] : false);
+    //setYtId(match && match[7].length == 11 ? match[7] : false);
+    setYtId(match && match[7].length === 11 ? match[7] : false);
+
+    console.log(match && match[7].length === 11 ? match[7] : false);
   }, []);
 
   return (
@@ -33,11 +36,13 @@ function ExerciseSingle({ exercise }) {
       <div className="border-b-2 flex justify-between mt-2">
         <p>{exercise.exName}</p>
 
-        <Link to={'www.google.com'}>
-          <MdOndemandVideo />
-        </Link>
+        <div>
+          <MdOndemandVideo onClick={() => setVideoModal(true)} />
+        </div>
 
-        <YouTube videoId={ytId} />
+        {/**
+         *    <YouTube videoId={ytId} />
+         */}
 
         <div className="flex">
           <p>sets: {exercise.sets}</p>

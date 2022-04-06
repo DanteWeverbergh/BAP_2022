@@ -1,32 +1,38 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ExerciseLog from './ExerciseLog';
 import { BsPlusCircleFill } from 'react-icons/bs';
 
 function WorkoutDetail({ days }) {
+  const [log, setLog] = useState([]);
   useEffect(() => {
-    console.log(days);
+    //
   });
 
   return (
     <>
-      <div className="text-white mt-6">
-        <h1 className="text-xl font-bold">{days.name}</h1>
+      <div className="text-white-950 mt-6">
+        <h1 className="text-xl font-bold text-center ">{days.name}</h1>
         <div>
-          {days.exercises &&
-            days.exercises.map((ex) => (
-              <div className="mt-10 bg-slate-700 px-4 py-2 rounded-md">
-                <h1 className="text-white font-bold text-xl mb-2">{ex.name}</h1>
-                <ExerciseLog exercise={ex} />
+          {days.Exercises &&
+            days.Exercises.map((ex) => (
+              <div className="mt-10 bg-slate-960 px-4 py-2 rounded-md">
+                <h1 className="text-white-950 font-bold text-xl mb-2">
+                  {ex.exName}
+                </h1>
+                {/** */}
+                <ExerciseLog exercise={ex} setLog={setLog} />
               </div>
             ))}
         </div>
         <div>
           <button
-            className="bg-blue-500 px-4 py-2 rounded-md"
-            onClick={() => console.log('klaar')}
+            className="bg-blue-950 px-4 py-2 w-full mt-6 rounded-md"
+            onClick={() => console.log(log)}
           >
             Done
           </button>
+
+          <div className="mt-32"></div>
         </div>
       </div>
     </>

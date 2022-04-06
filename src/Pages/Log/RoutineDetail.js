@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Back from '../../Components/Back';
 import Exercise from '../../Components/Exercises/Exercise';
+import VideoModal from '../../Components/Exercises/VideoModal';
 import Modal from '../../Components/Modal';
 import { useAuthContext } from '../../Context/AuthContext';
 import Footer from '../../Layouts/Footer/Footer';
@@ -16,6 +17,9 @@ function RoutineDetail() {
   const { user } = useAuthContext();
   const [openModal, setOpenModal] = useState(false);
   const [exercises, setExercises] = useState([]);
+
+  const [videoModal, setVideoModal] = useState(false);
+  const [ytId, setYtId] = useState('');
 
   useEffect(() => {
     //
@@ -62,6 +66,8 @@ function RoutineDetail() {
     <>
       <Header />
 
+      {videoModal && <VideoModal setVideoModal={setVideoModal} ytId={ytId} />}
+
       {openModal && (
         <Modal
           setOpenModal={setOpenModal}
@@ -69,9 +75,7 @@ function RoutineDetail() {
           selectRoutine={selectRoutine}
         />
       )}
-
       <Back link={'/log'} />
-
       <div className="mx-12">
         <h1 className="text-white-950">{routine.name}</h1>
 
@@ -79,7 +83,13 @@ function RoutineDetail() {
 
         {exercises &&
           exercises.map(({ id, exercise }) => (
-            <Exercise key={id} id={id} exercise={exercise} />
+            <Exercise
+              key={id}
+              id={id}
+              exercise={exercise}
+              setVideoModal={setVideoModal}
+              setYtId={setYtId}
+            />
           ))}
 
         <div className="bg-blue-950 rounded-md px-2 mt-6 ">
@@ -88,7 +98,6 @@ function RoutineDetail() {
           </button>
         </div>
       </div>
-
       <Footer />
     </>
   );

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { db } from '../../Libs/Firebase';
 import ExerciseSingle from './ExerciseSingle';
 
-function ExerciseDetails({ exercise }) {
+function ExerciseDetails({ exercise, setVideoModal, setYtId }) {
   let navigate = useNavigate();
 
   const [videoUrl, setVideoUrl] = useState('');
@@ -30,7 +30,11 @@ function ExerciseDetails({ exercise }) {
       <div className="text-white-950 ">
         {exercise.Exercises &&
           exercise.Exercises.map((exercise) => (
-            <ExerciseSingle exercise={exercise} />
+            <ExerciseSingle
+              exercise={exercise}
+              setVideoModal={setVideoModal}
+              setYtId={setYtId}
+            />
           ))}
       </div>
     </>

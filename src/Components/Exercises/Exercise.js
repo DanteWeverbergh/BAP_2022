@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { IoMdArrowDropdownCircle, IoMdArrowDropupCircle } from 'react-icons/io';
 import ExerciseDetails from './ExerciseDetails';
+import VideoModal from './VideoModal';
 
-function Exercise({ id, exercise }) {
+function Exercise({ id, exercise, setVideoModal, setYtId }) {
   const [openDetails, setOpenDetails] = useState(false);
 
   useEffect(() => {
@@ -26,7 +27,13 @@ function Exercise({ id, exercise }) {
           />
         )}
       </div>
-      {openDetails && <ExerciseDetails exercise={exercise} />}
+      {openDetails && (
+        <ExerciseDetails
+          exercise={exercise}
+          setVideoModal={setVideoModal}
+          setYtId={setYtId}
+        />
+      )}
     </>
   );
 }

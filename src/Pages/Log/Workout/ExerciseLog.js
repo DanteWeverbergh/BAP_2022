@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Input from '../../../Components/Input';
 import Label from '../../../Components/Label';
 import { BsPlusCircleFill } from 'react-icons/bs';
 import { IoMdRemoveCircle } from 'react-icons/io';
 
-function ExerciseLog({ exercise }) {
+function ExerciseLog({ exercisen, setLog }) {
+  useEffect(() => {}, []);
+
   const [inputList, setInputList] = useState([
     { reps: '', weight: '', set: 1 },
   ]);
@@ -53,18 +55,23 @@ function ExerciseLog({ exercise }) {
               <div className="btn-box">
                 {inputList.length !== 1 && (
                   <button className="mr10" onClick={() => handleRemoveClick(i)}>
-                    <IoMdRemoveCircle className="text-xl absolute right-24" />
+                    <IoMdRemoveCircle className="text-xl text-white-950 absolute right-24" />
                   </button>
                 )}
                 {inputList.length - 1 === i && (
                   <button onClick={handleAddClick}>
-                    <BsPlusCircleFill className="text-xl absolute right-16" />
+                    <BsPlusCircleFill className="text-xl text-white-950 absolute right-16" />
                   </button>
                 )}
               </div>
+
+              <button className="bg-red-950" onClick={() => setLog(inputList)}>
+                TEST
+              </button>
             </div>
           );
         })}
+
         <div style={{ marginTop: 20 }}>{JSON.stringify(inputList)}</div>
       </div>
     </>

@@ -10,8 +10,9 @@ function Workout() {
 
   const [currentRoutineId, setCurrentRoutineId] = useState('');
   const [currentRoutine, setCurrentRoutine] = useState([]);
-  const [day, setDay] = useState('');
+
   const [days, setDays] = useState([]);
+  const [day, setDay] = useState('Choose a day');
   const [isLoaded, setIsLoaded] = useState(false);
 
   const [log, setLog] = useState(false);
@@ -65,6 +66,7 @@ function Workout() {
               value={day}
               onChange={({ target }) => setDay(target.value)}
             >
+              <option value={''}>{''}</option>
               {isLoaded &&
                 days.map((d) => <option value={d.name}>{d.name}</option>)}
             </select>
