@@ -42,9 +42,16 @@ function Login() {
 
   return (
     <>
-      <div className="w-full flex flex-col justify-center content-center h-screen relative">
-        <h1 className="text-4xl text-center text-white-950  mx-auto">Gains</h1>
-        {error && <p className="mb-4 text-xs text-red-primary">{error}</p>}
+      <div className="w-full flex flex-col justify-start mt-32 content-center h-screen relative">
+        <div className="">
+          <h1 className="text-4xl text-center text-white-950  mx-auto">
+            Gains
+          </h1>
+          {error && <p className="mb-4 text-xs text-red-primary">{error}</p>}
+          <div className="flex items-center justify-center">
+            <img src="./images/logo.png" alt="logo" className="h-48 w-48" />
+          </div>
+        </div>
 
         <form className="mx-12" onSubmit={handleSubmit} method="POST">
           <div className="mb-4 mt-12">
@@ -72,7 +79,12 @@ function Login() {
             Forgot password
           </button>
 
-          <Button text="Login" />
+          <button
+            type="submit"
+            className="w-full bg-blue-950 text-white-950 mb-4 px-4 py-2 rounded-md"
+          >
+            Login
+          </button>
         </form>
         <div className="mx-12">
           <Link className="text-white-950" to={'/register'}>

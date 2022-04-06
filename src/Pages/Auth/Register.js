@@ -41,8 +41,16 @@ function Register() {
 
   return (
     <>
-      <div className="w-full flex flex-col justify-center content-center h-screen">
-        {error && <p className="mb-4 text-xs text-red-primary">{error}</p>}
+      <div className="w-full flex flex-col justify-start mt-12 content-center h-screen">
+        <div className="">
+          <h1 className="text-4xl text-center text-white-950  mx-auto">
+            Gains
+          </h1>
+          {error && <p className="mb-4 text-xs text-red-primary">{error}</p>}
+          <div className="flex items-center justify-center">
+            <img src="./images/logo.png" alt="logo" className="h-48 w-48" />
+          </div>
+        </div>
 
         <form className="ml-12 mr-12" onSubmit={handleSubmit} method="POST">
           <div className="mb-4">
@@ -98,7 +106,7 @@ function Register() {
           <div>
             <label className="text-white-950">Account type</label>
             <select
-              className="rounded-md bg-white-950 text-slate-950"
+              className="rounded-md w-full h-8 bg-white-950 text-slate-950"
               value={role}
               onChange={({ target }) => setRole(target.value)}
             >
@@ -109,9 +117,9 @@ function Register() {
 
           <button
             type="submit"
-            className={`bg-blue-950 hover:bg-blue-960 text-white-950 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
+            className="w-full bg-blue-950 my-4 text-white-950  px-4 py-2 rounded-md"
           >
-            Sign up
+            Register
           </button>
         </form>
 
