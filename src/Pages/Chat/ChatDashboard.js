@@ -56,10 +56,7 @@ function ChatDashboard() {
 
         <ChatSearch search={search} setSearch={setSearch} />
 
-        {/*       <OnlineUsers />
-         */}
-
-        <button onClick={() => console.log(users)}> test</button>
+        <OnlineUsers />
 
         <div className="flex flex-col items-center mx-12">
           {isLoaded &&

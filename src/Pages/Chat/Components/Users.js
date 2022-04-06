@@ -6,6 +6,7 @@ import { db, FieldValue } from '../../../Libs/Firebase';
 import { addContact } from '../../../Libs/Firestore';
 import ChatProfile from './ChatProfile';
 import ChatSearch from './ChatSearch';
+import ListProfile from './ListProfile';
 
 function Users({ setShowList, listOfUsers }) {
   const { user } = useAuthContext();
@@ -26,7 +27,7 @@ function Users({ setShowList, listOfUsers }) {
 
   return (
     <>
-      <div className="z-50 bg-slate-800 h-screen absolute top-0 w-full">
+      <div className="z-50 bg-slate-950 h-screen absolute top-0 w-full">
         <div
           className="m-5 h-12 w-12 bg-slate-400 flex justify-center  items-center rounded-full absolute top-0 right-0"
           onClick={() => setShowList(false)}
@@ -34,8 +35,8 @@ function Users({ setShowList, listOfUsers }) {
           X
         </div>
 
-        <div className="flex mx-12 justify-around">
-          <form className="">
+        <div className="flex  justify-around mt-32">
+          <form className="w-full mx-12">
             <Input
               type={'text'}
               placeholder={'search'}
@@ -47,7 +48,7 @@ function Users({ setShowList, listOfUsers }) {
           </form>
         </div>
 
-        <div>List of users</div>
+        {/** 
 
         <div className="mx-12 mt-16">
           {listOfUsers
@@ -62,7 +63,7 @@ function Users({ setShowList, listOfUsers }) {
             })
             .map(({ id, user }) =>
               id !== activeUser.uid ? (
-                <div className="bg-slate-700  w-full py-2 mt-4 rounded-md relative">
+                <div className="bg-slate-960  w-full py-2 mt-4 rounded-md relative">
                   <p>{user.username}</p>
                   <button
                     className="absolute right-4 bg-blue-500"
@@ -74,6 +75,23 @@ function Users({ setShowList, listOfUsers }) {
               ) : (
                 <div></div>
               )
+            )}
+        </div>
+        */}
+
+        <div className="mx-12 mt-16">
+          {listOfUsers
+            .filter(({ user }) => {
+              if (search === '') {
+                return user;
+              } else if (
+                user.username.toLowerCase().includes(search.toLocaleLowerCase())
+              ) {
+                return user;
+              }
+            })
+            .map(({ id, user }) =>
+              id !== activeUser.uid ? <ListProfile uid={id} /> : <div></div>
             )}
         </div>
       </div>
