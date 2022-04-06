@@ -3,8 +3,9 @@ import Input from '../../../Components/Input';
 import Label from '../../../Components/Label';
 import { BsPlusCircleFill } from 'react-icons/bs';
 import { IoMdRemoveCircle } from 'react-icons/io';
+import { logDOM } from '@testing-library/react';
 
-function ExerciseLog({ exercise, setLog }) {
+function ExerciseLog({ exercise, setLog, log }) {
   useEffect(() => {}, []);
 
   const [inputList, setInputList] = useState([
@@ -65,9 +66,9 @@ function ExerciseLog({ exercise, setLog }) {
                     </button>
                     <button
                       className="bg-green-950 p-4"
-                      onClick={() => setLog([...inputList])}
+                      onClick={() => setLog([...log, ...inputList])}
                     >
-                      Save
+                      End exercise
                     </button>
                   </div>
                 )}
