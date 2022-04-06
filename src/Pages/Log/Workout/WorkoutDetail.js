@@ -20,7 +20,7 @@ function WorkoutDetail({ days }) {
                   {ex.exName}
                 </h1>
                 {/** */}
-                <ExerciseLog exercise={ex} setLog={setLog} />
+                <ExerciseLog exercise={ex} setLog={setLog} log={log} />
               </div>
             ))}
         </div>

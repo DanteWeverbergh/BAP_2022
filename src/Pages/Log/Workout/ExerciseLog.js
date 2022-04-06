@@ -59,9 +59,17 @@ function ExerciseLog({ exercise, setLog }) {
                   </button>
                 )}
                 {inputList.length - 1 === i && (
-                  <button onClick={handleAddClick}>
-                    <BsPlusCircleFill className="text-xl text-white-950 absolute right-16" />
-                  </button>
+                  <div>
+                    <button onClick={handleAddClick}>
+                      <BsPlusCircleFill className="text-xl text-white-950 absolute right-16" />
+                    </button>
+                    <button
+                      className="bg-green-950 p-4"
+                      onClick={() => setLog([...inputList])}
+                    >
+                      Save
+                    </button>
+                  </div>
                 )}
               </div>
 
