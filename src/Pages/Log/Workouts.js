@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuthContext } from '../../Context/AuthContext';
 import { db } from '../../Libs/Firebase';
 import { getDocById } from '../../Libs/Firestore';
+import WorkoutCard from './Workout/WorkoutCard';
 
 function Workouts() {
   const { user } = useAuthContext();
@@ -31,11 +32,16 @@ function Workouts() {
 
   return (
     <>
-      {isLoaded && workouts.map(({ id, data }) => <p>{data.dayName}</p>)}
+      {isLoaded &&
+        workouts.map(({ id, data }) => (
+          <WorkoutCard key={id} id={id} data={data} />
+        ))}
 
-      <div className="mt-6 text-white">
-        You haven't done any workouts yet. Start now!
-      </div>
+      {isLoaded && !workouts && (
+        <div className="mt-6 text-white">
+          You haven't done any workouts yet. Start now!
+        </div>
+      )}
     </>
   );
 }

@@ -1,6 +1,8 @@
 import React from 'react';
+import { MdDone } from 'react-icons/md';
 import Input from '../../Components/Input';
 import Label from '../../Components/Label';
+import { GrPowerReset } from 'react-icons/gr';
 
 function Filter({
   setFilterMenu,
@@ -11,6 +13,11 @@ function Filter({
   routineName,
   setRoutineName,
 }) {
+  const resetFilters = () => {
+    setTrainer('');
+    setDays('');
+  };
+
   return (
     <>
       <div className="  h-screen w-screen text-white-950 absolute top-0 z-50 bg-slate-950">
@@ -23,7 +30,11 @@ function Filter({
         <ul className="mt-48 mx-12">
           <li className="">
             <Label label={'days'} />
-            <select>
+            <select
+              name="days"
+              value={days}
+              onChange={({ target }) => setDays(target.value)}
+            >
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -44,6 +55,22 @@ function Filter({
             </select>
           </li>
         </ul>
+
+        <div className="mt-12">
+          <button
+            className="bg-red-950 flex items-center justify-center h-12 w-12 rounded-full absolute  right-32 "
+            onClick={() => resetFilters()}
+          >
+            <GrPowerReset className="text-white-950 text-2xl" />
+          </button>
+
+          <button
+            className="bg-blue-950 flex items-center justify-center h-12 w-12 rounded-full absolute  right-12 "
+            onClick={() => setFilterMenu(false)}
+          >
+            <MdDone className="text-2xl " />
+          </button>
+        </div>
       </div>
     </>
   );

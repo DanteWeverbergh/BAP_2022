@@ -20,6 +20,8 @@ function Routines({ u }) {
   const [trainer, setTrainer] = useState('');
   const [routineName, setRoutineName] = useState('');
 
+  //search
+
   useEffect(() => {
     //
 
@@ -30,7 +32,6 @@ function Routines({ u }) {
           routine: doc.data(),
         }))
       );
-      setIsLoaded(true);
     });
 
     //getCurrentRoutine
@@ -41,6 +42,8 @@ function Routines({ u }) {
       .then((doc) => {
         setCurrentRoutine(doc.data());
       });
+
+    setIsLoaded(true);
   }, [isLoaded]);
 
   return (
@@ -70,6 +73,7 @@ function Routines({ u }) {
               className="text-white-950 text-2xl mr-12"
             />
           </div>
+
           <ul className="flex overflow-x-auto gap-6 snap-x snap-mandatory">
             {isLoaded ? (
               routines.map(({ id, routine }) => (

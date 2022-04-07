@@ -17,6 +17,7 @@ import CreateExercise from '../Pages/PersonalTrainer/Exercises/CreateExercise';
 import User from '../Pages/Profile/Social/User';
 import ChatDashboard from '../Pages/Chat/ChatDashboard';
 import Chat from '../Pages/Chat/Chat';
+import WorkoutInfo from '../Pages/Log/Workout/WorkoutInfo';
 
 function Routing() {
   return (
@@ -47,6 +48,7 @@ function Routing() {
             <Route path="/create/routine" element={<CreateRoutine />} />
 
             <Route path="/log/workout" element={<Workout />} />
+            <Route path="/workouts/:id" element={<WorkoutInfo />} />
 
             {/*Chat */}
             <Route path="chat" element={<ChatDashboard />} />

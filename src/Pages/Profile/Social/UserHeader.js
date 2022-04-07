@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { MdOutlineEdit } from 'react-icons/md';
-import { IoIosArrowBack } from 'react-icons/io';
+import { IoIosArrowBack, IoIosFitness } from 'react-icons/io';
 
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../../Context/AuthContext';
@@ -15,6 +15,7 @@ function UserHeader({ photoUrl, u, uid }) {
   const [following, setFollowing] = useState([]);
   const [isFollowing, setIsFollowing] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [workoutPoints, setWorkoutPoints] = useState('');
 
   useEffect(() => {
     //ToDo verder uitwerken
@@ -30,6 +31,13 @@ function UserHeader({ photoUrl, u, uid }) {
             setIsFollowing(true);
           }
         });
+      });
+
+    db.collection('workouts')
+      .doc(uid)
+      .collection('workouts')
+      .onSnapshot((snapshot) => {
+        setWorkoutPoints(snapshot.size);
       });
 
     setIsLoaded(true);
@@ -71,6 +79,11 @@ function UserHeader({ photoUrl, u, uid }) {
               src={u.photoURL}
             />
           )}
+
+          <div className="bg-slate-960 h-12 w-12  absolute top-0 right-0 border-2 border-blue-950 rounded-full flex items-center flex-col justify-center text-white-950">
+            <p>{workoutPoints}</p>
+            <IoIosFitness />
+          </div>
         </div>
         <div className="text-2xl mt-4 mb-8 text-white-950">{u.fullName}</div>
       </div>

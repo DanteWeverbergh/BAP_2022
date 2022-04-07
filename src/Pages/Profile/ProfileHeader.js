@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { MdOutlineEdit } from 'react-icons/md';
-import { IoIosArrowBack } from 'react-icons/io';
+import { IoIosArrowBack, IoIosFitness } from 'react-icons/io';
 import { useAuthContext } from '../../Context/AuthContext';
 import { Link } from 'react-router-dom';
 import { db } from '../../Libs/Firebase';
@@ -10,15 +10,24 @@ function ProfileHeader({ photoUrl, u }) {
   const [following, setFollowing] = useState([]);
   const [followers, setFollowers] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [workoutPoints, setWorkoutPoints] = useState('');
 
   useEffect(() => {
     setFollowing(u.following);
     u.followers && setFollowers(u.followers);
-    setIsLoaded(true);
 
     db.collection('users').doc(user.uid).update({
       photoURL: photoUrl,
     });
+
+    db.collection('workouts')
+      .doc(user.uid)
+      .collection('workouts')
+      .onSnapshot((snapshot) => {
+        setWorkoutPoints(snapshot.size);
+      });
+
+    setIsLoaded(true);
   });
 
   return (
@@ -49,8 +58,13 @@ function ProfileHeader({ photoUrl, u }) {
             />
           )}
 
+          <div className="bg-slate-960 h-12 w-12  absolute top-0 right-0 border-2 border-blue-950 rounded-full flex items-center flex-col justify-center text-white-950">
+            <p>{workoutPoints}</p>
+            <IoIosFitness />
+          </div>
+
           <Link
-            className="h-6 w-6  rounded-full absolute bottom-3 right-3 bg-blue-950 text-center"
+            className="h-6 w-6  rounded-full absolute bottom-3 right-3 bg-blue-950 text-center flex items-center justify-center"
             to={'/profile/edit'}
           >
             <MdOutlineEdit className="text-white-950 text-center text-xl" />
