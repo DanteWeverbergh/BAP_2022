@@ -296,7 +296,7 @@ export async function checkDuplicates(col, check, setExists, setIsLoaded) {
  */
 
 //log a workout
-export async function logWorkout(user, day, data) {
+export async function logWorkout(user, day, data, time) {
   //get name of exercise
   data.map((t) => console.log('naam:', t[0].exName));
 
@@ -310,6 +310,7 @@ export async function logWorkout(user, day, data) {
       .add({
         created: FieldValue.serverTimestamp(),
         dayName: day,
+        time,
         log: data.map((arr) => ({ exercise: arr })),
       });
 

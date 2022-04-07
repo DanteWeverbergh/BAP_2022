@@ -10,6 +10,7 @@ function ExerciseLog({ exercise, setLog, log }) {
   useEffect(() => {}, []);
 
   const [inputList, setInputList] = useState([{ reps: '', weight: '' }]);
+  const [disabled, setDisabled] = useState(false);
 
   // handle input change
   const handleInputChange = (e, index) => {
@@ -31,6 +32,11 @@ function ExerciseLog({ exercise, setLog, log }) {
     setInputList([...inputList, { reps: '', weight: '' }]);
   };
 
+  const done = () => {
+    setLog([...log, [{ exName: exercise.exName }, ...inputList]]);
+    setDisabled(true);
+  };
+
   return (
     <>
       <div className="">
@@ -40,37 +46,45 @@ function ExerciseLog({ exercise, setLog, log }) {
               <div className="flex">
                 <h2>{}</h2>
                 <Input
+                  type={'number'}
                   name="reps"
                   placeholder={`reps: ${exercise.repRange}`}
                   value={x.reps}
                   onChange={(e) => handleInputChange(e, i)}
+                  disabled={disabled}
                 />
                 <Input
+                  type={'number'}
                   name="weight"
                   placeholder="Weight"
                   value={x.wieght}
                   onChange={(e) => handleInputChange(e, i)}
+                  disabled={disabled}
                 />
               </div>
               <div className="btn-box">
                 {inputList.length !== 1 && (
-                  <button className="mr10" onClick={() => handleRemoveClick(i)}>
+                  <button
+                    className="mr10"
+                    onClick={() => handleRemoveClick(i)}
+                    disabled={disabled}
+                  >
                     <IoMdRemoveCircle className="text-xl text-white-950 absolute right-24" />
                   </button>
                 )}
                 {inputList.length - 1 === i && (
                   <div>
-                    <button onClick={handleAddClick}>
+                    <button onClick={handleAddClick} disabled={disabled}>
                       <BsPlusCircleFill className="text-xl text-white-950 absolute right-16" />
                     </button>
                     <button
-                      className="bg-blue-950 h-8 w-8 rounded-full mt-4 flex items-center justify-center"
-                      onClick={() =>
-                        setLog([
-                          ...log,
-                          [{ exName: exercise.exName }, ...inputList],
-                        ])
+                      className={
+                        !disabled
+                          ? 'bg-blue-950 h-8 w-8 rounded-full mt-4 flex items-center justify-center'
+                          : 'bg-red-950 h-8 w-8 rounded-full mt-4 flex items-center justify-center'
                       }
+                      disabled={disabled}
+                      onClick={() => done()}
                     >
                       <MdDone />
                     </button>

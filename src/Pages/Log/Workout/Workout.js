@@ -18,7 +18,12 @@ function Workout() {
 
   const [log, setLog] = useState(false);
 
+  //timer
   const [time, setTime] = useState('');
+  const [seconds, setSeconds] = useState(0);
+  const [minutes, setMinutes] = useState(0);
+  const [hours, setHours] = useState(0);
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     //
@@ -43,15 +48,24 @@ function Workout() {
     } catch (error) {
       alert(error.message);
     }
-
-    console.log(days);
   }, []);
 
   return (
     <>
       <div className="mx-12">
         <div className="mt-6">
-          <Timer time={time} setTime={setTime} />
+          <Timer
+            time={time}
+            setTime={setTime}
+            seconds={seconds}
+            setSeconds={setSeconds}
+            minutes={minutes}
+            setMinutes={setMinutes}
+            hours={hours}
+            setHours={setHours}
+            isActive={isActive}
+            setIsActive={setIsActive}
+          />
         </div>
 
         <div className="text-white-950">
@@ -91,7 +105,20 @@ function Workout() {
          */}
         {isLoaded &&
           days.map(
-            (e) => e.name === day && <WorkoutDetail days={e} time={time} />
+            (e) =>
+              e.name === day && (
+                <WorkoutDetail
+                  days={e}
+                  seconds={seconds}
+                  setSeconds={setSeconds}
+                  minutes={minutes}
+                  setMinutes={setMinutes}
+                  hours={hours}
+                  setHours={setHours}
+                  isActive={isActive}
+                  setIsActive={setIsActive}
+                />
+              )
           )}
       </div>
 

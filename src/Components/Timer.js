@@ -1,10 +1,24 @@
 import React, { useEffect, useState } from 'react';
 
-function Timer({ time, setTime }) {
+function Timer({
+  time,
+  setTime,
+  seconds,
+  setSeconds,
+  minutes,
+  setMinutes,
+  hours,
+  setHours,
+  isActive,
+  setIsActive,
+}) {
+  /*
   const [seconds, setSeconds] = useState(0);
   const [minutes, setMinutes] = useState(0);
   const [hours, setHours] = useState(0);
+  
   const [isActive, setIsActive] = useState(false);
+  */
 
   const start = () => {
     setIsActive(!isActive);

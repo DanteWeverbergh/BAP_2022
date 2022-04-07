@@ -45,6 +45,7 @@ function WorkoutInfo() {
           <h1 className="text-2xl font-semibold">
             {isLoaded && workout.dayName}
           </h1>
+          <p>{isLoaded && workout.time}</p>
         </div>
 
         <div>

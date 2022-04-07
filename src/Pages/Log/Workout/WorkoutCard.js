@@ -22,7 +22,7 @@ function WorkoutCard({ id, data }) {
           <div className="flex justify-between mx-4">
             <div>
               <div>{data.dayName}</div>
-              <div> tijd</div>
+              <div> {data.time}</div>
             </div>
             <div>{date && date}</div>
           </div>

@@ -4,14 +4,31 @@ import { BsPlusCircleFill } from 'react-icons/bs';
 import { logWorkout } from '../../../Libs/Firestore';
 import { useAuthContext } from '../../../Context/AuthContext';
 
-function WorkoutDetail({ days, time }) {
+function WorkoutDetail({
+  days,
+
+  seconds,
+  setSeconds,
+  minutes,
+  setMinutes,
+  hours,
+  setHours,
+  isActive,
+  setIsActive,
+}) {
   const { user } = useAuthContext();
   const [log, setLog] = useState([]);
 
   useEffect(() => {
     //
-    console.log('dag', days.name);
   });
+
+  const workout = () => {
+    //
+    setIsActive(false);
+    const time = `${hours}:${minutes}:${seconds}`;
+    logWorkout(user, days.name, log, time);
+  };
 
   return (
     <>
@@ -36,7 +53,7 @@ function WorkoutDetail({ days, time }) {
           <button
             className="bg-blue-950 px-4 py-2 w-full mt-6 rounded-md"
             //onClick={() => logWorkout(user, log)}
-            onClick={() => logWorkout(user, days.name, log)}
+            onClick={() => workout()}
           >
             Done
           </button>
