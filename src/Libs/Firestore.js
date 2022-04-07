@@ -205,7 +205,9 @@ export async function follow(followerUid, profileUid, follow, setIsFollowing) {
   }
 }
 
-// CHAT
+/**
+ *chat
+ */
 
 // send message
 
@@ -287,4 +289,32 @@ export async function checkDuplicates(col, check, setExists, setIsLoaded) {
     });
 
   setIsLoaded(true);
+}
+
+/**
+ * Workouts
+ */
+
+//log a workout
+export async function logWorkout(user, day, data) {
+  //get name of exercise
+  data.map((t) => console.log('naam:', t[0].exName));
+
+  try {
+    const exerciseName = 'test';
+
+    await db
+      .collection('workouts')
+      .doc(user.uid)
+      .collection('workouts')
+      .add({
+        created: FieldValue.serverTimestamp(),
+        dayName: day,
+        log: data.map((arr) => ({ exercise: arr })),
+      });
+
+    alert('succes!');
+  } catch (error) {
+    console.log(error.message);
+  }
 }

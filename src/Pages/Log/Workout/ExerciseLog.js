@@ -7,9 +7,7 @@ import { logDOM } from '@testing-library/react';
 import { MdDone } from 'react-icons/md';
 
 function ExerciseLog({ exercise, setLog, log }) {
-  useEffect(() => {
-    console.log(exercise.exName);
-  }, []);
+  useEffect(() => {}, []);
 
   const [inputList, setInputList] = useState([{ reps: '', weight: '' }]);
 
@@ -68,7 +66,10 @@ function ExerciseLog({ exercise, setLog, log }) {
                     <button
                       className="bg-blue-950 h-8 w-8 rounded-full mt-4 flex items-center justify-center"
                       onClick={() =>
-                        setLog([...log, [exercise.exName, ...inputList]])
+                        setLog([
+                          ...log,
+                          [{ exName: exercise.exName }, ...inputList],
+                        ])
                       }
                     >
                       <MdDone />

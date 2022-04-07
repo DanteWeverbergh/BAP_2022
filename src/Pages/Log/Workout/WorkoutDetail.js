@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import ExerciseLog from './ExerciseLog';
 import { BsPlusCircleFill } from 'react-icons/bs';
+import { logWorkout } from '../../../Libs/Firestore';
+import { useAuthContext } from '../../../Context/AuthContext';
 
 function WorkoutDetail({ days, time }) {
+  const { user } = useAuthContext();
   const [log, setLog] = useState([]);
+
   useEffect(() => {
     //
+    console.log('dag', days.name);
   });
 
   return (
@@ -30,7 +35,8 @@ function WorkoutDetail({ days, time }) {
         <div>
           <button
             className="bg-blue-950 px-4 py-2 w-full mt-6 rounded-md"
-            onClick={() => console.log(log)}
+            //onClick={() => logWorkout(user, log)}
+            onClick={() => logWorkout(user, days.name, log)}
           >
             Done
           </button>

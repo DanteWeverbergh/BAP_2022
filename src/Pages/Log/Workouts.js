@@ -1,22 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import { useAuthContext } from '../../Context/AuthContext';
+import { db } from '../../Libs/Firebase';
 import { getDocById } from '../../Libs/Firestore';
 
 function Workouts() {
   const { user } = useAuthContext();
 
   const [u, setU] = useState({});
+  const [workouts, setWorkouts] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     //
 
-    getDocById('users', user.uid);
+    db.collection('workouts')
+      .doc(user.uid)
+      .collection('workouts')
+      .orderBy('created', 'desc')
+      .onSnapshot((snapshot) => {
+        setWorkouts(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data(),
+          }))
+        );
+      });
 
-    console.log(getDocById('users', user.uid));
+    setIsLoaded(true);
   }, []);
 
   return (
     <>
+      {isLoaded && workouts.map(({ id, data }) => <p>{data.dayName}</p>)}
+
       <div className="mt-6 text-white">
         You haven't done any workouts yet. Start now!
       </div>
