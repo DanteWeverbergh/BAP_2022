@@ -82,10 +82,12 @@ function Users({ setShowList, listOfUsers }) {
         <div className="mx-12 mt-16">
           {listOfUsers
             .filter(({ user }) => {
+              console.log(user);
+
               if (search === '') {
                 return user;
               } else if (
-                user.username.toLowerCase().includes(search.toLocaleLowerCase())
+                user.username.toLowerCase().includes(search.toLowerCase())
               ) {
                 return user;
               }

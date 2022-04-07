@@ -76,11 +76,17 @@ function Routines({ u }) {
 
           <ul className="flex overflow-x-auto gap-6 snap-x snap-mandatory">
             {isLoaded ? (
-              routines.map(({ id, routine }) => (
-                <li className="shrink-0 w-3/4 snap-center">
-                  <RoutineCard key={id} routine={routine} id={id} />
-                </li>
-              ))
+              routines
+                .filter(({ routine }) => {
+                  console.log(routine);
+
+                  return routine;
+                })
+                .map(({ id, routine }) => (
+                  <li className="shrink-0 w-3/4 snap-center">
+                    <RoutineCard key={id} routine={routine} id={id} />
+                  </li>
+                ))
             ) : (
               <div></div>
             )}
