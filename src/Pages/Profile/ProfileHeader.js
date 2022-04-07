@@ -4,6 +4,7 @@ import { IoIosArrowBack, IoIosFitness } from 'react-icons/io';
 import { useAuthContext } from '../../Context/AuthContext';
 import { Link } from 'react-router-dom';
 import { db } from '../../Libs/Firebase';
+import Followers from './Detail/Followers';
 
 function ProfileHeader({ photoUrl, u }) {
   const { user, logout } = useAuthContext();
@@ -11,6 +12,7 @@ function ProfileHeader({ photoUrl, u }) {
   const [followers, setFollowers] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [workoutPoints, setWorkoutPoints] = useState('');
+  const [followersList, setFollowersList] = useState(false);
 
   useEffect(() => {
     setFollowing(u.following);
@@ -32,6 +34,13 @@ function ProfileHeader({ photoUrl, u }) {
 
   return (
     <>
+      {followersList && (
+        <Followers
+          followersList={followersList}
+          setFollowersList={setFollowersList}
+        />
+      )}
+
       <div className="flex justify-between mx-6 mt-6">
         <Link
           className="rounded-full text-slate-950 bg-white-950 h-8 w-8 text-center "
@@ -76,7 +85,10 @@ function ProfileHeader({ photoUrl, u }) {
 
         <div className="text-white-950  mb-4 bg-slate-960 px-4 py-2 flex jusify-between w-full">
           <div>{following.length} following</div>
-          <div> {followers.length} followers</div>
+          <div onClick={() => setFollowersList(true)}>
+            {' '}
+            {followers.length} followers
+          </div>
           <div> ... posts</div>
         </div>
       </div>

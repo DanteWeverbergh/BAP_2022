@@ -69,7 +69,7 @@ function ExerciseLog({ exercise, setLog, log }) {
                     onClick={() => handleRemoveClick(i)}
                     disabled={disabled}
                   >
-                    <IoMdRemoveCircle className="text-xl text-white-950 absolute right-24" />
+                    <IoMdRemoveCircle className="text-xl text-white-950 mt-2 " />
                   </button>
                 )}
                 {inputList.length - 1 === i && (

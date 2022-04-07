@@ -41,7 +41,7 @@ function UserHeader({ photoUrl, u, uid }) {
       });
 
     setIsLoaded(true);
-  }, []);
+  }, [isLoaded]);
 
   return (
     <>

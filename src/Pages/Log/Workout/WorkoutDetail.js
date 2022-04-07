@@ -41,9 +41,12 @@ function WorkoutDetail({
           {days.Exercises &&
             days.Exercises.map((ex) => (
               <div className="mt-10 bg-slate-960 px-4 py-2 rounded-md">
-                <h1 className="text-white-950 font-bold text-xl mb-2">
-                  {ex.exName}
-                </h1>
+                <div className="flex flex-row">
+                  <h1 className="text-white-950 font-bold text-xl mb-2">
+                    {ex.exName}
+                  </h1>
+                  <p className="ml-4">({ex.sets} sets)</p>
+                </div>
                 {/** */}
                 <ExerciseLog exercise={ex} setLog={setLog} log={log} />
               </div>
