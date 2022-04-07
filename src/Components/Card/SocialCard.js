@@ -110,15 +110,13 @@ function SocialCard({ post, postId, setModal, setPostId }) {
 
         {/* content card */}
         <div className="mt-4">
-          {post.photoUrl ? (
+          {post.photoUrl && (
             <img
               className="rounded-md"
               alt="pic"
               //src="https://picsum.photos/400"
               src={post.photoUrl}
             />
-          ) : (
-            <div></div>
           )}
 
           <div>

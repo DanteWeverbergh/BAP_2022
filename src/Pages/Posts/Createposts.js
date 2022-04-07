@@ -68,7 +68,9 @@ function Createposts() {
   return (
     <>
       <Header />
-      <div>Create post</div>
+      <div className="text-white-950 font-bold text-2xl text-center">
+        Create post
+      </div>
 
       <form onSubmit={handleSubmit} className="mx-12">
         <div className="mb-6">
@@ -89,14 +91,14 @@ function Createposts() {
             id="pic"
             onChange={photoChange}
             type={'file'}
-            className="bg-white-950"
+            className="bg-white-950 w-full rounded-md"
             placeholder="hjlhhjlh"
           ></input>
         </div>
 
         <button
           type="submit"
-          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-6`}
+          className={`bg-blue-950 hover:bg-blue-960 text-white-950 w-full font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-6`}
         >
           Post
         </button>

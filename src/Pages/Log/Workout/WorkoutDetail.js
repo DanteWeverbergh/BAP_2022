@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ExerciseLog from './ExerciseLog';
 import { BsPlusCircleFill } from 'react-icons/bs';
 
-function WorkoutDetail({ days }) {
+function WorkoutDetail({ days, time }) {
   const [log, setLog] = useState([]);
   useEffect(() => {
     //
@@ -11,7 +11,10 @@ function WorkoutDetail({ days }) {
   return (
     <>
       <div className="text-white-950 mt-6">
+        {/**
         <h1 className="text-xl font-bold text-center ">{days.name}</h1>
+         */}
+
         <div>
           {days.Exercises &&
             days.Exercises.map((ex) => (

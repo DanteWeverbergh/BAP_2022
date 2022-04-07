@@ -4,13 +4,14 @@ import Label from '../../../Components/Label';
 import { BsPlusCircleFill } from 'react-icons/bs';
 import { IoMdRemoveCircle } from 'react-icons/io';
 import { logDOM } from '@testing-library/react';
+import { MdDone } from 'react-icons/md';
 
 function ExerciseLog({ exercise, setLog, log }) {
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log(exercise.exName);
+  }, []);
 
-  const [inputList, setInputList] = useState([
-    { reps: '', weight: '', set: 1 },
-  ]);
+  const [inputList, setInputList] = useState([{ reps: '', weight: '' }]);
 
   // handle input change
   const handleInputChange = (e, index) => {
@@ -65,23 +66,23 @@ function ExerciseLog({ exercise, setLog, log }) {
                       <BsPlusCircleFill className="text-xl text-white-950 absolute right-16" />
                     </button>
                     <button
-                      className="bg-green-950 p-4"
-                      onClick={() => setLog([...log, ...inputList])}
+                      className="bg-blue-950 h-8 w-8 rounded-full mt-4 flex items-center justify-center"
+                      onClick={() =>
+                        setLog([...log, [exercise.exName, ...inputList]])
+                      }
                     >
-                      End exercise
+                      <MdDone />
                     </button>
                   </div>
                 )}
               </div>
-
-              <button className="bg-red-950" onClick={() => setLog(inputList)}>
-                TEST
-              </button>
             </div>
           );
         })}
 
+        {/** 
         <div style={{ marginTop: 20 }}>{JSON.stringify(inputList)}</div>
+        */}
       </div>
     </>
   );

@@ -22,6 +22,7 @@ function Log() {
   const [workouts, setWorkouts] = useState(false);
 
   useEffect(() => {
+    let isMounted = true;
     document.title = 'Log - Gains';
 
     //const doc = getDocById('users', user.uid);
@@ -30,8 +31,12 @@ function Log() {
       .doc(user.uid)
       .get()
       .then((doc) => {
-        setU(doc.data());
+        if (isMounted) setU(doc.data());
       });
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const clickDashboard = () => {

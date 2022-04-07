@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Label from '../../../Components/Label';
 import Timer from '../../../Components/Timer';
 import { useAuthContext } from '../../../Context/AuthContext';
 import Footer from '../../../Layouts/Footer/Footer';
@@ -53,14 +54,15 @@ function Workout() {
           <Timer time={time} setTime={setTime} />
         </div>
 
-        <div className="text-white">
+        <div className="text-white-950">
           {currentRoutineId && currentRoutine.name}
         </div>
-        <div className="text-white">{day}</div>
+
         <div>
           <form>
+            <Label label={'select your day'} />
             <select
-              className="mx-auto w-3/4 rounded-md"
+              className="mx-auto w-full h-8 rounded-md"
               name="days"
               id="days"
               value={day}
@@ -72,6 +74,8 @@ function Workout() {
             </select>
           </form>
         </div>
+
+        {/**
         <button
           className="bg-blue-500 px-5 py-2 rounded-md"
           onClick={() => setLog(true)}
@@ -84,13 +88,11 @@ function Workout() {
         >
           Stop
         </button>
-        {log ? (
-          days.map((e) =>
-            e.name === day ? <WorkoutDetail days={e} /> : <div></div>
-          )
-        ) : (
-          <div></div>
-        )}
+         */}
+        {isLoaded &&
+          days.map(
+            (e) => e.name === day && <WorkoutDetail days={e} time={time} />
+          )}
       </div>
 
       <Footer />

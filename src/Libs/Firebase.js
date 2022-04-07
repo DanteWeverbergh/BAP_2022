@@ -43,22 +43,32 @@ export async function upload(file, currentUser, setLoading) {
 }
 
 export async function createPost(file, setIsLoaded, text, uid, uPhoto) {
-  const fileName = Date.now() + 'jpg';
-  const fileRef = ref(storage, fileName);
+  if (file) {
+    const fileName = Date.now() + 'jpg';
+    const fileRef = ref(storage, fileName);
 
-  //upload file
-  await uploadBytes(fileRef, file);
+    //upload file
+    await uploadBytes(fileRef, file);
 
-  const photoUrl = await getDownloadURL(fileRef);
+    const photoUrl = await getDownloadURL(fileRef);
 
-  await db.collection('posts').add({
-    photoUrl,
-    uid,
-    text,
-    uPhoto,
-    likes: [],
-    created: FieldValue.serverTimestamp(),
-  });
+    await db.collection('posts').add({
+      photoUrl,
+      uid,
+      text,
+      uPhoto,
+      likes: [],
+      created: FieldValue.serverTimestamp(),
+    });
+  } else {
+    await db.collection('posts').add({
+      uid,
+      text,
+      uPhoto,
+      likes: [],
+      created: FieldValue.serverTimestamp(),
+    });
+  }
 
   alert('post uploaded');
   setIsLoaded(true);

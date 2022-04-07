@@ -56,7 +56,9 @@ function ChatDashboard() {
 
         <ChatSearch search={search} setSearch={setSearch} />
 
-        <OnlineUsers />
+        <div className="flex overflow-x-auto gap-6 snap-x snap-mandatory mt-4">
+          <OnlineUsers />
+        </div>
 
         <div className="flex flex-col items-center mx-12">
           {isLoaded &&

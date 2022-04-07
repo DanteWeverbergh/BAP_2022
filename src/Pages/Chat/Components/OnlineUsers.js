@@ -32,26 +32,24 @@ function OnlineUsers() {
 
   return (
     <>
-      <div className="mx-12 flex w-full overflow-x-auto space-x-1 mt-4">
-        {isLoaded &&
-          onlineUsers.map(
-            ({ id, user }) =>
-              user.uid !== currentUser.uid && (
-                <div className="flex flex-col items-center">
-                  <img
-                    className="h-12 w-12 rounded-full ml-4 object-cover"
-                    src={
-                      user.photoURL
-                        ? user.photoURL
-                        : 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'
-                    }
-                    alt="profile"
-                  />
-                  <div className="text-white-950"> {user.username}</div>
-                </div>
-              )
-          )}
-      </div>
+      {isLoaded &&
+        onlineUsers.map(
+          ({ id, user }) =>
+            user.uid !== currentUser.uid && (
+              <div className="ml-12 flex flex-col items-center ">
+                <img
+                  className="h-12 w-12 rounded-full object-cover"
+                  src={
+                    user.photoURL
+                      ? user.photoURL
+                      : 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'
+                  }
+                  alt="profile"
+                />
+                <div className="text-white-950"> {user.username}</div>
+              </div>
+            )
+        )}
     </>
   );
 }

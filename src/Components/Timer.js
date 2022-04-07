@@ -41,21 +41,21 @@ function Timer({ time, setTime }) {
 
   return (
     <>
-      <div className="text-center">
+      <div className="text-center text-white-950 mb-6 bg-slate-960  py-4 rounded-md">
         <p className="text-6xl text-white-950">
           {hours}:{minutes}:{seconds}
         </p>
 
-        <div>
+        <div className="flex justify-between mx-12 mt-4">
           <button
-            className="bg-red-400 px-6 py-2 rounded-full"
+            className="bg-blue-950 px-6 py-2 rounded-md"
             onClick={() => start()}
           >
             {isActive ? 'Pause' : 'Start'}
           </button>
 
           <button
-            className="bg-blue-400 px-6 py-2 rounded-full"
+            className="bg-red-950 px-6 py-2 rounded-md"
             onClick={() => reset()}
           >
             Reset
