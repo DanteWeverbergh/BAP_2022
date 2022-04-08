@@ -6,13 +6,17 @@ import RoutineCard from './RoutineCard';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { IoFilterOutline } from 'react-icons/io5';
 import Filter from './Filter';
+import { useAuthContext } from '../../Context/AuthContext';
 
 function Routines({ u }) {
   const { firebase } = useContext(FirebaseContext);
+  const { user } = useAuthContext();
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [routines, setRoutines] = useState([]);
+  const [myRoutines, setMyRoutines] = useState([]);
   const [currentRoutine, setCurrentRoutine] = useState({});
+
   const [filterMenu, setFilterMenu] = useState(false);
 
   //filter states
@@ -41,6 +45,18 @@ function Routines({ u }) {
       .get()
       .then((doc) => {
         setCurrentRoutine(doc.data());
+      });
+
+    //get my routines
+    db.collection('Routines')
+      .where('creator', '==', user.uid)
+      .onSnapshot((snapshot) => {
+        setMyRoutines(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            routine: doc.data(),
+          }))
+        );
       });
 
     setIsLoaded(true);
@@ -77,7 +93,7 @@ function Routines({ u }) {
           </div>
 
           <ul className="flex overflow-x-auto gap-6 snap-x snap-mandatory">
-            {isLoaded ? (
+            {isLoaded &&
               routines
                 .filter(({ routine }) => {
                   return routine;
@@ -86,10 +102,7 @@ function Routines({ u }) {
                   <li className="shrink-0 w-3/4 snap-center " key={id}>
                     <RoutineCard routine={routine} id={id} />
                   </li>
-                ))
-            ) : (
-              <div></div>
-            )}
+                ))}
           </ul>
         </div>
       </div>
@@ -106,9 +119,23 @@ function Routines({ u }) {
         />
       )}
 
-      <div className="mx-12 mt-6 text-white-950">
+      <div className="ml-12  text-white-950">
+        <div className="mt-4">
+          <h1 className="font-semibold text-2xl mb-4  text-white-950">
+            My routines
+          </h1>
+          <ul className="flex overflow-x-auto gap-6 snap-x snap-mandatory">
+            {isLoaded &&
+              myRoutines.map(({ id, routine }) => (
+                <li className="shrink-0 w-3/4 snap-center " key={id}>
+                  <RoutineCard routine={routine} id={id} />
+                </li>
+              ))}
+          </ul>
+        </div>
+
         <Link to={'/create/routine'}>
-          <div className="bg-blue-950 py-2 rounded-md flex items-center justify-center">
+          <div className="bg-blue-950 py-2 rounded-md mt-4 flex items-center justify-center mr-12">
             Add your own routine.
           </div>
         </Link>

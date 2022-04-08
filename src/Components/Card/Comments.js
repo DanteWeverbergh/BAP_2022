@@ -45,7 +45,7 @@ function Comments({ comments, postId }) {
             method="POST"
           >
             <input
-              className="w-11/12 rounded-md bg-white-950 h-8   "
+              className="w-11/12 rounded-md bg-white-950 h-8 text-slate-950  "
               type={'text'}
               placeholder={'Start typing here ...'}
               name={'comment'}

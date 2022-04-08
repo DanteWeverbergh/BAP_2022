@@ -322,6 +322,7 @@ export async function logWorkout(user, day, data, time) {
   try {
     const exerciseName = 'test';
 
+    // add to workouts
     await db
       .collection('workouts')
       .doc(user.uid)
@@ -332,6 +333,15 @@ export async function logWorkout(user, day, data, time) {
         time,
         log: data.map((arr) => ({ exercise: arr })),
       });
+
+    // add posts
+    await db.collection('posts').add({
+      created: FieldValue.serverTimestamp(),
+      uid: user.uid,
+      uPhoto: user.photoURL,
+      likes: [],
+      text: `${user.displayName} has completed ${day} in ${time}`,
+    });
 
     alert('succes!');
   } catch (error) {

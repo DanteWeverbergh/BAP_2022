@@ -38,6 +38,7 @@ function Home() {
 
   const fetchMore = () => {
     //
+    let unmounted;
 
     setIsLoading(true);
 
@@ -48,21 +49,29 @@ function Home() {
       .onSnapshot((snapshot) => {
         // check if there are other posts
         if (snapshot.size === 0) {
-          setIsEmpty(true);
+          if (!unmounted) {
+            setIsEmpty(true);
+          }
         } else {
-          setLastPost(snapshot.docs[snapshot.docs.length - 1]);
+          if (!unmounted) {
+            setLastPost(snapshot.docs[snapshot.docs.length - 1]);
 
-          setPosts((posts) => [
-            ...posts,
-            ...snapshot.docs.map((doc) => ({
-              id: doc.id,
-              post: doc.data(),
-            })),
-          ]);
+            setPosts((posts) => [
+              ...posts,
+              ...snapshot.docs.map((doc) => ({
+                id: doc.id,
+                post: doc.data(),
+              })),
+            ]);
+          }
         }
       });
 
     setIsLoading(false);
+
+    return () => {
+      unmounted = true;
+    };
   };
 
   /*
