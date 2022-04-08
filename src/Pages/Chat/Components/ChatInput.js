@@ -17,6 +17,8 @@ function ChatInput({ chatId }) {
     e.preventDefault();
 
     sendMessage(message, user.uid, chatId);
+
+    setMessage('');
   };
   return (
     <>
