@@ -78,13 +78,11 @@ function Routines({ u }) {
             {isLoaded ? (
               routines
                 .filter(({ routine }) => {
-                  console.log(routine);
-
                   return routine;
                 })
                 .map(({ id, routine }) => (
-                  <li className="shrink-0 w-3/4 snap-center">
-                    <RoutineCard key={id} routine={routine} id={id} />
+                  <li className="shrink-0 w-3/4 snap-center " key={id}>
+                    <RoutineCard routine={routine} id={id} />
                   </li>
                 ))
             ) : (

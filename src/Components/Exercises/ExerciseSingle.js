@@ -6,7 +6,7 @@ import YouTube from 'react-youtube';
 import VideoModal from './VideoModal';
 
 function ExerciseSingle({ exercise, setVideoModal, setYtId }) {
-  const [videoUrl, setVideoUrl] = useState('');
+  const [ytUrl, setYtUrl] = useState('');
 
   useEffect(() => {
     //
@@ -15,38 +15,42 @@ function ExerciseSingle({ exercise, setVideoModal, setYtId }) {
       .where('name', '==', exercise.exName)
       .onSnapshot((snapshot) => {
         snapshot.docs.map((doc) => {
-          setVideoUrl(doc.data().videoUrl);
+          setYtUrl(doc.data().videoUrl);
         });
       });
+  }, []);
 
-    //Youtube url to youtube id
+  const urlToId = () => {
+    //
 
     var regExp =
       /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/;
-    var match = videoUrl.match(regExp);
 
-    //setYtId(match && match[7].length == 11 ? match[7] : false);
-    setYtId(match && match[7].length === 11 ? match[7] : false);
+    var match = ytUrl.match(regExp);
 
-    console.log(match && match[7].length === 11 ? match[7] : false);
-  }, []);
+    setYtId(match && match[7].length == 11 ? match[7] : false);
+  };
+
+  const modal = () => {
+    urlToId();
+    setVideoModal(true);
+  };
 
   return (
     <>
-      <div className="border-b-2 flex justify-between mt-2">
-        <p>{exercise.exName}</p>
+      <div className="bg-slate-960 px-4 py-2 rounded-md">
+        <div className=" flex items-center justify-between">
+          <div>
+            <p className="font-semibold ">{exercise.exName}</p>
 
-        <div>
-          <MdOndemandVideo onClick={() => setVideoModal(true)} />
-        </div>
-
-        {/**
-         *    <YouTube videoId={ytId} />
-         */}
-
-        <div className="flex">
-          <p>sets: {exercise.sets}</p>
-          <p className="ml-4">reps: {exercise.repRange}</p>
+            <div className="flex">
+              <p>sets: {exercise.sets}</p>
+              <p className="ml-4">reps: {exercise.repRange}</p>
+            </div>
+          </div>
+          <div>
+            <MdOndemandVideo className="text-2xl" onClick={() => modal()} />
+          </div>
         </div>
       </div>
     </>

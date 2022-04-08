@@ -51,6 +51,7 @@ function Home() {
           setIsEmpty(true);
         } else {
           setLastPost(snapshot.docs[snapshot.docs.length - 1]);
+
           setPosts((posts) => [
             ...posts,
             ...snapshot.docs.map((doc) => ({
@@ -65,16 +66,14 @@ function Home() {
   };
 
   /*
-
   const handleScrol = (e) => {
     //
 
-    const scrollTop = e.target.documentElement.scrollTop;
     const scrollHeight = e.target.documentElement.scrollHeight;
-    const innerHeight = window.innerHeight;
-
-    if (innerHeight + scrollTop + 1 >= scrollHeight) {
-      console.log('koek');
+    const currentHeight = Math.ceil(
+      e.target.documentElement.scrollTop + window.innerHeight
+    );
+    if (currentHeight + 1 >= scrollHeight) {
       fetchMore();
     }
   };
@@ -86,8 +85,6 @@ function Home() {
     /*
     window.addEventListener('scroll', handleScrol);
     */
-
-    console.log('home');
 
     //const db = firebase.firestore();
     setIsloaded(true);

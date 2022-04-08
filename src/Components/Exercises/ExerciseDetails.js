@@ -8,6 +8,9 @@ function ExerciseDetails({ exercise, setVideoModal, setYtId }) {
   let navigate = useNavigate();
 
   const [videoUrl, setVideoUrl] = useState('');
+  const [docId, setDocId] = useState('');
+
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     //
@@ -27,7 +30,7 @@ function ExerciseDetails({ exercise, setVideoModal, setYtId }) {
 
   return (
     <>
-      <div className="text-white-950 ">
+      <div className="text-white-950 flex flex-col space-y-4">
         {exercise.Exercises &&
           exercise.Exercises.map((exercise) => (
             <ExerciseSingle

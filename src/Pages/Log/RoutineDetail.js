@@ -77,9 +77,13 @@ function RoutineDetail() {
       )}
       <Back link={'/log'} />
       <div className="mx-12">
-        <h1 className="text-white-950">{routine.name}</h1>
+        <div className="flex justify-between items-center mb-12">
+          <h1 className="text-white-950">{routine.name}</h1>
 
-        <div className="text-white-950">{routine.days}</div>
+          <div className="text-white-950 bg-blue-950 h-12 w-12 rounded-full flex items-center justify-center">
+            {routine.days}
+          </div>
+        </div>
 
         {exercises &&
           exercises.map(({ id, exercise }) => (
