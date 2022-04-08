@@ -5,7 +5,7 @@ function Button({ text }) {
     <>
       <button
         type="submit"
-        className={`bg-blue-950 hover:bg-blue-700 text-white-950 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-5`}
+        className={`bg-blue-950 hover:bg-blue-700 text-white-950 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-5 w-full`}
       >
         {text}
       </button>

@@ -51,7 +51,7 @@ function Form1({
       </div>
 
       <button
-        className="bg-blue-400 py-2 px-4 rounded-md"
+        className="bg-blue-950 py-2 px-4 rounded-md w-full text-white-950 mt-12"
         onClick={() => setPage(2)}
       >
         Next

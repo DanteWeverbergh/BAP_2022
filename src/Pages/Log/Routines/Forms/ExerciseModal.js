@@ -34,7 +34,6 @@ function ExerciseModal() {
 
   return (
     <>
-      {isLoaded && exists ? <p>Bestaat</p> : <p>Niet</p>}
       <div className="bg-slate-950 h-screen z-50 w-full">
         <form className="mx-12" onSubmit={handleSubmit}>
           <Label label={'exerciseName'} htmlFor="exerciseName" />

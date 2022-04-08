@@ -39,17 +39,21 @@ function Comments({ comments, postId }) {
         )}
         {/*form/*/}
         <div>
-          <form className="w-full" onSubmit={sendComment} method="POST">
+          <form
+            className="w-full flex items-center mt-6"
+            onSubmit={sendComment}
+            method="POST"
+          >
             <input
-              className="w-11/12 rounded-full bg-slate-600 border-2 mt-6"
+              className="w-11/12 rounded-md bg-white-950 h-8   "
               type={'text'}
               placeholder={'Start typing here ...'}
               name={'comment'}
               value={comment}
               onChange={({ target }) => setComment(target.value)}
             />
-            <button>
-              <MdSend className="text-blue-950 text-xl ml-2" />
+            <button className="bg-blue-950 h-8 w-8 rounded-full ml-4">
+              <MdSend className="text-white-950 text-xl ml-2" />
             </button>
           </form>
         </div>

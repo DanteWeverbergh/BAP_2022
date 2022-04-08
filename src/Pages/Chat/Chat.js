@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuthContext } from '../../Context/AuthContext';
 import { db } from '../../Libs/Firebase';
@@ -40,6 +40,7 @@ function Chat() {
       <ChatHeader />
 
       {chat.id && <ChatMessage chatId={chat.id} />}
+
       {chat.id && <ChatInput chatId={chat.id} />}
     </>
   );

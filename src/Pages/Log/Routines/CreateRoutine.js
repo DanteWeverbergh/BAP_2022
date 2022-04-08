@@ -89,14 +89,13 @@ function CreateRoutine() {
   return (
     <>
       <Header />
-      {docRef}
 
       <ProgressBar page={page} />
 
       <div className="text-white-950 mx-12 text-2xl">Create a new routine</div>
 
       <div
-        className="text-white mx-12"
+        className="text-white-950 mt-6 bg-slate-960 px-4 rounded-md py-2 mx-12"
         onClick={() => setExerciseModal(!exerciseModal)}
       >
         Exercise not in the list? Add the exercise!

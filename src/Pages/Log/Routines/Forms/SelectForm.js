@@ -28,7 +28,7 @@ function SelectForm({ isLoaded, exercisesDB, exerciseList, setExerciseList }) {
         <div className="mt-8">
           <Label label={'Exercise'} htmlFor="exName" />
           <select
-            className="mx-auto w-full roounded-md"
+            className="mx-auto w-full roounded-md h-8 bg-white-950"
             name="exName"
             id="exName"
             value={x.exName}
@@ -67,12 +67,12 @@ function SelectForm({ isLoaded, exercisesDB, exerciseList, setExerciseList }) {
           <div className="btn-box">
             {exerciseList.length !== 1 && (
               <button className="mr10" onClick={() => handleRemoveClick(i)}>
-                <IoMdRemoveCircle className="text-xl absolute right-24" />
+                <IoMdRemoveCircle className="text-2xl mt-4 text-white-950 " />
               </button>
             )}
             {exerciseList.length - 1 === i && (
               <button onClick={handleAddClick}>
-                <BsPlusCircleFill className="text-xl absolute right-16" />
+                <BsPlusCircleFill className="text-2xl absolute right-16 text-white-950" />
               </button>
             )}
           </div>

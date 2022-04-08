@@ -22,7 +22,7 @@ function ChatHeader() {
 
   return (
     <>
-      <div className="flex h-16 bg-slate-960 items-center justify-between rounded-b-md text-white-950">
+      <div className="fixed inset-x-0 z-50 top-0 flex h-16 bg-slate-960 items-center justify-between rounded-b-md text-white-950 ">
         <Back link={'/chat'} />
         <div className="mr-6 flex items-center">
           <div className="text-white text-2xl ml-4">
@@ -31,7 +31,7 @@ function ChatHeader() {
 
           {chatUser.photoURL ? (
             <img
-              className="h-12 w-12 rounded-full ml-4 object-cover"
+              className="h-12 w-12 rounded-full ml-4 object-cover border-2 border-blue-950"
               src={chatUser.photoURL}
               alt="profile"
             />
