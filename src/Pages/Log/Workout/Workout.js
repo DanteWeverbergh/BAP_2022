@@ -15,6 +15,7 @@ function Workout() {
   const [days, setDays] = useState([]);
   const [day, setDay] = useState('Choose a day');
   const [isLoaded, setIsLoaded] = useState(false);
+  const [previousSession, setPreviousSession] = useState([]);
 
   const [log, setLog] = useState(false);
 
@@ -49,6 +50,28 @@ function Workout() {
       alert(error.message);
     }
   }, []);
+
+  /**
+   * UseEffect for change days
+   */
+
+  useEffect(() => {
+    try {
+      //
+      db.collection('workouts')
+        .doc(user.uid)
+        .collection('workouts')
+        .orderBy('created', 'desc')
+        .where('dayName', '==', day)
+        .onSnapshot((snapshot) => {
+          setPreviousSession(snapshot.docs.map((doc) => doc.data()));
+        });
+    } catch (error) {
+      console.log(error.message);
+    }
+
+    setIsLoaded(true);
+  }, [day]);
 
   return (
     <>
@@ -89,20 +112,15 @@ function Workout() {
           </form>
         </div>
 
-        {/**
-        <button
-          className="bg-blue-500 px-5 py-2 rounded-md"
-          onClick={() => setLog(true)}
-        >
-          Start
-        </button>
-        <button
-          className="bg-blue-500 px-5 py-2 rounded-md"
-          onClick={() => setLog(false)}
-        >
-          Stop
-        </button>
-         */}
+        <div className="text-white-950 mt-4">
+          <button
+            onClick={() => console.log(previousSession)}
+            className="bg-blue-950 w-full rounded-md flex items-center justify-center py-2"
+          >
+            Previous {day}{' '}
+          </button>
+        </div>
+
         {isLoaded &&
           days.map(
             (e) =>

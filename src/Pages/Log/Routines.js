@@ -105,8 +105,10 @@ function Routines({ u }) {
       )}
 
       <div className="mx-12 mt-6 text-white-950">
-        <Link className="flex" to={'/create/routine'}>
-          Add your own routine. <BsFillPlusCircleFill />
+        <Link to={'/create/routine'}>
+          <div className="bg-blue-950 py-2 rounded-md flex items-center justify-center">
+            Add your own routine.
+          </div>
         </Link>
       </div>
     </>

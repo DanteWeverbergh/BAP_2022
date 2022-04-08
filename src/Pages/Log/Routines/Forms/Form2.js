@@ -30,9 +30,12 @@ function Form2({
 
     let unsubscribe;
 
-    unsubscribe = db.collection('exercises').onSnapshot((snapshot) => {
-      setExercisesDB(snapshot.docs.map((doc) => doc.data()));
-    });
+    unsubscribe = db
+      .collection('exercises')
+      .orderBy('name')
+      .onSnapshot((snapshot) => {
+        setExercisesDB(snapshot.docs.map((doc) => doc.data()));
+      });
 
     setIsLoaded(true);
 
