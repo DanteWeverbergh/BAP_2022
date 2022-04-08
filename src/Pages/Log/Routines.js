@@ -51,7 +51,9 @@ function Routines({ u }) {
       <div className=" mt-6 text-white-950">
         {u.currentRoutineId ? (
           <div className="mx-12">
-            <h1 className="text-white text-2xl">Current routine</h1>
+            <h1 className="font-semibold text-2xl mb-4  text-white-950">
+              Current routine
+            </h1>
 
             <RoutineCard routine={currentRoutine} id={u.currentRoutineId} />
           </div>
@@ -63,9 +65,9 @@ function Routines({ u }) {
           </div>
         )}
 
-        <div className="ml-12">
+        <div className="ml-12 mt-12">
           <div className="flex items-center justify-between">
-            <h1 className="text-white-950 text-2xl mt-6 mb-4">
+            <h1 className="font-semibold text-2xl mb-4  text-white-950">
               Other routines
             </h1>
             <IoFilterOutline

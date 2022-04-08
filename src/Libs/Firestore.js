@@ -134,14 +134,33 @@ export async function addRoutine(data, dataa, setDocRef) {
 }
 
 //add extra day to routine
-export async function addDayToRoutine(data, docRef) {
+export async function addDayToRoutine(
+  data,
+  docRef,
+  days,
+  setDay,
+  setRoutineDone,
+  setExerciseList
+) {
   try {
     await db
       .collection('Routines')
       .doc(docRef)
       .collection('Exercises')
       .add(data)
-      .then(() => console.log('succes'));
+      .then(() => alert(`Succesfullt add day ${data.day}/${days}`));
+
+    setExerciseList([
+      {
+        exName: '',
+        sets: '',
+        repRange: '',
+      },
+    ]);
+
+    if (Number(data.day) === Number(days)) {
+      setRoutineDone(true);
+    }
   } catch (error) {
     console.log(error.message);
   }

@@ -28,7 +28,7 @@ function SelectForm({ isLoaded, exercisesDB, exerciseList, setExerciseList }) {
         <div className="mt-8">
           <Label label={'Exercise'} htmlFor="exName" />
           <select
-            className="mx-auto w-full roounded-md h-8 bg-white-950"
+            className="mx-auto w-full rounded-md h-8 bg-white-950"
             name="exName"
             id="exName"
             value={x.exName}

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../../Components/Button';
 import Input from '../../../Components/Input';
 import Label from '../../../Components/Label';
@@ -14,6 +15,7 @@ import Form2 from './Forms/Form2';
 
 function CreateRoutine() {
   const { user } = useAuthContext();
+  let Navigate = useNavigate();
 
   //states all form pages
   const [days, setDays] = useState('');
@@ -31,6 +33,8 @@ function CreateRoutine() {
       repRange: '',
     },
   ]);
+
+  const [routineDone, setRoutineDone] = useState(false);
 
   const [docRef, setDocRef] = useState('');
 
@@ -77,20 +81,35 @@ function CreateRoutine() {
               },
             ]);
           });
+
+        alert(`Succesfullt add day ${data.day}/${days}`);
       } catch (error) {
         console.log(error.message);
       }
     } else {
-      console.log(dataa);
-      //addDayToRoutine(dataa, docRef);
+      addDayToRoutine(
+        dataa,
+        docRef,
+        days,
+        setDay,
+        setRoutineDone,
+        setExerciseList
+      );
     }
   };
+
+  useEffect(() => {
+    if (routineDone) {
+      Navigate('/log');
+    }
+  }, [routineDone]);
 
   return (
     <>
       <Header />
 
-      <ProgressBar page={page} />
+      {/** *     <ProgressBar page={page} />
+       */}
 
       <div className="text-white-950 mx-12 text-2xl">Create a new routine</div>
 

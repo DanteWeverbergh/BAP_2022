@@ -27,19 +27,21 @@ function Form2({
     //
 
     //for (var i = 1; i <= days; i++) {}
+    let unmounted = false;
 
-    let unsubscribe;
-
-    unsubscribe = db
-      .collection('exercises')
+    db.collection('exercises')
       .orderBy('name')
       .onSnapshot((snapshot) => {
-        setExercisesDB(snapshot.docs.map((doc) => doc.data()));
+        if (!unmounted) {
+          setExercisesDB(snapshot.docs.map((doc) => doc.data()));
+        }
       });
 
     setIsLoaded(true);
 
-    return unsubscribe;
+    return () => {
+      unmounted = true;
+    };
   }, []);
 
   const test = () => {
