@@ -16,24 +16,31 @@ function ListProfile({ uid }) {
   useEffect(() => {
     //
 
-    let unsubscribe;
+    let unmount = false;
 
-    unsubscribe = db
-      .collection('users')
+    db.collection('users')
       .doc(uid)
-      .onSnapshot((doc) => setCardUser(doc.data()));
+      .onSnapshot((doc) => {
+        if (!unmount) {
+          setCardUser(doc.data());
+        }
+      });
 
     db.collection('users')
       .doc(user.uid)
       .onSnapshot((snapshot) => {
-        const chat = snapshot.data().chat;
+        if (!unmount) {
+          const chat = snapshot.data().chat;
 
-        setContacts(chat.map((id) => id));
+          setContacts(chat.map((id) => id));
+        }
       });
 
     setIsLoaded(true);
 
-    return unsubscribe;
+    return () => {
+      unmount = true;
+    };
   }, []);
 
   return (

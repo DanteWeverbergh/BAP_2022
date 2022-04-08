@@ -27,27 +27,18 @@ function ChatDashboard() {
     unsubscribe = db
       .collection('users')
       .doc(user.uid)
-      .get()
-      .then((doc) => {
+      .onSnapshot((doc) => {
         setContacts(doc.data().chat);
       });
-
-    if (contacts) {
-      contacts.map((uid) => {
-        setUsers(
-          db
-            .collection('users')
-            .doc(uid)
-            .get()
-            .then((doc) => console.log(doc.data()))
-        );
-      });
-    }
 
     setIsLoaded(true);
 
     return unsubscribe;
   }, []);
+
+  useEffect(() => {
+    //
+  }, [contacts]);
 
   return (
     <>
@@ -56,9 +47,11 @@ function ChatDashboard() {
 
         <ChatSearch search={search} setSearch={setSearch} />
 
+        {/**
         <div className="flex overflow-x-auto gap-6 snap-x snap-mandatory mt-4">
           <OnlineUsers />
         </div>
+         */}
 
         <div className="flex flex-col items-center mx-12">
           {isLoaded &&
@@ -77,6 +70,8 @@ function ChatDashboard() {
         {isLoaded && !contacts && (
           <p className="text-white text-center">No contacts yet!</p>
         )}
+
+        <div className="mt-24"></div>
 
         <Footer />
       </div>

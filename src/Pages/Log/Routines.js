@@ -29,13 +29,17 @@ function Routines({ u }) {
   useEffect(() => {
     //
 
+    let mounted = false;
+
     db.collection('Routines').onSnapshot((snapshot) => {
-      setRoutines(
-        snapshot.docs.map((doc) => ({
-          id: doc.id,
-          routine: doc.data(),
-        }))
-      );
+      if (!mounted) {
+        setRoutines(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            routine: doc.data(),
+          }))
+        );
+      }
     });
 
     //getCurrentRoutine
@@ -44,23 +48,31 @@ function Routines({ u }) {
       .doc(u.currentRoutineId)
       .get()
       .then((doc) => {
-        setCurrentRoutine(doc.data());
+        if (!mounted) {
+          setCurrentRoutine(doc.data());
+        }
       });
 
     //get my routines
     db.collection('Routines')
       .where('creator', '==', user.uid)
       .onSnapshot((snapshot) => {
-        setMyRoutines(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            routine: doc.data(),
-          }))
-        );
+        if (!mounted) {
+          setMyRoutines(
+            snapshot.docs.map((doc) => ({
+              id: doc.id,
+              routine: doc.data(),
+            }))
+          );
+        }
       });
 
     setIsLoaded(true);
-  }, [isLoaded]);
+
+    return () => {
+      mounted = true;
+    };
+  }, []);
 
   return (
     <>

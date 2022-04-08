@@ -11,8 +11,6 @@ function WorkoutCard({ id, data }) {
         day: 'numeric',
       }).format(data.created.toDate())
     );
-
-    console.log(date);
   }, []);
 
   return (

@@ -16,14 +16,8 @@ function Users({ setShowList, listOfUsers }) {
   const [activeUser, setActiveUser] = useState({});
 
   useEffect(() => {
-    console.log(listOfUsers);
-
     setActiveUser(user);
   }, []);
-
-  const add = (uid) => {
-    addContact(user, uid, setIsLoaded);
-  };
 
   return (
     <>
@@ -48,51 +42,19 @@ function Users({ setShowList, listOfUsers }) {
           </form>
         </div>
 
-        {/** 
-
         <div className="mx-12 mt-16">
           {listOfUsers
-            .filter(({ user }) => {
+            .filter(({ user, id }) => {
               if (search === '') {
-                return user;
+                return id;
               } else if (
-                user.username.toLowerCase().includes(search.toLocaleLowerCase())
+                user.username.includes(search.toLowerCase()) ||
+                user.username === search.toLowerCase()
               ) {
-                return user;
+                return id;
               }
             })
-            .map(({ id, user }) =>
-              id !== activeUser.uid ? (
-                <div className="bg-slate-960  w-full py-2 mt-4 rounded-md relative">
-                  <p>{user.username}</p>
-                  <button
-                    className="absolute right-4 bg-blue-500"
-                    onClick={() => add(id)}
-                  >
-                    Add
-                  </button>
-                </div>
-              ) : (
-                <div></div>
-              )
-            )}
-        </div>
-        */}
-
-        <div className="mx-12 mt-16">
-          {listOfUsers
-            .filter(({ user }) => {
-              console.log(user);
-
-              if (search === '') {
-                return user;
-              } else if (
-                user.username.toLowerCase().includes(search.toLowerCase())
-              ) {
-                return user;
-              }
-            })
-            .map(({ id, user }) =>
+            .map(({ id }) =>
               id !== activeUser.uid ? <ListProfile uid={id} /> : <div></div>
             )}
         </div>

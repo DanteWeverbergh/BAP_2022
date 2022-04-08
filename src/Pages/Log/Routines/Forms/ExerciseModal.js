@@ -5,7 +5,7 @@ import Label from '../../../../Components/Label';
 import { db } from '../../../../Libs/Firebase';
 import { addDoc, checkDuplicates } from '../../../../Libs/Firestore';
 
-function ExerciseModal() {
+function ExerciseModal({ setExerciseModal }) {
   const [exerciseName, setExersiceName] = useState('');
   const [videoUrl, setVideoUrl] = useState('');
   const [exists, setExists] = useState(false);
@@ -15,6 +15,27 @@ function ExerciseModal() {
     e.preventDefault();
 
     //checkDuplicates('exercises', exerciseName, setExists, setIsLoaded);
+
+    console.log(exerciseName);
+
+    db.collection('exercises')
+      .where('name', '==', exerciseName)
+      .get()
+      .then((doc) => {
+        if (doc.empty) {
+          db.collection('exercises').add({
+            name: exerciseName.toLocaleLowerCase(),
+            videoUrl: videoUrl,
+          });
+
+          alert('exercise added!');
+          setExerciseModal(false);
+        } else {
+          alert('exercise is already in the list!');
+        }
+      });
+
+    /*
 
     db.collection('exercises')
       .where('name', '==', exerciseName)
@@ -30,6 +51,7 @@ function ExerciseModal() {
           alert('The exercise is already in the dataase!');
         }
       });
+      */
   };
 
   return (

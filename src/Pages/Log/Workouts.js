@@ -14,20 +14,28 @@ function Workouts() {
   useEffect(() => {
     //
 
+    let mounted = false;
+
     db.collection('workouts')
       .doc(user.uid)
       .collection('workouts')
       .orderBy('created', 'desc')
       .onSnapshot((snapshot) => {
-        setWorkouts(
-          snapshot.docs.map((doc) => ({
-            id: doc.id,
-            data: doc.data(),
-          }))
-        );
+        if (!mounted) {
+          setWorkouts(
+            snapshot.docs.map((doc) => ({
+              id: doc.id,
+              data: doc.data(),
+            }))
+          );
+        }
       });
 
     setIsLoaded(true);
+
+    return () => {
+      mounted = true;
+    };
   }, []);
 
   return (
@@ -42,6 +50,8 @@ function Workouts() {
           You haven't done any workouts yet. Start now!
         </div>
       )}
+
+      <div className="mt-24"></div>
     </>
   );
 }

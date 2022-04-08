@@ -14,6 +14,8 @@ function Chat() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
+    let mounted = false;
+
     const array1 = [uid, user.uid];
     const array2 = [user.uid, uid];
 
@@ -24,20 +26,28 @@ function Chat() {
           JSON.stringify(array2) === JSON.stringify(doc.data().users)
         ) {
           //
-          setChat({
-            id: doc.id,
-            chat: doc.data(),
-          });
+          if (!mounted) {
+            setChat({
+              id: doc.id,
+              chat: doc.data(),
+            });
+          }
         }
       });
     });
 
     setIsLoaded(true);
+
+    return () => {
+      mounted = true;
+    };
   }, []);
 
   return (
     <>
       <ChatHeader />
+
+      <div className="mb-12"></div>
 
       {chat.id && <ChatMessage chatId={chat.id} />}
 

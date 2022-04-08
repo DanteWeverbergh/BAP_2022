@@ -32,9 +32,9 @@ function PreviousSession({ previousSession, previous, setPrevious }) {
               <>
                 <WorkoutCard key={id} id={id} data={data} />
 
-                <div className="mx-12">
+                <div className="mx-12" key={id}>
                   {data.log.map((r) => (
-                    <p className="mt-6 bg-slate-960 rounded-md px-4 py-2">
+                    <div className="mt-6 bg-slate-960 rounded-md px-4 py-2">
                       {r.exercise.map((ex) => (
                         <div>
                           <h1 className="text-xl">{ex.exName && ex.exName}</h1>
@@ -46,7 +46,7 @@ function PreviousSession({ previousSession, previous, setPrevious }) {
                           </div>
                         </div>
                       ))}
-                    </p>
+                    </div>
                   ))}
                 </div>
               </>

@@ -38,8 +38,6 @@ function Dashboard() {
               .get()
               .then((r) => {
                 if (!unmounted) {
-                  console.log(r.data());
-
                   setCurrentRoutine(r.data());
                 }
               });

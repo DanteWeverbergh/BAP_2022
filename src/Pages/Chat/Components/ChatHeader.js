@@ -9,15 +9,27 @@ function ChatHeader() {
   const { user } = useAuthContext();
 
   const [chatUser, setChatUser] = useState({});
+  const [chatUid, setChatUid] = useState('');
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     //
+
+    let mounted = false;
     db.collection('users')
       .doc(uid)
       .get()
       .then((doc) => {
-        setChatUser(doc.data());
+        if (!mounted) {
+          setChatUser(doc.data());
+        }
       });
+
+    setIsLoaded(true);
+
+    return () => {
+      mounted = true;
+    };
   }, []);
 
   return (
@@ -26,13 +38,14 @@ function ChatHeader() {
         <Back link={'/chat'} />
         <div className="mr-6 flex items-center">
           <div className="text-white text-2xl ml-4">
-            <h1>{chatUser.username}</h1>
+            <h1>{isLoaded && chatUser.username}</h1>
+            <div onClick={() => console.log(chatUser.username)}> test</div>
           </div>
 
-          {chatUser.photoURL ? (
+          {isLoaded && chatUser.photoURL ? (
             <img
-              className="h-12 w-12 rounded-full ml-4 object-cover border-2 border-blue-950"
-              src={chatUser.photoURL}
+              className="h-12 w-12 rounded-full ml-4 object-cover "
+              src={isLoaded && chatUser.photoURL}
               alt="profile"
             />
           ) : (

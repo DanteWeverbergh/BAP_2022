@@ -24,16 +24,13 @@ function ChatSearch({ search, setSearch }) {
     return unsubsrcibe;
   }, []);
 
-  const addChat = () => {
-    console.log('caht');
-  };
   return (
     <>
       {showList && (
         <Users setShowList={setShowList} listOfUsers={listOfUsers} />
       )}
 
-      <div className="flex mx-12 justify-around">
+      <div className="flex mx-12 justify-around items-center">
         <form className="">
           <Input
             type={'text'}
@@ -46,7 +43,7 @@ function ChatSearch({ search, setSearch }) {
         </form>
         <div
           onClick={() => setShowList(true)}
-          className="text-3xl text-white bg-blue-500 w-10 h-10 rounded-full flex items-center justify-center"
+          className="text-3xl text-white bg-blue-950 text-white-950 w-10 h-10 rounded-full flex items-center justify-center"
         >
           +
         </div>

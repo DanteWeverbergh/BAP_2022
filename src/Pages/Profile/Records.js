@@ -59,40 +59,41 @@ function Records({ u }) {
 
   return (
     <>
-      <div className="flex justify-between mx-12">
+      <div className="flex justify-between mx-12 text-white-950">
         <div
           onClick={() => setOpenDeadlift(!openDeadlift)}
-          className="bg-blue-950 rounded-full h-24 w-24 flex "
+          className="bg-slate-960 rounded-full h-24 w-24 flex "
         >
-          <p className="m-auto">{deadlift}</p>
+          <p className="m-auto text-center">
+            {deadlift} <br /> deadlift
+          </p>
         </div>
         <div
           onClick={() => setOpenSquad(!openSquat)}
-          className="bg-blue-950 rounded-full h-24 w-24 flex"
+          className="bg-slate-960 rounded-full h-24 w-24 flex"
         >
-          <p className="m-auto">{squad}</p>
+          <p className="m-auto text-center">
+            {squad} <br />
+            squat
+          </p>
         </div>
         <div
           onClick={() => setOpenBench(!openBench)}
-          className="bg-blue-950 rounded-full h-24 w-24 flex"
+          className="bg-slate-960 rounded-full h-24 w-24 flex"
         >
-          <p className="m-auto">{bench}</p>
+          <p className="m-auto text-center">
+            {bench} <br /> bench
+          </p>
         </div>
       </div>
-      <div className="flex justify-between mx-12 ">
-        <div className="bg-blue-950  h-12 w-24 flex ">
-          <p className="m-auto">Deadlift</p>
-        </div>
-        <div className="bg-blue-950  h-12 w-24 flex">
-          <p className="m-auto">Squad</p>
-        </div>
-        <div className="bg-blue-950  h-12 w-24 flex">
-          <p className="m-auto">Bench</p>
-        </div>
-      </div>
+
       {openDeadlift ? (
         <div>
-          <form onSubmit={updateDeadlift} method="POST" className="mx-12 mb-4">
+          <form
+            onSubmit={updateDeadlift}
+            method="POST"
+            className="mx-12 mt-4 mb-4"
+          >
             <Input
               type={'number'}
               placeholder="deadlift 1rm"

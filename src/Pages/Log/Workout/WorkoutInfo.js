@@ -18,6 +18,9 @@ function WorkoutInfo() {
 
   useEffect(() => {
     //
+
+    let mounted = false;
+
     try {
       db.collection('workouts')
         .doc(user.uid)
@@ -25,17 +28,21 @@ function WorkoutInfo() {
         .doc(id)
         .get()
         .then((doc) => {
-          setWorkout(doc.data());
+          if (!mounted) {
+            setWorkout(doc.data());
 
-          setRoutine(doc.data().log.map((exercise) => exercise));
-
-          console.log(routine.map((r) => r.exercise.length));
+            setRoutine(doc.data().log.map((exercise) => exercise));
+          }
         });
 
       setIsLoaded(true);
     } catch (error) {
       console.log(error.message);
     }
+
+    return () => {
+      mounted = true;
+    };
   }, []);
 
   return (
@@ -55,11 +62,11 @@ function WorkoutInfo() {
         <div>
           {isLoaded &&
             routine.map((routine) => (
-              <div>
+              <div key={id}>
                 {/**
                 <h1>{routine.exercise[0].exName}</h1>
                  */}
-                <p className="mt-6 bg-slate-960 rounded-md px-4 py-2">
+                <div className="mt-6 bg-slate-960 rounded-md px-4 py-2">
                   {routine.exercise.map((r) => (
                     <div>
                       <h1 className="text-xl">{r.exName && r.exName}</h1>
@@ -69,7 +76,7 @@ function WorkoutInfo() {
                       </div>
                     </div>
                   ))}
-                </p>
+                </div>
               </div>
             ))}
         </div>

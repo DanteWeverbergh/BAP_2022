@@ -120,7 +120,7 @@ function CreateRoutine() {
         Exercise not in the list? Add the exercise!
       </div>
 
-      {exerciseModal && <ExerciseModal />}
+      {exerciseModal && <ExerciseModal setExerciseModal={setExerciseModal} />}
 
       <form className="mx-12" method="POST" onSubmit={handleSubmit}>
         {page === 1 && (
