@@ -4,6 +4,7 @@ import Timer from '../../../Components/Timer';
 import { useAuthContext } from '../../../Context/AuthContext';
 import Footer from '../../../Layouts/Footer/Footer';
 import { db } from '../../../Libs/Firebase';
+import PreviousSession from './PreviousSession';
 import WorkoutDetail from './WorkoutDetail';
 
 function Workout() {
@@ -16,7 +17,8 @@ function Workout() {
   const [day, setDay] = useState('Choose a day');
   const [isLoaded, setIsLoaded] = useState(false);
   const [previousSession, setPreviousSession] = useState([]);
-
+  const [previous, setPrevious] = useState(false);
+  const [dayLoaded, setDayLoaded] = useState(false);
   const [log, setLog] = useState(false);
 
   //timer
@@ -63,18 +65,32 @@ function Workout() {
         .collection('workouts')
         .orderBy('created', 'desc')
         .where('dayName', '==', day)
+        .limit(1)
         .onSnapshot((snapshot) => {
-          setPreviousSession(snapshot.docs.map((doc) => doc.data()));
+          setPreviousSession(
+            snapshot.docs.map((doc) => ({
+              id: doc.id,
+              data: doc.data(),
+            }))
+          );
         });
     } catch (error) {
       console.log(error.message);
     }
 
-    setIsLoaded(true);
+    setDayLoaded(true);
   }, [day]);
 
   return (
     <>
+      {dayLoaded && previous && (
+        <PreviousSession
+          previousSession={previousSession}
+          setPrevious={setPrevious}
+          previous={previous}
+        />
+      )}
+
       <div className="mx-12">
         <div className="mt-6">
           <Timer
@@ -112,14 +128,16 @@ function Workout() {
           </form>
         </div>
 
-        <div className="text-white-950 mt-4">
-          <button
-            onClick={() => console.log(previousSession)}
-            className="bg-blue-950 w-full rounded-md flex items-center justify-center py-2"
-          >
-            Previous {day}{' '}
-          </button>
-        </div>
+        {day && (
+          <div className="text-white-950 mt-4">
+            <button
+              onClick={() => setPrevious(true)}
+              className="bg-blue-950 w-full rounded-md flex items-center justify-center py-2"
+            >
+              Previous {day}{' '}
+            </button>
+          </div>
+        )}
 
         {isLoaded &&
           days.map(
