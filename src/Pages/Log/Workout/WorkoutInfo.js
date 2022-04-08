@@ -5,6 +5,8 @@ import { useAuthContext } from '../../../Context/AuthContext';
 import Footer from '../../../Layouts/Footer/Footer';
 import Header from '../../../Layouts/Header/Header';
 import { db } from '../../../Libs/Firebase';
+import { IoArrowBack } from 'react-icons/io5';
+import Back from '../../../Components/Back';
 
 function WorkoutInfo() {
   let { id } = useParams();
@@ -39,6 +41,8 @@ function WorkoutInfo() {
   return (
     <>
       <Header />
+
+      <Back link={'/log'} />
 
       <div className="text-white-950 mx-12">
         <div className="">

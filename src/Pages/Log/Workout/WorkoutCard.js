@@ -18,7 +18,7 @@ function WorkoutCard({ id, data }) {
   return (
     <>
       <Link to={`/workouts/${id}`}>
-        <div className="bg-slate-960 rounded-md mx-12 mt-6 text-white-950">
+        <div className="mx-12 bg-slate-960 rounded-md py-2 mt-6 text-white-950">
           <div className="flex justify-between mx-4">
             <div>
               <div>{data.dayName}</div>
