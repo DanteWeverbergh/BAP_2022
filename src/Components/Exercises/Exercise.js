@@ -12,8 +12,11 @@ function Exercise({ id, exercise, setVideoModal, setYtId }) {
 
   return (
     <>
-      <div className="text-white-950 mb-4 mt-4 flex justify-between text-xl">
-        <h1>{exercise.name}</h1>
+      <div
+        className="text-white-950 mb-4 mt-4 flex justify-between text-xl"
+        onClick={() => setOpenDetails(!openDetails)}
+      >
+        <h1 onClick={() => setOpenDetails(!openDetails)}>{exercise.name}</h1>
 
         {!openDetails ? (
           <IoMdArrowDropdownCircle

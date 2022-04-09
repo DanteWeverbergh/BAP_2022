@@ -97,6 +97,23 @@ export async function deleteDoc(col, doc, setIsDeleted, setModal) {
   }
 }
 
+//delete routine
+export async function deleteDocument(col, doc, setIsDeleted) {
+  try {
+    await db
+      .collection(col)
+      .doc(doc)
+      .delete()
+      .then(() => {
+        alert('Routine deleted succesfully!');
+        setIsDeleted(true);
+      });
+  } catch (error) {
+    console.log(error.message);
+    alert('Something went wrong!');
+  }
+}
+
 //add doc to collection
 export async function addDoc(col, data) {
   try {
@@ -240,6 +257,7 @@ export async function sendMessage(message, uid, chatId) {
 
     await db.collection('chat').doc(chatId).update({
       lastUpdated: FieldValue.serverTimestamp(),
+      lastMessage: message,
     });
 
     console.log('message send');
@@ -269,6 +287,8 @@ export async function addContact(user, uid, setIsLoaded) {
     await db.collection('chat').add({
       users: [user.uid, uid],
       created: FieldValue.serverTimestamp(),
+      lastUpdated: FieldValue.serverTimestamp(),
+      lastMessage: '',
     });
 
     setIsLoaded(true);

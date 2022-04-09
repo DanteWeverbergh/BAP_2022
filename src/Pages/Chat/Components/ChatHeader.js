@@ -39,7 +39,6 @@ function ChatHeader() {
         <div className="mr-6 flex items-center">
           <div className="text-white text-2xl ml-4">
             <h1>{isLoaded && chatUser.username}</h1>
-            <div onClick={() => console.log(chatUser.username)}> test</div>
           </div>
 
           {isLoaded && chatUser.photoURL ? (
