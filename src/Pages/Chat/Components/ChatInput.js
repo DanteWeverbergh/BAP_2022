@@ -10,7 +10,7 @@ function ChatInput({ chatId }) {
   const { user } = useAuthContext();
 
   useEffect(() => {
-    console.log('input', chatId);
+    //
   }, []);
 
   const handleSubmit = (e) => {

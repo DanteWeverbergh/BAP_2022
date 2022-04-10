@@ -49,12 +49,11 @@ function ChatDashboard() {
         const otherUser = uid;
 
         db.collection('chat')
+          .orderBy('lastUpdated', 'desc')
           .where('users', 'array-contains-any', usersArray)
-          .orderBy('lastUpdated')
           .onSnapshot((snapshot) => {
             setChats(
               snapshot.docs.map((doc) => ({
-                uid: otherUser,
                 id: doc.id,
                 data: doc.data(),
               }))
@@ -70,8 +69,6 @@ function ChatDashboard() {
     <>
       <div className="z-10">
         <Header />
-
-        <button onClick={() => console.log(chats)}>TEST</button>
 
         <ChatSearch search={search} setSearch={setSearch} />
 

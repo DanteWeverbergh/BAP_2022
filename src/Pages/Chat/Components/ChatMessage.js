@@ -12,8 +12,6 @@ function ChatMessage({ chatId }) {
   useEffect(() => {
     //
 
-    let unsubcibe;
-
     db.collection('chat')
       .doc(chatId)
       .collection('messages')
@@ -23,8 +21,6 @@ function ChatMessage({ chatId }) {
       });
 
     setIsLoaded(true);
-
-    return unsubcibe;
   }, []);
 
   useEffect(() => {

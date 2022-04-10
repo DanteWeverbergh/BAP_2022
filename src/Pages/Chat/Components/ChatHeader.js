@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Back from '../../../Components/Back';
 import { useAuthContext } from '../../../Context/AuthContext';
 import { db } from '../../../Libs/Firebase';
@@ -42,17 +42,21 @@ function ChatHeader() {
           </div>
 
           {isLoaded && chatUser.photoURL ? (
-            <img
-              className="h-12 w-12 rounded-full ml-4 object-cover "
-              src={isLoaded && chatUser.photoURL}
-              alt="profile"
-            />
+            <Link to={`/profile/${uid}`}>
+              <img
+                className="h-12 w-12 rounded-full ml-4 object-cover "
+                src={isLoaded && chatUser.photoURL}
+                alt="profile"
+              />
+            </Link>
           ) : (
-            <img
-              className="h-12 w-12 rounded-full ml-4"
-              src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
-              alt="profile"
-            />
+            <Link to={`/profile/${uid}`}>
+              <img
+                className="h-12 w-12 rounded-full ml-4"
+                src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
+                alt="profile"
+              />
+            </Link>
           )}
         </div>
       </div>
