@@ -14,8 +14,10 @@ function ChatDashboard() {
 
   const [contacts, setContacts] = useState([]);
   const [users, setUsers] = useState([]);
+  const [chats, setChats] = useState([]);
 
   const [isLoaded, setIsLoaded] = useState(false);
+  const [contactsLoaded, setContactsLoaded] = useState(false);
 
   const [search, setSearch] = useState('');
 
@@ -38,12 +40,38 @@ function ChatDashboard() {
 
   useEffect(() => {
     //
+
+    if (contacts.length !== 0) {
+      contacts.map((uid) => {
+        const usersArray = [user.uid, uid];
+
+        console.log(uid);
+        const otherUser = uid;
+
+        db.collection('chat')
+          .where('users', 'array-contains-any', usersArray)
+          .orderBy('lastUpdated')
+          .onSnapshot((snapshot) => {
+            setChats(
+              snapshot.docs.map((doc) => ({
+                uid: otherUser,
+                id: doc.id,
+                data: doc.data(),
+              }))
+            );
+          });
+      });
+    }
+
+    setContactsLoaded(true);
   }, [contacts]);
 
   return (
     <>
       <div className="z-10">
         <Header />
+
+        <button onClick={() => console.log(chats)}>TEST</button>
 
         <ChatSearch search={search} setSearch={setSearch} />
 
@@ -54,17 +82,11 @@ function ChatDashboard() {
          */}
 
         <div className="flex flex-col items-center mx-12">
-          {isLoaded &&
-            contacts &&
-            contacts
-              .filter((uid) => {
-                if (search === '') {
-                  return uid;
-                } else if (uid.includes(search)) {
-                  return uid;
-                }
-              })
-              .map((uid) => <ChatProfile uid={uid} key={uid} />)}
+          {contactsLoaded &&
+            chats &&
+            chats.map(({ data, id }) => (
+              <ChatProfile id={id} key={id} data={data} />
+            ))}
         </div>
 
         {isLoaded && !contacts && (
