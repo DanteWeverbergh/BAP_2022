@@ -24,18 +24,21 @@ function ChatDashboard() {
   useEffect(() => {
     //
 
-    let unsubscribe;
+    let unmounted = false;
 
-    unsubscribe = db
-      .collection('users')
+    db.collection('users')
       .doc(user.uid)
       .onSnapshot((doc) => {
-        setContacts(doc.data().chat);
+        if (!unmounted) {
+          setContacts(doc.data().chat);
+        }
       });
 
     setIsLoaded(true);
 
-    return unsubscribe;
+    return () => {
+      unmounted = true;
+    };
   }, []);
 
   useEffect(() => {
@@ -45,7 +48,6 @@ function ChatDashboard() {
       contacts.map((uid) => {
         const usersArray = [user.uid, uid];
 
-        console.log(uid);
         const otherUser = uid;
 
         db.collection('chat')

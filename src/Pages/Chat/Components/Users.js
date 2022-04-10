@@ -43,20 +43,9 @@ function Users({ setShowList, listOfUsers }) {
         </div>
 
         <div className="mx-12 mt-16">
-          {listOfUsers
-            .filter(({ user, id }) => {
-              if (search === '') {
-                return id;
-              } else if (
-                user.username.includes(search.toLowerCase()) ||
-                user.username === search.toLowerCase()
-              ) {
-                return id;
-              }
-            })
-            .map(({ id }) =>
-              id !== activeUser.uid ? <ListProfile uid={id} /> : <div></div>
-            )}
+          {listOfUsers.map(({ id }) =>
+            id !== activeUser.uid ? <ListProfile uid={id} /> : <div></div>
+          )}
         </div>
       </div>
     </>

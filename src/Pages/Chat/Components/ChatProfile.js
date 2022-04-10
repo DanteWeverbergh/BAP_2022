@@ -73,13 +73,13 @@ function ChatProfile({ data, id }) {
         )}
 
         <div className="ml-4">
-          <h1>{cardUser.username}</h1>
-          <p>{data.lastMessage}</p>
+          <h1>{cardUser && cardUser.username}</h1>
+          <p>{data.lastMessage && data.lastMessage}</p>
         </div>
 
-        <p className="absolute right-12 top-0">{date}</p>
+        <p className="absolute right-12 top-0">{date && date}</p>
 
-        {cardUser.online ? (
+        {cardUser && cardUser.online ? (
           <div className="absolute right-4 top-0-4 bg-green-950 h-2 w-2 rounded-full"></div>
         ) : (
           <div className="absolute right-4 top-0-4 bg-red-950 h-2 w-2 rounded-full"></div>

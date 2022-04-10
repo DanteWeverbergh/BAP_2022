@@ -31,6 +31,7 @@ function ChatSearch({ search, setSearch }) {
       )}
 
       <div className="flex mx-12 justify-around items-center">
+        {/** 
         <form className="">
           <Input
             type={'text'}
@@ -41,9 +42,10 @@ function ChatSearch({ search, setSearch }) {
             onChange={({ target }) => setSearch(target.value)}
           />
         </form>
+        */}
         <div
           onClick={() => setShowList(true)}
-          className="text-3xl text-white bg-blue-950 text-white-950 w-10 h-10 rounded-full flex items-center justify-center"
+          className="text-3xl text-white bg-blue-950 text-white-950 w-full rounded-md flex items-center justify-center"
         >
           +
         </div>
