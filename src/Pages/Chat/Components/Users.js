@@ -17,6 +17,7 @@ function Users({ setShowList, listOfUsers }) {
 
   useEffect(() => {
     setActiveUser(user);
+    console.log(listOfUsers);
   }, []);
 
   return (
@@ -43,9 +44,20 @@ function Users({ setShowList, listOfUsers }) {
         </div>
 
         <div className="mx-12 mt-16">
-          {listOfUsers.map(({ id }) =>
-            id !== activeUser.uid ? <ListProfile uid={id} /> : <div></div>
-          )}
+          {listOfUsers
+            .filter(({ id, user }) => {
+              if (search === '') {
+                return user;
+              } else if (
+                user.username.toLowerCase().includes(search.toLowerCase())
+              ) {
+                console.log('user:', user.username);
+                return user;
+              }
+            })
+            .map(({ id }) =>
+              id !== activeUser.uid ? <ListProfile uid={id} /> : <div></div>
+            )}
         </div>
       </div>
     </>

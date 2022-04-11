@@ -88,10 +88,12 @@ function UserHeader({ photoUrl, u, uid }) {
         <div className="text-2xl mt-4 mb-8 text-white-950">{u.fullName}</div>
       </div>
 
-      <div className="text-white-950  mb-4 bg-slate-960 px-4 py-2 flex jusify-between w-full">
-        <div> following</div>
-        <div> followers</div>
-        <div> ... posts</div>
+      <div className="w-full">
+        <div className="text-white-950  mb-4 bg-slate-960 px-4 py-2 flex justify-between">
+          <div>following</div>
+          <div>followers</div>
+          <div> posts</div>
+        </div>
       </div>
     </>
   );

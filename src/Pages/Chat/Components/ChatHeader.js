@@ -36,14 +36,10 @@ function ChatHeader({ chatId }) {
   }, []);
 
   const deleteChat = () => {
-    console.log(chatId);
-
     const answer = window.confirm('del');
 
     if (answer) {
       deleteContact(user, uid, chatId, setIsDeleted);
-    } else {
-      console.log('toch niet');
     }
   };
 

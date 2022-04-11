@@ -43,6 +43,7 @@ function ChatDashboard() {
 
   useEffect(() => {
     //
+    let unmounted = false;
 
     if (contacts.length !== 0) {
       contacts.map((uid) => {
@@ -54,17 +55,23 @@ function ChatDashboard() {
           .orderBy('lastUpdated', 'desc')
           .where('users', 'array-contains-any', usersArray)
           .onSnapshot((snapshot) => {
-            setChats(
-              snapshot.docs.map((doc) => ({
-                id: doc.id,
-                data: doc.data(),
-              }))
-            );
+            if (!unmounted) {
+              setChats(
+                snapshot.docs.map((doc) => ({
+                  id: doc.id,
+                  data: doc.data(),
+                }))
+              );
+            }
           });
       });
     }
 
     setContactsLoaded(true);
+
+    return () => {
+      unmounted = true;
+    };
   }, [contacts]);
 
   return (

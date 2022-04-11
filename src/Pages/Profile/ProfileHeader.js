@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { MdOutlineEdit } from 'react-icons/md';
 import { IoIosArrowBack, IoIosFitness } from 'react-icons/io';
 import { useAuthContext } from '../../Context/AuthContext';
 import { Link } from 'react-router-dom';
 import { db } from '../../Libs/Firebase';
 import Followers from './Detail/Followers';
+import { follow } from '../../Libs/Firestore';
 
 function ProfileHeader({ photoUrl, u }) {
   const { user, logout } = useAuthContext();
@@ -13,6 +14,8 @@ function ProfileHeader({ photoUrl, u }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [workoutPoints, setWorkoutPoints] = useState('');
   const [followersList, setFollowersList] = useState(false);
+  const [posts, setPosts] = useState('');
+  const [list, setList] = useState('');
 
   useEffect(() => {
     setFollowing(u.following);
@@ -29,17 +32,35 @@ function ProfileHeader({ photoUrl, u }) {
         setWorkoutPoints(snapshot.size);
       });
 
-    setIsLoaded(true);
-  });
+    db.collection('posts')
+      .where('uid', '==', user.uid)
+      .onSnapshot((snapshot) => {
+        setPosts(snapshot.docs.length);
+      });
 
+    setIsLoaded(true);
+  }, []);
+
+  const openList = (list) => {
+    setList(list);
+    setFollowersList(true);
+  };
   return (
     <>
-      {followersList && (
+      {/*
+      
+      followersList && list && (
         <Followers
           followersList={followersList}
           setFollowersList={setFollowersList}
+          list={list}
+          followers={followers}
+          following={following}
         />
-      )}
+      )
+    
+    
+      */}
 
       <div className="flex justify-between mx-6 mt-6">
         <Link
@@ -82,14 +103,16 @@ function ProfileHeader({ photoUrl, u }) {
         <div className="text-2xl mt-4 mb-8 text-white-950">
           Welcome {u.fullName}
         </div>
-
-        <div className="text-white-950  mb-4 bg-slate-960 px-4 py-2 flex jusify-between w-full">
-          <div>{following.length} following</div>
-          <div onClick={() => setFollowersList(true)}>
-            {' '}
-            {followers.length} followers
+        <div className="w-full">
+          <div className="text-white-950  mb-4 bg-slate-960 px-4 py-2 flex justify-between">
+            <div onClick={() => openList('following')}>
+              {following.length} following
+            </div>
+            <div onClick={() => openList('followers')}>
+              {followers.length} followers
+            </div>
+            <div> {posts} posts</div>
           </div>
-          <div> ... posts</div>
         </div>
       </div>
     </>
