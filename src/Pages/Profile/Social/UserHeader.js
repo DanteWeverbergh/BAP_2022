@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { MdOutlineEdit } from 'react-icons/md';
 import { IoIosArrowBack, IoIosFitness } from 'react-icons/io';
 
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../../Context/AuthContext';
 import FirebaseContext from '../../../Context/Firebase';
-import { db, FieldValue } from '../../../Libs/Firebase';
+import { db } from '../../../Libs/Firebase';
 import { follow } from '../../../Libs/Firestore';
 
 function UserHeader({ photoUrl, u, uid }) {
@@ -16,32 +15,49 @@ function UserHeader({ photoUrl, u, uid }) {
   const [isFollowing, setIsFollowing] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
   const [workoutPoints, setWorkoutPoints] = useState('');
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     //ToDo verder uitwerken
+    let unmounted = false;
+    if (u.uid) {
+      db.collection('users')
+        .doc(uid)
+        .get()
+        .then((doc) => {
+          if (!unmounted) {
+            const followers = doc.data().followers;
 
-    db.collection('users')
-      .doc(uid)
-      .get()
-      .then((doc) => {
-        const followers = doc.data().followers;
-
-        followers.map((f) => {
-          if (user.uid === f) {
-            setIsFollowing(true);
+            followers.map((f) => {
+              if (user.uid === f) {
+                setIsFollowing(true);
+              }
+            });
           }
         });
-      });
 
-    db.collection('workouts')
-      .doc(uid)
-      .collection('workouts')
-      .onSnapshot((snapshot) => {
-        setWorkoutPoints(snapshot.size);
-      });
+      db.collection('workouts')
+        .doc(uid)
+        .collection('workouts')
+        .onSnapshot((snapshot) => {
+          if (!unmounted) {
+            setWorkoutPoints(snapshot.size);
+          }
+        });
 
-    setIsLoaded(true);
-  }, [isLoaded]);
+      db.collection('posts')
+        .where('uid', '==', u.uid)
+        .onSnapshot((snapshot) => {
+          setPosts(snapshot.docs.map((doc) => doc.data()));
+        });
+
+      setIsLoaded(true);
+    }
+
+    return () => {
+      unmounted = true;
+    };
+  }, [u]);
 
   return (
     <>
@@ -90,9 +106,13 @@ function UserHeader({ photoUrl, u, uid }) {
 
       <div className="w-full">
         <div className="text-white-950  mb-4 bg-slate-960 px-4 py-2 flex justify-between">
-          <div>following</div>
-          <div>followers</div>
-          <div> posts</div>
+          <div> {isLoaded && u.following && u.following.length} following</div>
+          <div>
+            {' '}
+            {isLoaded && u.followers && u.followers.length}
+            followers
+          </div>
+          <div> {isLoaded && posts && posts.length} posts</div>
         </div>
       </div>
     </>

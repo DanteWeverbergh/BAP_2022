@@ -79,6 +79,10 @@ function RoutineDetail() {
     deleteDocument('Routines', id, setIsDeleted);
   };
 
+  const modifyRoutine = () => {
+    Navigate(`/log/modify/${id}`);
+  };
+
   return (
     <>
       <Header />
@@ -113,7 +117,7 @@ function RoutineDetail() {
             />
           ))}
 
-        <div className="flex space-x-4">
+        <div className="">
           <div className="bg-blue-950 rounded-md px-2 mt-6 w-full py-2 text-center">
             <button className="text-white-950" onClick={() => modal()}>
               Select this as current routine
@@ -132,13 +136,25 @@ function RoutineDetail() {
                 </button>
               </div>
                */}
-              <div className="bg-red-950 rounded-md px-2 mt-6 w-full py-2 text-center flex items-center justify-center">
-                <button
-                  className="text-white-950 "
-                  onClick={() => deleteRoutine()}
-                >
-                  Delete this routine
-                </button>
+              <div className="flex space-x-4 ">
+                <div className="w-full">
+                  <div className="bg-green-950 rounded-md px-2 mt-6  py-2 text-center flex items-center justify-center w-full">
+                    <button
+                      className="text-white-950 "
+                      onClick={() => modifyRoutine()}
+                    >
+                      Modify this routine
+                    </button>
+                  </div>
+                </div>
+                <div className="bg-red-950 rounded-md px-2 mt-6  py-2 text-center flex items-center justify-center w-full">
+                  <button
+                    className="text-white-950 "
+                    onClick={() => deleteRoutine()}
+                  >
+                    Delete this routine
+                  </button>
+                </div>
               </div>
             </>
           ) : (

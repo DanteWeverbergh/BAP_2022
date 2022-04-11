@@ -19,6 +19,7 @@ function User() {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
+    let unmounted = false;
     if (user.uid === uid) {
       //
       return navigate('/profile');
@@ -28,10 +29,16 @@ function User() {
       .doc(uid)
       .get()
       .then((doc) => {
-        setUserProfile(doc.data());
+        if (!unmounted) {
+          setUserProfile(doc.data());
+        }
       });
 
     setIsLoaded(true);
+
+    return () => {
+      unmounted = true;
+    };
   }, []);
 
   const test = () => {

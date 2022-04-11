@@ -7,6 +7,8 @@ import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { IoFilterOutline } from 'react-icons/io5';
 import Filter from './Filter';
 import { useAuthContext } from '../../Context/AuthContext';
+import Input from '../../Components/Input';
+import Label from '../../Components/Label';
 
 function Routines({ u }) {
   const { firebase } = useContext(FirebaseContext);
@@ -21,7 +23,6 @@ function Routines({ u }) {
 
   //filter states
   const [days, setDays] = useState('');
-  const [trainer, setTrainer] = useState('');
   const [routineName, setRoutineName] = useState('');
 
   //search
@@ -74,6 +75,11 @@ function Routines({ u }) {
     };
   }, []);
 
+  const removeFilters = () => {
+    setRoutineName('');
+    setDays('');
+  };
+
   return (
     <>
       <div className=" mt-6 text-white-950">
@@ -104,11 +110,45 @@ function Routines({ u }) {
             />
           </div>
 
+          {filterMenu && (
+            <div className="mb-6 mr-12 bg-slate-960 rounded-md py-4 px-4">
+              <div>
+                <form>
+                  <div>
+                    <Label htmlFor={'routineName'} label="Routine name" />
+                    <Input
+                      value={routineName}
+                      name="routineName"
+                      id={'routineName'}
+                      placeholder="routine name"
+                      onChange={({ target }) => setRoutineName(target.value)}
+                    />
+                  </div>
+                </form>
+
+                <button
+                  onClick={() => removeFilters()}
+                  className="bg-red-950 w-full py-2 rounded-md mt-6"
+                >
+                  Remove
+                </button>
+              </div>
+            </div>
+          )}
+
           <ul className="flex overflow-x-auto gap-6 snap-x snap-mandatory">
             {isLoaded &&
               routines
                 .filter(({ routine }) => {
-                  return routine;
+                  if (routineName === '') {
+                    return routine;
+                  } else if (
+                    routine.name
+                      .toLowerCase()
+                      .includes(routineName.toLowerCase())
+                  ) {
+                    return routine;
+                  }
                 })
                 .map(({ id, routine }) => (
                   <li className="shrink-0 w-3/4 snap-center " key={id}>
@@ -118,18 +158,6 @@ function Routines({ u }) {
           </ul>
         </div>
       </div>
-
-      {filterMenu && (
-        <Filter
-          setFilterMenu={setFilterMenu}
-          days={days}
-          setDays={setDays}
-          trainer={trainer}
-          setTrainer={setTrainer}
-          routineName={routineName}
-          setRoutineName={setRoutineName}
-        />
-      )}
 
       <div className="ml-12  text-white-950">
         <div className="mt-4">

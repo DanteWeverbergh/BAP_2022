@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
 import { useAuthContext } from '../../../Context/AuthContext';
 import { db } from '../../../Libs/Firebase';
-import { follow } from '../../../Libs/Firestore';
 
 function Followers({
   followersList,

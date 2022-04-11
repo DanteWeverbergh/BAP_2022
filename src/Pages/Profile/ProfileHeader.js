@@ -1,11 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdOutlineEdit } from 'react-icons/md';
 import { IoIosArrowBack, IoIosFitness } from 'react-icons/io';
 import { useAuthContext } from '../../Context/AuthContext';
 import { Link } from 'react-router-dom';
 import { db } from '../../Libs/Firebase';
 import Followers from './Detail/Followers';
-import { follow } from '../../Libs/Firestore';
 
 function ProfileHeader({ photoUrl, u }) {
   const { user, logout } = useAuthContext();

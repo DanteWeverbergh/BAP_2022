@@ -376,3 +376,60 @@ export async function logWorkout(user, day, data, time) {
     console.log(error.message);
   }
 }
+
+/**
+ * Modify routine
+ */
+
+//modify routine
+export async function modifyRoutine(data, id) {
+  try {
+    await db.collection('Routines').doc(id).update(data);
+
+    alert('updated succesfully!');
+  } catch (error) {
+    console.log(error.message);
+    alert('Oops, something went wrond!');
+  }
+}
+
+//add extra day to routine
+export async function modifyDayRoutine(
+  data,
+  id,
+  setRoutineDone,
+  day,
+  days,
+  dayId
+) {
+  try {
+    await db
+      .collection('Routines')
+      .doc(id)
+      .collection('Exercises')
+      .doc(dayId)
+      .update(data);
+
+    alert(`Succesfully edited day ${day}/${days}`);
+  } catch (error) {
+    console.log(error.message);
+    alert('Something went wrong!');
+  }
+
+  /*
+  try {
+    await db
+      .collection('Routines')
+      .doc(id)
+      .collection('Exercises')
+      .add(data)
+      .then(() => alert(`Succesfullt add day ${data.day}/${days}`));
+
+    if (Number(data.day) === Number(days)) {
+      setRoutineDone(true);
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+  */
+}
