@@ -298,7 +298,7 @@ export async function addContact(user, uid, setIsLoaded) {
 }
 
 // delete contact
-export async function deleteContact(user, uid, setIsLoaded) {
+export async function deleteContact(user, uid, chatId, setIsDeleted) {
   try {
     await db
       .collection('users')
@@ -311,7 +311,15 @@ export async function deleteContact(user, uid, setIsLoaded) {
       .doc(uid)
       .update('chat', FieldValue.arrayRemove(user.uid));
 
-    setIsLoaded(true);
+    await db
+      .collection('chat')
+      .doc(chatId)
+      .delete()
+      .then(() => {
+        alert('user deleted succesfully');
+      });
+
+    setIsDeleted(true);
   } catch (error) {
     console.log(error.message);
   }

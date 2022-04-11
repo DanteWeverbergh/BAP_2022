@@ -45,7 +45,7 @@ function Chat() {
 
   return (
     <>
-      <ChatHeader />
+      <ChatHeader chatId={chat.id} />
 
       <div className="mt-24"></div>
 
