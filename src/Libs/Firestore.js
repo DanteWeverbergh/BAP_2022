@@ -1,7 +1,4 @@
-import { useState } from 'react';
-import { useAuthContext } from '../Context/AuthContext';
 import { db, FieldValue } from './Firebase';
-import { deadliftGifs } from './Gifs';
 
 //get collection from firestore
 
@@ -415,21 +412,4 @@ export async function modifyDayRoutine(
     console.log(error.message);
     alert('Something went wrong!');
   }
-
-  /*
-  try {
-    await db
-      .collection('Routines')
-      .doc(id)
-      .collection('Exercises')
-      .add(data)
-      .then(() => alert(`Succesfullt add day ${data.day}/${days}`));
-
-    if (Number(data.day) === Number(days)) {
-      setRoutineDone(true);
-    }
-  } catch (error) {
-    console.log(error.message);
-  }
-  */
 }

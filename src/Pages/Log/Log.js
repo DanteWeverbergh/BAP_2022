@@ -62,21 +62,27 @@ function Log() {
       <Header />
 
       {u.userType === 'regular' ? (
-        <ul className="bg-slate-960 rounded-md mx-12 flex justify-between px-8">
+        <ul className="bg-slate-960 rounded-md py-2 mx-12 flex items-center justify-between px-8">
           <li
-            className={dashboard ? 'text-white-950' : ''}
+            className={
+              dashboard ? 'text-white-950 bg-blue-950 p-2  rounded-md' : ''
+            }
             onClick={() => clickDashboard()}
           >
             Dashboard
           </li>
           <li
-            className={routine ? 'text-white-950' : ''}
+            className={
+              routine ? 'text-white-950  bg-blue-950 p-2  rounded-md' : ''
+            }
             onClick={() => clickPlans()}
           >
             routines
           </li>
           <li
-            className={workouts ? 'text-white-950' : ''}
+            className={
+              workouts ? 'text-white-950  bg-blue-950 p-2  rounded-md' : ''
+            }
             onClick={() => clickWorkouts()}
           >
             workouts

@@ -42,6 +42,7 @@ function Workout() {
           db.collection('Routines')
             .doc(doc.data().currentRoutineId)
             .collection('Exercises')
+            .orderBy('day')
             .onSnapshot((snapshot) => {
               setDays(snapshot.docs.map((ex) => ex.data()));
             });

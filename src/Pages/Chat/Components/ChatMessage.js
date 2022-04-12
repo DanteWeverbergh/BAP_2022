@@ -30,7 +30,7 @@ function ChatMessage({ chatId }) {
 
   return (
     <>
-      <ul class="space-y-2 mt-6">
+      <ul className="space-y-2 mt-6">
         {isLoaded &&
           messages.map((message) => <ChatBubble message={message} />)}
       </ul>

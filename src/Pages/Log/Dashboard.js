@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../Context/AuthContext';
 import { db } from '../../Libs/Firebase';
-import { checkDuplicates } from '../../Libs/Firestore';
 import RoutineCard from './RoutineCard';
 import { doc, getDoc } from 'firebase/firestore';
 import WorkoutCard from './Workout/WorkoutCard';
