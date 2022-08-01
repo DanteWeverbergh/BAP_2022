@@ -11,5 +11,13 @@
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#22262d",
-  "background_color": "#22262d"
+  "background_color": "#22262d",
+  "shortcuts": [
+    {
+      "name": "Log workout",
+      "short_name": "log",
+      "description": "Log a new workout",
+      "url": "test"
+    }
+  ]
 }
