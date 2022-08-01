@@ -1,8 +1,10 @@
+import { useEffect } from 'react';
 import { useAuthContext } from '../Context/AuthContext';
 import Routing from '../Routes/Routing';
 
 function App() {
   const { loading, error, user } = useAuthContext();
+
   return (
     <>
       {error && <p>{error}</p>}
