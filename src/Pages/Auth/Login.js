@@ -47,7 +47,7 @@ function Login() {
           <h1 className="text-4xl text-center text-white-950  mx-auto">
             Gains
           </h1>
-          {error && <p className="mb-4 text-xs text-red-primary">{error}</p>}
+          {error && <p className="mb-4 text-xs text-white-950">{error}</p>}
           <div className="flex items-center justify-center">
             <img src="./images/logo.png" alt="logo" className="h-48 w-48" />
           </div>
