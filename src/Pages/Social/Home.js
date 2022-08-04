@@ -141,20 +141,6 @@ function Home() {
        * Test syling
        */}
 
-      <div className="ml-10 mr-10">
-        <div className="bg-grey-950 w-full rounded-lg py-5 px-5">
-          <div className="flex gap-5  ">
-            <div className="h-10 w-10 bg-blue-950 rounded-full "></div>
-            <div>
-              <div>Dante Weverbergh</div>
-              <div>24/07/2000</div>
-            </div>
-          </div>
-
-          <div className=" mt-10 bg-red-400"></div>
-        </div>
-      </div>
-
       <div>
         {isLoaded ? (
           posts.map(({ id, post }) => (

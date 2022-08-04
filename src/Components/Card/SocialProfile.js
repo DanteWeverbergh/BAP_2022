@@ -35,7 +35,7 @@ function SocialProfile({ post, postUser, setModal, setPostId, postId }) {
           <Link to={`/profile/${postUser.uid}`}>
             <img
               alt="profilePic"
-              className="h-12 w-12 rounded-full object-cover mr-4"
+              className="h-12 w-12 rounded-full object-cover mr-4 border-blue-950 border-2"
               //src="https://picsum.photos/200"
               src={post.uPhoto}
             />

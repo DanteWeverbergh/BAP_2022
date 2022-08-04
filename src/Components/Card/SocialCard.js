@@ -99,7 +99,7 @@ function SocialCard({ post, postId, setModal, setPostId }) {
     <>
       {/*Card */}
 
-      <div className="px-4 mx-4 py-4 mt-5 rounded-md bg-slate-960 text-white-950">
+      <div className="px-4 mx-4 py-4 mt-5 rounded-lg bg-grey-950 text-white-950">
         <SocialProfile
           post={post}
           postUser={postUser}
@@ -112,7 +112,7 @@ function SocialCard({ post, postId, setModal, setPostId }) {
         <div className="mt-4">
           {post.photoUrl && (
             <img
-              className="rounded-md"
+              className="rounded-lg border-solid "
               alt="pic"
               //src="https://picsum.photos/400"
               src={post.photoUrl}
