@@ -4,8 +4,6 @@ import 'firebase/compat/auth';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 import { updateProfile } from 'firebase/auth';
 
-console.log(process.env.REACT_APP_FIREBASE_API_KEY);
-
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,

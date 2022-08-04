@@ -42,7 +42,7 @@ function Login() {
 
   return (
     <>
-      <div className="w-full flex flex-col justify-start mt-32 content-center h-screen relative">
+      <div className="w-full flex flex-col justify-start  content-center mt-32  relative">
         <div className="">
           <h1 className="text-4xl text-center text-white-950  mx-auto">
             Gains
