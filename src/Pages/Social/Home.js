@@ -12,6 +12,7 @@ import { db } from '../../Libs/Firebase';
 import { benchGifs, deadliftGifs, squatGifs } from '../../Libs/Gifs';
 import { MdCollections } from 'react-icons/md';
 import Modal from '../../Components/Card/Modal';
+import Swal from 'sweetalert2';
 
 function Home() {
   const { firebase } = useContext(FirebaseContext);

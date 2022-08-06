@@ -17,13 +17,13 @@ function Modal({ setOpenModal, routine, selectRoutine }) {
 
         <div className="flex content-start justify-between mx-12">
           <button
-            className="bg-red-950 px-12 py-4"
+            className="bg-red-950 px-12 py-4 rounded-lg"
             onClick={() => setOpenModal(false)}
           >
             No
           </button>
           <button
-            className="bg-green-950 px-12 py-4"
+            className="bg-green-950 px-12 py-4 rounded-lg"
             onClick={() => selectRoutine()}
           >
             Yes
