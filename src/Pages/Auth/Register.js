@@ -103,6 +103,8 @@ function Register() {
               id="fullName"
             />
           </div>
+
+          {/** 
           <div>
             <label className="text-white-950">Account type</label>
             <select
@@ -114,6 +116,7 @@ function Register() {
               <option>Personal trainer</option>
             </select>
           </div>
+          */}
 
           <button
             type="submit"
