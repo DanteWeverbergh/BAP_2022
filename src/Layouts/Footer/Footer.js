@@ -29,7 +29,7 @@ function Footer() {
 
   return (
     <>
-      <div className="fixed inset-x-0 bottom-0 py-5 bg-slate-950 opacity-90 ">
+      <div className="fixed inset-x-0 bottom-0 py-5 bg-slate-950  ">
         <nav className="flex justify-around content-center  text-4xl text-white">
           <Link to={'/home'}>
             <MdHome

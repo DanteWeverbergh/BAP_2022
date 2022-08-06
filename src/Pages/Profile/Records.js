@@ -6,6 +6,7 @@ import { useAuthContext } from '../../Context/AuthContext';
 import { db } from '../../Libs/Firebase';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { recordsUpdate, updateDoc } from '../../Libs/Firestore';
+import Swal from 'sweetalert2';
 
 function Records({ u }) {
   const [openDeadlift, setOpenDeadlift] = useState(false);
@@ -52,9 +53,14 @@ function Records({ u }) {
     e.preventDefault();
     //
 
-    updateDoc('users', user.uid, { bench1rm: bench });
+    // udpate forebase
+    //updateDoc('users', user.uid, { bench1rm: bench });
 
-    recordsUpdate(user, 'benchpress', bench);
+    //recordsUpdate(user, 'benchpress', bench);
+  };
+
+  const updateRm = (lift) => {
+    Swal.fire({ input: 'text', text: `update ${lift}` });
   };
 
   return (
@@ -78,7 +84,7 @@ function Records({ u }) {
           </p>
         </div>
         <div
-          onClick={() => setOpenBench(!openBench)}
+          onClick={() => updateRm('bench')}
           className="bg-slate-960 rounded-full h-24 w-24 flex"
         >
           <p className="m-auto text-center">
@@ -128,19 +134,9 @@ function Records({ u }) {
       )}
 
       {openBench ? (
-        <div>
-          <form onSubmit={updateBench} method="POST" className="mx-12 mb-4">
-            <Input
-              type={'number'}
-              placeholder="bench 1rm"
-              onChange={({ target }) => setBench(target.value)}
-              id="bench"
-              value={bench}
-              name="bench"
-            />
-            <Button text={'Update'} />
-          </form>
-        </div>
+        <>
+          <div className="text-white-950">Bench</div>
+        </>
       ) : (
         <div></div>
       )}

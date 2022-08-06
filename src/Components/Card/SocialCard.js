@@ -99,7 +99,7 @@ function SocialCard({ post, postId, setModal, setPostId }) {
     <>
       {/*Card */}
 
-      <div className="px-4 mx-4 py-4 mt-5 rounded-lg  text-white-950">
+      <div className="px-4 mx-4 py-4 mt-5 mb-12 rounded-lg  text-white-950">
         <SocialProfile
           post={post}
           postUser={postUser}
