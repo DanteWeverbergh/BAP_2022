@@ -4,6 +4,8 @@ import { useAuthContext } from '../../Context/AuthContext';
 import Modal from './Modal';
 import Swal from 'sweetalert2';
 
+import { deleteDoc } from '../../Libs/Firestore';
+
 function SocialProfile({ post, postUser, setModal, setPostId, postId }) {
   const { user } = useAuthContext();
   const [date, setDate] = useState('');
@@ -38,7 +40,6 @@ function SocialProfile({ post, postUser, setModal, setPostId, postId }) {
       denyButtonColor: 'green',
       confirmButtonText: 'Yes',
       cancelButtonText: 'No',
-
       confirmButtonColor: '#DA3633',
       cancelButtonColor: '#2EA043',
       color: '#F0F6FC',
@@ -46,7 +47,16 @@ function SocialProfile({ post, postUser, setModal, setPostId, postId }) {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        console.log('delete post');
+        deleteDoc('posts', postId);
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Post deleted',
+          color: '#F0F6FC',
+          background: '#0D1017',
+          iconColor: '#2EA043',
+          confirmButtonColor: '#206FEB',
+        });
       }
     });
   };

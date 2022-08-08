@@ -58,12 +58,18 @@ function Createposts() {
         user.photoURL ? user.photoURL : null
       );
 
-      isLoaded && navigate('/home');
+      //sLoaded && navigate('/home');
     } catch (error) {
       setError(error.message);
       alert(error.message);
     }
   };
+
+  useEffect(() => {
+    if (isLoaded) {
+      navigate('/home');
+    }
+  }, [isLoaded]);
 
   return (
     <>

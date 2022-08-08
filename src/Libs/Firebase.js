@@ -3,6 +3,8 @@ import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 import { updateProfile } from 'firebase/auth';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const config = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -24,7 +26,7 @@ export { firebase, FieldValue, db, auth, storage };
 
 //storage tijdelijk
 
-export async function upload(file, currentUser, setLoading) {
+export async function upload(file, currentUser, setLoading, setIsLoaded) {
   //
   const fileRef = ref(storage, currentUser.uid + '.png');
 
@@ -70,8 +72,18 @@ export async function createPost(file, setIsLoaded, text, uid, uPhoto) {
     });
   }
 
-  alert('post uploaded');
-  setIsLoaded(true);
+  Swal.fire({
+    icon: 'success',
+    title: 'Post uploaded',
+    color: '#F0F6FC',
+    background: '#0D1017',
+    iconColor: '#2EA043',
+    confirmButtonColor: '#206FEB',
+  }).then((result) => {
+    if (result.isConfirmed) {
+      setIsLoaded(true);
+    }
+  });
 }
 
 //add data to a collection
