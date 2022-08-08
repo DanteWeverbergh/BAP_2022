@@ -41,7 +41,7 @@ function Header() {
           <div>
             {isHome ? (
               <Link
-                className="bg-blue-950 rounded-full px-4 py-4 absolute top-0 right-24 mt-5"
+                className="bg-blue-950 rounded-full  flex justify-center items-center text-slate-950 text-3xl w-14 h-14 absolute top-0 right-24 mt-5"
                 to={'/createpost'}
               >
                 +

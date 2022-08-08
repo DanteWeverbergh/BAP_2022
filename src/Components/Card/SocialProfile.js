@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../Context/AuthContext';
 import Modal from './Modal';
+import Swal from 'sweetalert2';
 
 function SocialProfile({ post, postUser, setModal, setPostId, postId }) {
   const { user } = useAuthContext();
@@ -28,6 +29,28 @@ function SocialProfile({ post, postUser, setModal, setPostId, postId }) {
     }
   };
 
+  const dots = () => {
+    // delete post ?
+
+    Swal.fire({
+      title: 'Do you want to delete this post?',
+      showCancelButton: true,
+      denyButtonColor: 'green',
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+
+      confirmButtonColor: '#DA3633',
+      cancelButtonColor: '#2EA043',
+      color: '#F0F6FC',
+      background: '#0D1017',
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        console.log('delete post');
+      }
+    });
+  };
+
   return (
     <>
       <div className="flex justify-between">
@@ -46,7 +69,10 @@ function SocialProfile({ post, postUser, setModal, setPostId, postId }) {
           </div>
         </div>
 
+        {/**
         <div onClick={() => menu()}>...</div>
+         */}
+        <div onClick={() => dots()}>...</div>
       </div>
     </>
   );
