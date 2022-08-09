@@ -2,13 +2,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import FirebaseContext from '../../Context/Firebase';
 import { db } from '../../Libs/Firebase';
-import RoutineCard from './RoutineCard';
+
 import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { IoFilterOutline } from 'react-icons/io5';
 import Filter from './Filter';
 import { useAuthContext } from '../../Context/AuthContext';
 import Input from '../../Components/Input';
 import Label from '../../Components/Label';
+import RoutineCard from '../../Components/log/RoutineCard';
 
 function Routines({ u }) {
   const { firebase } = useContext(FirebaseContext);
@@ -32,8 +33,10 @@ function Routines({ u }) {
 
     let mounted = false;
 
-    db.collection('Routines').onSnapshot((snapshot) => {
+    db.collection('routines').onSnapshot((snapshot) => {
       if (!mounted) {
+        console.log('routines', snapshot);
+
         setRoutines(
           snapshot.docs.map((doc) => ({
             id: doc.id,
@@ -45,30 +48,28 @@ function Routines({ u }) {
 
     //getCurrentRoutine
 
-    db.collection('Routines')
-      .doc(u.currentRoutineId)
-      .get()
-      .then((doc) => {
-        if (!mounted) {
-          setCurrentRoutine(doc.data());
-        }
-      });
+    // db.collection('Routines')
+    //   .doc(u.currentRoutineId)
+    //   .get()
+    //   .then((doc) => {
+    //     if (!mounted) {
+    //       setCurrentRoutine(doc.data());
+    //     }
+    //   });
 
     //get my routines
-    db.collection('Routines')
-      .where('creator', '==', user.uid)
-      .onSnapshot((snapshot) => {
-        if (!mounted) {
-          setMyRoutines(
-            snapshot.docs.map((doc) => ({
-              id: doc.id,
-              routine: doc.data(),
-            }))
-          );
-        }
-      });
-
-    setIsLoaded(true);
+    // db.collection('Routines')
+    //   .where('creator', '==', user.uid)
+    //   .onSnapshot((snapshot) => {
+    //     if (!mounted) {
+    //       setMyRoutines(
+    //         snapshot.docs.map((doc) => ({
+    //           id: doc.id,
+    //           routine: doc.data(),
+    //         }))
+    //       );
+    //     }
+    //   });
 
     return () => {
       mounted = true;
@@ -93,13 +94,20 @@ function Routines({ u }) {
           </div>
         ) : (
           <div className="text-white">
-            <p>
+            <p className="mx-12">
               No routine selected yet, please pick one or make on of your own.
             </p>
           </div>
         )}
 
-        <div className="ml-12 mt-12">
+        <div className="mx-12">
+          <h1 className="text-2xl font-bold">Routines</h1>
+
+          <RoutineCard />
+          <RoutineCard />
+        </div>
+
+        {/* <div className="ml-12 mt-12">
           <div className="flex items-center justify-between">
             <h1 className="font-semibold text-2xl mb-4  text-white-950">
               Other routines
@@ -156,7 +164,7 @@ function Routines({ u }) {
                   </li>
                 ))}
           </ul>
-        </div>
+        </div> */}
       </div>
 
       <div className="ml-12  text-white-950">

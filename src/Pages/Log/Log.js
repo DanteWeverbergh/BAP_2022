@@ -125,10 +125,7 @@ function Log() {
           <Link to={'/exercise/create'}>Add Exercise</Link>
         </>
       )
-    
-    
-    
-    
+  
       */}
 
       {dashboard ? <Dashboard /> : <div></div>}

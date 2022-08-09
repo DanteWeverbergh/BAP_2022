@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../Context/AuthContext';
 import { db } from '../../Libs/Firebase';
-import RoutineCard from './RoutineCard';
+
 import { doc, getDoc } from 'firebase/firestore';
 import WorkoutCard from './Workout/WorkoutCard';
+import { FaDumbbell, FaRunning } from 'react-icons/fa';
+import RoutineCard from '../../Components/log/RoutineCard';
 
 function Dashboard() {
   const { user } = useAuthContext();
@@ -19,6 +21,12 @@ function Dashboard() {
     let unmounted = false;
 
     try {
+      db.collection('routines').onSnapshot((snapshot) => {
+        snapshot.docs.map((doc) => {
+          console.log(doc.data(), doc.id);
+        });
+      });
+
       //
       /*
 
@@ -83,17 +91,7 @@ function Dashboard() {
             <h1 className="font-semibold text-2xl mb-4">Current Routine</h1>
           </div>
 
-          {isLoaded && (
-            <Link to={`/log/${rId}`}>
-              <div className=" text-white bg-slate-960 rounded-md p-2 relative">
-                <div className="text-center h-10 w-10 flex justify-center items-center bg-blue-950 rounded-full absolute top-2 right-2">
-                  {currentRoutine.days}
-                </div>
-                <h1 className="text-xl mb-4">{currentRoutine.name}</h1>
-                <p>{currentRoutine.description}</p>
-              </div>
-            </Link>
-          )}
+          <RoutineCard type="weight" />
 
           <Link to="/log/workout">
             <div className="bg-blue-950 w-full py-2 mt-6 flex items-center justify-center rounded-md">
