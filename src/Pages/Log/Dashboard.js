@@ -20,6 +20,7 @@ function Dashboard() {
 
     try {
       //
+      /*
 
       db.collection('users')
         .doc(user.uid)
@@ -42,6 +43,7 @@ function Dashboard() {
               });
           }
         });
+        */
     } catch (error) {
       console.log(error.message);
     }
@@ -62,11 +64,11 @@ function Dashboard() {
             }))
           );
         });
+
+      setIsLoaded(true);
     } catch (error) {
       console.log(error.message);
     }
-
-    setIsLoaded(true);
 
     return () => {
       unmounted = true;

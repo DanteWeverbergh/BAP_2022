@@ -61,7 +61,38 @@ function Log() {
     <>
       <Header />
 
-      {u.userType === 'regular' ? (
+      <div>
+        <ul className="text-white-950 flex justify-between mx-12">
+          <li
+            className={
+              dashboard ? 'bg-blue-950 px-4 py-2 rounded-lg' : 'px-4 py-2'
+            }
+            onClick={() => clickDashboard()}
+          >
+            Dashboard
+          </li>
+          <li
+            className={
+              routine ? 'bg-blue-950 px-4 py-2 rounded-lg' : 'px-4 py-2'
+            }
+            onClick={() => clickPlans()}
+          >
+            Routines
+          </li>
+          <li
+            className={
+              workouts ? 'bg-blue-950 px-4 py-2 rounded-lg' : 'px-4 py-2'
+            }
+            onClick={() => clickWorkouts()}
+          >
+            Workouts
+          </li>
+        </ul>
+      </div>
+
+      {/*
+      
+      u.userType === 'regular' ? (
         <ul className="bg-slate-960 rounded-md py-2 mx-12 flex items-center justify-between px-8">
           <li
             className={
@@ -93,7 +124,12 @@ function Log() {
           <div>make workout programs</div>
           <Link to={'/exercise/create'}>Add Exercise</Link>
         </>
-      )}
+      )
+    
+    
+    
+    
+      */}
 
       {dashboard ? <Dashboard /> : <div></div>}
       {routine ? <Routines u={u} /> : <div></div>}
