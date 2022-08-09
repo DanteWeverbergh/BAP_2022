@@ -10,6 +10,7 @@ import { useAuthContext } from '../../Context/AuthContext';
 import Input from '../../Components/Input';
 import Label from '../../Components/Label';
 import RoutineCard from '../../Components/log/RoutineCard';
+import AllRoutines from './Routines/AllRoutines';
 
 function Routines({ u }) {
   const { firebase } = useContext(FirebaseContext);
@@ -35,8 +36,6 @@ function Routines({ u }) {
 
     db.collection('routines').onSnapshot((snapshot) => {
       if (!mounted) {
-        console.log('routines', snapshot);
-
         setRoutines(
           snapshot.docs.map((doc) => ({
             id: doc.id,
@@ -83,8 +82,7 @@ function Routines({ u }) {
 
   return (
     <>
-      <div className=" mt-6 text-white-950">
-        {u.currentRoutineId ? (
+      {/* {u.currentRoutineId ? (
           <div className="mx-12">
             <h1 className="font-semibold text-2xl mb-4  text-white-950">
               Current routine
@@ -98,16 +96,11 @@ function Routines({ u }) {
               No routine selected yet, please pick one or make on of your own.
             </p>
           </div>
-        )}
+        )} */}
 
-        <div className="mx-12">
-          <h1 className="text-2xl font-bold">Routines</h1>
+      <AllRoutines />
 
-          <RoutineCard />
-          <RoutineCard />
-        </div>
-
-        {/* <div className="ml-12 mt-12">
+      {/* <div className="ml-12 mt-12">
           <div className="flex items-center justify-between">
             <h1 className="font-semibold text-2xl mb-4  text-white-950">
               Other routines
@@ -165,9 +158,8 @@ function Routines({ u }) {
                 ))}
           </ul>
         </div> */}
-      </div>
 
-      <div className="ml-12  text-white-950">
+      {/* <div className="ml-12  text-white-950">
         <div className="mt-4">
           <h1 className="font-semibold text-2xl mb-4  text-white-950">
             My routines
@@ -187,7 +179,7 @@ function Routines({ u }) {
             Add your own routine.
           </div>
         </Link>
-      </div>
+      </div> */}
     </>
   );
 }

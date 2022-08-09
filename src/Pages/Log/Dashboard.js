@@ -23,7 +23,7 @@ function Dashboard() {
     try {
       db.collection('routines').onSnapshot((snapshot) => {
         snapshot.docs.map((doc) => {
-          console.log(doc.data(), doc.id);
+          //console.log(doc.data(), doc.id);
         });
       });
 
@@ -90,8 +90,6 @@ function Dashboard() {
           <div className="mt-6">
             <h1 className="font-semibold text-2xl mb-4">Current Routine</h1>
           </div>
-
-          <RoutineCard type="weight" />
 
           <Link to="/log/workout">
             <div className="bg-blue-950 w-full py-2 mt-6 flex items-center justify-center rounded-md">
