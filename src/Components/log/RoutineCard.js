@@ -10,7 +10,7 @@ function RoutineCard({ type, routine, id }) {
         <div className="mb-12 flex items-center justify-between  ">
           <div className="flex">
             <div className="bg-blue-950 w-12 h-12  rounded-full flex justify-center items-center">
-              <FaDumbbell className="text-xl" />
+              <FaDumbbell className="text-xl text-white-950" />
               {/* {type.type === 'cardio' ? (
             <FaRunning className="text-xl" />
           ) : (

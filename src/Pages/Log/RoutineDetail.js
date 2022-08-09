@@ -26,13 +26,13 @@ function RoutineDetail() {
   const [isDeleted, setIsDeleted] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const [days, setDays] = useState([]);
+
   const [videoModal, setVideoModal] = useState(false);
   const [ytId, setYtId] = useState('');
 
   useEffect(() => {
     //
-
-    console.log(id);
 
     try {
       db.collection('routines')
@@ -40,6 +40,19 @@ function RoutineDetail() {
         .get()
         .then((doc) => {
           setRoutine(doc.data());
+        });
+
+      db.collection('routines')
+        .doc(id)
+        .collection('days')
+        .orderBy('day')
+        .onSnapshot((snapshot) => {
+          setDays(
+            snapshot.docs.map((doc) => ({
+              id: doc.id,
+              data: doc.data(),
+            }))
+          );
         });
 
       setIsLoaded(true);
@@ -108,12 +121,9 @@ function RoutineDetail() {
         <>
           <DetailHeader routine={routine} />
 
-          <DaysCard />
-          <DaysCard />
-          <DaysCard />
-          <DaysCard />
-          <DaysCard />
-          <DaysCard />
+          {days.map(({ data, id }) => (
+            <DaysCard key={id} id={id} day={data} />
+          ))}
 
           <div className="mx-12 fixed inset-x-0 bottom-0 mb-12">
             <button
