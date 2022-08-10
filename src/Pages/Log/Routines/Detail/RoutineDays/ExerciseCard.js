@@ -10,11 +10,8 @@ function ExerciseCard({ id, data }) {
         onClick={() =>
           Swal.fire({
             title: data.exerciseName,
-
             confirmButtonText: 'OK',
-
             confirmButtonColor: '#206FEB',
-
             color: '#F0F6FC',
             background: '#0D1017',
           })

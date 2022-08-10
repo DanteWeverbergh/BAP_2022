@@ -11,6 +11,7 @@ import Input from '../../Components/Input';
 import Label from '../../Components/Label';
 import RoutineCard from '../../Components/log/RoutineCard';
 import AllRoutines from './Routines/AllRoutines';
+import CurrentRoutine from './Routines/CurrentRoutine';
 
 function Routines({ u }) {
   const { firebase } = useContext(FirebaseContext);
@@ -98,6 +99,7 @@ function Routines({ u }) {
           </div>
         )} */}
 
+      <CurrentRoutine />
       <AllRoutines />
 
       {/* <div className="ml-12 mt-12">

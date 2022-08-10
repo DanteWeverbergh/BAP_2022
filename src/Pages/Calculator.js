@@ -57,65 +57,46 @@ function Calculator() {
             <div className="mx-12 text-white-950 mt-6 ">
               <p className="font-semibold text-xl mb-6">{`Your estimated 1RM is  ${result}kg`}</p>
 
-              <div className="bg-slate-960  rounded-md px-2 py-2">
-                <table className="w-full table-fixed rounded-md">
-                  <thead>
-                    <tr className="bg-slate-950 ">
-                      <th className="px-4 py-2">1RM %</th>
-                      <th className="px-4 py-2">Reps</th>
-                      <th className="px-4 py-2">Weight</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr className="border-b-2 border-slate-950">
-                      <td className="px-4 py-2">100%</td>
-                      <td className="px-4 py-2">1</td>
-                      <td className="px-4 py-2">{result} kg</td>
-                    </tr>
-                    <tr className="border-b-2 border-slate-950">
-                      <td className="px-4 py-2">95%</td>
-                      <td className="px-4 py-2">2</td>
-                      <td className="px-4 py-2">
-                        {Math.round(result * 0.95)} kg
-                      </td>
-                    </tr>
-                    <tr className="border-b-2 border-slate-950 ">
-                      <td className="px-4 py-2">90%</td>
-                      <td className="px-4 py-2">4</td>
-                      <td className="px-4 py-2">
-                        {Math.round(result * 0.9)} kg
-                      </td>
-                    </tr>
-                    <tr className="border-b-2 border-slate-950">
-                      <td className="px-4 py-2">85%</td>
-                      <td className="px-4 py-2">6</td>
-                      <td className="px-4 py-2">
-                        {Math.round(result * 0.85)} kg
-                      </td>
-                    </tr>
-                    <tr className="border-b-2 border-slate-950">
-                      <td className="px-4 py-2">80%</td>
-                      <td className="px-4 py-2">8</td>
-                      <td className="px-4 py-2">
-                        {Math.round(result * 0.8)} kg
-                      </td>
-                    </tr>
-                    <tr className="border-b-2 border-slate-950">
-                      <td className="px-4 py-2">75%</td>
-                      <td className="px-4 py-2">10</td>
-                      <td className="px-4 py-2">
-                        {Math.round(result * 0.75)} kg
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="px-4 py-2">70%</td>
-                      <td className="px-4 py-2">12</td>
-                      <td className="px-4 py-2">
-                        {Math.round(result * 0.7)} kg
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+              <div className="flex justify-between bg-blue-950 py-2 rounded-lg mb-4">
+                <div className="px-4 font-bold">1RM%</div>
+                <div className="px-4 font-bold">Reps</div>
+                <div className="px-4 font-bold">Weight</div>
+              </div>
+
+              <div className="flex justify-between ">
+                <div>100%</div>
+                <div>1</div>
+                <div>{result} kg</div>
+              </div>
+              <div className="flex justify-between ">
+                <div>95%</div>
+                <div>2</div>
+                <div>{Math.round(result * 0.95)} kg</div>
+              </div>
+              <div className="flex justify-between ">
+                <div>90%</div>
+                <div>4</div>
+                <div>{Math.round(result * 0.9)} kg</div>
+              </div>
+              <div className="flex justify-between ">
+                <div>85%</div>
+                <div>6</div>
+                <div>{Math.round(result * 0.85)} kg</div>
+              </div>
+              <div className="flex justify-between ">
+                <div>80%</div>
+                <div>8</div>
+                <div>{Math.round(result * 0.8)} kg</div>
+              </div>
+              <div className="flex justify-between ">
+                <div>75%</div>
+                <div>10</div>
+                <div>{Math.round(result * 0.75)} kg</div>
+              </div>
+              <div className="flex justify-between ">
+                <div>70%</div>
+                <div>12</div>
+                <div>{Math.round(result * 0.7)} kg</div>
               </div>
             </div>
           )}

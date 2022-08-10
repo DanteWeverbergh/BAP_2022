@@ -62,7 +62,10 @@ function Log() {
       <Header />
 
       <div>
-        <ul className="text-white-950 flex justify-between mx-12">
+        <ul
+          className="text-white-950 flex justify-between mx-12  
+         rounded-lg"
+        >
           <li
             className={
               dashboard ? 'bg-blue-950 px-4 py-2 rounded-lg' : 'px-4 py-2'

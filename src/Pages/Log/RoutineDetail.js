@@ -13,6 +13,7 @@ import { deleteDocument } from '../../Libs/Firestore';
 import Routines from './Routines';
 import DetailHeader from './Routines/Detail/DetailHeader';
 import DaysCard from './Routines/Detail/DaysCard';
+import Swal from 'sweetalert2';
 
 function RoutineDetail() {
   let { id } = useParams();
@@ -25,6 +26,8 @@ function RoutineDetail() {
   const [exercises, setExercises] = useState([]);
   const [isDeleted, setIsDeleted] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const [isCurrentRoutine, setIsCurrentRoutine] = useState(false);
 
   const [days, setDays] = useState([]);
 
@@ -40,6 +43,19 @@ function RoutineDetail() {
         .get()
         .then((doc) => {
           setRoutine(doc.data());
+          const routineId = doc.id;
+
+          console.log('......', doc.id);
+
+          db.collection('users')
+            .doc(user.uid)
+            .get()
+            .then((doc) => {
+              const currentRoutineId = doc.data().currentRoutineId;
+              if (routineId === currentRoutineId) {
+                setIsCurrentRoutine(true);
+              }
+            });
         });
 
       db.collection('routines')
@@ -59,56 +75,29 @@ function RoutineDetail() {
     } catch (error) {
       console.log('error: ', error);
     }
-
-    // try {
-    //   db.collection('Routines')
-    //     .doc(id)
-    //     .get()
-    //     .then((doc) => setRoutine(doc.data()))
-    //     .then(() => {
-    //       db.collection('Routines')
-    //         .doc(id)
-    //         .collection('Exercises')
-    //         .orderBy('day')
-    //         .onSnapshot((snapshot) => {
-    //           setExercises(
-    //             snapshot.docs.map((doc) => ({
-    //               id: doc.id,
-    //               exercise: doc.data(),
-    //             }))
-    //           );
-    //         });
-    //     });
-    // } catch (error) {
-    //   console.log(error.message);
-    // }
   }, []);
-
-  const modal = () => {
-    setOpenModal(true);
-  };
-
-  useEffect(() => {
-    if (isDeleted) {
-      Navigate('/log');
-    }
-  }, [isDeleted]);
 
   const selectRoutine = () => {
     //
+
+    console.log('select this routineeeee', id);
+    console.log(user.uid);
 
     db.collection('users')
       .doc(user.uid)
       .update({
         currentRoutineId: id,
       })
-      .then(() => setOpenModal(false));
-  };
-
-  const deleteRoutine = () => {
-    //
-
-    deleteDocument('Routines', id, setIsDeleted);
+      .then(() => {
+        Swal.fire({
+          icon: 'success',
+          title: `selected ${routine.name} as your current routine.`,
+          color: '#F0F6FC',
+          background: '#0D1017',
+          iconColor: '#2EA043',
+          confirmButtonColor: '#206FEB',
+        });
+      });
   };
 
   const modifyRoutine = () => {
@@ -125,7 +114,25 @@ function RoutineDetail() {
             <DaysCard key={id} id={id} day={data} />
           ))}
 
-          <Footer />
+          {!isCurrentRoutine ? (
+            <div className="mx-12 fixed inset-x-0 bottom-0 mb-12">
+              <button
+                className="bg-blue-950 w-full py-2 px-4 rounded-lg text-white-950"
+                onClick={() => selectRoutine()}
+              >
+                Select this routine
+              </button>
+            </div>
+          ) : (
+            <div className="mx-12 fixed inset-x-0 bottom-0 mb-12">
+              <button
+                className="bg-blue-950 w-full py-2 px-4 rounded-lg text-white-950"
+                onClick={() => console.log('log workout')}
+              >
+                Log workout
+              </button>
+            </div>
+          )}
         </>
       ) : (
         <h1>Loading...</h1>

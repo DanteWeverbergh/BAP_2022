@@ -7,6 +7,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import WorkoutCard from './Workout/WorkoutCard';
 import { FaDumbbell, FaRunning } from 'react-icons/fa';
 import RoutineCard from '../../Components/log/RoutineCard';
+import CurrentRoutine from './Routines/CurrentRoutine';
 
 function Dashboard() {
   const { user } = useAuthContext();
@@ -86,14 +87,14 @@ function Dashboard() {
   return (
     <>
       <div className=" text-white-950 ">
-        <div className="mx-12">
-          <div className="mt-6">
-            <h1 className="font-semibold text-2xl mb-4">Current Routine</h1>
-          </div>
+        <div className="">
+          <CurrentRoutine />
 
           <Link to="/log/workout">
-            <div className="bg-blue-950 w-full py-2 mt-6 flex items-center justify-center rounded-md">
-              Log your workout
+            <div className="mx-12">
+              <div className=" bg-blue-950 w-full py-2 mt-6 flex items-center justify-center rounded-md">
+                Log your workout
+              </div>
             </div>
           </Link>
         </div>

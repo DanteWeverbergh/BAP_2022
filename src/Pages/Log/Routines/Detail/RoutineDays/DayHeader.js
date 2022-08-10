@@ -19,7 +19,7 @@ function DayHeader({ day }) {
           </div>
 
           <div className=" px-12 flex items-center justify-between rounded-lg py-2 bg-blue-950 absolute w-full bottom-0">
-            <div className="flex">
+            <div className="flex items-center">
               <div className="bg-slate-950 w-12 h-12  rounded-full flex justify-center items-center">
                 <FaDumbbell className="text-xl" />
                 {/* {type.type === 'cardio' ? (
@@ -32,7 +32,6 @@ function DayHeader({ day }) {
                 <h1 className="font-bold text-xl routine__name">
                   {day.dayName}
                 </h1>
-                <p className="routine__description">Short description</p>
               </div>
             </div>
             <div className="text-blue-950 w-12 h-12 rounded-lg flex items-center justify-center">
