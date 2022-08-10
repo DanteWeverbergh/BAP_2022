@@ -20,6 +20,7 @@ import Chat from '../Pages/Chat/Chat';
 import WorkoutInfo from '../Pages/Log/Workout/WorkoutInfo';
 import ModifyRoutine from '../Pages/Log/Routines/ModifyRoutine';
 import Modify from '../Pages/Log/Routines/Forms/Modify';
+import DayDetail from '../Pages/Log/Routines/Detail/RoutineDays/DayDetail';
 
 function Routing() {
   return (
@@ -50,6 +51,7 @@ function Routing() {
             <Route path="/create/routine" element={<CreateRoutine />} />
             <Route path="/log/modify/:id" element={<ModifyRoutine />} />
             <Route path="/log/modify/2/:id" element={<Modify />} />
+            <Route path="/log/:id/:dayid" element={<DayDetail />} />
 
             <Route path="/log/workout" element={<Workout />} />
             <Route path="/workouts/:id" element={<WorkoutInfo />} />

@@ -1,13 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { FaDumbbell } from 'react-icons/fa';
 import { MdKeyboardArrowRight } from 'react-icons/md';
-import Back from '../../../../Components/Back';
+import Back from '../../../../../Components/Back';
 
-function DetailHeader({ routine }) {
-  useEffect(() => {
-    console.log(routine);
-  }, []);
-
+function DayHeader({ day }) {
   return (
     <>
       <div className="text-white-950">
@@ -34,11 +30,9 @@ function DetailHeader({ routine }) {
               </div>
               <div className="ml-4">
                 <h1 className="font-bold text-xl routine__name">
-                  {routine.name}
+                  {day.dayName}
                 </h1>
-                <p className="routine__description">
-                  {routine.shortDescription}
-                </p>
+                <p className="routine__description">Short description</p>
               </div>
             </div>
             <div className="text-blue-950 w-12 h-12 rounded-lg flex items-center justify-center">
@@ -51,4 +45,4 @@ function DetailHeader({ routine }) {
   );
 }
 
-export default DetailHeader;
+export default DayHeader;
