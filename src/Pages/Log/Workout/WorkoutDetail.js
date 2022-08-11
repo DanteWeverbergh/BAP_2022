@@ -21,6 +21,7 @@ function WorkoutDetail({
 
   useEffect(() => {
     //
+    console.log(days);
   });
 
   const workout = () => {

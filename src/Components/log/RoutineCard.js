@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { FaDumbbell, FaRunning } from 'react-icons/fa';
+import { FaDumbbell } from 'react-icons/fa';
 import { MdKeyboardArrowRight } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
@@ -11,11 +11,6 @@ function RoutineCard({ type, routine, id }) {
           <div className="flex">
             <div className="bg-blue-950 w-12 h-12  rounded-full flex justify-center items-center">
               <FaDumbbell className="text-xl text-white-950" />
-              {/* {type.type === 'cardio' ? (
-            <FaRunning className="text-xl" />
-          ) : (
-            <FaDumbbell className="text-xl" />
-          )} */}
             </div>
             <div className="ml-4">
               <h1 className="font-bold text-xl routine__name">

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Back from '../../../Components/Back';
 import Label from '../../../Components/Label';
 import Timer from '../../../Components/Timer';
 import { useAuthContext } from '../../../Context/AuthContext';
@@ -19,7 +20,6 @@ function Workout() {
   const [previousSession, setPreviousSession] = useState([]);
   const [previous, setPrevious] = useState(false);
   const [dayLoaded, setDayLoaded] = useState(false);
-  const [log, setLog] = useState(false);
 
   //timer
   const [time, setTime] = useState('');
@@ -27,6 +27,8 @@ function Workout() {
   const [minutes, setMinutes] = useState(0);
   const [hours, setHours] = useState(0);
   const [isActive, setIsActive] = useState(false);
+
+  const [exercises, setExercises] = useState([]);
 
   useEffect(() => {
     //
@@ -44,8 +46,15 @@ function Workout() {
             .collection('days')
             .orderBy('day')
             .onSnapshot((snapshot) => {
-              setDays(snapshot.docs.map((doc) => doc.data()));
+              setDays(
+                snapshot.docs.map((doc) => ({
+                  id: doc.id,
+                  data: doc.data(),
+                }))
+              );
             });
+
+          //get exercises by day
         });
 
       setIsLoaded(true);
@@ -92,8 +101,9 @@ function Workout() {
         />
       )}
 
-      <div className="mx-12">
-        <div className="mt-6">
+      <div className=" ">
+        <Back />
+        <div className="mx-12">
           <Timer
             time={time}
             setTime={setTime}
@@ -112,7 +122,7 @@ function Workout() {
           {currentRoutineId && currentRoutine.name}
         </div>
 
-        <div>
+        <div className="mx-12">
           <form>
             <Label label={'select your day'} />
             <select
@@ -124,18 +134,20 @@ function Workout() {
             >
               <option value={''}>{''}</option>
               {isLoaded &&
-                days.map((d) => <option value={d.dayName}>{d.dayName}</option>)}
+                days.map(({ id, data }) => (
+                  <option value={id}>{data.dayName}</option>
+                ))}
             </select>
           </form>
         </div>
 
         {day && (
-          <div className="text-white-950 mt-4">
+          <div className="text-white-950 mt-4 mx-12">
             <button
               onClick={() => setPrevious(true)}
               className="bg-blue-950 w-full rounded-md flex items-center justify-center py-2"
             >
-              Previous {day}{' '}
+              Previous {day}
             </button>
           </div>
         )}

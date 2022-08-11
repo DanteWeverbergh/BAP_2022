@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Button from '../../Components/Button';
-import Input from '../../Components/Input';
-import Modal from '../../Components/Modal';
 import { useAuthContext } from '../../Context/AuthContext';
 import { db } from '../../Libs/Firebase';
 import { doc, onSnapshot } from 'firebase/firestore';
@@ -9,16 +6,9 @@ import { recordsUpdate, updateDoc } from '../../Libs/Firestore';
 import Swal from 'sweetalert2';
 
 function Records({ u }) {
-  const [openDeadlift, setOpenDeadlift] = useState(false);
-  const [openSquat, setOpenSquad] = useState(false);
-  const [openBench, setOpenBench] = useState(false);
-
   const [deadlift, setDeadlift] = useState('');
   const [squad, setSquad] = useState('');
   const [bench, setBench] = useState('');
-
-  //modal
-  const [openModal, setOpenModal] = useState(false);
 
   const { user } = useAuthContext();
 

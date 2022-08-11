@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuthContext } from '../../Context/AuthContext';
-import Modal from './Modal';
 import Swal from 'sweetalert2';
 
 import { deleteDoc } from '../../Libs/Firestore';
@@ -23,13 +22,6 @@ function SocialProfile({ post, postUser, setModal, setPostId, postId }) {
 
     setIsLoaded(true);
   }, []);
-
-  const menu = () => {
-    if (user.uid === postUser.uid) {
-      setPostId(postId);
-      setModal(true);
-    }
-  };
 
   const dots = () => {
     // delete post ?

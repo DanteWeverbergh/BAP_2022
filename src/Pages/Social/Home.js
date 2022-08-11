@@ -1,30 +1,18 @@
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SocialCard from '../../Components/Card/SocialCard';
-import FirebaseContext from '../../Context/Firebase';
+
 import 'firebase/auth';
-import SignOut from '../../Components/SignOut';
-import { Link } from 'react-router-dom';
-import { useFirestoreContext } from '../../Context/Firestore';
 import Header from '../../Layouts/Header/Header';
 import Footer from '../../Layouts/Footer/Footer';
 import { useAuthContext } from '../../Context/AuthContext';
 import { db } from '../../Libs/Firebase';
-import { benchGifs, deadliftGifs, squatGifs } from '../../Libs/Gifs';
-import { MdCollections } from 'react-icons/md';
 import Modal from '../../Components/Card/Modal';
-import Swal from 'sweetalert2';
 
 function Home() {
-  const { firebase } = useContext(FirebaseContext);
   const { user } = useAuthContext();
-  //const { getCollection } = useFirestoreContext();
 
-  const [test, setTest] = useState([]);
   const [userType, setUserType] = useState('');
   const [isLoaded, setIsloaded] = useState(false);
-
-  //infinite scroll
-  const [limit, setLimit] = useState(2);
 
   const [posts, setPosts] = useState([]);
   const [lastPost, setLastPost] = useState([]);

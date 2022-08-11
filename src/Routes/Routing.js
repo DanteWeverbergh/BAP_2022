@@ -8,7 +8,6 @@ import Calculator from '../Pages/Calculator';
 import Home from '../Pages/Social/Home';
 import Log from '../Pages/Log/Log';
 import Createposts from '../Pages/Posts/Createposts';
-import SocialProfile from '../Components/Card/SocialProfile';
 import Profile from '../Pages/Profile/Profile';
 import RoutineDetail from '../Pages/Log/RoutineDetail';
 import CreateRoutine from '../Pages/Log/Routines/CreateRoutine';

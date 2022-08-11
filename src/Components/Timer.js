@@ -55,21 +55,22 @@ function Timer({
 
   return (
     <>
-      <div className="text-center text-white-950 mb-6 py-4 rounded-md">
+      <div className="text-center text-white-950 mb-6  rounded-md">
         <p className="text-6xl text-white-950">
           {hours}:{minutes}:{seconds}
         </p>
 
-        <div className="flex justify-between mx-12 mt-4">
+        <div className="flex justify-between  mt-4">
           <button
-            className="bg-blue-950 px-6 py-2 rounded-md"
+            className="bg-blue-950 w-full py-2 rounded-md"
             onClick={() => start()}
           >
             {isActive ? 'Pause' : 'Start'}
           </button>
+          <div className="w-6"></div>
 
           <button
-            className="bg-red-950 px-6 py-2 rounded-md"
+            className="bg-red-950 w-full py-2 rounded-md"
             onClick={() => reset()}
           >
             Reset

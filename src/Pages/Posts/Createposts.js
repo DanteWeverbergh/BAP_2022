@@ -1,29 +1,22 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import FirebaseContext from '../../Context/Firebase';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Header from '../../Layouts/Header/Header';
 import Footer from '../../Layouts/Footer/Footer';
-import userEvent from '@testing-library/user-event';
 import { useAuthContext } from '../../Context/AuthContext';
-import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 import { createPost } from '../../Libs/Firebase';
 import Label from '../../Components/Label';
 import { IoMdImages } from 'react-icons/io';
 
 function Createposts() {
-  const { firebase, storage } = useContext(FirebaseContext);
+  const { firebase } = useContext(FirebaseContext);
   const { user } = useAuthContext();
   let navigate = useNavigate();
 
   //states
   const [error, setError] = useState('');
-  const [post, setpost] = useState('');
-  const [uid, setUid] = useState('');
-
   const [message, setMessage] = useState('');
   const [photo, setPhoto] = useState('');
-  const [photoUrl, setPhotoUrl] = useState('');
-  const [loading, setLoading] = useState('false');
   const [isLoaded, setIsLoaded] = useState(false);
   const [photoName, setPhotoName] = useState('');
 

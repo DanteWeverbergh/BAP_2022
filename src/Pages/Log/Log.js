@@ -1,20 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import Input from '../../Components/Input';
-import Timer from '../../Components/Timer';
 import { useAuthContext } from '../../Context/AuthContext';
 import Footer from '../../Layouts/Footer/Footer';
 import Header from '../../Layouts/Header/Header';
 import { db } from '../../Libs/Firebase';
-import { getDocById } from '../../Libs/Firestore';
 import Dashboard from './Dashboard';
 import Routines from './Routines';
 import Workouts from './Workouts';
 
 function Log() {
   const { user } = useAuthContext();
-
-  const [userType, setUserType] = useState('regular');
   const [u, setU] = useState({});
 
   const [dashboard, setDashboard] = useState(true);
