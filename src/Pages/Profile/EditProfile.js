@@ -1,10 +1,10 @@
 import { getDownloadURL } from 'firebase/storage';
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../Context/AuthContext';
 import FirebaseContext from '../../Context/Firebase';
 import { upload } from '../../Libs/Firebase';
-import { IoIosArrowBack } from 'react-icons/io';
+import { IoIosArrowBack, IoMdImages } from 'react-icons/io';
 import Button from '../../Components/Button';
 import Label from '../../Components/Label';
 import Input from '../../Components/Input';
@@ -14,6 +14,7 @@ function EditProfile() {
 
   const { user, logout } = useAuthContext();
   let navigate = useNavigate();
+  const hiddenFileInput = useRef(null);
 
   //states
   const [email, setEmail] = useState('');
@@ -71,6 +72,10 @@ function EditProfile() {
     updateProfile(user, {
       displayName: username,
     });
+  };
+
+  const handleClick = () => {
+    hiddenFileInput.current.click();
   };
 
   return (
@@ -133,26 +138,33 @@ function EditProfile() {
           <Button text="Update" />
         </form>
 
-        <div className="mt-24 mx-12">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="pic"
+        <div className="text-white-950 mx-12 mt-12">
+          <Label label={'upload photo'} htmlFor="pic" />
+          <div
+            className="w-full bg-white-950 rounded-lg py-2 px-4 text-gray-700 flex items-center "
+            onClick={() => handleClick()}
           >
-            Update profile picture
-          </label>
+            <IoMdImages />
+            <div className="ml-4"> {photo ? photo.name : 'Choose a photo'}</div>
+          </div>
+
           <input
-            id="pic"
-            onChange={photoChange}
             type={'file'}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          ></input>
+            className="hidden"
+            ref={hiddenFileInput}
+            id={'pic'}
+            onChange={photoChange}
+          />
+        </div>
+
+        <div className=" mx-12">
           <button
             disabled={loading || !photo}
             type="submit"
             onClick={() => picture()}
-            className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-6`}
+            className={`bg-blue-950 text-white-950  py-2 px-4 rounded-lg mt-6 w-full`}
           >
-            Upload photo
+            Update photo
           </button>
         </div>
       </div>

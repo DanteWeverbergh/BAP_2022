@@ -107,7 +107,7 @@ function Createposts() {
             className="w-full bg-white-950 rounded-lg py-2 px-4 text-gray-700 flex items-center "
             onClick={() => handleClick()}
           >
-            <IoMdImages />{' '}
+            <IoMdImages />
             <div className="ml-4"> {photo ? photo.name : 'Choose a photo'}</div>
           </div>
 
