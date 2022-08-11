@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState, useContext, useRef } from 'react';
 import FirebaseContext from '../../Context/Firebase';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../../Layouts/Header/Header';
@@ -8,6 +8,7 @@ import { useAuthContext } from '../../Context/AuthContext';
 import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
 import { createPost } from '../../Libs/Firebase';
 import Label from '../../Components/Label';
+import { IoMdImages } from 'react-icons/io';
 
 function Createposts() {
   const { firebase, storage } = useContext(FirebaseContext);
@@ -24,6 +25,10 @@ function Createposts() {
   const [photoUrl, setPhotoUrl] = useState('');
   const [loading, setLoading] = useState('false');
   const [isLoaded, setIsLoaded] = useState(false);
+  const [photoName, setPhotoName] = useState('');
+
+  //ref
+  const hiddenFileInput = useRef(null);
 
   useEffect(() => {
     document.title = 'Create - Gains';
@@ -38,6 +43,8 @@ function Createposts() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    setPhotoName(photo.name);
+
     const db = firebase.firestore();
 
     const data = {
@@ -48,8 +55,7 @@ function Createposts() {
     };
 
     try {
-      //await db.collection('posts').add(data);
-
+      await db.collection('posts').add(data);
       createPost(
         photo,
         setIsLoaded,
@@ -57,7 +63,6 @@ function Createposts() {
         user.uid,
         user.photoURL ? user.photoURL : null
       );
-
       //sLoaded && navigate('/home');
     } catch (error) {
       setError(error.message);
@@ -70,6 +75,10 @@ function Createposts() {
       navigate('/home');
     }
   }, [isLoaded]);
+
+  const handleClick = () => {
+    hiddenFileInput.current.click();
+  };
 
   return (
     <>
@@ -91,15 +100,24 @@ function Createposts() {
             className="shadow appearance-none border rounded w-full py-2 px-3 text-slate-950 bg-white-950 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
-        <div className="mb-6">
-          <Label label={'Select a photo'} htmlFor="pic" />
+
+        <div className="text-white-950 mb-6">
+          <Label label={'upload photo'} htmlFor="pic" />
+          <div
+            className="w-full bg-white-950 rounded-lg py-2 px-4 text-gray-700 flex items-center "
+            onClick={() => handleClick()}
+          >
+            <IoMdImages />{' '}
+            <div className="ml-4"> {photo ? photo.name : 'Choose a photo'}</div>
+          </div>
+
           <input
-            id="pic"
-            onChange={photoChange}
             type={'file'}
-            className="bg-white-950 w-full rounded-md"
-            placeholder="hjlhhjlh"
-          ></input>
+            className="hidden"
+            ref={hiddenFileInput}
+            id={'pic'}
+            onChange={photoChange}
+          />
         </div>
 
         <button
