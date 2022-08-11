@@ -55,7 +55,7 @@ function Timer({
 
   return (
     <>
-      <div className="text-center text-white-950 mb-6 bg-slate-960  py-4 rounded-md">
+      <div className="text-center text-white-950 mb-6 py-4 rounded-md">
         <p className="text-6xl text-white-950">
           {hours}:{minutes}:{seconds}
         </p>

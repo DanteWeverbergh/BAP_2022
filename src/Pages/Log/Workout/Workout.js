@@ -39,12 +39,12 @@ function Workout() {
         .then((doc) => {
           setCurrentRoutineId(doc.data().currentRoutineId);
 
-          db.collection('Routines')
+          db.collection('routines')
             .doc(doc.data().currentRoutineId)
-            .collection('Exercises')
+            .collection('days')
             .orderBy('day')
             .onSnapshot((snapshot) => {
-              setDays(snapshot.docs.map((ex) => ex.data()));
+              setDays(snapshot.docs.map((doc) => doc.data()));
             });
         });
 
@@ -124,7 +124,7 @@ function Workout() {
             >
               <option value={''}>{''}</option>
               {isLoaded &&
-                days.map((d) => <option value={d.name}>{d.name}</option>)}
+                days.map((d) => <option value={d.dayName}>{d.dayName}</option>)}
             </select>
           </form>
         </div>
