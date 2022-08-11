@@ -70,7 +70,11 @@ function SocialProfile({ post, postUser, setModal, setPostId, postId }) {
               alt="profilePic"
               className="h-12 w-12 rounded-full object-cover mr-4 border-blue-950 border-2"
               //src="https://picsum.photos/200"
-              src={post.uPhoto}
+              //src={post.uPhoto}
+              src={`${post.uPhoto.replace(
+                'https://firebasestorage.googleapis.com/v0/b/gains-dd329.appspot.com',
+                'https://ik.imagekit.io/w2g1ssyqs/'
+              )}&tr=w-100`}
             />
           </Link>
           <div>

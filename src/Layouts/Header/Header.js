@@ -57,7 +57,10 @@ function Header() {
             <img
               className="rounded-full h-12 w-12 object-cover"
               alt="p"
-              src={photoUrl}
+              src={`${photoUrl.replace(
+                'https://firebasestorage.googleapis.com/v0/b/gains-dd329.appspot.com',
+                'https://ik.imagekit.io/w2g1ssyqs/'
+              )}&tr=w-150`}
             />
           </Link>
         </div>

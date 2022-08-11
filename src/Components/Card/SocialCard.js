@@ -110,7 +110,15 @@ function SocialCard({ post, postId, setModal, setPostId }) {
 
         {/* content card */}
         <div className="mt-4">
-          {post.photoUrl && (
+          {post.imageKit && post.photoUrl && (
+            <img
+              className="rounded-lg border-solid "
+              alt="pic"
+              //src="https://picsum.photos/400"
+              src={post.imageKit}
+            />
+          )}
+          {post.photoUrl && !post.imageKit && (
             <img
               className="rounded-lg border-solid "
               alt="pic"
@@ -119,8 +127,8 @@ function SocialCard({ post, postId, setModal, setPostId }) {
             />
           )}
 
-          <div>
-            <p className="mt-4 text-white-950">{post.text}</p>
+          <div className=" overflow-auto">
+            <p className="mt-4 text-white-950 ">{post.text}</p>
           </div>
           <div className="flex justify-between mt-5">
             <div className="flex">

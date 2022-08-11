@@ -54,8 +54,14 @@ export async function createPost(file, setIsLoaded, text, uid, uPhoto) {
 
     const photoUrl = await getDownloadURL(fileRef);
 
+    const imageKit = `${photoUrl.replace(
+      'https://firebasestorage.googleapis.com/v0/b/gains-dd329.appspot.com',
+      'https://ik.imagekit.io/w2g1ssyqs/'
+    )}&tr=w-844`;
+
     await db.collection('posts').add({
       photoUrl,
+      imageKit,
       uid,
       text,
       uPhoto,
