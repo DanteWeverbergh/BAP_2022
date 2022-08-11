@@ -5,6 +5,7 @@ import { useAuthContext } from '../../Context/AuthContext';
 import { Link } from 'react-router-dom';
 import { db } from '../../Libs/Firebase';
 import Followers from './Detail/Followers';
+import Back from '../../Components/Back';
 
 function ProfileHeader({ photoUrl, u }) {
   const { user, logout } = useAuthContext();
@@ -61,16 +62,11 @@ function ProfileHeader({ photoUrl, u }) {
     
       */}
 
-      <div className="flex justify-between mx-6 mt-6">
-        <Link
-          className="rounded-full text-slate-950 bg-white-950 h-8 w-8 text-center "
-          to={'/home'}
-        >
-          <IoIosArrowBack className="text-3xl text-center text-slate-950" />
-        </Link>
+      <div className="flex justify-between items-center ">
+        <Back />
 
         <button
-          className="px-4 bg-blue-950 rounded-md"
+          className="px-4 py-2 bg-blue-950 text-white-950 m-5 rounded-lg"
           onClick={() => logout(user.uid)}
         >
           Logout
@@ -78,12 +74,15 @@ function ProfileHeader({ photoUrl, u }) {
       </div>
 
       <div className="flex-col text-center grid place-items-center">
-        <div className=" relative w-36 h-36 grid place-items-center  bg-blue-500 rounded-full  mr-5 mt-5  ">
+        <div className=" relative w-36 h-36 grid place-items-center  bg-blue-500 rounded-full  ">
           {photoUrl && (
             <img
               className="h-32 w-32 rounded-full object-cover"
               alt="profilePic"
-              src={photoUrl}
+              src={`${photoUrl.replace(
+                'https://firebasestorage.googleapis.com/v0/b/gains-dd329.appspot.com',
+                'https://ik.imagekit.io/w2g1ssyqs/'
+              )}&tr=w-500`}
             />
           )}
 
@@ -99,18 +98,15 @@ function ProfileHeader({ photoUrl, u }) {
             <MdOutlineEdit className="text-white-950 text-center text-xl" />
           </Link>
         </div>
-        <div className="text-2xl mt-4 mb-8 text-white-950">
-          Welcome {u.fullName}
-        </div>
+        <div className="text-2xl mt-4 mb-8 text-white-950">{u.fullName}</div>
         <div className="w-full">
-          <div className="text-white-950  mb-4 bg-slate-960 px-4 py-2 flex justify-between">
+          <div className="text-white-950  mb-4 mx-24 flex justify-between">
             <div onClick={() => openList('following')}>
-              {following.length} following
+              <div>{following.length} </div>following
             </div>
             <div onClick={() => openList('followers')}>
-              {followers.length} followers
+              <div>{followers.length} </div>followers
             </div>
-            <div> {posts} posts</div>
           </div>
         </div>
       </div>

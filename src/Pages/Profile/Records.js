@@ -32,119 +32,60 @@ function Records({ u }) {
     return unsub;
   }, []);
 
-  const updateDeadlift = (e) => {
-    //
-    e.preventDefault();
-
-    updateDoc('users', user.uid, { deadlift1rm: deadlift });
-
-    recordsUpdate(user, 'deadlift', deadlift);
-  };
-  const updateSquat = (e) => {
-    e.preventDefault();
-    //
-
-    updateDoc('users', user.uid, { squad1rm: squad });
-
-    recordsUpdate(user, 'squad', squad);
-  };
-
-  const updateBench = (e) => {
-    e.preventDefault();
-    //
-
-    // udpate forebase
-    //updateDoc('users', user.uid, { bench1rm: bench });
-
-    //recordsUpdate(user, 'benchpress', bench);
-  };
-
   const updateRm = (lift) => {
-    Swal.fire({ input: 'text', text: `update ${lift}` });
+    Swal.fire({
+      input: 'number',
+      inputPlaceholder: '100',
+      text: `Update your pr on the ${lift}`,
+      confirmButtonText: 'Update',
+      showCancelButton: true,
+      cancelButtonColor: '#DA3633',
+      confirmButtonColor: '#206FEB',
+      background: '#0D1017',
+      color: '#F0F6FC',
+    }).then((result) => {
+      if (lift === 'deadlift') {
+        updateDoc('users', user.uid, { deadlift1rm: result.value });
+        recordsUpdate(user, 'deadlift', result.value);
+      } else if (lift === 'squat') {
+        updateDoc('users', user.uid, { squad1rm: result.value });
+        recordsUpdate(user, 'squat', result.value);
+      } else if (lift === 'bench') {
+        updateDoc('users', user.uid, { bench1rm: result.value });
+        recordsUpdate(user, 'bench', result.value);
+      }
+    });
   };
 
   return (
     <>
       <div className="flex justify-between mx-12 text-white-950">
         <div
-          onClick={() => setOpenDeadlift(!openDeadlift)}
-          className="bg-slate-960 rounded-full h-24 w-24 flex "
+          onClick={() => updateRm('deadlift')}
+          className="bg-blue-950 rounded-lg h-24 w-24 flex "
         >
           <p className="m-auto text-center">
-            {deadlift} <br /> deadlift
+            {deadlift} kg <br /> deadlift
           </p>
         </div>
         <div
-          onClick={() => setOpenSquad(!openSquat)}
-          className="bg-slate-960 rounded-full h-24 w-24 flex"
+          onClick={() => updateRm('squat')}
+          className="bg-blue-950 rounded-lg h-24 w-24 flex"
         >
           <p className="m-auto text-center">
-            {squad} <br />
+            {squad} kg <br />
             squat
           </p>
         </div>
         <div
           onClick={() => updateRm('bench')}
-          className="bg-slate-960 rounded-full h-24 w-24 flex"
+          className="bg-blue-950 rounded-lg h-24 w-24 flex"
         >
           <p className="m-auto text-center">
-            {bench} <br /> bench
+            {bench} kg <br /> bench
           </p>
         </div>
       </div>
-
-      {openDeadlift ? (
-        <div>
-          <form
-            onSubmit={updateDeadlift}
-            method="POST"
-            className="mx-12 mt-4 mb-4"
-          >
-            <Input
-              type={'number'}
-              placeholder="deadlift 1rm"
-              onChange={({ target }) => setDeadlift(target.value)}
-              id="deadlift"
-              value={deadlift}
-              name="deadlift"
-            />
-            <Button text={'Update'} />
-          </form>
-        </div>
-      ) : (
-        <div></div>
-      )}
-
-      {openSquat ? (
-        <div>
-          <form onSubmit={updateSquat} method="POST" className="mx-12 mb-4">
-            <Input
-              type={'number'}
-              placeholder="squad 1rm"
-              onChange={({ target }) => setSquad(target.value)}
-              id="squad"
-              value={squad}
-              name="squad"
-            />
-            <Button text={'Update'} />
-          </form>
-        </div>
-      ) : (
-        <div></div>
-      )}
-
-      {openBench ? (
-        <>
-          <div className="text-white-950">Bench</div>
-        </>
-      ) : (
-        <div></div>
-      )}
-
-      {/**
-
-      {openModal && <Modal openModal={openModal} setOpenModal={setOpenModal} />}
-       */}
     </>
   );
 }

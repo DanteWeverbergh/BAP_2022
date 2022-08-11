@@ -69,7 +69,7 @@ function MyPosts() {
         );
       });
 
-    setIsLoaded(true);
+    //setIsLoaded(true);
 
     return unsubscribe;
   }, []);

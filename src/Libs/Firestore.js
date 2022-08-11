@@ -70,7 +70,7 @@ export async function updateDoc(col, doc, data) {
   try {
     await db.collection(col).doc(doc).update(data);
 
-    alert('updated');
+    // alert('updated');
   } catch (error) {
     console.log(error.message);
   }
