@@ -345,8 +345,6 @@ export async function logWorkout(user, day, data, time) {
   data.map((t) => console.log('naam:', t[0].exName));
 
   try {
-    const exerciseName = 'test';
-
     // add to workouts
     await db
       .collection('workouts')

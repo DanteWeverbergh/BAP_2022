@@ -3,14 +3,18 @@ import { IoArrowBack } from 'react-icons/io5';
 import { useNavigate, useParams } from 'react-router-dom';
 import Back from '../../../Components/Back';
 import Timer from '../../../Components/Timer';
+import { useAuthContext } from '../../../Context/AuthContext';
 import { db } from '../../../Libs/Firebase';
+import { logWorkout } from '../../../Libs/Firestore';
 import LogExerciseCard from './LogExerciseCard';
 
 function LogWorkout() {
   let { routineId, dayId } = useParams();
+  const { user } = useAuthContext();
   const navigate = useNavigate();
   const [exercises, setExercises] = useState([]);
   const [isLoaded, setisLoaded] = useState(false);
+  const [day, setDay] = useState('');
 
   const [workout, setWorkout] = useState([]);
 
@@ -42,8 +46,31 @@ function LogWorkout() {
         );
       });
 
+    db.collection('routines')
+      .doc(routineId)
+      .collection('days')
+      .doc(dayId)
+      .get()
+      .then((doc) => {
+        setDay(doc.data().dayName);
+      });
+
     setisLoaded(true);
   }, []);
+
+  const saveWorkout = () => {
+    //workout reps & weight
+    console.log('workout:', workout);
+
+    //time
+    console.log('time:', `${hours}:${minutes}:${seconds}`);
+
+    const timer = `${hours}:${minutes}:${seconds}`;
+    //stop timer
+    setIsActive(false);
+
+    logWorkout(user, day, workout, timer);
+  };
 
   return (
     <>
@@ -94,7 +121,7 @@ function LogWorkout() {
         <div className="mx-12 mb-12">
           <button
             className="bg-blue-950 text-white-950 w-full py-2 rounded-lg"
-            onClick={() => console.log(workout)}
+            onClick={() => saveWorkout()}
           >
             Save workout
           </button>

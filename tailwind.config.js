@@ -13,6 +13,7 @@ module.exports = {
         },
         white: {
           950: '#F0F6FC',
+          960: '#C9D1D9',
         },
         red: {
           950: '#DA3633',

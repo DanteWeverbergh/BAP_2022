@@ -40,7 +40,9 @@ function LogExerciseCard({ id, data, workout, setWorkout }) {
   };
 
   const save = () => {
-    console.log(inputList);
+    setDisabled(true);
+
+    setWorkout([...workout, [{ exercise: data.exerciseName }, ...inputList]]);
   };
 
   return (
@@ -59,6 +61,11 @@ function LogExerciseCard({ id, data, workout, setWorkout }) {
                       value={input.reps}
                       placeholder={data.reps}
                       disabled={disabled}
+                      className={
+                        disabled
+                          ? 'bg-white-960 border-none shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                          : 'bg-white-950 border-none shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                      }
                       onChange={(event) => handleInputChange(event, index)}
                     />
                     <div className="w-6"></div>
@@ -68,6 +75,11 @@ function LogExerciseCard({ id, data, workout, setWorkout }) {
                       value={input.weight}
                       placeholder={'weight'}
                       disabled={disabled}
+                      className={
+                        disabled
+                          ? 'bg-white-960 border-none shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                          : 'bg-white-950 border-none shadow appearance-none border rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+                      }
                       onChange={(event) => handleInputChange(event, index)}
                     />
                   </div>
