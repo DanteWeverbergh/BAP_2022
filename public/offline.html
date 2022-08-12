@@ -14,6 +14,8 @@
         background: #0d1017;
 
         color: #f0f6fc;
+        margin-left: 3rem;
+        margin-right: 3rem;
       }
 
       .text {
@@ -23,6 +25,53 @@
       h1 {
         color: #206feb;
       }
+
+      div {
+        margin: 0;
+      }
+
+      .routineCard {
+        margin-bottom: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .logoDiv {
+        background-color: #206feb;
+        height: 3rem;
+        width: 3rem;
+        border-radius: 9999px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .routineTitle {
+        color: #f0f6fc;
+        margin: 0;
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+      }
+
+      .routine__description {
+        margin: 0;
+        font-size: 1rem;
+      }
+
+      .textDiv {
+        margin-left: 0.5rem;
+      }
+
+      .routineCardContent {
+        display: flex;
+      }
+
+      .button {
+        font-size: 1.25rem;
+        line-height: 1.5rem;
+        color: #206feb;
+      }
     </style>
   </head>
   <body>
@@ -30,18 +79,39 @@
       <h1>Gains is offline</h1>
     </div>
 
-    <div>
-      <h2>Current Routine:</h2>
-      <div>
-        <div>
-          <div>logo</div>
-          <div>
-            <h1>Push Pull Legs</h1>
-            <p>6 day push pull leg routine</p>
-          </div>
+    <div></div>
+
+    <div class="routineCard">
+      <div class="routineCardContent">
+        <div class="logoDiv">1</div>
+        <div class="textDiv">
+          <h1 class="routineTitle">Bench press</h1>
+          <p class="routine__description">3 sets</p>
         </div>
-        <div>></div>
       </div>
+      <div class="button">></div>
+    </div>
+
+    <div class="routineCard">
+      <div class="routineCardContent">
+        <div class="logoDiv">2</div>
+        <div class="textDiv">
+          <h1 class="routineTitle">exercise name</h1>
+          <p class="routine__description">sets</p>
+        </div>
+      </div>
+      <div class="button">></div>
+    </div>
+
+    <div class="routineCard">
+      <div class="routineCardContent">
+        <div class="logoDiv">3</div>
+        <div class="textDiv">
+          <h1 class="routineTitle">Exercise name</h1>
+          <p class="routine__description">sets</p>
+        </div>
+      </div>
+      <div class="button">></div>
     </div>
   </body>
 </html>

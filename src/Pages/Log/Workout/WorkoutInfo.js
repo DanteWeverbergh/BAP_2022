@@ -31,6 +31,8 @@ function WorkoutInfo() {
           if (!mounted) {
             setWorkout(doc.data());
 
+            console.log(doc.data());
+
             setRoutine(doc.data().log.map((exercise) => exercise));
           }
         });
@@ -66,10 +68,12 @@ function WorkoutInfo() {
                 {/**
                 <h1>{routine.exercise[0].exName}</h1>
                  */}
-                <div className="mt-6 bg-slate-960 rounded-md px-4 py-2">
+                <div className="mt-6  py-2">
                   {routine.exercise.map((r) => (
                     <div>
-                      <h1 className="text-xl">{r.exName && r.exName}</h1>
+                      <h1 className="text-xl font-bold">
+                        {r.exercise && r.exercise}
+                      </h1>
                       <div className="flex">
                         <p>{r.reps && `${r.reps} reps`}</p>
                         <p className="ml-6">{r.weight && `${r.weight} kg`}</p>
