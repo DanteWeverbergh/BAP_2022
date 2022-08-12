@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { db } from '../../../../../Libs/Firebase';
 import DayHeader from './DayHeader';
 import ExerciseCard from './ExerciseCard';
@@ -54,12 +54,14 @@ function DayDetail() {
           </div>
 
           <div className="mx-12 fixed inset-x-0 bottom-0 mb-12">
-            <button
-              className="bg-blue-950 w-full py-2 px-4 rounded-lg text-white-950"
-              onClick={() => console.log('start workout')}
-            >
-              Start workout
-            </button>
+            <Link to={`/logworkout/${id}/${dayid}`}>
+              <button
+                className="bg-blue-950 w-full py-2 px-4 rounded-lg text-white-950"
+                onClick={() => console.log('start workout')}
+              >
+                Start workout
+              </button>
+            </Link>
           </div>
         </>
       )}

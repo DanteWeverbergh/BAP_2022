@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 function DaysCard({ id, day }) {
   useEffect(() => {
     console.log(day);
-  }, {});
+  }, []);
 
   return (
     <>

@@ -20,6 +20,7 @@ import WorkoutInfo from '../Pages/Log/Workout/WorkoutInfo';
 import ModifyRoutine from '../Pages/Log/Routines/ModifyRoutine';
 import Modify from '../Pages/Log/Routines/Forms/Modify';
 import DayDetail from '../Pages/Log/Routines/Detail/RoutineDays/DayDetail';
+import LogWorkout from '../Pages/Log/Log/LogWorkout';
 
 function Routing() {
   return (
@@ -51,6 +52,11 @@ function Routing() {
             <Route path="/log/modify/:id" element={<ModifyRoutine />} />
             <Route path="/log/modify/2/:id" element={<Modify />} />
             <Route path="/log/:id/:dayid" element={<DayDetail />} />
+
+            <Route
+              path="/logworkout/:routineId/:dayId"
+              element={<LogWorkout />}
+            />
 
             <Route path="/log/workout" element={<Workout />} />
             <Route path="/workouts/:id" element={<WorkoutInfo />} />

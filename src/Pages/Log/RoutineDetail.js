@@ -114,22 +114,13 @@ function RoutineDetail() {
             <DaysCard key={id} id={id} day={data} />
           ))}
 
-          {!isCurrentRoutine ? (
+          {!isCurrentRoutine && (
             <div className="mx-12 fixed inset-x-0 bottom-0 mb-12">
               <button
                 className="bg-blue-950 w-full py-2 px-4 rounded-lg text-white-950"
                 onClick={() => selectRoutine()}
               >
                 Select this routine
-              </button>
-            </div>
-          ) : (
-            <div className="mx-12 fixed inset-x-0 bottom-0 mb-12">
-              <button
-                className="bg-blue-950 w-full py-2 px-4 rounded-lg text-white-950"
-                onClick={() => console.log('log workout')}
-              >
-                Log workout
               </button>
             </div>
           )}

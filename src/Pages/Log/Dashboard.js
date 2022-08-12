@@ -15,6 +15,7 @@ function Dashboard() {
   const [currentRoutine, setCurrentRoutine] = useState({});
   const [rId, setRId] = useState('');
   const [workouts, setWorkouts] = useState([]);
+  const [currentRoutineId, setCurrentRoutineId] = useState('');
 
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -22,37 +23,14 @@ function Dashboard() {
     let unmounted = false;
 
     try {
-      db.collection('routines').onSnapshot((snapshot) => {
-        snapshot.docs.map((doc) => {
-          //console.log(doc.data(), doc.id);
-        });
-      });
-
       //
-      /*
 
       db.collection('users')
         .doc(user.uid)
         .get()
         .then((doc) => {
-          if (!unmounted) {
-            setUserInfo(doc.data());
-
-            const routineId = doc.data().currentRoutineId;
-
-            setRId(routineId);
-
-            db.collection('Routines')
-              .doc(routineId)
-              .get()
-              .then((r) => {
-                if (!unmounted) {
-                  setCurrentRoutine(r.data());
-                }
-              });
-          }
+          setCurrentRoutineId(doc.data().currentRoutineId);
         });
-        */
     } catch (error) {
       console.log(error.message);
     }
@@ -90,7 +68,7 @@ function Dashboard() {
         <div className="">
           <CurrentRoutine />
 
-          <Link to="/log/workout">
+          <Link to={`/log/${currentRoutineId}`}>
             <div className="mx-12">
               <div className=" bg-blue-950 w-full py-2 mt-6 flex items-center justify-center rounded-md">
                 Log your workout
