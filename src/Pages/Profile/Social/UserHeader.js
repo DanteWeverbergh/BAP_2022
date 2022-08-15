@@ -1,16 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { IoIosArrowBack, IoIosFitness } from 'react-icons/io';
+import { MdOutlineEdit } from 'react-icons/md';
 
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import Back from '../../../Components/Back';
 import { useAuthContext } from '../../../Context/AuthContext';
 import FirebaseContext from '../../../Context/Firebase';
 import { db } from '../../../Libs/Firebase';
 import { follow } from '../../../Libs/Firestore';
 
-function UserHeader({ photoUrl, u, uid }) {
-  const { user } = useAuthContext();
+function UserHeader({ u }) {
+  const { user, logout } = useAuthContext();
 
-  const { firebase } = useContext(FirebaseContext);
+  let { uid } = useParams();
+
   const [following, setFollowing] = useState([]);
   const [isFollowing, setIsFollowing] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -18,81 +21,34 @@ function UserHeader({ photoUrl, u, uid }) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    //ToDo verder uitwerken
-    let unmounted = false;
-    if (u.uid) {
-      db.collection('users')
-        .doc(uid)
-        .get()
-        .then((doc) => {
-          if (!unmounted) {
-            const followers = doc.data().followers;
+    //
 
-            followers.map((f) => {
-              if (user.uid === f) {
-                setIsFollowing(true);
-              }
-            });
-          }
-        });
-
-      db.collection('workouts')
-        .doc(uid)
-        .collection('workouts')
-        .onSnapshot((snapshot) => {
-          if (!unmounted) {
-            setWorkoutPoints(snapshot.size);
-          }
-        });
-
-      db.collection('posts')
-        .where('uid', '==', u.uid)
-        .onSnapshot((snapshot) => {
-          setPosts(snapshot.docs.map((doc) => doc.data()));
-        });
-
-      setIsLoaded(true);
-    }
-
-    return () => {
-      unmounted = true;
-    };
-  }, [u]);
+    console.log(u.followers);
+    console.log(user.uid);
+  }, []);
 
   return (
     <>
-      <div className="flex justify-between mx-6 mt-6">
-        <Link
-          className="rounded-full bg-white-950  h-8 w-8 text-center "
-          to={'/home'}
+      <div className="flex justify-between items-center ">
+        <Back />
+        <button
+          className="px-4 py-2 bg-blue-950 text-white-950 m-5 rounded-lg"
+          onClick={() => follow(user.uid, uid, isFollowing, setIsFollowing)}
         >
-          <IoIosArrowBack className="text-3xl text-center text-slate-950" />
-        </Link>
-
-        {isFollowing ? (
-          <div
-            className="px-4 bg-blue-950  rounded-md text-white"
-            onClick={() => follow(user.uid, uid, false, setIsFollowing)}
-          >
-            Unfollow
-          </div>
-        ) : (
-          <div
-            className="px-4 bg-blue-500 rounded-md text-white"
-            onClick={() => follow(user.uid, uid, true, setIsFollowing)}
-          >
-            follow
-          </div>
-        )}
+          {isFollowing ? 'unfollow' : 'follow'}
+        </button>
       </div>
 
       <div className="flex-col text-center grid place-items-center">
-        <div className=" relative w-36 h-36 grid place-items-center  bg-blue-950 rounded-full  mr-5 mt-5  ">
+        <div className=" relative w-36 h-36 grid place-items-center  bg-blue-500 rounded-full  ">
           {u.photoURL && (
             <img
               className="h-32 w-32 rounded-full object-cover"
               alt="profilePic"
-              src={u.photoURL}
+              src={`${u.photoURL.replace(
+                'https://firebasestorage.googleapis.com/v0/b/gains-dd329.appspot.com',
+                'https://ik.imagekit.io/w2g1ssyqs/'
+              )}&tr=w-500`}
             />
           )}
 
@@ -102,17 +58,15 @@ function UserHeader({ photoUrl, u, uid }) {
           </div>
         </div>
         <div className="text-2xl mt-4 mb-8 text-white-950">{u.fullName}</div>
-      </div>
-
-      <div className="w-full">
-        <div className="text-white-950  mb-4 bg-slate-960 px-4 py-2 flex justify-between">
-          <div> {isLoaded && u.following && u.following.length} following</div>
-          <div>
-            {' '}
-            {isLoaded && u.followers && u.followers.length}
-            followers
+        <div className="w-full">
+          <div className="text-white-950  mb-4 mx-24 flex justify-between">
+            <div onClick={() => console.log('following')}>
+              <div>{u.following ? u.following.length : '0'} </div>following
+            </div>
+            <div onClick={() => console.log('followers')}>
+              <div>{u.followers ? u.followers.length : '0'} </div>followers
+            </div>
           </div>
-          <div> {isLoaded && posts && posts.length} posts</div>
         </div>
       </div>
     </>

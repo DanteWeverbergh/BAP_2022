@@ -1,10 +1,14 @@
+import { doc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
+import { useAuthContext } from '../../Context/AuthContext';
 import { db } from '../../Libs/Firebase';
 import AllRoutines from './Routines/AllRoutines';
 import CurrentRoutine from './Routines/CurrentRoutine';
 
 function Routines({ u }) {
   const [routines, setRoutines] = useState([]);
+  const { user } = useAuthContext();
+  const [currentRoutineId, setCurrentRoutineId] = useState('');
 
   //search
 
@@ -12,6 +16,13 @@ function Routines({ u }) {
     //
 
     let mounted = false;
+
+    db.collection('users')
+      .doc(user.uid)
+      .get()
+      .then((doc) => {
+        setCurrentRoutineId(doc.data().currentRoutineId);
+      });
 
     db.collection('routines').onSnapshot((snapshot) => {
       if (!mounted) {
@@ -31,7 +42,7 @@ function Routines({ u }) {
 
   return (
     <>
-      <CurrentRoutine />
+      {currentRoutineId && <CurrentRoutine />}
       <AllRoutines />
     </>
   );

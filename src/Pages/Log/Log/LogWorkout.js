@@ -72,6 +72,10 @@ function LogWorkout() {
     logWorkout(user, day, workout, timer);
   };
 
+  const addExercise = () => {
+    //
+  };
+
   return (
     <>
       <div className="bg-slate-950 pb-2 fixed w-full">
@@ -117,6 +121,10 @@ function LogWorkout() {
               setWorkout={setWorkout}
             />
           ))}
+
+        <div className="text-white-950 mx-12 mb-12 bg-green-950 rounded-lg py-2 flex items-center justify-center" onClick={() => addExercise()}>
+          add Exercise
+        </div>
 
         <div className="mx-12 mb-12">
           <button

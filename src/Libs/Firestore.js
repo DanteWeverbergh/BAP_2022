@@ -200,9 +200,11 @@ export async function recordsUpdate(user, lift, rm) {
 
 export async function follow(followerUid, profileUid, follow, setIsFollowing) {
   if (follow) {
-    //follow
+    console.log('ontvlg');
+  } else {
+    console.log('volg');
+
     try {
-      //
       await db
         .collection('users')
         .doc(followerUid)
@@ -213,29 +215,47 @@ export async function follow(followerUid, profileUid, follow, setIsFollowing) {
         .doc(profileUid)
         .update('followers', FieldValue.arrayUnion(followerUid));
 
-      setIsFollowing(true);
-    } catch (error) {
-      console.log(error.message);
-    }
-  } else {
-    //unfollow
-
-    await db
-      .collection('users')
-      .doc(followerUid)
-      .update('following', FieldValue.arrayRemove(profileUid));
-
-    await db
-      .collection('users')
-      .doc(profileUid)
-      .update('followers', FieldValue.arrayRemove(followerUid));
-
-    setIsFollowing(false);
-    try {
-    } catch (error) {
-      console.log(error.message);
-    }
+      console.log('volgt');
+    } catch (error) {}
   }
+
+  // if (follow) {
+  //   //follow
+  //   try {
+  //     //
+  //     await db
+  //       .collection('users')
+  //       .doc(followerUid)
+  //       .update('following', FieldValue.arrayUnion(profileUid));
+
+  //     await db
+  //       .collection('users')
+  //       .doc(profileUid)
+  //       .update('followers', FieldValue.arrayUnion(followerUid));
+
+  //     setIsFollowing(true);
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // } else {
+  //   //unfollow
+
+  //   await db
+  //     .collection('users')
+  //     .doc(followerUid)
+  //     .update('following', FieldValue.arrayRemove(profileUid));
+
+  //   await db
+  //     .collection('users')
+  //     .doc(profileUid)
+  //     .update('followers', FieldValue.arrayRemove(followerUid));
+
+  //   setIsFollowing(false);
+  //   try {
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // }
 }
 
 /**

@@ -66,15 +66,24 @@ function Dashboard() {
     <>
       <div className=" text-white-950 ">
         <div className="">
-          <CurrentRoutine />
-
-          <Link to={`/log/${currentRoutineId}`}>
-            <div className="mx-12">
-              <div className=" bg-blue-950 w-full py-2 mt-6 flex items-center justify-center rounded-md">
-                Log your workout
+          {currentRoutineId ? (
+            <CurrentRoutine />
+          ) : (
+            <>
+              <div className="mx-12 mt-6">
+                You have not selected a routine yet.
               </div>
-            </div>
-          </Link>
+            </>
+          )}
+          {currentRoutineId && (
+            <Link to={`/log/${currentRoutineId}`}>
+              <div className="mx-12">
+                <div className=" bg-blue-950 w-full py-2 mt-6 flex items-center justify-center rounded-md">
+                  Log your workout
+                </div>
+              </div>
+            </Link>
+          )}
         </div>
 
         <div>

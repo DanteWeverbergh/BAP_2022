@@ -29,6 +29,7 @@ function User() {
       .doc(uid)
       .get()
       .then((doc) => {
+        console.log(doc.data());
         if (!unmounted) {
           setUserProfile(doc.data());
         }
@@ -43,10 +44,12 @@ function User() {
 
   return (
     <>
-      <div className="text-white-950">
-        <h1>test</h1>
-      </div>
+      {isLoaded && <UserHeader u={userProfile} />}
+
+      {isLoaded && <UserRecords u={userProfile} />}
       {/* {isLoaded && <UserHeader u={userProfile} uid={uid} />}
+
+
 
       <UserRecords uid={uid} />
       <UserPosts />

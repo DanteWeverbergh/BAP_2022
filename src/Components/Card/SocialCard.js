@@ -112,7 +112,7 @@ function SocialCard({ post, postId, setModal, setPostId }) {
         <div className="mt-4">
           {post.imageKit && post.photoUrl && (
             <img
-              className="rounded-lg border-solid "
+              className="rounded-lg border-solid max-h-96 object-cover"
               alt="pic"
               //src="https://picsum.photos/400"
               src={post.imageKit}
@@ -120,7 +120,7 @@ function SocialCard({ post, postId, setModal, setPostId }) {
           )}
           {post.photoUrl && !post.imageKit && (
             <img
-              className="rounded-lg border-solid "
+              className="rounded-lg border-solid max-h-96 object-cover"
               alt="pic"
               //src="https://picsum.photos/400"
               src={post.photoUrl}
