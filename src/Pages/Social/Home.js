@@ -109,6 +109,20 @@ function Home() {
       .then((res) => {
         const data = res.data();
 
+        console.log(res.data().currentRoutineId);
+        const currentRoutine = res.data().currentRoutineId;
+        db.collection('routines')
+          .doc(currentRoutine)
+          .get()
+          .then((routine) => {
+            console.log(routine.data());
+
+            localStorage.setItem(
+              'currentRoutine',
+              JSON.stringify(routine.data())
+            );
+          });
+
         setUserType(data.userType);
       });
   }, []);
