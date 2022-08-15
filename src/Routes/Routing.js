@@ -10,7 +10,6 @@ import Log from '../Pages/Log/Log';
 import Createposts from '../Pages/Posts/Createposts';
 import Profile from '../Pages/Profile/Profile';
 import RoutineDetail from '../Pages/Log/RoutineDetail';
-import CreateRoutine from '../Pages/Log/Routines/CreateRoutine';
 import Workout from '../Pages/Log/Workout/Workout';
 import CreateExercise from '../Pages/PersonalTrainer/Exercises/CreateExercise';
 import User from '../Pages/Profile/Social/User';
@@ -21,6 +20,7 @@ import ModifyRoutine from '../Pages/Log/Routines/ModifyRoutine';
 import Modify from '../Pages/Log/Routines/Forms/Modify';
 import DayDetail from '../Pages/Log/Routines/Detail/RoutineDays/DayDetail';
 import LogWorkout from '../Pages/Log/Log/LogWorkout';
+import CreateRoutine from '../Pages/Log/Routines/Create/CreateRoutine';
 
 function Routing() {
   return (

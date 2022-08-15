@@ -27,7 +27,7 @@ function SelectForm({ isLoaded, exercisesDB, exerciseList, setExerciseList }) {
       {exerciseList.map((x, i) => (
         <div className="mt-8">
           <Label label={'Exercise'} htmlFor="exName" />
-          <select
+          {/* <select
             className="mx-auto w-full rounded-md h-8 bg-white-950"
             name="exName"
             id="exName"
@@ -36,7 +36,16 @@ function SelectForm({ isLoaded, exercisesDB, exerciseList, setExerciseList }) {
           >
             {isLoaded &&
               exercisesDB.map((e) => <option value={e.name}> {e.name}</option>)}
-          </select>
+          </select> */}
+
+          <Input
+            id={'exName'}
+            name="exName"
+            placeholder={'Exercise'}
+            onChange={(e) => handleInputChange(e, i)}
+            value={x.exName}
+            type="text"
+          />
 
           <div className="flex mt-4">
             <div>
@@ -55,7 +64,7 @@ function SelectForm({ isLoaded, exercisesDB, exerciseList, setExerciseList }) {
             <div>
               <Label label={'rep range'} htmlFor="repRange" />
               <Input
-                type={'text'}
+                type={'number'}
                 name="repRange"
                 value={x.repRange}
                 placeholder="Rep range"
@@ -65,17 +74,22 @@ function SelectForm({ isLoaded, exercisesDB, exerciseList, setExerciseList }) {
             </div>
           </div>
 
-          <div className="btn-box">
+          <div className="text-white-950 flex mt-6">
             {exerciseList.length !== 1 && (
-              <button className="mr10" onClick={() => handleRemoveClick(i)}>
-                <IoMdRemoveCircle className="text-2xl mt-4 text-white-950 " />
-              </button>
+              <div
+                className="bg-blue-950 h-8 w-8 rounded-lg flex justify-center items-center mr-2"
+                onClick={() => handleRemoveClick(i)}
+              >
+                -
+              </div>
             )}
-            {exerciseList.length - 1 === i && (
-              <button onClick={handleAddClick}>
-                <BsPlusCircleFill className="text-2xl absolute right-16 text-white-950" />
-              </button>
-            )}
+
+            <div
+              className="bg-blue-950 h-8 w-8 rounded-lg flex justify-center items-center "
+              onClick={handleAddClick}
+            >
+              +
+            </div>
           </div>
         </div>
       ))}

@@ -60,42 +60,45 @@ function CreateRoutine() {
       Exercises: exerciseList,
     };
 
-    if (day === '1') {
-      try {
-        await db
-          .collection('Routines')
-          .add(data)
-          .then((docRef) => {
-            db.collection('Routines')
-              .doc(docRef.id)
-              .collection('Exercises')
-              .add(dataa);
-            setDocRef(docRef.id);
-            //reset al fields
-            setDayName('');
-            setExerciseList([
-              {
-                exName: '',
-                sets: '',
-                repRange: '',
-              },
-            ]);
-          });
+    console.log('data', data);
+    console.log('dataaaa', dataa);
 
-        alert(`Succesfullt add day ${data.day}/${days}`);
-      } catch (error) {
-        console.log(error.message);
-      }
-    } else {
-      addDayToRoutine(
-        dataa,
-        docRef,
-        days,
-        setDay,
-        setRoutineDone,
-        setExerciseList
-      );
-    }
+    // if (day === '1') {
+    //   try {
+    //     await db
+    //       .collection('routines')
+    //       .add(data)
+    //       .then((docRef) => {
+    //         db.collection('routines')
+    //           .doc(docRef.id)
+    //           .collection('Exercises')
+    //           .add(dataa);
+    //         setDocRef(docRef.id);
+    //         //reset al fields
+    //         setDayName('');
+    //         setExerciseList([
+    //           {
+    //             exName: '',
+    //             sets: '',
+    //             repRange: '',
+    //           },
+    //         ]);
+    //       });
+
+    //     alert(`Succesfullt add day ${data.day}/${days}`);
+    //   } catch (error) {
+    //     console.log(error.message);
+    //   }
+    // } else {
+    //   addDayToRoutine(
+    //     dataa,
+    //     docRef,
+    //     days,
+    //     setDay,
+    //     setRoutineDone,
+    //     setExerciseList
+    //   );
+    // }
   };
 
   useEffect(() => {
