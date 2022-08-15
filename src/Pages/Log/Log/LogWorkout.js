@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { IoArrowBack } from 'react-icons/io5';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Router, useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Back from '../../../Components/Back';
 import Timer from '../../../Components/Timer';
@@ -13,6 +13,7 @@ function LogWorkout() {
   let { routineId, dayId } = useParams();
   const { user } = useAuthContext();
   const navigate = useNavigate();
+
   const [exercises, setExercises] = useState([]);
   const [isLoaded, setisLoaded] = useState(false);
   const [day, setDay] = useState('');
@@ -25,6 +26,8 @@ function LogWorkout() {
   const [minutes, setMinutes] = useState(0);
   const [hours, setHours] = useState(0);
   const [isActive, setIsActive] = useState(false);
+
+  const [isSaved, setIsSaved] = useState(false);
 
   const [extraExercise, setExtraExercise] = useState([]);
 
@@ -72,8 +75,14 @@ function LogWorkout() {
     //stop timer
     setIsActive(false);
 
-    logWorkout(user, day, workout, timer);
+    logWorkout(user, day, workout, timer, setIsSaved);
   };
+
+  useEffect(() => {
+    if (isSaved) {
+      navigate('/log');
+    }
+  }, [isSaved]);
 
   const addExercise = () => {
     //
@@ -94,7 +103,9 @@ function LogWorkout() {
           sets: 1,
         };
 
-        setExtraExercise([data]);
+        console.log(data);
+
+        setExtraExercise([...extraExercise, data]);
       }
     });
   };

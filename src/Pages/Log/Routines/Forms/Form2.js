@@ -5,6 +5,7 @@ import { db } from '../../../../Libs/Firebase';
 import DaySelect from './DaySelect';
 import SelectForm from './SelectForm';
 import { IoArrowBack } from 'react-icons/io5';
+import Back from '../../../../Components/Back';
 
 function Form2({
   setPage,
@@ -52,11 +53,12 @@ function Form2({
   return (
     <>
       <button
-        className="mt-6 bg-white-950 flex items-center justify-center text-slate-950 h-12 w-12 py-2 px-4 rounded-full"
+        className="mt-6 bg-blue-950 flex items-center justify-center text-white-950 h-12 w-12 py-2 px-4 rounded-full"
         onClick={() => setPage(1)}
       >
-        <IoArrowBack className="text-slate-950 text-2xl" />
+        <IoArrowBack className="text-white-950 text-3xl" />
       </button>
+
       <div className="mt-8">
         <Label label={'day'} htmlFor="day" />
         <select
@@ -72,7 +74,6 @@ function Form2({
           ))}
         </select>
       </div>
-
       <div className="mt-6">
         <Label htmlFor={'dayName'} label="day name" />
         <Input
@@ -84,20 +85,19 @@ function Form2({
           id={'dayName'}
         />
       </div>
+
       <SelectForm
         isLoaded={isLoaded}
         exercisesDB={exercisesDB}
         exerciseList={exerciseList}
         setExerciseList={setExerciseList}
       />
-
       <button
         className="mt-12 bg-blue-950 text-white-950 w-full py-2 px-4 rounded-md"
         type="submit"
       >
         Next
       </button>
-
       <div className="mt-24"></div>
     </>
   );

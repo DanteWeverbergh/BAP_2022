@@ -113,14 +113,14 @@ function CreateRoutine() {
 
       <div className="text-white-950 mx-12 text-2xl">Create a new routine</div>
 
-      <div
+      {/* <div
         className="text-white-950 mt-6 bg-slate-960 px-4 rounded-md py-2 mx-12"
         onClick={() => setExerciseModal(!exerciseModal)}
       >
         Exercise not in the list? Add the exercise!
-      </div>
+      </div> */}
 
-      {exerciseModal && <ExerciseModal setExerciseModal={setExerciseModal} />}
+      {/* {exerciseModal && <ExerciseModal setExerciseModal={setExerciseModal} />} */}
 
       <form className="mx-12" method="POST" onSubmit={handleSubmit}>
         {page === 1 && (

@@ -360,7 +360,7 @@ export async function checkDuplicates(col, check, setExists, setIsLoaded) {
  */
 
 //log a workout
-export async function logWorkout(user, day, data, time) {
+export async function logWorkout(user, day, data, time, setIsSaved) {
   //get name of exercise
   data.map((t) => console.log('naam:', t[0].exName));
 
@@ -386,7 +386,7 @@ export async function logWorkout(user, day, data, time) {
       text: `${user.displayName} has completed ${day} in ${time}`,
     });
 
-    alert('succes!');
+    setIsSaved(true);
   } catch (error) {
     console.log(error.message);
   }

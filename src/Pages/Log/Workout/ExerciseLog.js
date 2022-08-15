@@ -5,6 +5,7 @@ import { BsPlusCircleFill } from 'react-icons/bs';
 import { IoMdRemoveCircle } from 'react-icons/io';
 import { logDOM } from '@testing-library/react';
 import { MdDone } from 'react-icons/md';
+import { FaEdit } from 'react-icons/fa';
 
 function ExerciseLog({ exercise, setLog, log }) {
   useEffect(() => {}, []);
@@ -72,6 +73,7 @@ function ExerciseLog({ exercise, setLog, log }) {
                     <IoMdRemoveCircle className="text-xl text-white-950 mt-2 " />
                   </button>
                 )}
+
                 {inputList.length - 1 === i && (
                   <div>
                     <button onClick={handleAddClick} disabled={disabled}>
@@ -94,7 +96,6 @@ function ExerciseLog({ exercise, setLog, log }) {
             </div>
           );
         })}
-
         {/** 
         <div style={{ marginTop: 20 }}>{JSON.stringify(inputList)}</div>
         */}

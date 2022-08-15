@@ -1,5 +1,7 @@
 import { array } from 'prop-types';
 import React, { useEffect, useState } from 'react';
+import { VscEdit } from 'react-icons/vsc';
+import Swal from 'sweetalert2';
 import Input from '../../../Components/Input';
 import Label from '../../../Components/Label';
 
@@ -9,9 +11,13 @@ function LogExerciseCard({ id, data, workout, setWorkout }) {
   const [inputList, setInputList] = useState([{ reps: '', weight: '' }]);
   const [disabled, setDisabled] = useState(false);
 
+  const [exercise, setExercise] = useState('');
+
   useEffect(() => {
     // let newField = { reps: '', weight: '' };
     // [...Array(4)].map(() => setInputList([...inputList, newField]));
+
+    setExercise(data.exerciseName);
 
     setInputList([...Array(data.sets)].map(() => ({ reps: '', weight: '' })));
   }, []);
@@ -42,13 +48,29 @@ function LogExerciseCard({ id, data, workout, setWorkout }) {
   const save = () => {
     setDisabled(true);
 
-    setWorkout([...workout, [{ exercise: data.exerciseName }, ...inputList]]);
+    setWorkout([...workout, [{ exercise: exercise }, ...inputList]]);
+  };
+
+  const editExercise = () => {
+    Swal.fire({
+      text: 'Change exercsise',
+      input: 'text',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setExercise(result.value);
+      }
+    });
   };
 
   return (
     <>
       <div className="text-white-950 mx-12 mb-12">
-        <h1 className="font-bold text-xl mb-2">{data.exerciseName}</h1>
+        <div className="flex justify-between items-center">
+          <h1 className="font-bold text-xl mb-2">{exercise}</h1>
+          <div className="h-6 w-6 bg-blue-950 rounded-lg flex items-center justify-center">
+            <VscEdit onClick={() => editExercise()} />
+          </div>
+        </div>
         <div className="text-white-950">
           <div>
             <form>

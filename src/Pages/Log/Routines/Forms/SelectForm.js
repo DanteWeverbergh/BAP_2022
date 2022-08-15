@@ -51,6 +51,7 @@ function SelectForm({ isLoaded, exercisesDB, exerciseList, setExerciseList }) {
               />
             </div>
 
+            <div className="w-6"></div>
             <div>
               <Label label={'rep range'} htmlFor="repRange" />
               <Input
