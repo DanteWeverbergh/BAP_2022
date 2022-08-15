@@ -59,7 +59,7 @@ function LogExerciseCard({ id, data, workout, setWorkout }) {
                       type={'number'}
                       name={'reps'}
                       value={input.reps}
-                      placeholder={data.reps}
+                      placeholder={data.reps ? data.reps : 'reps'}
                       disabled={disabled}
                       className={
                         disabled

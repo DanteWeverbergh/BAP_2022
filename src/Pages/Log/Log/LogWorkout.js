@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { IoArrowBack } from 'react-icons/io5';
 import { useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import Back from '../../../Components/Back';
 import Timer from '../../../Components/Timer';
 import { useAuthContext } from '../../../Context/AuthContext';
@@ -24,6 +25,8 @@ function LogWorkout() {
   const [minutes, setMinutes] = useState(0);
   const [hours, setHours] = useState(0);
   const [isActive, setIsActive] = useState(false);
+
+  const [extraExercise, setExtraExercise] = useState([]);
 
   useEffect(() => {
     //
@@ -74,6 +77,26 @@ function LogWorkout() {
 
   const addExercise = () => {
     //
+    Swal.fire({
+      title: 'Add extra exercise',
+      input: 'text',
+      showCancelButton: true,
+      confirmButtonColor: '#206FEB',
+      cancelButtonColor: '#DA3633',
+      color: '#F0F6FC',
+      background: '#0D1017',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log(result.value);
+
+        const data = {
+          exerciseName: result.value,
+          sets: 1,
+        };
+
+        setExtraExercise([data]);
+      }
+    });
   };
 
   return (
@@ -122,7 +145,18 @@ function LogWorkout() {
             />
           ))}
 
-        <div className="text-white-950 mx-12 mb-12 bg-green-950 rounded-lg py-2 flex items-center justify-center" onClick={() => addExercise()}>
+        {extraExercise.map((data) => (
+          <LogExerciseCard
+            data={data}
+            workout={workout}
+            setWorkout={setWorkout}
+          />
+        ))}
+
+        <div
+          className="text-white-950 mx-12 mb-12 bg-green-950 rounded-lg py-2 flex items-center justify-center"
+          onClick={() => addExercise()}
+        >
           add Exercise
         </div>
 
