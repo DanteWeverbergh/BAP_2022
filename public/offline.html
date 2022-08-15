@@ -8,7 +8,9 @@
       html {
         height: 100%;
       }
+
       body {
+        font-family: sans-serif;
         height: 100%;
         margin: 0;
         background: #0d1017;
@@ -79,7 +81,14 @@
       <h1>Gains is offline</h1>
     </div>
 
-    <div></div>
+    <div>
+      <h1 id="routineName">
+        ded
+        <script>
+          JSON.parse(localStorage.getItem('currentRoutine')).name;
+        </script>
+      </h1>
+    </div>
 
     <div class="routineCard">
       <div class="routineCardContent">
@@ -113,5 +122,22 @@
       </div>
       <div class="button">></div>
     </div>
+
+    <div id="myDIV"></div>
   </body>
+
+  <script>
+    document.getElementById('routineName').innerHTML = JSON.parse(
+      localStorage.getItem('currentRoutine')
+    ).name;
+    console.log(JSON.parse(localStorage.getItem('currentRoutine')).name);
+
+    const days = JSON.parse(localStorage.getItem('currentRoutine')).days;
+
+    for (i = 0; i < days; i++) {
+      const para = document.createElement('p');
+      para.innerHTML = 'This is a paragraph.';
+      document.getElementById('myDIV').appendChild(para);
+    }
+  </script>
 </html>

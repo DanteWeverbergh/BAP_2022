@@ -10,6 +10,7 @@ function ChatProfile({ chat }) {
   const [cardUser, setCardUser] = useState({});
   const [uid, setUid] = useState('');
   const [date, setDate] = useState('');
+  const [lastMessage, setLastMessage] = useState('');
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [photoUrl, setPhotoUrl] = useState(
@@ -17,7 +18,15 @@ function ChatProfile({ chat }) {
   );
 
   useEffect(() => {
-    console.log(chat);
+    console.log('chat', chat);
+
+    //get chat
+    db.collection('chats')
+      .doc(chat.chatId)
+      .get()
+      .then((doc) => {
+        setLastMessage(doc.data().lastMessage);
+      });
 
     //user
     db.collection('users')
@@ -85,7 +94,7 @@ function ChatProfile({ chat }) {
                   <h1 className="font-bold text-xl routine__name">
                     {cardUser.fullName}
                   </h1>
-                  <p className="routine__description">Laatste bericht</p>
+                  <p className="routine__description">{lastMessage}</p>
                 </div>
               </div>
               <div className="text-blue-950 w-12 h-12 rounded-lg flex items-center justify-center">

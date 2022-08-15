@@ -8,7 +8,7 @@ function ChatBubble({ message }) {
     <>
       {user.uid === message.uid ? (
         <li class="flex justify-end">
-          <div class="relative max-w-xl px-4 py-2 text-white-950 bg-slate-960 rounded shadow">
+          <div class="relative max-w-xl px-4 py-2 text-slate-950 bg-white-950 rounded shadow">
             <span class="block">{message.message}</span>
           </div>
         </li>

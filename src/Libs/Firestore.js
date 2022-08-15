@@ -246,13 +246,13 @@ export async function follow(followerUid, profileUid, follow, setIsFollowing) {
 
 export async function sendMessage(message, uid, chatId) {
   try {
-    await db.collection('chat').doc(chatId).collection('messages').add({
+    await db.collection('chats').doc(chatId).collection('messages').add({
       created: FieldValue.serverTimestamp(),
       message,
       uid,
     });
 
-    await db.collection('chat').doc(chatId).update({
+    await db.collection('chats').doc(chatId).update({
       lastUpdated: FieldValue.serverTimestamp(),
       lastMessage: message,
     });

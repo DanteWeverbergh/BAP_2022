@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useParams } from 'react-router-dom';
 import { db } from '../../../Libs/Firebase';
 import ChatBubble from './ChatBubble';
 
-function ChatMessage({ chatId }) {
+function ChatMessage() {
+  let { chatid } = useParams();
   const [messages, setMessages] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -12,12 +14,19 @@ function ChatMessage({ chatId }) {
   useEffect(() => {
     //
 
-    db.collection('chat')
-      .doc(chatId)
+    console.log(chatid);
+
+    db.collection('chats')
+      .doc(chatid)
       .collection('messages')
       .orderBy('created')
       .onSnapshot((snapshot) => {
-        setMessages(snapshot.docs.map((doc) => doc.data()));
+        setMessages(
+          snapshot.docs.map((doc) => ({
+            id: doc.id,
+            data: doc.data(),
+          }))
+        );
       });
 
     setIsLoaded(true);
@@ -30,19 +39,17 @@ function ChatMessage({ chatId }) {
 
   return (
     <>
-      <ul className="space-y-2 mt-6">
+      <ul className="space-y-2 mt-6 mx-12">
         {isLoaded &&
-          messages.map((message) => <ChatBubble message={message} />)}
+          messages.map(({ id, data }) => (
+            <ChatBubble key={id} message={data} />
+          ))}
       </ul>
 
       {/**
        * div for scroll
        */}
       <div className="mt-24" ref={messageEndRef}></div>
-
-      {isLoaded && !messages && (
-        <p className="text-white text-center mt-4">No message yet!</p>
-      )}
     </>
   );
 }

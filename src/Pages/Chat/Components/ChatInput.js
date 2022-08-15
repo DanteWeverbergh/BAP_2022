@@ -1,28 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import { IoSend } from 'react-icons/io5';
+import { useParams } from 'react-router-dom';
 import Input from '../../../Components/Input';
 import { useAuthContext } from '../../../Context/AuthContext';
 import { sendMessage } from '../../../Libs/Firestore';
 
-function ChatInput({ chatId }) {
+function ChatInput() {
+  let { chatid } = useParams();
   const [message, setMessage] = useState('');
 
   const { user } = useAuthContext();
 
   useEffect(() => {
     //
+
+    console.log(chatid);
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    sendMessage(message, user.uid, chatId);
+    console.log(message);
+    console.log(user.uid);
+    console.log(chatid);
+
+    sendMessage(message, user.uid, chatid);
+
+    // sendMessage(message, user.uid, chatId);
 
     setMessage('');
   };
   return (
     <>
-      <div className="fixed inset-x-0 bottom-0 py-4 rounded-md z-50 mt-12 bg-slate-950">
+      <div className="fixed inset-x-0 bottom-0 py-4 rounded-md z-50 mt-12 mx-5 bg-slate-950">
         <form className="flex" onSubmit={handleSubmit} method="POST">
           <Input
             type={'text'}

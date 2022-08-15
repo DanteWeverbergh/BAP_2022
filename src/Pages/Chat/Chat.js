@@ -68,9 +68,11 @@ function Chat() {
 
       <div className="mt-24"></div>
 
-      {chat.id && <ChatMessage chatId={chat.id} />}
+      <div>
+        <ChatInput />
+      </div>
 
-      {chat.id && <ChatInput chatId={chat.id} />}
+      <ChatMessage />
     </>
   );
 }
