@@ -93,6 +93,9 @@ export const AuthContextProvider = ({ children }) => {
     });
 
     signOut(auth);
+
+    //clear localstorage
+    localStorage.clear();
   };
 
   const forgotPassword = (email) => {

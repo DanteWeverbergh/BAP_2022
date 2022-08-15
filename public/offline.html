@@ -24,22 +24,18 @@
         font-size: 2em;
       }
 
-      h1 {
-        color: #206feb;
-      }
-
       div {
         margin: 0;
       }
 
-      .routineCard {
+      #routineCard {
         margin-bottom: 3rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
       }
 
-      .logoDiv {
+      #logoDiv {
         background-color: #206feb;
         height: 3rem;
         width: 3rem;
@@ -49,78 +45,63 @@
         align-items: center;
       }
 
-      .routineTitle {
+      #routineTitle {
         color: #f0f6fc;
         margin: 0;
         font-size: 1.25rem;
         line-height: 1.75rem;
       }
 
-      .routine__description {
+      #routine__description {
         margin: 0;
         font-size: 1rem;
       }
 
-      .textDiv {
+      #textDiv {
         margin-left: 0.5rem;
       }
 
-      .routineCardContent {
+      #routineCardContent {
         display: flex;
       }
 
-      .button {
+      #button {
         font-size: 1.25rem;
         line-height: 1.5rem;
         color: #206feb;
       }
+
+      #routineName {
+        background-color: #206feb;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        color: #f0f6fc;
+        border-radius: 0.5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        font-size: 1.5rem;
+        margin-bottom: 4rem;
+      }
+
+      .offline {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #f0f6fc;
+      }
     </style>
   </head>
   <body>
-    <div>
-      <h1>Gains is offline</h1>
+    <div class="offline">
+      <h1>! Gains is offline !</h1>
     </div>
 
     <div>
       <h1 id="routineName">
-        ded
         <script>
           JSON.parse(localStorage.getItem('currentRoutine')).name;
         </script>
       </h1>
-    </div>
-
-    <div class="routineCard">
-      <div class="routineCardContent">
-        <div class="logoDiv">1</div>
-        <div class="textDiv">
-          <h1 class="routineTitle">Bench press</h1>
-          <p class="routine__description">3 sets</p>
-        </div>
-      </div>
-      <div class="button">></div>
-    </div>
-
-    <div class="routineCard">
-      <div class="routineCardContent">
-        <div class="logoDiv">2</div>
-        <div class="textDiv">
-          <h1 class="routineTitle">exercise name</h1>
-          <p class="routine__description">sets</p>
-        </div>
-      </div>
-      <div class="button">></div>
-    </div>
-
-    <div class="routineCard">
-      <div class="routineCardContent">
-        <div class="logoDiv">3</div>
-        <div class="textDiv">
-          <h1 class="routineTitle">Exercise name</h1>
-          <p class="routine__description">sets</p>
-        </div>
-      </div>
-      <div class="button">></div>
     </div>
 
     <div id="myDIV"></div>
@@ -137,7 +118,35 @@
     for (i = 0; i < days; i++) {
       const para = document.createElement('p');
       para.innerHTML = 'This is a paragraph.';
-      document.getElementById('myDIV').appendChild(para);
+
+      const routineCard = document.createElement('div');
+      routineCard.id = 'routineCard';
+      const routineCardContent = document.createElement('div');
+      routineCardContent.id = 'routineCardContent';
+
+      const logoDiv = document.createElement('div');
+      logoDiv.id = 'logoDiv';
+      logoDiv.innerHTML = i + 1;
+
+      const textDiv = document.createElement('div');
+      textDiv.id = 'textDiv';
+      const routineTitle = document.createElement('h1');
+      routineTitle.id = 'routineTitle';
+      routineTitle.innerHTML = 'Day Name';
+
+      const routineDescription = document.createElement('p');
+      routineDescription.id = 'routine__description';
+      routineDescription.innerHTML = 'Exercises:';
+
+      textDiv.appendChild(routineTitle);
+      textDiv.appendChild(routineDescription);
+
+      routineCardContent.appendChild(logoDiv);
+      routineCardContent.appendChild(textDiv);
+
+      routineCard.appendChild(routineCardContent);
+
+      document.getElementById('myDIV').appendChild(routineCard);
     }
   </script>
 </html>
