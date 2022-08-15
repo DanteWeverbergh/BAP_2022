@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import { IoArrowBack } from 'react-icons/io5';
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import Back from '../../../Components/Back';
 import { useAuthContext } from '../../../Context/AuthContext';
 import { db } from '../../../Libs/Firebase';
 import { deleteContact } from '../../../Libs/Firestore';
 
-function ChatHeader({ chatId }) {
-  let { uid } = useParams();
+function ChatHeader({ contactUid }) {
   const { user } = useAuthContext();
   let Navigate = useNavigate();
 
@@ -18,9 +18,11 @@ function ChatHeader({ chatId }) {
   useEffect(() => {
     //
 
+    console.log('contact........', contactUid);
+
     let mounted = false;
     db.collection('users')
-      .doc(uid)
+      .doc(contactUid)
       .get()
       .then((doc) => {
         if (!mounted) {
@@ -28,20 +30,12 @@ function ChatHeader({ chatId }) {
         }
       });
 
-    setIsLoaded(true);
+    //setIsLoaded(true);
 
     return () => {
       mounted = true;
     };
   }, []);
-
-  const deleteChat = () => {
-    const answer = window.confirm('del');
-
-    if (answer) {
-      deleteContact(user, uid, chatId, setIsDeleted);
-    }
-  };
 
   useEffect(() => {
     if (isDeleted) {
@@ -51,37 +45,23 @@ function ChatHeader({ chatId }) {
 
   return (
     <>
-      <div className="fixed inset-x-0 z-50 top-0 flex h-16 bg-slate-960 items-center justify-between rounded-b-md text-white-950 ">
-        <Back link={'/chat'} />
-        <div
-          className="bg-red-950 h-12 w-12 rounded-full flex items-center justify-center text-slate-950 -ml-28"
-          onClick={() => deleteChat()}
-        >
-          {' '}
-          X
+      <div className="mb-24 ">
+        <div className="absolute top-0 left-0 ">
+          <Back />
         </div>
-        <div className="mr-6 flex items-center">
-          <div className="text-white text-2xl ml-4">
-            <h1>{isLoaded && chatUser.username}</h1>
+        <div className="absolute top-0 right-0 ">
+          <div className="flex items-center">
+            <h1 className="text-white-950 text-xl font-bold">
+              {chatUser.fullName}{' '}
+            </h1>
+            <div className="bg-blue-950 h-12 w-12 flex items-center justify-center rounded-full m-5">
+              <img
+                src={chatUser.photoURL}
+                className="h-11 w-11 object-cover rounded-full "
+                alt="profileImage"
+              />
+            </div>
           </div>
-
-          {isLoaded && chatUser.photoURL ? (
-            <Link to={`/profile/${uid}`}>
-              <img
-                className="h-12 w-12 rounded-full ml-4 object-cover "
-                src={isLoaded && chatUser.photoURL}
-                alt="profile"
-              />
-            </Link>
-          ) : (
-            <Link to={`/profile/${uid}`}>
-              <img
-                className="h-12 w-12 rounded-full ml-4"
-                src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png"
-                alt="profile"
-              />
-            </Link>
-          )}
         </div>
       </div>
     </>

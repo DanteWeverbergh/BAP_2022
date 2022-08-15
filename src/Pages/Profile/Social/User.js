@@ -41,22 +41,17 @@ function User() {
     };
   }, []);
 
-  const test = () => {
-    console.log('array', deadliftGifs);
-
-    var gif = deadliftGifs[Math.floor(Math.random() * deadliftGifs.length)];
-
-    console.log('enkele', gif);
-  };
-
   return (
     <>
-      {isLoaded && <UserHeader u={userProfile} uid={uid} />}
+      <div className="text-white-950">
+        <h1>test</h1>
+      </div>
+      {/* {isLoaded && <UserHeader u={userProfile} uid={uid} />}
 
       <UserRecords uid={uid} />
       <UserPosts />
 
-      <Footer />
+      <Footer /> */}
     </>
   );
 }

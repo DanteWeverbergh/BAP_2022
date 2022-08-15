@@ -63,7 +63,7 @@ function Routing() {
 
             {/*Chat */}
             <Route path="chat" element={<ChatDashboard />} />
-            <Route path="chat/:uid" element={<Chat />} />
+            <Route path="chat/:chatid" element={<Chat />} />
 
             <Route path="/exercise/create" element={<CreateExercise />} />
           </Route>
