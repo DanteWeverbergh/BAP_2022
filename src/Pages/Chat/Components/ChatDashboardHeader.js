@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../../Context/AuthContext';
 import { TbMessagePlus } from 'react-icons/tb';
 import Swal from 'sweetalert2';
@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 function ChatDashboardHeader() {
   const { user } = useAuthContext();
   const location = useLocation();
+  const navigate = useNavigate();
   const [photoUrl, setPhotoUrl] = useState(
     'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'
   );
@@ -35,6 +36,12 @@ function ChatDashboardHeader() {
   //     });
   //
 
+  const newContact = () => {
+    console.log('new Contact');
+
+    navigate('/chat/contacts');
+  };
+
   return (
     <>
       <header className="mb-24 ">
@@ -45,7 +52,10 @@ function ChatDashboardHeader() {
         </Link>
 
         <div>
-          <div className="text-white-950  bg-blue-950 rounded-full  flex justify-center items-center  text-3xl w-14 h-14 absolute top-0 right-24 mt-5 ">
+          <div
+            className="text-white-950  bg-blue-950 rounded-full  flex justify-center items-center  text-3xl w-14 h-14 absolute top-0 right-24 mt-5 "
+            onClick={() => newContact()}
+          >
             <TbMessagePlus />
           </div>
           <Link

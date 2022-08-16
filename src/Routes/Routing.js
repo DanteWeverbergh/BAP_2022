@@ -19,6 +19,7 @@ import WorkoutInfo from '../Pages/Log/Workout/WorkoutInfo';
 import DayDetail from '../Pages/Log/Routines/Detail/RoutineDays/DayDetail';
 import LogWorkout from '../Pages/Log/Log/LogWorkout';
 import CreateRoutine from '../Pages/Log/Routines/Create/CreateRoutine';
+import Contact from '../Pages/Chat/Contact';
 
 function Routing() {
   return (
@@ -61,6 +62,7 @@ function Routing() {
             {/*Chat */}
             <Route path="chat" element={<ChatDashboard />} />
             <Route path="chat/:chatid" element={<Chat />} />
+            <Route path="/chat/contacts" element={<Contact />} />
 
             <Route path="/exercise/create" element={<CreateExercise />} />
           </Route>

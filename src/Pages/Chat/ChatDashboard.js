@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Input from '../../Components/Input';
 import { useAuthContext } from '../../Context/AuthContext';
 import Footer from '../../Layouts/Footer/Footer';
@@ -11,6 +12,7 @@ import OnlineUsers from './Components/OnlineUsers';
 
 function ChatDashboard() {
   const { user } = useAuthContext();
+  const navigate = useNavigate();
 
   const [onlineUsers, setOnlineUsers] = useState([]);
 
@@ -76,7 +78,7 @@ function ChatDashboard() {
 
   return (
     <>
-      <div className="z-10">
+      <div className="z-10 text-white-950">
         {/* <Header /> */}
         <ChatDashboardHeader />
 
@@ -110,7 +112,7 @@ function ChatDashboard() {
           ))}
 
         {isLoaded && !contacts && (
-          <p className="text-white text-center">No contacts yet!</p>
+          <p className="text-white-950 text-center">No contacts yet!</p>
         )}
 
         <div className="mt-24"></div>
