@@ -1,12 +1,27 @@
 import React, { useEffect } from 'react';
 import { FaDumbbell } from 'react-icons/fa';
 import { MdKeyboardArrowRight } from 'react-icons/md';
+import { useNavigate, useParams } from 'react-router-dom';
 import Back from '../../../../Components/Back';
+import { useAuthContext } from '../../../../Context/AuthContext';
+import { db } from '../../../../Libs/Firebase';
 
 function DetailHeader({ routine }) {
+  const navigate = useNavigate();
+  const { user } = useAuthContext();
+  let { id } = useParams();
   useEffect(() => {
-    console.log(routine);
+    console.log();
   }, []);
+
+  const deleteRoutine = () => {
+    db.collection('routines')
+      .doc(id)
+      .delete()
+      .then(() => {
+        navigate(-1);
+      });
+  };
 
   return (
     <>
@@ -22,15 +37,10 @@ function DetailHeader({ routine }) {
             <Back />
           </div>
 
-          <div className=" px-12 flex items-center justify-between rounded-lg py-2 bg-blue-950 absolute w-full bottom-0">
+          <div className=" px-12 flex items-center justify-between rounded-lg py-2 bg-blue-950 absolute w-full bottom-0 ">
             <div className="flex">
               <div className="bg-slate-950 w-12 h-12  rounded-full flex justify-center items-center">
                 <FaDumbbell className="text-xl" />
-                {/* {type.type === 'cardio' ? (
-            <FaRunning className="text-xl" />
-          ) : (
-            <FaDumbbell className="text-xl" />
-          )} */}
               </div>
               <div className="ml-4">
                 <h1 className="font-bold text-xl routine__name">
@@ -41,9 +51,14 @@ function DetailHeader({ routine }) {
                 </p>
               </div>
             </div>
-            <div className="text-blue-950 w-12 h-12 rounded-lg flex items-center justify-center">
-              <MdKeyboardArrowRight className="text-4xl" />
-            </div>
+            {user.uid === routine.uid && (
+              <div
+                className="text-white-950  rounded-lg bg-red-950 px-4 py-2 flex items-center justify-center"
+                onClick={() => deleteRoutine()}
+              >
+                Delete
+              </div>
+            )}
           </div>
         </div>
       </div>
