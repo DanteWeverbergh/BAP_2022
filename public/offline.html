@@ -33,6 +33,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        width: 100%;
       }
 
       .logoDiv {
@@ -46,10 +47,15 @@
       }
 
       .routineTitle {
-        color: #f0f6fc;
-        margin: 0;
-        font-size: 1.25rem;
-        line-height: 1.75rem;
+        background-color: #f0f6fc;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        color: #206feb;
+        border-radius: 0.5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
       }
 
       .routine__description {
@@ -58,11 +64,10 @@
       }
 
       .textDiv {
-        margin-left: 0.5rem;
       }
 
       .routineCardContent {
-        display: flex;
+        width: 100%;
       }
 
       .button {
@@ -71,7 +76,7 @@
         color: #206feb;
       }
 
-      .routineName {
+      #routineName {
         background-color: #206feb;
         padding-top: 0.5rem;
         padding-bottom: 0.5rem;
@@ -80,7 +85,7 @@
         padding-left: 1rem;
         padding-right: 1rem;
         font-size: 1.5rem;
-        margin-bottom: 4rem;
+        margin-bottom: 2rem;
       }
 
       .offline {
@@ -92,6 +97,15 @@
 
       .bottom {
         height: 25px;
+      }
+
+      .exerciseContent {
+        margin-bottom: 1rem;
+      }
+
+      .exDiv {
+        font-size: 1.25rem;
+        font-weight: bold;
       }
     </style>
   </head>
@@ -132,9 +146,9 @@
       const routineCardContent = document.createElement('div');
       routineCardContent.classList = 'routineCardContent';
 
-      const logoDiv = document.createElement('div');
-      logoDiv.classList = 'logoDiv';
-      logoDiv.innerHTML = dayList[i].day;
+      //const logoDiv = document.createElement('div');
+      //logoDiv.classList = 'logoDiv';
+      //logoDiv.innerHTML = dayList[i].day;
 
       const textDiv = document.createElement('div');
       textDiv.classList = 'textDiv';
@@ -151,6 +165,7 @@
       textDiv.appendChild(routineTitle);
       for (e = 0; e < JSON.parse(localStorage.getItem(i + 1)).length; e++) {
         const exerciseContent = document.createElement('div');
+        exerciseContent.classList = 'exerciseContent';
 
         const exDiv = document.createElement('div');
         exDiv.innerHTML = JSON.parse(localStorage.getItem(`${i + 1}`))[
@@ -161,7 +176,7 @@
         const infoDiv = document.createElement('div');
         infoDiv.innerHTML = `sets: ${
           JSON.parse(localStorage.getItem(`${i + 1}`))[e].sets
-        }     reps: ${JSON.parse(localStorage.getItem(`${i + 1}`))[e].reps}`;
+        }  reps: ${JSON.parse(localStorage.getItem(`${i + 1}`))[e].reps}`;
 
         console.log(
           JSON.parse(localStorage.getItem(`${i + 1}`))[e].exerciseName
@@ -175,7 +190,7 @@
 
       //textDiv.appendChild(routineDescription);
 
-      routineCardContent.appendChild(logoDiv);
+      //routineCardContent.appendChild(logoDiv);
       routineCardContent.appendChild(textDiv);
 
       routineCard.appendChild(routineCardContent);
