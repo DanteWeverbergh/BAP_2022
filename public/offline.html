@@ -59,6 +59,8 @@
 
       #textDiv {
         margin-left: 0.5rem;
+        display: flex;
+        align-items: center;
       }
 
       #routineCardContent {
@@ -138,12 +140,12 @@
       routineTitle.id = 'routineTitle';
       routineTitle.innerHTML = dayList[i].dayName;
 
-      const routineDescription = document.createElement('p');
-      routineDescription.id = 'routine__description';
-      routineDescription.innerHTML = 'Exercises:';
+      //const routineDescription = document.createElement('p');
+      //routineDescription.id = 'routine__description';
+      //routineDescription.innerHTML = 'Exercises:';
 
       textDiv.appendChild(routineTitle);
-      textDiv.appendChild(routineDescription);
+      //textDiv.appendChild(routineDescription);
 
       routineCardContent.appendChild(logoDiv);
       routineCardContent.appendChild(textDiv);

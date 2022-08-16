@@ -25,6 +25,8 @@ function Home() {
   const [postId, setPostId] = useState('');
   const [isDeleted, setIsDeleted] = useState(false);
 
+  const [exercises, setExercises] = useState([]);
+
   const fetchMore = () => {
     //
     let unmounted;
@@ -128,8 +130,6 @@ function Home() {
         // get days in routine
         const currentDays = [];
         const dayIds = [];
-        const exercises = [];
-        const allExercises = [];
 
         db.collection('routines')
           .doc(currentRoutine)
@@ -150,16 +150,25 @@ function Home() {
                 .doc(currentRoutine)
                 .collection('days')
                 .doc(id)
-                .collection('exercises')
-                .onSnapshot((snapshot) => {
-                  snapshot.docs.map((doc) => {
-                    exercises.push(doc.data());
-                  });
-                });
-              allExercises.push(exercises);
-            });
+                .get()
+                .then((doc) => {
+                  const day = doc.data().day;
 
-            console.log('ex', allExercises);
+                  db.collection('routines')
+                    .doc(currentRoutine)
+                    .collection('days')
+                    .doc(id)
+                    .collection('exercises')
+                    .onSnapshot((snapshot) => {
+                      snapshot.docs.map((ex) => {
+                        localStorage.setItem(
+                          `${day}`,
+                          JSON.stringify(ex.data())
+                        );
+                      });
+                    });
+                });
+            });
           });
 
         setUserType(data.userType);
@@ -178,6 +187,10 @@ function Home() {
       )}
 
       <Header />
+
+      <div className="text-white-950" onClick={() => console.log(exercises)}>
+        test
+      </div>
 
       {/**
        * Test syling
