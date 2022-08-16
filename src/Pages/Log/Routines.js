@@ -45,7 +45,7 @@ function Routines({ u }) {
   return (
     <>
       {currentRoutineId && <CurrentRoutine />}
-      <div className="mx-12">
+      <div className="mx-12 mt-6">
         <div
           className="text-white-950 bg-blue-950 py-2 flex items-center justify-center rounded-lg"
           onClick={() => navigate('/create/routine')}

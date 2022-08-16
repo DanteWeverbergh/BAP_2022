@@ -45,13 +45,13 @@ function ChatHeader({ contactUid }) {
 
   return (
     <>
-      <div className="mb-24 ">
-        <div className="absolute top-0 left-0 ">
+      <div className="mb-24 fixed  z-50 ">
+        <div className="fixed top-0 left-0 bg-slate-950 ">
           <Back />
         </div>
-        <div className="absolute top-0 right-0 ">
-          <div className="flex items-center">
-            <h1 className="text-white-950 text-xl font-bold">
+        <div className="fixed top-0 right-0 bg-slate-950">
+          <div className="flex items-center b">
+            <h1 className="text-white-950 text-xl font-bold bg-slate-950">
               {chatUser.fullName}{' '}
             </h1>
             <div className="bg-blue-950 h-12 w-12 flex items-center justify-center rounded-full m-5">

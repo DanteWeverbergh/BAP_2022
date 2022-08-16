@@ -11,14 +11,15 @@ function SocialProfile({ post, postUser, setModal, setPostId, postId }) {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    const date = new Intl.DateTimeFormat('de-De', {
-      year: 'numeric',
-      month: 'numeric',
-      day: 'numeric',
-    }).format(post.created.toDate());
+    if (post.created) {
+      const date = new Intl.DateTimeFormat('de-De', {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+      }).format(post.created.toDate());
 
-    console.log(post.created.toDate());
-    setDate(date);
+      setDate(date);
+    }
 
     setIsLoaded(true);
   }, []);
@@ -63,10 +64,19 @@ function SocialProfile({ post, postUser, setModal, setPostId, postId }) {
               className="h-12 w-12 rounded-full object-cover mr-4 border-blue-950 border-2"
               //src="https://picsum.photos/200"
               //src={post.uPhoto}
-              src={`${post.uPhoto.replace(
-                'https://firebasestorage.googleapis.com/v0/b/gains-dd329.appspot.com',
-                'https://ik.imagekit.io/w2g1ssyqs/'
-              )}&tr=w-100`}
+              // src={`${post.uPhoto.replace(
+              //   'https://firebasestorage.googleapis.com/v0/b/gains-dd329.appspot.com',
+              //   'https://ik.imagekit.io/w2g1ssyqs/'
+              // )}&tr=w-100`}
+
+              src={
+                post.uPhoto
+                  ? `${post.uPhoto.replace(
+                      'https://firebasestorage.googleapis.com/v0/b/gains-dd329.appspot.com',
+                      'https://ik.imagekit.io/w2g1ssyqs/'
+                    )}&tr=w-100`
+                  : 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png'
+              }
             />
           </Link>
           <div>

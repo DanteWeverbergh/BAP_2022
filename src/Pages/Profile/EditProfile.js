@@ -8,6 +8,7 @@ import { IoIosArrowBack, IoMdImages } from 'react-icons/io';
 import Button from '../../Components/Button';
 import Label from '../../Components/Label';
 import Input from '../../Components/Input';
+import Back from '../../Components/Back';
 
 function EditProfile() {
   const { firebase } = useContext(FirebaseContext);
@@ -81,15 +82,13 @@ function EditProfile() {
   return (
     <>
       <div>
-        <div className="flex justify-between mx-6 mt-6">
-          <Link
-            className="rounded-full bg-slate-700 h-8 w-8 text-center "
-            to={'/profile'}
-          >
-            <IoIosArrowBack className="text-3xl text-center text-white" />
-          </Link>
+        <div className="flex justify-between items-center mx-6 mt-6">
+          <Back />
 
-          <button className="px-4 bg-blue-500 rounded-md" onClick={logout}>
+          <button
+            className="px-4 bg-blue-950 rounded-lg py-2 text-white-950"
+            onClick={logout}
+          >
             Logout
           </button>
         </div>
@@ -107,9 +106,7 @@ function EditProfile() {
         </div>
          */}
           </div>
-          <div className="text-2xl mt-4 mb-8 text-white">
-            Welcome {fullName}
-          </div>
+          <div className="text-2xl mt-4 mb-8 text-white-950">{fullName}</div>
         </div>
         <form className="ml-12 mr-12" onSubmit={updateProfile} method="POST">
           <div className="mb-4">
