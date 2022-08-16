@@ -22,7 +22,8 @@ function Header() {
     if (
       currentPath === '/home' ||
       currentPath === 'Home' ||
-      currentPath === '/'
+      currentPath === '/' ||
+      currentPath === ''
     ) {
       setIsHome(true);
     }

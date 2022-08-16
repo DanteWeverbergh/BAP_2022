@@ -112,7 +112,7 @@ function SocialCard({ post, postId, setModal, setPostId }) {
         <div className="mt-4">
           {post.imageKit && post.photoUrl && (
             <img
-              className="rounded-lg border-solid max-h-96 object-cover"
+              className="rounded-lg border-solid "
               alt="pic"
               //src="https://picsum.photos/400"
               src={post.imageKit}
