@@ -35,7 +35,7 @@ function CreateRoutine() {
         days,
         name: routineName,
         shortDescription,
-        creator: user.uid,
+        uid: user.uid,
       };
 
       // add routine
