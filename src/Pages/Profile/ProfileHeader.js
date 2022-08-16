@@ -98,7 +98,7 @@ function ProfileHeader({ photoUrl, u }) {
           </Link>
         </div>
         <div className="text-2xl mt-4 mb-8 text-white-950">{u.fullName}</div>
-        <div className="w-full">
+        {/* <div className="w-full">
           <div className="text-white-950  mb-4 mx-24 flex justify-between">
             <div onClick={() => openList('following')}>
               <div>{following.length} </div>following
@@ -107,7 +107,7 @@ function ProfileHeader({ photoUrl, u }) {
               <div>{followers.length} </div>followers
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

@@ -58,6 +58,7 @@ function MyPosts() {
 
     unsubscribe = db
       .collection('posts')
+      .orderBy('created', 'desc')
       .where('uid', '==', user.uid)
       .limit(3)
       .onSnapshot((snapshot) => {
@@ -69,7 +70,7 @@ function MyPosts() {
         );
       });
 
-    //setIsLoaded(true);
+    setIsLoaded(true);
 
     return unsubscribe;
   }, []);
@@ -84,6 +85,8 @@ function MyPosts() {
         posts.map(({ id, post }) => (
           <SocialCard key={id} post={post} postid={post} />
         ))}
+
+      <div onClick={() => console.log(posts)}>Test</div>
 
       {/** 
 

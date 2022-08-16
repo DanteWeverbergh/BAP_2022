@@ -58,45 +58,79 @@ function Calculator() {
               <p className="font-semibold text-xl mb-6">{`Your estimated 1RM is  ${result}kg`}</p>
 
               <div className="flex justify-between bg-blue-950 py-2 rounded-lg mb-4">
-                <div className="px-4 font-bold">1RM%</div>
-                <div className="px-4 font-bold">Reps</div>
-                <div className="px-4 font-bold">Weight</div>
+                <div className=" font-bold w-1/3 flex items-center justify-center">
+                  1RM%
+                </div>
+                <div className="flex items-center justify-center font-bold w-1/3">
+                  Reps
+                </div>
+                <div className="flex items-center justify-center font-bold w-1/3">
+                  Weight
+                </div>
               </div>
 
               <div className="flex justify-between ">
-                <div>100%</div>
-                <div>1</div>
-                <div>{result} kg</div>
+                <div className="w-1/3 flex items-center justify-center">
+                  100%
+                </div>
+                <div className="w-1/3 flex items-center justify-center">1</div>
+                <div className="w-1/3 flex items-center justify-center">
+                  {result} kg
+                </div>
               </div>
               <div className="flex justify-between ">
-                <div>95%</div>
-                <div>2</div>
-                <div>{Math.round(result * 0.95)} kg</div>
+                <div className="w-1/3 flex items-center justify-center">
+                  95%
+                </div>
+                <div className="w-1/3 flex items-center justify-center">2</div>
+                <div className="w-1/3 flex items-center justify-center">
+                  {Math.round(result * 0.95)} kg
+                </div>
               </div>
               <div className="flex justify-between ">
-                <div>90%</div>
-                <div>4</div>
-                <div>{Math.round(result * 0.9)} kg</div>
+                <div className="w-1/3 flex items-center justify-center">
+                  90%
+                </div>
+                <div className="w-1/3 flex items-center justify-center">4</div>
+                <div className="w-1/3 flex items-center justify-center">
+                  {Math.round(result * 0.9)} kg
+                </div>
               </div>
               <div className="flex justify-between ">
-                <div>85%</div>
-                <div>6</div>
-                <div>{Math.round(result * 0.85)} kg</div>
+                <div className="w-1/3 flex items-center justify-center">
+                  85%
+                </div>
+                <div className="w-1/3 flex items-center justify-center">6</div>
+                <div className="w-1/3 flex items-center justify-center">
+                  {Math.round(result * 0.85)} kg
+                </div>
               </div>
               <div className="flex justify-between ">
-                <div>80%</div>
-                <div>8</div>
-                <div>{Math.round(result * 0.8)} kg</div>
+                <div className="w-1/3 flex items-center justify-center">
+                  80%
+                </div>
+                <div className="w-1/3 flex items-center justify-center">8</div>
+                <div className="w-1/3 flex items-center justify-center">
+                  {Math.round(result * 0.8)} kg
+                </div>
               </div>
               <div className="flex justify-between ">
-                <div>75%</div>
-                <div>10</div>
-                <div>{Math.round(result * 0.75)} kg</div>
+                <div className="w-1/3 flex items-center justify-center">
+                  75%
+                </div>
+                <div className="w-1/3 flex items-center justify-center">10</div>
+                <div className="w-1/3 flex items-center justify-center">
+                  {Math.round(result * 0.75)} kg
+                </div>
               </div>
               <div className="flex justify-between ">
-                <div>70%</div>
-                <div>12</div>
-                <div>{Math.round(result * 0.7)} kg</div>
+                <div className="w-1/3 flex items-center justify-center">
+                  70%
+                </div>
+                <div className="w-1/3 flex items-center justify-center">12</div>
+                <div className="w-1/3 flex items-center justify-center">
+                  {Math.round(result * 0.7)} kg
+                </div>
               </div>
             </div>
           )}

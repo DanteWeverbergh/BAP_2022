@@ -15,6 +15,7 @@ function UserPosts() {
     let unsubscribe;
     unsubscribe = db
       .collection('posts')
+      .orderBy('created', 'desc')
       .where('uid', '==', uid)
       .onSnapshot((snapshot) => {
         //
@@ -34,7 +35,7 @@ function UserPosts() {
   return (
     <>
       <div className=" text-center text-2xl mt-8 text-white-950">
-        Post from user
+        Last posts
       </div>
 
       {isLoaded &&

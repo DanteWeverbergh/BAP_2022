@@ -55,6 +55,9 @@ function User() {
       <UserPosts />
 
       <Footer /> */}
+
+      <UserPosts />
+      <Footer />
     </>
   );
 }

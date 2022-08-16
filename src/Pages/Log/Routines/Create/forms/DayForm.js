@@ -13,9 +13,11 @@ function DayForm({
   setForm,
 }) {
   const [exerciseList, setExerciseList] = useState([
-    { exerciseName: '', reps: '', sets: '', exercise: '' },
+    { exerciseName: '', reps: '', sets: '', exercise: 1 },
   ]);
   const [dayName, setDayName] = useState('');
+
+  var [exerciseCount, setExerciseCount] = useState(1);
 
   useEffect(() => {
     if (dayList.length !== 0) {
@@ -54,7 +56,7 @@ function DayForm({
       setDayList([...dayList, data]);
 
       setDayName('');
-      setExerciseList([{ exerciseName: '', reps: '', sets: '', exercise: '' }]);
+      setExerciseList([{ exerciseName: '', reps: '', sets: '', exercise: 1 }]);
     } else {
       Swal.fire({
         text: 'Please fill in all the field',
@@ -95,10 +97,15 @@ function DayForm({
     setExerciseList(list);
   };
 
-  const addExercise = () => {
+  const addExercise = (index) => {
     //
 
-    let newField = { exerciseName: '', reps: '', sets: '', exercise: '' };
+    let newField = {
+      exerciseName: '',
+      reps: '',
+      sets: '',
+      exercise: (exerciseCount += 1),
+    };
     setExerciseList([...exerciseList, newField]);
   };
 
@@ -106,6 +113,8 @@ function DayForm({
     const list = [...exerciseList];
     list.splice(index, 1);
     setExerciseList(list);
+
+    setExerciseCount((exerciseCount -= 1));
   };
 
   return (

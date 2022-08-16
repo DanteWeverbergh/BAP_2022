@@ -17,7 +17,7 @@ function SocialProfile({ post, postUser, setModal, setPostId, postId }) {
       day: 'numeric',
     }).format(post.created.toDate());
 
-    // console.log(post.created.toDate());
+    console.log(post.created.toDate());
     setDate(date);
 
     setIsLoaded(true);

@@ -31,12 +31,12 @@ function UserHeader({ u }) {
     <>
       <div className="flex justify-between items-center ">
         <Back />
-        <button
+        {/* <button
           className="px-4 py-2 bg-blue-950 text-white-950 m-5 rounded-lg"
           onClick={() => follow(user.uid, uid, isFollowing, setIsFollowing)}
         >
           {isFollowing ? 'unfollow' : 'follow'}
-        </button>
+        </button> */}
       </div>
 
       <div className="flex-col text-center grid place-items-center">
@@ -58,7 +58,7 @@ function UserHeader({ u }) {
           </div>
         </div>
         <div className="text-2xl mt-4 mb-8 text-white-950">{u.fullName}</div>
-        <div className="w-full">
+        {/* <div className="w-full">
           <div className="text-white-950  mb-4 mx-24 flex justify-between">
             <div onClick={() => console.log('following')}>
               <div>{u.following ? u.following.length : '0'} </div>following
@@ -67,7 +67,7 @@ function UserHeader({ u }) {
               <div>{u.followers ? u.followers.length : '0'} </div>followers
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );
