@@ -78,7 +78,7 @@ function SocialProfile({ post, postUser, setModal, setPostId, postId }) {
         {/**
         <div onClick={() => menu()}>...</div>
          */}
-        <div onClick={() => dots()}>...</div>
+        {post.uid === user.uid && <div onClick={() => dots()}>...</div>}
       </div>
     </>
   );

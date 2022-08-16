@@ -29,9 +29,6 @@ function ExerciseCard({ id, data }) {
             </div>
           </div>
         </div>
-        <div className="text-blue-950 w-12 h-12 rounded-lg flex items-center justify-center">
-          <MdKeyboardArrowRight className="text-4xl" />
-        </div>
       </div>
     </>
   );

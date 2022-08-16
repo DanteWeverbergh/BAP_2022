@@ -28,14 +28,14 @@
         margin: 0;
       }
 
-      #routineCard {
+      .routineCard {
         margin-bottom: 3rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
       }
 
-      #logoDiv {
+      .logoDiv {
         background-color: #206feb;
         height: 3rem;
         width: 3rem;
@@ -45,35 +45,33 @@
         align-items: center;
       }
 
-      #routineTitle {
+      .routineTitle {
         color: #f0f6fc;
         margin: 0;
         font-size: 1.25rem;
         line-height: 1.75rem;
       }
 
-      #routine__description {
+      .routine__description {
         margin: 0;
         font-size: 1rem;
       }
 
-      #textDiv {
+      .textDiv {
         margin-left: 0.5rem;
-        display: flex;
-        align-items: center;
       }
 
-      #routineCardContent {
+      .routineCardContent {
         display: flex;
       }
 
-      #button {
+      .button {
         font-size: 1.25rem;
         line-height: 1.5rem;
         color: #206feb;
       }
 
-      #routineName {
+      .routineName {
         background-color: #206feb;
         padding-top: 0.5rem;
         padding-bottom: 0.5rem;
@@ -91,6 +89,10 @@
         align-items: center;
         color: #f0f6fc;
       }
+
+      .bottom {
+        height: 25px;
+      }
     </style>
   </head>
   <body>
@@ -107,13 +109,14 @@
     </div>
 
     <div id="myDIV"></div>
+
+    <div class="bottom"></div>
   </body>
 
   <script>
     document.getElementById('routineName').innerHTML = JSON.parse(
       localStorage.getItem('currentRoutine')
     ).name;
-    console.log(JSON.parse(localStorage.getItem('currentRoutine')).name);
 
     const dayList = JSON.parse(localStorage.getItem('days'));
 
@@ -122,28 +125,54 @@
     const days = JSON.parse(localStorage.getItem('currentRoutine')).days;
 
     for (i = 0; i < days; i++) {
-      console.log(JSON.parse(localStorage.getItem(i - 1)));
+      // console.log(JSON.parse(localStorage.getItem(i - 1)));
 
       const routineCard = document.createElement('div');
-      routineCard.id = 'routineCard';
+      routineCard.classList = 'routineCard';
       const routineCardContent = document.createElement('div');
-      routineCardContent.id = 'routineCardContent';
+      routineCardContent.classList = 'routineCardContent';
 
       const logoDiv = document.createElement('div');
-      logoDiv.id = 'logoDiv';
+      logoDiv.classList = 'logoDiv';
       logoDiv.innerHTML = dayList[i].day;
 
       const textDiv = document.createElement('div');
-      textDiv.id = 'textDiv';
+      textDiv.classList = 'textDiv';
       const routineTitle = document.createElement('h1');
-      routineTitle.id = 'routineTitle';
+      routineTitle.classList = 'routineTitle';
       routineTitle.innerHTML = dayList[i].dayName;
 
       //const routineDescription = document.createElement('p');
       //routineDescription.id = 'routine__description';
       //routineDescription.innerHTML = 'Exercises:';
 
+      console.log('length: ', JSON.parse(localStorage.getItem(i + 1)).length);
+
       textDiv.appendChild(routineTitle);
+      for (e = 0; e < JSON.parse(localStorage.getItem(i + 1)).length; e++) {
+        const exerciseContent = document.createElement('div');
+
+        const exDiv = document.createElement('div');
+        exDiv.innerHTML = JSON.parse(localStorage.getItem(`${i + 1}`))[
+          e
+        ].exerciseName;
+        exDiv.classList = 'exDiv';
+
+        const infoDiv = document.createElement('div');
+        infoDiv.innerHTML = `sets: ${
+          JSON.parse(localStorage.getItem(`${i + 1}`))[e].sets
+        }     reps: ${JSON.parse(localStorage.getItem(`${i + 1}`))[e].reps}`;
+
+        console.log(
+          JSON.parse(localStorage.getItem(`${i + 1}`))[e].exerciseName
+        );
+
+        exerciseContent.appendChild(exDiv);
+        exerciseContent.appendChild(infoDiv);
+
+        textDiv.appendChild(exerciseContent);
+      }
+
       //textDiv.appendChild(routineDescription);
 
       routineCardContent.appendChild(logoDiv);
