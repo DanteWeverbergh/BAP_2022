@@ -113,6 +113,10 @@
     ).name;
     console.log(JSON.parse(localStorage.getItem('currentRoutine')).name);
 
+    const dayList = JSON.parse(localStorage.getItem('days'));
+
+    //
+
     const days = JSON.parse(localStorage.getItem('currentRoutine')).days;
 
     for (i = 0; i < days; i++) {
@@ -126,13 +130,13 @@
 
       const logoDiv = document.createElement('div');
       logoDiv.id = 'logoDiv';
-      logoDiv.innerHTML = i + 1;
+      logoDiv.innerHTML = dayList[i].day;
 
       const textDiv = document.createElement('div');
       textDiv.id = 'textDiv';
       const routineTitle = document.createElement('h1');
       routineTitle.id = 'routineTitle';
-      routineTitle.innerHTML = 'Day Name';
+      routineTitle.innerHTML = dayList[i].dayName;
 
       const routineDescription = document.createElement('p');
       routineDescription.id = 'routine__description';

@@ -110,6 +110,8 @@ function Home() {
         const data = res.data();
 
         console.log(res.data().currentRoutineId);
+
+        //get current routine
         const currentRoutine = res.data().currentRoutineId;
         db.collection('routines')
           .doc(currentRoutine)
@@ -121,6 +123,43 @@ function Home() {
               'currentRoutine',
               JSON.stringify(routine.data())
             );
+          });
+
+        // get days in routine
+        const currentDays = [];
+        const dayIds = [];
+        const exercises = [];
+        const allExercises = [];
+
+        db.collection('routines')
+          .doc(currentRoutine)
+          .collection('days')
+          .orderBy('day')
+          .onSnapshot((snapshot) => {
+            snapshot.docs.map((doc) => {
+              currentDays.push(doc.data());
+
+              dayIds.push(doc.id);
+            });
+
+            localStorage.setItem('days', JSON.stringify(currentDays));
+
+            //exercises
+            dayIds.map((id) => {
+              db.collection('routines')
+                .doc(currentRoutine)
+                .collection('days')
+                .doc(id)
+                .collection('exercises')
+                .onSnapshot((snapshot) => {
+                  snapshot.docs.map((doc) => {
+                    exercises.push(doc.data());
+                  });
+                });
+              allExercises.push(exercises);
+            });
+
+            console.log('ex', allExercises);
           });
 
         setUserType(data.userType);
