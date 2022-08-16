@@ -122,8 +122,7 @@
     const days = JSON.parse(localStorage.getItem('currentRoutine')).days;
 
     for (i = 0; i < days; i++) {
-      const para = document.createElement('p');
-      para.innerHTML = 'This is a paragraph.';
+      console.log(JSON.parse(localStorage.getItem(i - 1)));
 
       const routineCard = document.createElement('div');
       routineCard.id = 'routineCard';

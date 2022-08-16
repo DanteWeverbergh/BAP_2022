@@ -154,18 +154,22 @@ function Home() {
                 .then((doc) => {
                   const day = doc.data().day;
 
+                  const exList = [];
+
                   db.collection('routines')
                     .doc(currentRoutine)
                     .collection('days')
                     .doc(id)
                     .collection('exercises')
+                    .orderBy('exercise')
                     .onSnapshot((snapshot) => {
                       snapshot.docs.map((ex) => {
-                        localStorage.setItem(
-                          `${day}`,
-                          JSON.stringify(ex.data())
-                        );
+                        exList.push(ex.data());
                       });
+
+                      console.log(day, exList);
+
+                      localStorage.setItem(`${day}`, JSON.stringify(exList));
                     });
                 });
             });
@@ -187,10 +191,6 @@ function Home() {
       )}
 
       <Header />
-
-      <div className="text-white-950" onClick={() => console.log(exercises)}>
-        test
-      </div>
 
       {/**
        * Test syling
